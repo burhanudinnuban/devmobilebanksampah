@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBorderWhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/ic_background_2"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPicture_Profil"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_navigation_profil" />
+
+            <TextView
+                android:id="@+id/tvNama_Profil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Pak Boy"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvIDUser_Profil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:gravity="center"
+                android:text="ID User"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgGaris6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvData_Profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_phone_android_black_24dp"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left|start"
+            android:text="Data Pribadi"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imgGaris2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvHistory_Profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_history"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left|start"
+            android:text="Riwayat Order"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imgGaris3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvPassword_Profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_key"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left|start"
+            android:text="Ganti Kata Sandi"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imgGaris4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvCallUs_Profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_call"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left|start"
+            android:text="Hubungi Kami"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imgGaris5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvFaq_Profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_info"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left|start"
+            android:text="FAQ"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imgGaris7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvGantiUnit_Profil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:drawableLeft="@drawable/ic_info"
+            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawablePadding="10dp"
+            android:gravity="center|left|start"
+            android:text="Ganti Unit"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/imgGaris12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            app:srcCompat="@android:color/darker_gray" />
+
+       <!-- <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgGaris9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tvLogOut"
+                android:layout_marginBottom="3dp"
+                app:srcCompat="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvLogOut2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:drawablePadding="10dp"
+                android:gravity="center|left"
+                android:text="Keluar"
+                android:textSize="14sp" />
+
+        </RelativeLayout>-->
+
+    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgGaris8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_above="@+id/tvLogOut"
+            app:srcCompat="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/tvLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:drawablePadding="10dp"
+        android:gravity="center|left"
+        android:text="Keluar"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imgArrowBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_arrow_white" />
+
+</RelativeLayout>

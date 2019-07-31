@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default -->
+    <!--<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBe9P-itehQgH5BG7ox5vizpv5E1iGLMhg</string>-->
+
+    <!-- Dari Mas Kholis untuk eRecycle-->
+    <!--<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD1bZXobqJjCkU5rwxaDT7PuGIAJ4hN-S0</string>-->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBpXdEhmquAHOjvuqudcR0XeuMv_wsq0u8</string>
+
+    <!-- Dari Mas Gagas Klik Bar-->
+    <!--<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCCyn48HOvNzB0XXNAPRBwlRgMjM6YxJ4Q</string>-->
+    <!--<string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBe9P-itehQgH5BG7ox5vizpv5E1iGLMhg</string>-->
+</resources>

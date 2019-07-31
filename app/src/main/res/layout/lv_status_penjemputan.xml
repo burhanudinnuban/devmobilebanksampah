@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    app:layout_gravity="center">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:id="@+id/imgJemput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_penjemputan" />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/imgJemput"
+                android:layout_toRightOf="@+id/imgJemput"
+                android:gravity="center|left|start"
+                android:text="Limbah Anda akan dijemput oleh Picker dengan detail:"
+                android:textSize="12sp" />
+
+            <TableRow
+                android:id="@+id/tbl_IDOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtStatus"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/imgJemput"
+                android:layout_toRightOf="@+id/imgJemput"
+                android:gravity="center|left|start">
+
+                <TextView
+                    android:id="@+id/txtIDOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center|start|left"
+                    android:text="ID Order"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtDot7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center|start|left"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvIDOrder_Penjemputan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:gravity="center|start|left"
+                    android:text="ID-0002"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbl_Driver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tbl_IDOrder"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/imgJemput"
+                android:layout_toRightOf="@+id/imgJemput"
+                android:gravity="center|left|start">
+
+                <TextView
+                    android:id="@+id/txtNama"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|start|left"
+                    android:text="Nama"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtDot"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:gravity="center|start|left"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvNamaDriver_Detail"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:gravity="center|start|left"
+                    android:text="Pak Dodit"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbl_TipeKendaraan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tbl_Driver"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/imgJemput"
+                android:layout_toRightOf="@+id/imgJemput"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtTipe"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|start|left"
+                    android:text="Tipe Truck"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtDot2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:gravity="center|start|left"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvTipeTruck_Detail"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:gravity="center|start|left"
+                    android:text="Jumat"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tbl_Kendaraan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tbl_TipeKendaraan"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/imgJemput"
+                android:layout_toRightOf="@+id/imgJemput"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtKendaraan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="center|start|left"
+                    android:text="No. Kendaraan"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtDot3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:gravity="center|start|left"
+                    android:text=":"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvKendaraan_Penjemputan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:gravity="center|start|left"
+                    android:text="B 44 DIT"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TextView
+                android:id="@+id/tvCekDetail_Penjemputan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tbl_Kendaraan"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/imgJemput"
+                android:layout_toRightOf="@+id/imgJemput"
+                android:gravity="center|left|start"
+                android:text="Klik Disini"
+                android:textColor="@color/colorCardDS"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCekDetail_Penjemputan2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tbl_Kendaraan"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/tvCekDetail_Penjemputan"
+                android:layout_toRightOf="@+id/tvCekDetail_Penjemputan"
+                android:gravity="center|left|start"
+                android:text="untuk melihat Detailnya"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

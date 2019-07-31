@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#74A13A</color>
+    <color name="colorPrimaryDark">#74A13A</color>
+    <color name="colorAccent">#3F9C2A</color>
+
+    <color name="colorNavBarBelow">@android:color/holo_blue_light</color>
+    <color name="colorNavBarBelowFont">#ffffff</color>
+
+    <color name="colorFragmenTittle">#428fc9</color>
+    <color name="colorFragmenTittleFont">#ffffff</color>
+    <color name="colorTvLogout">#103595</color>
+    <color name="colorTvBg">#ffffff</color>
+    <color name="colorTvFont">#000000</color>
+    <color name="colorLayoutBg">#ffffff</color>
+    <color name="colorBtnBg">#f5e2ac</color>
+    <color name="colorBtnFont">#161414</color>
+    <color name="colorBtnStrGray">#878787</color>
+    <color name="colorDlgStrGray">#878787</color>
+    <color name="colorDivider">#428FC9</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBorderWhite">#FFFFFF</color>
+    <color name="colorTransparentWhite">#00717070</color>
+
+    <!--color for button -->
+    <color name="gradBoxStart">#103595</color>
+    <color name="gradBoxCenter">#103595</color>
+    <color name="gradBoxEnd">#103595</color>
+
+    <!--color for button -->
+    <color name="gradLoginBoxStart">#d00a0a0a</color>
+    <color name="gradLoginBoxCenter">#d0B0B0B0</color>
+    <color name="gradLoginBoxEnd">#d0ffffff </color>
+    <color name="colorLoginBtnStroke">#878787</color>
+
+    <color name="colorBtnStroke">#d5d4d4</color>
+    <color name="colorBtnText">#F6F6F6</color>
+
+
+
+    <!--color for promo category -->
+    <color name="colorCardR">#e64c53</color>
+    <color name="colorCardD">#FFD700</color>
+    <color name="colorCardE">#3feb97</color>
+
+    <color name="colorCardRS">#9E484C</color>
+    <color name="colorCardDS">#3E5F9A</color>
+    <color name="colorCardES">#006F39</color>
+    <color name="colorGreen">#14a895</color>
+
+
+    <color name="colorBgGray">#878787</color>
+    <color name="colorBgLightGray">#B3B0B0</color>
+
+    <color name="colorBgProgress">#ba7e04</color>
+    <color name="colorBgLightProgress">#9B0909</color>
+    <color name="colorLogin">#727272</color>
+    <color name="colorTvFont2">#372c24</color>
+    <color name="colorTransparentGray">#83717070</color>
+
+</resources>

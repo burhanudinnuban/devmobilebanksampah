@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/dlgOk"
+    android:background="@drawable/dlgbox"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingTop="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/llOkTitle"
+        android:background="@drawable/paneltop">
+
+        <TextView
+            android:id="@+id/tvDlgCTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="TESTING"
+            android:textColor="@color/colorFragmenTittleFont"
+            android:textSize="16dp"
+            app:fontFamily="@font/sourcesansproregular" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOkMsg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+        <!-- Thumbnail image -->
+        <ImageView
+            android:id="@+id/ivDlgCProduct"
+            android:layout_width="match_parent"
+            android:layout_height="140dip"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:src="@null" />
+
+        <TextView
+            android:id="@+id/tvDlgCMerchantName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="@string/TITLE_MERCHANT"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgCBandaraName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="BANDARA NAME (LIVE)"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgCProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="PRODUCT NAME (LIVE)"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgCOutletName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="OUTLET NAME (LIVE)"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgMemberName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="MEMBER NAME (LIVE)"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgVcardMember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="VCARD MEMBER(LIVE)"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgCouponLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="Quantity:"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgCouponNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="2"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvRef"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"
+            android:textStyle="bold"
+
+
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgTglLbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="@string/FIELD_RD_DATE"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <TextView
+            android:id="@+id/tvDlgTgl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="10dip"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="20-05-2017 00:00:00"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:textStyle="bold"
+
+
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <Button
+            android:id="@+id/btnDlgCClose"
+            android:fontFamily="sourcesansproregular"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btngeneralred"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Tutup"
+            android:textColor="@color/colorBtnText"
+            android:textSize="12dp"
+
+
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

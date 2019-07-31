@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:contentPadding="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvOrderID_List"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:gravity="center|start|left"
+                    android:text="(Order ID)"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvStatusOrder_List"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/cdBtnDetail"
+                    android:layout_weight="1"
+                    android:gravity="center|right|end"
+                    android:text="(Status Order)"
+                    android:textSize="12sp" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cdBtnDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="2dp">
+
+                    <Button
+                        android:id="@+id/btnDetail_ListOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:background="@color/colorDivider"
+                        android:text="Detail"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBorderWhite"
+                        android:textSize="13sp" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cdBtnHide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="2dp">
+
+                    <Button
+                        android:id="@+id/btnHide_ListOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:background="@color/colorDivider"
+                        android:text="Hide"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBorderWhite"
+                        android:textSize="13sp"
+                        android:visibility="visible" />
+                </android.support.v7.widget.CardView>
+            </TableRow>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cdnTelusuri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="end|right"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <Button
+                    android:id="@+id/btnTelusuri_ListOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@color/colorAccent"
+                    android:text="Telusuri"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBorderWhite"
+                    android:textSize="13sp" />
+            </android.support.v7.widget.CardView>
+
+           <!-- <TableRow
+                android:id="@+id/tblTelusuri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|end"
+                android:layout_gravity="end|right"
+                android:layout_marginTop="5dp">
+
+                &lt;!&ndash;<TextView
+                    android:id="@+id/tvNameOrderTo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:gravity="center|start|left"
+                    android:text="(Order To: Lestari)"
+                    android:textSize="12sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"/>&ndash;&gt;
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cdnTelusuri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="2dp">
+
+                    <Button
+                        android:id="@+id/btnTelusuri_ListOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:background="@color/colorAccent"
+                        android:text="Telusuri"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBorderWhite"
+                        android:textSize="13sp" />
+                </android.support.v7.widget.CardView>
+            </TableRow>-->
+
+            <!--<include
+                android:id="@+id/include_FormListOrderDetail"
+                layout="@layout/form_list_order_detail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />-->
+
+            <!--<ListView-->
+                <!--android:id="@+id/lvDetail_Sampah"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="150dp">-->
+            <!--</ListView>-->
+
+            <ImageView
+                android:id="@+id/imgGaris"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@android:color/darker_gray" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|start|left"
+                    android:text="Total"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvTotalKg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="(Total Kg)"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvTotalPoints"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|right|end"
+                    android:text="(Total Points)"
+                    android:textColor="@color/colorCardES"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imgViewDetail_List"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_pageview" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tblLokasi_List"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvLokasi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Lokasi"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvAlamat_List"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right|end"
+                    android:text="(Alamat)"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tblFoto_List"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvFoto"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Foto Limbah"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/imgArrowDown_List"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_arrow_drop_down" />
+
+                <ImageView
+                    android:id="@+id/imgArrowUp_List"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/ic_arrow_drop_up_black_24dp"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgViewSampah_List"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="right|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_navigation_profil"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnCancel_Order_List"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/TableRow_TotalPoints"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/ic_rounded_button"
+                android:gravity="center"
+                android:text="Batalkan Order"
+                android:textAllCaps="false"
+                android:textColor="@color/colorBtnFont"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</FrameLayout>

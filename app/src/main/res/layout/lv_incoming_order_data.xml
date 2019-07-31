@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTanggal_IncomingOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center|start|left"
+                android:text="(Date)"
+                android:textColor="@color/colorBgGray"
+                android:textSize="10sp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp">
+
+                <TextView
+                    android:id="@+id/tvJenisSampah_IncomingOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center|start|left"
+                    android:text="(Jenis Sampah)"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvBeratSampah_IncomingOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="(Kilo Sampah)"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvPoints_IncomingOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center|right|end"
+                    android:text="(Pts Sampah)"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgDelete_IncomingOrder"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom|right|end"
+            android:layout_weight="0.15"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ic_trash" />
+    </LinearLayout>
+
+
+</LinearLayout>
+    <!--
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tvTanggal_IncomingOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(Date)"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/tvJenisSampah_IncomingOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Jenis Sampah)"
+            android:layout_below="@+id/tvTanggal_IncomingOrder"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/tvBeratSampah_IncomingOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Kilo Sampah)"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/tvJenisSampah_IncomingOrder"
+            android:layout_toRightOf="@+id/tvJenisSampah_IncomingOrder"
+            android:layout_below="@+id/tvTanggal_IncomingOrder" />
+    </RelativeLayout>-->
