@@ -184,6 +184,13 @@ public class LazyAdapter extends BaseAdapter {
         TextView tvPoints_Get;
         TextView tvIDOrder_Get;
 
+        //Untuk Fragment Position 9
+        ImageView imgPhotoMember;
+        TextView tvNamaMember;
+        TextView tvIdMember;
+        TextView tvPointMember;
+
+
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -341,7 +348,7 @@ public class LazyAdapter extends BaseAdapter {
 
             case 5:
                 if (convertView == null) {
-                    vi = inflater.inflate(R.layout.lv_list_order, parent, false);
+                    vi = inflater.inflate(R.layout.lv_member_list, parent, false);
 
                     myDialog = new Dialog(activity);
 
@@ -670,6 +677,39 @@ public class LazyAdapter extends BaseAdapter {
                 holder.tvIDOrder_Get.setText(strOrder);
 
                 break;
+
+            case 9:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_point_order, parent, false);
+
+                    holder = new ViewHolder();
+                    holder.tvNamaMember = vi.findViewById(R.id.tvNamaMember_ListMember);
+                    holder.tvIdMember = vi.findViewById(R.id.tvIDMember_ListMember);
+                    holder.tvPointMember = vi.findViewById(R.id.tvPointMember_ListMember);
+
+                    vi.setTag(holder);
+                }else{
+                    holder = (ViewHolder)vi.getTag();
+                }
+
+                HashMap<String, String> StatusPoint_List1;
+                StatusPoint_List1 = data.get(position);
+
+                String strNamaMember = StatusPoint_List1.get("nama_member");
+                String strIdMember = StatusPoint_List1.get("id_member");
+                String strPointMember = StatusPoint_List1.get("point");
+
+
+                try {
+                    holder.tvPoints_Get.setText("Point: " + decimalFormat.format(Double.valueOf(strPointMember)));
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                    Log.e("tag", e.toString());
+                }
+                holder.tvIdMember.setText(strIdMember);
+                holder.tvNamaMember.setText(strNamaMember);
+                holder.tvPointMember.setText(strPointMember);
+
 
             default:
 
