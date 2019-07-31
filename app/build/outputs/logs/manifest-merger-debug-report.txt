@@ -1,0 +1,1097 @@
+-- Merging decision tree log ---
+provider#android.support.v4.content.FileProvider
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:247:9-255:20
+	android:grantUriPermissions
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:251:13-47
+	android:authorities
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:249:13-60
+	android:exported
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:250:13-37
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:248:13-67
+manifest
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+MERGED from [com.android.support:multidex:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\37aed83be6d335edca702b1645ee537e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:design:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\2a7f3a3d5e16286e8621ede2731335be\AndroidManifest.xml:17:1-24:12
+MERGED from [com.gauravbhola.ripplepulsebackground:library:1.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\library-1.0.0.aar\1cc876a32e35606f405608cc6eccfec6\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.GrenderG:Toasty:1.4.2] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\Toasty-1.4.2.aar\53290e72667950c52e85d32aba1998a1\AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:2:1-26:12
+MERGED from [com.github.qapqap:TimelineView:v1.6] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\TimelineView-v1.6.aar\753c02fde00cf8e51ea2c018d5c691d9\AndroidManifest.xml:2:1-17:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\21f8bd60b6d6bd3d978cdacb9d979f8c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:17:1-55:12
+MERGED from [me.dm7.barcodescanner:zxing:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-1.9.aar\5de20243eb807e211dddaca154023be4\AndroidManifest.xml:2:1-13:12
+MERGED from [me.dm7.barcodescanner:core:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\core-1.9.aar\f606ae67ab824e3f0c0dfd42c306d8df\AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:17:1-37:12
+MERGED from [com.google.firebase:firebase-core:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-core-16.0.1.aar\4871342263eb279585407783d15678c3\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:17:1-34:12
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:17:1-55:12
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:17:1-59:12
+MERGED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:2:1-17:12
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-clearcut-16.0.0.aar\40bd6501c15b8b8d81669ee6952669f3\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\c824d1417e4db7d55733dd1169315d1f\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-interop-16.0.1.aar\94d7df15dad58176b1075968dde9b705\AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-phenotype-16.0.0.aar\9adaa31a1ec7c3cc13f7aadb10a78e45\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\a739b8adf7806a9364174be59b132fbb\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-17.0.1.aar\6a2003437db8b066f5face97631c18df\AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\b7030d223284afdf014efd394636acd3\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\943eee9e42559b1533ba81f7f20d553c\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\a6f6dafba9cb97e1ba21d1a5faab7dda\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\e39b04fd81246b0acc924088615f47a0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\9eae7c8b9bfb1e47b13e615e29e25da3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\17cb5000734d27958795fcbe7c163808\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:gridlayout-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-28.0.0.aar\2a6b03a6766ee734d70692499b72c02f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3b71b1d3d66ea7d0ff000115d88d721e\AndroidManifest.xml:2:1-11:12
+MERGED from [it.gilvegliach.android:transparent-text-textview:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transparent-text-textview-1.0.3.aar\4185af44817ee399387f106800e64423\AndroidManifest.xml:17:1-29:12
+MERGED from [pl.bclogic:pulsator4droid:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\pulsator4droid-1.0.3.aar\3e6edc0632f2462d706e068d5861b159\AndroidManifest.xml:2:1-17:12
+MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.17] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-gif-drawable-1.2.17.aar\12f7c6ed3cbe02d6738244079ea168f7\AndroidManifest.xml:2:1-10:12
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\volley-1.1.1.aar\7e1b1a0c69d6b15b69514fd25b5d496a\AndroidManifest.xml:2:1-11:12
+MERGED from [de.hdodenhof:circleimageview:2.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\circleimageview-2.2.0.aar\31e3e9acf8358d520aaaefc40ba75077\AndroidManifest.xml:2:1-11:12
+MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:2:1-14:12
+MERGED from [com.github.mreram:showcaseview:1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\showcaseview-1.1.aar\9c1a3e401c9637a0eb93197e6b6ec7bf\AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:2:1-13:12
+MERGED from [net.cachapa.expandablelayout:expandablelayout:2.9.2] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\expandablelayout-2.9.2.aar\92c9be59847d4bea78960a6b4d596976\AndroidManifest.xml:2:1-12:12
+MERGED from [:HERE-sdk:] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\HERE-sdk.aar\db2048eccd74984d479c87b0e1c979f2\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\8704918362e2c1daa4d5330050e4113e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\d0e268591913d76fccdc862d047766a8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\a7291e726b439e3b0edfd82e55dbaa48\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\2bacd17b0b76d4e3416e12af5505325c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\49539a2ba29229e9d06fb8a36d26e983\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\fd383fbe698c40136453559bbf6931d7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\b3bea2e819ee8c3412c49b71e951ae01\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\65d9018c96f64ee407389c2ad6be7f40\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\8aef2f939a7c5a5321de9f61c4db9cd7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\a95d89c1be692830c8ba3026017ecc9b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\df2840ec073e77fccfaf141a38253b05\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\2f3a332a23fedeb77a4954bffce95586\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\db2e4537f99020be0d4ac743fc6eeb2a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\013ce00c8f22e72d6b53e3ccd851b3d5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\e866a5596b66cce90843fc44adbcb14c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\65109c67aef5917a40449179137ac02c\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\70c3db3674903c274f1018fdd97ef9d2\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\fe8e0d5c66c23fb5f2a3f5bfa3f39fe4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:exifinterface:27.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\65ab6f9dfe412bfa92cbdf0a9f0294bf\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7ceda5197c4d278b29f1ff866e061dcd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\e0977933cecf74fe27d43ce0cb1f6be0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\dfeae34328a95492cce089613c914beb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\710e5c6ecfa1fd4a67876c1a6c66677a\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\ca9d5eca0ec1bd9ee3ba2fa11a86ce19\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\cfe95aaf538b34b014bcb99b53b6f417\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\glide-4.3.1.aar\305ba46130871e219aa45d7daeeb0d1a\AndroidManifest.xml:2:1-12:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\89746a1ac3ad4a5f3e8ba7fcbcbc4075\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\604bca37e2ec4ad6dd32594ac117502b\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\98947ea52bb34d21092779cf147228be\AndroidManifest.xml:17:1-22:12
+MERGED from [pl.droidsonroids.relinker:relinker:1.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\relinker-1.3.1.aar\f249dc3fae3bbd17ff26346c7f054732\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.0.aar\63576df234eb5a86208fd09e8d7e5595\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+	package
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:4:5-39
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+	xmlns:dist
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:3:5-61
+	android:versionCode
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:1-258:12
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:2:11-69
+dist:module
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:6:5-40
+	dist:instant
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:6:18-37
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:8:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:9:5-79
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:9:22-76
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:10:5-76
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:10:5-76
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:10:5-76
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:10:22-73
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:11:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:12:5-80
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:12:22-77
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:13:5-75
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:13:22-72
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:14:5-79
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:9:5-79
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:14:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:15:5-81
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:15:22-78
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:16:5-65
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:21:5-65
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:21:5-65
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:16:22-62
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:17:5-82
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:26:5-82
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:17:22-79
+uses-feature#android.hardware.camera
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:19:5-60
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:24:5-26:36
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:24:5-26:36
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:19:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:20:5-70
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:32:5-34:36
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:32:5-34:36
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:20:19-67
+application
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:22:5-256:19
+MERGED from [com.android.support:design:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\2a7f3a3d5e16286e8621ede2731335be\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\2a7f3a3d5e16286e8621ede2731335be\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:13:5-24:19
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:13:5-24:19
+MERGED from [com.github.qapqap:TimelineView:v1.6] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\TimelineView-v1.6.aar\753c02fde00cf8e51ea2c018d5c691d9\AndroidManifest.xml:11:5-15:19
+MERGED from [com.github.qapqap:TimelineView:v1.6] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\TimelineView-v1.6.aar\753c02fde00cf8e51ea2c018d5c691d9\AndroidManifest.xml:11:5-15:19
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:45:5-53:19
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:45:5-53:19
+MERGED from [me.dm7.barcodescanner:zxing:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-1.9.aar\5de20243eb807e211dddaca154023be4\AndroidManifest.xml:11:5-20
+MERGED from [me.dm7.barcodescanner:zxing:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-1.9.aar\5de20243eb807e211dddaca154023be4\AndroidManifest.xml:11:5-20
+MERGED from [me.dm7.barcodescanner:core:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\core-1.9.aar\f606ae67ab824e3f0c0dfd42c306d8df\AndroidManifest.xml:11:5-20
+MERGED from [me.dm7.barcodescanner:core:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\core-1.9.aar\f606ae67ab824e3f0c0dfd42c306d8df\AndroidManifest.xml:11:5-20
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:22:5-35:19
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:22:5-35:19
+MERGED from [com.google.firebase:firebase-core:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-core-16.0.1.aar\4871342263eb279585407783d15678c3\AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-core:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-core-16.0.1.aar\4871342263eb279585407783d15678c3\AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:26:5-32:19
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:26:5-32:19
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:28:5-57:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:28:5-57:19
+MERGED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:9:5-15:19
+MERGED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:9:5-15:19
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-clearcut-16.0.0.aar\40bd6501c15b8b8d81669ee6952669f3\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-clearcut-16.0.0.aar\40bd6501c15b8b8d81669ee6952669f3\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\c824d1417e4db7d55733dd1169315d1f\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\c824d1417e4db7d55733dd1169315d1f\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-interop-16.0.1.aar\94d7df15dad58176b1075968dde9b705\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-interop-16.0.1.aar\94d7df15dad58176b1075968dde9b705\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-phenotype-16.0.0.aar\9adaa31a1ec7c3cc13f7aadb10a78e45\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-phenotype-16.0.0.aar\9adaa31a1ec7c3cc13f7aadb10a78e45\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\a739b8adf7806a9364174be59b132fbb\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\a739b8adf7806a9364174be59b132fbb\AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-17.0.1.aar\6a2003437db8b066f5face97631c18df\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-17.0.1.aar\6a2003437db8b066f5face97631c18df\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\b7030d223284afdf014efd394636acd3\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\b7030d223284afdf014efd394636acd3\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\943eee9e42559b1533ba81f7f20d553c\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\943eee9e42559b1533ba81f7f20d553c\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\a6f6dafba9cb97e1ba21d1a5faab7dda\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\a6f6dafba9cb97e1ba21d1a5faab7dda\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3b71b1d3d66ea7d0ff000115d88d721e\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3b71b1d3d66ea7d0ff000115d88d721e\AndroidManifest.xml:9:5-20
+MERGED from [it.gilvegliach.android:transparent-text-textview:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transparent-text-textview-1.0.3.aar\4185af44817ee399387f106800e64423\AndroidManifest.xml:27:5-20
+MERGED from [it.gilvegliach.android:transparent-text-textview:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transparent-text-textview-1.0.3.aar\4185af44817ee399387f106800e64423\AndroidManifest.xml:27:5-20
+MERGED from [pl.bclogic:pulsator4droid:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\pulsator4droid-1.0.3.aar\3e6edc0632f2462d706e068d5861b159\AndroidManifest.xml:11:5-15:19
+MERGED from [pl.bclogic:pulsator4droid:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\pulsator4droid-1.0.3.aar\3e6edc0632f2462d706e068d5861b159\AndroidManifest.xml:11:5-15:19
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\volley-1.1.1.aar\7e1b1a0c69d6b15b69514fd25b5d496a\AndroidManifest.xml:9:5-20
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\volley-1.1.1.aar\7e1b1a0c69d6b15b69514fd25b5d496a\AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:2.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\circleimageview-2.2.0.aar\31e3e9acf8358d520aaaefc40ba75077\AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:2.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\circleimageview-2.2.0.aar\31e3e9acf8358d520aaaefc40ba75077\AndroidManifest.xml:9:5-20
+MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:7:5-12:19
+MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:7:5-12:19
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:7:5-11:19
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\65109c67aef5917a40449179137ac02c\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\65109c67aef5917a40449179137ac02c\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\70c3db3674903c274f1018fdd97ef9d2\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\70c3db3674903c274f1018fdd97ef9d2\AndroidManifest.xml:22:5-23:19
+MERGED from [com.github.bumptech.glide:glide:4.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\glide-4.3.1.aar\305ba46130871e219aa45d7daeeb0d1a\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\glide-4.3.1.aar\305ba46130871e219aa45d7daeeb0d1a\AndroidManifest.xml:10:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.0.aar\63576df234eb5a86208fd09e8d7e5595\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.0.aar\63576df234eb5a86208fd09e8d7e5595\AndroidManifest.xml:22:5-20
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:28:9-45
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\65109c67aef5917a40449179137ac02c\AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:29:9-35
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:26:9-41
+	android:roundIcon
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:27:9-48
+	android:icon
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:25:9-45
+	android:allowBackup
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:24:9-35
+	android:theme
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:30:9-40
+	android:usesCleartextTraffic
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:31:9-44
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:23:9-49
+activity#com.demo.user.banksampah.RegisterActivities.RegisterActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:32:9-82
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:32:19-70
+activity#com.demo.user.banksampah.MemberFragment.ListMember.RiwayatOrderMemberActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:33:9-90
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:33:19-87
+activity#com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:34:9-84
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:34:19-81
+activity#com.demo.user.banksampah.HereMaps.ResultListActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:35:9-65
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:35:19-62
+meta-data#com.here.android.maps.appid
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:37:9-39:56
+	android:value
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:39:13-53
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:38:13-55
+meta-data#com.here.android.maps.apptoken
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:40:9-42:59
+	android:value
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:42:13-56
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:41:13-58
+activity#com.demo.user.banksampah.TimelineOrder.TimelineOrderActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:44:9-73
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:44:19-70
+activity#com.demo.user.banksampah.BankSampahActivities.DaftarHargaBankSampah
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:45:9-80
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:45:19-77
+activity#com.demo.user.banksampah.BankSampahActivities.CariBankSampah
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:46:9-73
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:46:19-70
+activity#com.demo.user.banksampah.MapsActivities.PickupDetailActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:47:9-73
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:47:19-70
+activity#com.demo.user.banksampah.MapsActivities.PickupActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:48:9-67
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:48:19-64
+activity#com.demo.user.banksampah.NotificationActivities.RiwayatOrder
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:49:9-54:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:54:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:53:13-69
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:52:13-42
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:51:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:50:13-64
+activity#com.demo.user.banksampah.Documentation.HubungiKami
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:55:9-60:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:60:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:59:13-69
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:58:13-41
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:57:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:56:13-54
+activity#com.demo.user.banksampah.Activities.OpenMaps
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:61:9-64:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:64:13-49
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:63:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:62:13-48
+activity#com.demo.user.banksampah.Activities.IntroSliderActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:65:9-69:63
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:68:13-49
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:67:13-48
+	android:theme
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:69:13-60
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:66:13-59
+activity#com.demo.user.banksampah.ResetPasswordActivities.ChangeResetPasswordActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:70:9-75:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:75:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:74:13-67
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:73:13-48
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:72:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:71:13-80
+activity#com.demo.user.banksampah.ResetPasswordActivities.ResetPasswordActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:76:9-81:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:81:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:80:13-67
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:79:13-44
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:78:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:77:13-74
+activity#com.demo.user.banksampah.Activities.ChangePassword
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:82:9-89:57
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:88:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:87:13-69
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:85:13-48
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:86:13-43
+	android:windowSoftInputMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:89:13-54
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:84:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:83:13-54
+activity#com.demo.user.banksampah.Documentation.SyaratKetentuan
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:90:9-96:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:96:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:95:13-83
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:93:13-49
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:94:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:92:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:91:13-58
+activity#com.demo.user.banksampah.Documentation.Faq
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:97:9-102:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:102:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:101:13-69
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:100:13-57
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:99:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:98:13-46
+activity#com.demo.user.banksampah.InfoLimbahDetails
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:103:9-109:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:109:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:108:13-66
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:106:13-45
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:107:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:105:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:104:13-46
+activity#com.demo.user.banksampah.NotificationActivities.PointGetStatus
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:110:9-115:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:115:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:114:13-89
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:113:13-46
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:112:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:111:13-66
+activity#com.demo.user.banksampah.NotificationActivities.PickStatus
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:116:9-121:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:121:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:120:13-89
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:119:13-46
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:118:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:117:13-62
+activity#com.demo.user.banksampah.NotificationActivities.ConfirmPickOrder
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:122:9-128:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:128:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:127:13-89
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:125:13-51
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:126:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:124:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:123:13-68
+activity#com.demo.user.banksampah.NotificationActivities.SubNotificationActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:129:9-135:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:135:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:134:13-66
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:132:13-39
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:133:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:131:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:130:13-75
+activity#com.demo.user.banksampah.Activities.UpdateProfileActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:136:9-141:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:141:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:140:13-69
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:139:13-49
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:138:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:137:13-61
+activity#com.demo.user.banksampah.Activities.OrderDetailsActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:142:9-145:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:145:13-49
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:144:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:143:13-60
+activity#com.demo.user.banksampah.Activities.QRScanActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:146:9-63
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:146:19-60
+activity#com.demo.user.banksampah.Activities.SummaryOrderActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:147:9-155:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:155:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:154:13-66
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:151:13-42
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:153:13-43
+	android:hardwareAccelerated
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:150:13-48
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:149:13-48
+	android:largeHeap
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:152:13-37
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:148:13-60
+uses-library#org.apache.http.legacy
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:157:9-159:40
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:33:9-35:40
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:159:13-37
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:158:13-50
+activity#com.demo.user.banksampah.Activities.ProfileActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:161:9-168:63
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:167:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:166:13-66
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:164:13-40
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:165:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:163:13-48
+	android:theme
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:168:13-60
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:162:13-55
+activity#com.demo.user.banksampah.RegisterActivities.OtpActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:169:9-174:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:174:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:173:13-67
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:172:13-42
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:171:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:170:13-59
+activity#com.demo.user.banksampah.RegisterActivities.RegisterPhoneActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:175:9-181:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:181:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:180:13-67
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:178:13-49
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:179:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:177:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:176:13-69
+activity#com.demo.user.banksampah.Activities.TrashDetailOrder
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:182:9-188:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:188:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:187:13-65
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:185:13-41
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:186:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:184:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:183:13-56
+activity#com.demo.user.banksampah.Activities.TrashDetail
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:189:9-195:52
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:195:13-49
+	android:parentActivityName
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:194:13-66
+	android:label
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:192:13-50
+	android:launchMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:193:13-43
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:191:13-48
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:190:13-51
+activity#com.demo.user.banksampah.WebViewTest
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:196:9-49
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:196:19-46
+meta-data#com.google.android.geo.API_KEY
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:198:9-200:55
+	android:value
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:200:13-52
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:199:13-58
+meta-data#com.google.android.gms.version
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:201:9-203:69
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:8:9-10:69
+	android:value
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:203:13-66
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:202:13-58
+activity#com.demo.user.banksampah.Activities.SplashScreen
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:205:9-211:20
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:205:19-58
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:206:13-210:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:207:17-69
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:207:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:209:17-77
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:209:27-74
+activity#com.demo.user.banksampah.Activities.MainActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:212:9-219:57
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:217:13-49
+	android:hardwareAccelerated
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:215:13-47
+	android:windowSoftInputMode
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:219:13-54
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:214:13-48
+	android:largeHeap
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:216:13-37
+	android:theme
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:218:13-60
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:213:13-52
+meta-data#com.google.firebase.messaging.default_notification_channel_id
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:221:9-223:71
+	android:value
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:223:13-68
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:222:13-89
+meta-data#com.google.firebase.messaging.default_notification_icon
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:224:9-226:54
+	android:resource
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:226:13-51
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:225:13-83
+meta-data#com.google.firebase.messaging.default_notification_color
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:227:9-229:53
+	android:resource
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:229:13-50
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:228:13-84
+service#com.demo.user.banksampah.Services.MyFirebaseMessagingServices
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:231:9-239:19
+	android:enabled
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:233:13-35
+	android:exported
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:234:13-36
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:232:13-65
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE+action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:235:13-238:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:236:17-78
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:236:25-75
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:237:17-81
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:237:25-78
+activity#com.demo.user.banksampah.Activities.LoginActivity
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:241:9-245:63
+	android:screenOrientation
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:244:13-49
+	android:configChanges
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:243:13-48
+	android:theme
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:245:13-60
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:242:13-53
+uses-sdk
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:multidex:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\37aed83be6d335edca702b1645ee537e\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:multidex:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\37aed83be6d335edca702b1645ee537e\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\2a7f3a3d5e16286e8621ede2731335be\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\2a7f3a3d5e16286e8621ede2731335be\AndroidManifest.xml:20:5-44
+MERGED from [com.gauravbhola.ripplepulsebackground:library:1.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\library-1.0.0.aar\1cc876a32e35606f405608cc6eccfec6\AndroidManifest.xml:7:5-9:41
+MERGED from [com.gauravbhola.ripplepulsebackground:library:1.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\library-1.0.0.aar\1cc876a32e35606f405608cc6eccfec6\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.GrenderG:Toasty:1.4.2] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\Toasty-1.4.2.aar\53290e72667950c52e85d32aba1998a1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.GrenderG:Toasty:1.4.2] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\Toasty-1.4.2.aar\53290e72667950c52e85d32aba1998a1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:7:5-44
+MERGED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:7:5-44
+MERGED from [com.github.qapqap:TimelineView:v1.6] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\TimelineView-v1.6.aar\753c02fde00cf8e51ea2c018d5c691d9\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.qapqap:TimelineView:v1.6] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\TimelineView-v1.6.aar\753c02fde00cf8e51ea2c018d5c691d9\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\21f8bd60b6d6bd3d978cdacb9d979f8c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\21f8bd60b6d6bd3d978cdacb9d979f8c\AndroidManifest.xml:20:5-44
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:19:5-43
+MERGED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:19:5-43
+MERGED from [me.dm7.barcodescanner:zxing:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-1.9.aar\5de20243eb807e211dddaca154023be4\AndroidManifest.xml:7:5-9:41
+MERGED from [me.dm7.barcodescanner:zxing:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-1.9.aar\5de20243eb807e211dddaca154023be4\AndroidManifest.xml:7:5-9:41
+MERGED from [me.dm7.barcodescanner:core:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\core-1.9.aar\f606ae67ab824e3f0c0dfd42c306d8df\AndroidManifest.xml:7:5-9:41
+MERGED from [me.dm7.barcodescanner:core:1.9] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\core-1.9.aar\f606ae67ab824e3f0c0dfd42c306d8df\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-core:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-core-16.0.1.aar\4871342263eb279585407783d15678c3\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-core:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-core-16.0.1.aar\4871342263eb279585407783d15678c3\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-clearcut-16.0.0.aar\40bd6501c15b8b8d81669ee6952669f3\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-clearcut:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-clearcut-16.0.0.aar\40bd6501c15b8b8d81669ee6952669f3\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\c824d1417e4db7d55733dd1169315d1f\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\c824d1417e4db7d55733dd1169315d1f\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-interop-16.0.1.aar\94d7df15dad58176b1075968dde9b705\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-interop-16.0.1.aar\94d7df15dad58176b1075968dde9b705\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-phenotype-16.0.0.aar\9adaa31a1ec7c3cc13f7aadb10a78e45\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-phenotype:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-phenotype-16.0.0.aar\9adaa31a1ec7c3cc13f7aadb10a78e45\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\a739b8adf7806a9364174be59b132fbb\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\a739b8adf7806a9364174be59b132fbb\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-17.0.1.aar\6a2003437db8b066f5face97631c18df\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-17.0.1.aar\6a2003437db8b066f5face97631c18df\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\b7030d223284afdf014efd394636acd3\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-stats-16.0.1.aar\b7030d223284afdf014efd394636acd3\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\943eee9e42559b1533ba81f7f20d553c\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\943eee9e42559b1533ba81f7f20d553c\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\a6f6dafba9cb97e1ba21d1a5faab7dda\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\a6f6dafba9cb97e1ba21d1a5faab7dda\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.2.0.aar\fbe028c27617a768d29867856943008f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\e39b04fd81246b0acc924088615f47a0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\e39b04fd81246b0acc924088615f47a0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\9eae7c8b9bfb1e47b13e615e29e25da3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\9eae7c8b9bfb1e47b13e615e29e25da3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\17cb5000734d27958795fcbe7c163808\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\17cb5000734d27958795fcbe7c163808\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:gridlayout-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-28.0.0.aar\2a6b03a6766ee734d70692499b72c02f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:gridlayout-v7:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\gridlayout-v7-28.0.0.aar\2a6b03a6766ee734d70692499b72c02f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3b71b1d3d66ea7d0ff000115d88d721e\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\3b71b1d3d66ea7d0ff000115d88d721e\AndroidManifest.xml:5:5-7:41
+MERGED from [it.gilvegliach.android:transparent-text-textview:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transparent-text-textview-1.0.3.aar\4185af44817ee399387f106800e64423\AndroidManifest.xml:23:5-25:41
+MERGED from [it.gilvegliach.android:transparent-text-textview:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transparent-text-textview-1.0.3.aar\4185af44817ee399387f106800e64423\AndroidManifest.xml:23:5-25:41
+MERGED from [pl.bclogic:pulsator4droid:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\pulsator4droid-1.0.3.aar\3e6edc0632f2462d706e068d5861b159\AndroidManifest.xml:7:5-9:41
+MERGED from [pl.bclogic:pulsator4droid:1.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\pulsator4droid-1.0.3.aar\3e6edc0632f2462d706e068d5861b159\AndroidManifest.xml:7:5-9:41
+MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.17] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-gif-drawable-1.2.17.aar\12f7c6ed3cbe02d6738244079ea168f7\AndroidManifest.xml:6:5-8:41
+MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.17] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-gif-drawable-1.2.17.aar\12f7c6ed3cbe02d6738244079ea168f7\AndroidManifest.xml:6:5-8:41
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\volley-1.1.1.aar\7e1b1a0c69d6b15b69514fd25b5d496a\AndroidManifest.xml:7:5-43
+MERGED from [com.android.volley:volley:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\volley-1.1.1.aar\7e1b1a0c69d6b15b69514fd25b5d496a\AndroidManifest.xml:7:5-43
+MERGED from [de.hdodenhof:circleimageview:2.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\circleimageview-2.2.0.aar\31e3e9acf8358d520aaaefc40ba75077\AndroidManifest.xml:5:5-7:41
+MERGED from [de.hdodenhof:circleimageview:2.2.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\circleimageview-2.2.0.aar\31e3e9acf8358d520aaaefc40ba75077\AndroidManifest.xml:5:5-7:41
+MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:5:5-44
+MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:5:5-44
+MERGED from [com.github.mreram:showcaseview:1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\showcaseview-1.1.aar\9c1a3e401c9637a0eb93197e6b6ec7bf\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.mreram:showcaseview:1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\showcaseview-1.1.aar\9c1a3e401c9637a0eb93197e6b6ec7bf\AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:5:5-43
+MERGED from [com.google.maps.android:android-maps-utils:0.4.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\android-maps-utils-0.4.4.aar\be2de7ec1cdec3409e5e01ea9da16af5\AndroidManifest.xml:5:5-43
+MERGED from [net.cachapa.expandablelayout:expandablelayout:2.9.2] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\expandablelayout-2.9.2.aar\92c9be59847d4bea78960a6b4d596976\AndroidManifest.xml:8:5-10:41
+MERGED from [net.cachapa.expandablelayout:expandablelayout:2.9.2] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\expandablelayout-2.9.2.aar\92c9be59847d4bea78960a6b4d596976\AndroidManifest.xml:8:5-10:41
+MERGED from [:HERE-sdk:] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\HERE-sdk.aar\db2048eccd74984d479c87b0e1c979f2\AndroidManifest.xml:7:5-9:41
+MERGED from [:HERE-sdk:] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\HERE-sdk.aar\db2048eccd74984d479c87b0e1c979f2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\8704918362e2c1daa4d5330050e4113e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\8704918362e2c1daa4d5330050e4113e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\d0e268591913d76fccdc862d047766a8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\d0e268591913d76fccdc862d047766a8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\a7291e726b439e3b0edfd82e55dbaa48\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\a7291e726b439e3b0edfd82e55dbaa48\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\2bacd17b0b76d4e3416e12af5505325c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\2bacd17b0b76d4e3416e12af5505325c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\49539a2ba29229e9d06fb8a36d26e983\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\49539a2ba29229e9d06fb8a36d26e983\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\fd383fbe698c40136453559bbf6931d7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\fd383fbe698c40136453559bbf6931d7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\b3bea2e819ee8c3412c49b71e951ae01\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\b3bea2e819ee8c3412c49b71e951ae01\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\65d9018c96f64ee407389c2ad6be7f40\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\65d9018c96f64ee407389c2ad6be7f40\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\8aef2f939a7c5a5321de9f61c4db9cd7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\8aef2f939a7c5a5321de9f61c4db9cd7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\a95d89c1be692830c8ba3026017ecc9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\a95d89c1be692830c8ba3026017ecc9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\df2840ec073e77fccfaf141a38253b05\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\df2840ec073e77fccfaf141a38253b05\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\2f3a332a23fedeb77a4954bffce95586\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\2f3a332a23fedeb77a4954bffce95586\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\db2e4537f99020be0d4ac743fc6eeb2a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\db2e4537f99020be0d4ac743fc6eeb2a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\013ce00c8f22e72d6b53e3ccd851b3d5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\013ce00c8f22e72d6b53e3ccd851b3d5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\e866a5596b66cce90843fc44adbcb14c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\e866a5596b66cce90843fc44adbcb14c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\65109c67aef5917a40449179137ac02c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\65109c67aef5917a40449179137ac02c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\70c3db3674903c274f1018fdd97ef9d2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\70c3db3674903c274f1018fdd97ef9d2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\fe8e0d5c66c23fb5f2a3f5bfa3f39fe4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\fe8e0d5c66c23fb5f2a3f5bfa3f39fe4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\65ab6f9dfe412bfa92cbdf0a9f0294bf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:exifinterface:27.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\exifinterface-27.1.0.aar\65ab6f9dfe412bfa92cbdf0a9f0294bf\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7ceda5197c4d278b29f1ff866e061dcd\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7ceda5197c4d278b29f1ff866e061dcd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\e0977933cecf74fe27d43ce0cb1f6be0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\e0977933cecf74fe27d43ce0cb1f6be0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\dfeae34328a95492cce089613c914beb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\dfeae34328a95492cce089613c914beb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\710e5c6ecfa1fd4a67876c1a6c66677a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\710e5c6ecfa1fd4a67876c1a6c66677a\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\ca9d5eca0ec1bd9ee3ba2fa11a86ce19\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\ca9d5eca0ec1bd9ee3ba2fa11a86ce19\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\cfe95aaf538b34b014bcb99b53b6f417\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\cfe95aaf538b34b014bcb99b53b6f417\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\glide-4.3.1.aar\305ba46130871e219aa45d7daeeb0d1a\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\glide-4.3.1.aar\305ba46130871e219aa45d7daeeb0d1a\AndroidManifest.xml:6:5-8:41
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\89746a1ac3ad4a5f3e8ba7fcbcbc4075\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\89746a1ac3ad4a5f3e8ba7fcbcbc4075\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\604bca37e2ec4ad6dd32594ac117502b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\604bca37e2ec4ad6dd32594ac117502b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\98947ea52bb34d21092779cf147228be\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\98947ea52bb34d21092779cf147228be\AndroidManifest.xml:20:5-44
+MERGED from [pl.droidsonroids.relinker:relinker:1.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\relinker-1.3.1.aar\f249dc3fae3bbd17ff26346c7f054732\AndroidManifest.xml:5:5-43
+MERGED from [pl.droidsonroids.relinker:relinker:1.3.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\relinker-1.3.1.aar\f249dc3fae3bbd17ff26346c7f054732\AndroidManifest.xml:5:5-43
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.0.aar\63576df234eb5a86208fd09e8d7e5595\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.0.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.0.aar\63576df234eb5a86208fd09e8d7e5595\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:252:13-254:54
+	android:resource
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:254:17-51
+	android:name
+		ADDED from C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\src\main\AndroidManifest.xml:253:17-67
+activity#com.google.android.libraries.places.widget.AutocompleteActivity
+ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:16:9-23:20
+	android:label
+		ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:20:13-62
+	android:hardwareAccelerated
+		ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:19:13-47
+	android:windowSoftInputMode
+		ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:22:13-71
+	android:exported
+		ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:18:13-37
+	android:theme
+		ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:21:13-66
+	android:name
+		ADDED from [com.google.android.libraries.places:places:1.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\places-1.1.0.aar\3bbf4d811f09561119cbebe4db0b8d18\AndroidManifest.xml:17:13-91
+uses-feature#android.hardware.camera.front
+ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:27:5-29:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:29:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:28:9-53
+uses-feature#android.hardware.camera.flash
+ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:35:5-37:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:37:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:36:9-53
+uses-feature#android.hardware.screen.landscape
+ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:38:5-40:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:40:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:39:9-57
+uses-feature#android.hardware.wifi
+ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:41:5-43:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:43:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:42:9-45
+activity#com.journeyapps.barcodescanner.CaptureActivity
+ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:46:9-52:63
+	android:screenOrientation
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:49:13-56
+	android:clearTaskOnLaunch
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:48:13-45
+	android:stateNotNeeded
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:50:13-42
+	android:windowSoftInputMode
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:52:13-60
+	android:theme
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:51:13-54
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.5.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\zxing-android-embedded-3.5.0.aar\b55cd25c956ae00e850a1ceb5efe3d80\AndroidManifest.xml:47:13-74
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:28:9-34:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:30:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:29:13-82
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:31:13-33:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-messaging:17.3.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-messaging-17.3.4.aar\f51a7980ae6809e1a046f2f820031cd3\AndroidManifest.xml:31:28-51
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:24:5-68
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:24:22-65
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:27:9-31:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:29:9-35:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:27:18-89
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-measurement-connector-impl:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-measurement-connector-impl-16.0.1.aar\3d6b296e48dbcd29e7c7136817b78418\AndroidManifest.xml:29:17-139
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:26:5-110
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:26:5-110
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:30:13-85
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:34:9-42:20
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:29:9-37:20
+MERGED from [com.google.firebase:firebase-analytics-impl:16.1.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-16.1.1.aar\0fda856551d25a90cac4f25bd61bf1a8\AndroidManifest.xml:29:9-37:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:36:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:37:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:38:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:35:13-100
+intent-filter#action:name:com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:39:13-41:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:40:17-79
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:40:25-76
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:44:9-47:40
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:46:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:45:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:48:9-52:72
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:50:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:51:13-37
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:52:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:16.0.1] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-analytics-16.0.1.aar\84d089dfcb5d0a3efa6fae1694410617\AndroidManifest.xml:49:13-87
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:33:17-96
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:37:9-44:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:39:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:40:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:38:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:41:13-43:29
+service#com.google.firebase.iid.FirebaseInstanceIdService
+ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:50:9-56:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:52:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:51:13-77
+intent-filter#action:name:com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:53:13-55:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:53:28-51
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:54:17-80
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:17.0.4] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-iid-17.0.4.aar\77aa5e03e9fe5cc541163e844893a622\AndroidManifest.xml:54:25-77
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:10:9-14:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:12:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:13:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:14:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:16.0.3] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\firebase-common-16.0.3.aar\0c60b0ae2e65f894460a5753041455a1\AndroidManifest.xml:11:13-77
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.1.0.aar\54b7fcdf09d316c789be300deb9e9395\AndroidManifest.xml:28:9-32
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\play-services-base-16.1.0.aar\612f78d7971007ce20683f6b17b3b114\AndroidManifest.xml:24:13-79
+provider#com.squareup.picasso.PicassoProvider
+ADDED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:8:9-11:40
+	android:authorities
+		ADDED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:10:13-72
+	android:exported
+		ADDED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [com.squareup.picasso:picasso:2.71828] C:\Users\Adit\.gradle\caches\transforms-1\files-1.1\picasso-2.71828.aar\3749f157ebd218efb8054b35869e3f58\AndroidManifest.xml:9:13-64
