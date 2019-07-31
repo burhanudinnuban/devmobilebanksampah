@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.OpenMaps">
+
+
+    <RelativeLayout
+        android:id="@+id/maps_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <fragment
+            android:id="@+id/map"
+            class="com.here.android.mpa.mapping.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!--<TextView
+            android:id="@+id/tvSearchLocation"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorBorderWhite"
+            android:gravity="center|left"
+            android:hint="Cari Alamat"
+            android:padding="20dp"
+            android:text="TextView"
+            android:textSize="12sp" />-->
+
+        <EditText
+            android:id="@+id/etSearchLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBorderWhite"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center|left"
+            android:hint="Cari Alamat"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/ivmarker"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:paddingBottom="30dp"
+            android:src="@drawable/ic_person_pin_circle_green_30_dp"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp">
+
+            <Button
+                android:id="@+id/btnSaveLocation"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:text="Simpan Lokasi"
+                android:textColor="#FFF" />
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+</RelativeLayout>

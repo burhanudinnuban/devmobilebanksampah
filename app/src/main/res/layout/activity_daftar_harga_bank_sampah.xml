@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:orientation="vertical"
+    tools:context=".BankSampahActivities.DaftarHargaBankSampah">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Daftar Harga Limbah Sampah: Lestari"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"/>
+
+    <ExpandableListView
+        android:id="@+id/expandListView_Sampah"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="2dp"
+        android:groupIndicator="@drawable/settings_selector">
+
+    </ExpandableListView>
+
+</LinearLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.demo.user.banksampah.Activities.MapsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"/>
+
+        <TableRow
+            android:id="@+id/tableRow_Search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etSearchLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:clickable="true"
+                android:gravity="center|start|left"
+                android:lineSpacingExtra="3sp"
+                android:padding="5dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
+
+          <!--  <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.1"
+                android:src="@drawable/ic_close_red_24dp" />-->
+
+            <!--<ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="0.1"
+                android:background="@color/colorBorderWhite"
+                android:padding="2dp"
+                android:src="@drawable/ic_close_red_24dp" />-->
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15" />
+        </TableRow>
+
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tableRow_Search"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/ic_btn_default"
+            android:text="Clear"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBorderWhite"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tableRow_Search"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/btnClear"
+            android:layout_weight="0.3"
+            android:background="@drawable/ic_btn_default"
+            android:onClick="searchLocation"
+            android:text="Cari"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBorderWhite"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:id="@+id/imgConfirmAddress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/view"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_person_pin_circle_green_30_dp" />
+
+        <Button
+            android:id="@+id/btnSaveLocation"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ic_btn_default"
+            android:text="Simpan"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBorderWhite"
+            android:textSize="17sp" />
+
+    </RelativeLayout>
+</FrameLayout>

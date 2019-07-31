@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_navigation_profil_2"
+            android:title="Data Pribadi" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_history"
+            android:title="Riwayat Order" />
+        <item
+            android:id="@+id/nav_pwd"
+            android:icon="@drawable/ic_key"
+            android:title="Ganti Kata Sandi" />
+        <item
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info"
+            android:title="Hubungi Kami" />
+    </group>
+</menu>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    tools:context=".MapsActivities.PickupActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_above="@+id/controls_layout" />
+
+    <com.gauravbhola.ripplepulsebackground.RipplePulseLayout
+        android:id="@+id/layout_ripplepulse"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        app:duration="2000"
+        app:endRadius="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/controls_layout"
+        app:rippleColor="@color/colorAccent"
+        app:rippleType="fill"
+        app:startRadius="42dp"
+        app:strokeWidth="3dp">
+
+        <!--<com.gauravbhola.ripplepulsebackground.sample.views.RoundedImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_my_location" />-->
+    </com.gauravbhola.ripplepulsebackground.RipplePulseLayout>
+
+    <LinearLayout
+        android:id="@+id/controls_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="#FFFFFFFF">
+
+        <TextView
+            android:id="@+id/tvNotes_Pickup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sourcesansproregular"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Mencarikan Kamu Picker untuk Mengangkut Limbah Anda.\nHarap Menunggu..."
+            android:textSize="12dp"
+            app:fontFamily="@font/sourcesansproregular" />
+
+        <Button
+            android:id="@+id/btnCancel_Pickup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBgLightProgress"
+            android:fontFamily="sourcesansproregular"
+            android:text="Batalkan Pemesanan"
+            android:textStyle="bold"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+
+</RelativeLayout>

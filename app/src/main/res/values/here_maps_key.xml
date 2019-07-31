@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Akun Aditya.ismail@student.bakrie.ac.id -->
+    <string name="here_maps_app_id" templateMergeStrategy="preserve" translatable="false">54tKpKqHTUGQhq4osiMx</string>
+    <string name="here_maps_app_token" templateMergeStrategy="preserve" translatable="false">xJItpvq7k-zZQyu9e9QVIQ</string>
+</resources>
