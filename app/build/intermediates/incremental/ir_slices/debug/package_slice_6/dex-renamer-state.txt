@@ -1,4 +1,0 @@
-#Thu Jul 25 09:44:01 ICT 2019
-base.0=C\:\\Users\\Adit\\Documents\\MIS PROJECT ANDROID\\WM_BANK_SAMPAH_DEMO\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6
-path.0=classes.dex
-renamed.0=classes.dex

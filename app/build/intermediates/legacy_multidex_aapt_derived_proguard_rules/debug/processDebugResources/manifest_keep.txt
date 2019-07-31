@@ -1,4 +1,0 @@
-# Referenced at C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\build\intermediates\merged_manifests\debug\AndroidManifest.xml:47
--keep class android.support.v4.app.CoreComponentFactory { <init>(); }
-# Referenced at C:\Users\Adit\Documents\MIS PROJECT ANDROID\WM_BANK_SAMPAH_DEMO\app\build\intermediates\merged_manifests\debug\AndroidManifest.xml:47
--keep class com.demo.user.banksampah.Adapter.VolleyController { <init>(); }
