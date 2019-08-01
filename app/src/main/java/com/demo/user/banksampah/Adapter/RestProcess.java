@@ -231,6 +231,11 @@ public class RestProcess {
 
         //Volley Setting
         apiErecyle.put("str_json_obj", "json_obj_req");
+
+
+        //List Member
+        apiErecyle.put("str_api_list_member",".list_member_bank_sampah");
+
         return apiErecyle;
     }
 

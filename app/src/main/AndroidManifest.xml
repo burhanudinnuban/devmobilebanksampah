@@ -216,7 +216,9 @@
             android:largeHeap="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBarHide"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+        </activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

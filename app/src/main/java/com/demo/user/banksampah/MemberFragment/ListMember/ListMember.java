@@ -24,11 +24,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
+import com.demo.user.banksampah.Adapter.ModelData;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +45,9 @@ public class ListMember extends Fragment {
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-    protected String strIDUser;
+    private ArrayList<ModelData> dataSet;
 
+    protected String strIDUser;
 
     protected CustomProgress customProgress;
 
@@ -140,18 +146,31 @@ public class ListMember extends Fragment {
         return rootView;
     }
 
-    protected void getListMember(String strIDUser) {
+    protected void getListMember(final String strIDUser) {
         customProgress.showProgress(getContext(), "", false);
-        final String[] field_name = {"id_member","nama_member","point"};
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_member");
 
-        String base_url = apiData.get("str_url_address") + apiData.get(".list_member_bank_sampah");
+        Log.d("debug", "getParams: "+strIDUser);
 
         StringRequest strReq = new StringRequest(Request.Method.GET, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 customProgress.hideProgress();
-                Log.d("DEBUG", "Register Response: " + response);
+                JSONObject jObject;
                 try {
+                    jObject = new JSONObject(response);
+                    Log.d("DEBUG", "onResponse: "+response);
+                    JSONArray cast = jObject.getJSONArray("message");
+                    dataSet = new ArrayList<>();
+                    dataSet.clear();
+                    for (int i = 0; i < cast.length(); i++){
+                        JSONObject data = cast.getJSONObject(i);
+                        String id_member = data.getString("id_member");
+                        String nama_member = data.getString("nama_member");
+                        String point = data.getString("point");
+
+                        dataSet.add(new ModelData(id_member, nama_member, point));
+                    }
                     Log.e("tag", "sukses");
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
@@ -174,13 +193,9 @@ public class ListMember extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(field_name[0], strIdMember);
-                params.put(field_name[1], strNamaMember);
-                params.put(field_name[2], strPointMember);
-
+                params.put("id_bank_sampah",strIDUser);
                 return params;
             }
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -189,9 +204,6 @@ public class ListMember extends Fragment {
             }
         };
 
-        // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
-
-
 }
