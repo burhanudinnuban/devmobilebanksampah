@@ -4,7 +4,12 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-
+    <string-array name="Tipe_Sampah">
+        <item>Plastik</item>
+        <item>Kertas</item>
+        <item>Logam</item>
+        <item>Kaca</item>
+    </string-array>
     <string name="placeholder_pcs"> Pcs</string>
     <string name="placeholder_kgs"> Kg</string>
     <string name="placeholder_point"> Points</string>
