@@ -31,11 +31,14 @@ import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 public class ListMember extends Fragment {
 
@@ -76,7 +79,7 @@ public class ListMember extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_list_member, container, false);
         session = new PrefManager(getContext());
         HashMap<String, String> user = session.getUserDetails();
-        strIDUser = user.get(PrefManager.KEY_ID);
+        strIDUser = user.get(PrefManager.KEY_NAMA);
 
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
@@ -92,9 +95,11 @@ public class ListMember extends Fragment {
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListMember(strIDUser);
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected())
+        {
             //Jalanin API
+            getListMember(strIDUser);
+
         } else {
             Snackbar snackbar = Snackbar
                     .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
@@ -135,7 +140,7 @@ public class ListMember extends Fragment {
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListMember(strIDUser);
+            //getListMember(strIDUser);
         } else {
             Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
@@ -148,29 +153,14 @@ public class ListMember extends Fragment {
 
     protected void getListMember(final String strIDUser) {
         customProgress.showProgress(getContext(), "", false);
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_member");
-
-        Log.d("debug", "getParams: "+strIDUser);
-
+        String base_url = "https://dev-lestari.multiinti.io/api/method/digitalwastev2.bsh_bankapi.list_member_bank_sampah";
         StringRequest strReq = new StringRequest(Request.Method.GET, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 customProgress.hideProgress();
                 JSONObject jObject;
                 try {
-                    jObject = new JSONObject(response);
-                    Log.d("DEBUG", "onResponse: "+response);
-                    JSONArray cast = jObject.getJSONArray("message");
-                    dataSet = new ArrayList<>();
-                    dataSet.clear();
-                    for (int i = 0; i < cast.length(); i++){
-                        JSONObject data = cast.getJSONObject(i);
-                        String id_member = data.getString("id_member");
-                        String nama_member = data.getString("nama_member");
-                        String point = data.getString("point");
-
-                        dataSet.add(new ModelData(id_member, nama_member, point));
-                    }
+                   viewDataMember(response);
                     Log.e("tag", "sukses");
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
@@ -193,7 +183,7 @@ public class ListMember extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("id_bank_sampah",strIDUser);
+                params.put("id_bank_sampah", "Bank Sampah Bekasi");
                 return params;
             }
             @Override
@@ -205,5 +195,60 @@ public class ListMember extends Fragment {
         };
 
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+    }
+
+    protected void viewDataMember(String resp_content){
+        String[] field_name = {"message", "id_member", "nama_member", "point"};
+
+        try {
+            JSONObject jsonObject = new JSONObject(resp_content);
+            String message = jsonObject.getString(field_name[0]);
+
+            //if (!message.equalsIgnoreCase("Invalid")) {
+                ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+                JSONArray cast = jsonObject.getJSONArray(field_name[0]);
+                Log.e("tag", String.valueOf(cast.length()));
+
+                for (int i = 0; i < cast.length(); i++) {
+                    JSONObject c = cast.getJSONObject(i);
+
+                    String id_member= c.getString(field_name[1]);
+                    String nama_member = c.getString(field_name[2]);
+                    String point = c.getString(field_name[3]);
+
+                    HashMap<String, String> map = new HashMap<>();
+
+                    map.put(field_name[1], id_member);
+                    map.put(field_name[2], nama_member);
+                    map.put(field_name[3], point);
+                    allOrder.add(map);
+                }
+
+                Log.d("tag", allOrder.toString());
+
+                adapter = new LazyAdapter(getActivity(), allOrder, 9);
+
+            /*} else {
+                //include_FormOrderList.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                linear_listOrder.setVisibility(View.GONE);
+                cd_NoConnection.setVisibility(View.GONE);
+                *//*if (getContext() != null) {
+                    Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+                }*//*
+            }*/
+
+        } catch (JSONException e) {
+            if (getContext() != null) {
+                Toasty.error(getContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+            }
+            Log.e("tag", " 2 :" + String.valueOf(e));
+            e.printStackTrace();
+            /*include_FormOrderList.setVisibility(View.GONE);
+            linear_NoData.setVisibility(View.VISIBLE);
+            if(getContext()!=null) {
+                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+            }*/
+        }
     }
 }

@@ -4,12 +4,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <!--<ExpandableListView
-        android:id="@+id/expandListView_Sampah"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:dividerHeight="0dp">
-    </ExpandableListView>-->
+        android:layout_height="wrap_content"
+        android:text="Daftar Harga Bank Sampah"
+        android:gravity="center"
+        android:layout_margin="12dp"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_btn_default"
+        android:text="+ Tambahkan Daftar"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBtnText"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TableRow
+            android:id="@+id/tbl_nama_harga_sampah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/child_nama_sampah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="left|center|start"
+                android:text="Plastik"
+                android:textColor="@color/colorCardDS"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/child_harga_sampah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="0.7"
+                android:drawableEnd="@drawable/arrow_right"
+                android:drawableRight="@drawable/arrow_right"
+                android:drawablePadding="10dp"
+                android:gravity="left|center|start"
+                android:text="Harga"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -55,11 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.imgPicture_Profil);
         imgArrowBack = findViewById(R.id.imgArrowBack);
 
-        tvDataProfil = findViewById(R.id.tvData_Profil);
-        tvHistory = findViewById(R.id.tvHistory_Profil);
-        tvPassword= findViewById(R.id.tvPassword_Profil);
-        tvCallUs = findViewById(R.id.tvCallUs_Profil);
-        tvFaq = findViewById(R.id.tvFaq_Profil);
+//        tvDataProfil = findViewById(R.id.tvData_Profil);
+//        tvHistory = findViewById(R.id.tvHistory_Profil);
+//        tvPassword= findViewById(R.id.tvPassword_Profil);
+//        tvCallUs = findViewById(R.id.tvCallUs_Profil);
+//        tvFaq = findViewById(R.id.tvFaq_Profil);
         tvLogOut = findViewById(R.id.tvLogOut);
 
         //Create myDialog
