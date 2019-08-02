@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
@@ -23,6 +24,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.user.banksampah.Adapter.CustomProgress;
@@ -69,6 +72,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected Bitmap getBitmapPicture;
     protected ByteArrayOutputStream byteArrayOutputStream;
 
+    //Linear Satu
+
     protected CustomProgress customProgress;
 
     //Session Class
@@ -81,20 +86,22 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected static String getTglLahir = "";
     protected static String getNoHP = "";
     protected static String getAlamat = "";
-    protected static String getEmail = "";
+//    protected static String getEmail = "";
 
     @SuppressLint("StaticFieldLeak")
     protected static ImageView imgProfil;
 
     protected String url_foto;
 
-    protected ImageView imgPinMaps;
-    protected EditText etNamaLengkap, etEmail, etNoHp, etTglLahir, etAlamat;
-    protected TextInputLayout DoB;
+    //Deklarasi Ke Layout
+    protected ImageView imgPinCircle, imgRegister;
+    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus, etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank;
+    protected TextView tvMaps , tvDataPengurus, tvStepOne, tvStepTwo, tvStepThree, tvStatusNoHp, tvDataRekeningBankSampah;
+    protected Button btDaftarkan;
+    protected LinearLayout registerBankSampah, registerPengurus,registerDetailBank;
 
-    protected Button btnUpdate;
 
-    protected String strNamaLengkap_Update, strLatLong_Update, strEmail_Update,
+    protected String strNamaLengkap_Update, strLatLong_Update,
               strAlamat_Update;
 
     /*FOR GPS*/
@@ -131,15 +138,31 @@ public class UpdateProfileActivity extends AppCompatActivity {
         inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         outputDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-        imgProfil = findViewById(R.id.imgProfil_Update);
-        etNamaLengkap = findViewById(R.id.etNamaLengkap_Update);
-        etEmail = findViewById(R.id.etEmail_Update);
-        etNoHp = findViewById(R.id.etNoHP_Update);
-        etTglLahir = findViewById(R.id.etTanggalLahir_Update);
-        DoB = findViewById(R.id.DateOfBirth);
-        etAlamat = findViewById(R.id.etAlamat_Update);
-        imgPinMaps = findViewById(R.id.imgPinCircle);
-        btnUpdate = findViewById(R.id.btnSimpan_Update);
+        etAlamat = findViewById(R.id.etAlamat);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        etNamaBankSampah = findViewById(R.id.etNamaBankSampah_Register);
+        etNamaDetailBank = findViewById(R.id.etNamaDetailBank_Register);
+        etNamaPengurus = findViewById(R.id.etNamaPengurus_Register);
+        etNamaPengurusDua = findViewById(R.id.etNamaPengurusDua_Register);
+        etNamaRekeningBank = findViewById(R.id.etNamaRekeningBank_Register);
+        etNoHpBankSampah = findViewById(R.id.etNoHpBankSampah_Register);
+        etNoHpPengurus = findViewById(R.id.etNoHpPengurus_Register);
+        etNoHpPengurusDua = findViewById(R.id.etNoHpPengurusDua_Register);
+        etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
+        etPassword = findViewById(R.id.etPassword);
+        imgPinCircle = findViewById(R.id.imgPinCircle);
+        imgRegister = findViewById(R.id.imgRegisterPicture);
+        tvDataPengurus = findViewById(R.id.tvDataPengurus);
+        tvDataRekeningBankSampah = findViewById(R.id.tvDataRekeningBankSampah);
+        tvMaps = findViewById(R.id.tvMaps);
+        tvStatusNoHp= findViewById(R.id.tvStatusNoHP);
+        tvStepOne= findViewById(R.id.tvStepOne);
+        tvStepThree = findViewById(R.id.tvStepThree);
+        tvStepTwo = findViewById(R.id.tvStepTwo);
+        registerPengurus = findViewById(R.id.linear_RegisterPengurus);
+        registerBankSampah = findViewById(R.id.linear_RegisterBankSampah);
+        registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
+
 
         //Session Instance
         session = new PrefManager(getApplicationContext());
@@ -148,31 +171,13 @@ public class UpdateProfileActivity extends AppCompatActivity {
         getFoto = user.get(PrefManager.KEY_FOTO);
         getNoHP = user.get(PrefManager.KEY_NO_HP);
         getAlamat = user.get(PrefManager.KEY_ALAMAT);
-        getEmail = user.get(PrefManager.KEY_EMAIL);
+//        getEmail = user.get(PrefManager.KEY_EMAIL);
         getID = user.get(PrefManager.KEY_ID);
-        getTglLahir = user.get(PrefManager.KEY_ROLE_USER);
 
-        Log.e("tag", getFoto + "," + getTglLahir);
 
-        try {
-            Date date = inputDateFormat.parse(getTglLahir);
-            dateFixed = outputDateFormat.format(date);
-        }catch (ParseException e){
-            Log.e("tag", String.valueOf(e));
-
-            try {
-                Date date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).parse(getTglLahir);
-                dateFixed = outputDateFormat.format(date);
-            }catch (ParseException a){
-                a.printStackTrace();
-            }
-        }
-
-        etNamaLengkap.setText(getNama);
-        etEmail.setText(getEmail);
-        etNoHp.setText(getNoHP);
+        etNamaBankSampah.setText(getNama);
+        etNoHpBankSampah.setText(getNoHP);
         etAlamat.setText(getAlamat);
-        etTglLahir.setText(dateFixed);
 
         ctd = new CountDownTimer(2000, 1000) {
             @Override
@@ -190,7 +195,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         Picasso.get()
                 .load(url_foto + getFoto)
                 //.error(R.drawable.ic_navigation_profil)
-                .into(imgProfil);
+                .into(imgPinCircle);
 
         //Get Current Location GPS
         getCurrentLocation();
@@ -199,30 +204,25 @@ public class UpdateProfileActivity extends AppCompatActivity {
         dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         dateFormatter_ToDB = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
 
-        DoB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialog();
-            }
-        });
 
-        etTglLahir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialog();
-            }
-        });
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String date = dayOfMonth + "/" + month + "/" + year;
-                etTglLahir.setText(date);
-            }
-        };
+//        etTglLahir.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDateDialog();
+//            }
+//        });
 
-        imgPinMaps.setOnClickListener(new View.OnClickListener() {
+//        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                month = month + 1;
+//                String date = dayOfMonth + "/" + month + "/" + year;
+//                etTglLahir.setText(date);
+//            }
+//        };
+
+        imgPinCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openMaps = new Intent(getApplicationContext(), OpenMaps.class);
@@ -230,17 +230,66 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
-        imgProfil.setOnClickListener(new View.OnClickListener() {
+        imgRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
             }
         });
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        btDaftarkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate();
+            }
+        });
+
+        tvStepOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerBankSampah.setVisibility(View.VISIBLE);
+                registerDetailBank.setVisibility(View.GONE);
+                registerPengurus.setVisibility(View.GONE);
+                tvStepOne.setBackgroundColor(Color.BLUE);
+                tvStepOne.setTextColor(Color.WHITE);
+                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepOne.setBackgroundResource(R.drawable.rectangle_aktif);
+                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+
+            }
+        });
+        tvStepTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                registerBankSampah.setVisibility(View.GONE);
+                registerDetailBank.setVisibility(View.GONE);
+                registerPengurus.setVisibility(View.VISIBLE);
+                tvStepTwo.setBackgroundColor(Color.BLUE);
+                tvStepTwo.setTextColor(Color.WHITE);
+                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+                tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
+                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+            }
+        });
+        tvStepThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                registerBankSampah.setVisibility(View.GONE);
+                registerDetailBank.setVisibility(View.VISIBLE);
+                registerPengurus.setVisibility(View.GONE);
+                tvStepThree.setBackgroundColor(Color.BLUE);
+                tvStepThree.setTextColor(Color.WHITE);
+                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+                tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
             }
         });
     }
@@ -258,20 +307,20 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         }
 
-        private void showDateDialog(){
-            Calendar newCalendar = Calendar.getInstance();
-            datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    Calendar newDate = Calendar.getInstance();
-                    newDate.set(year, month,dayOfMonth);
-                    etTglLahir.setText(dateFormatter.format(newDate.getTime()));
-                    getTglLahir = dateFormatter_ToDB.format(newDate.getTime());
-                }
-            }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            datePickerDialog.show();
-        }
+//        private void showDateDialog(){
+//            Calendar newCalendar = Calendar.getInstance();
+//            datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//                @Override
+//                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                    Calendar newDate = Calendar.getInstance();
+//                    newDate.set(year, month,dayOfMonth);
+//                    etTglLahir.setText(dateFormatter.format(newDate.getTime()));
+//                    getTglLahir = dateFormatter_ToDB.format(newDate.getTime());
+//                }
+//            }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+//            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+//            datePickerDialog.show();
+//        }
 
     private void selectImage(){
         final CharSequence[] options = {"Ambil Foto", "Pilih dari Galeri", "Batal"};
@@ -356,10 +405,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                             selectedImage = Bitmap.createScaledBitmap(selectedImage, 300, 400, false);
                             selectedImage = getResizedBitmap(selectedImage, 400);// 400 is for example, replace with desired size
-                            imgProfil.setImageBitmap(selectedImage);
+                            imgRegister.setImageBitmap(selectedImage);
 
                             String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
-                            String name = etNamaLengkap.getText().toString();
+                            String name = etNamaBankSampah.getText().toString();
                             imageFileName = "JPEG_" + name + "_" + timeStamp;
                         }
                     }catch (FileNotFoundException e){
@@ -377,10 +426,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         images = Bitmap.createScaledBitmap(images, 300, 400, false);
                         images = getResizedBitmap(images, 400);
 
-                        imgProfil.setImageBitmap(images);
+                        imgRegister.setImageBitmap(images);
 
                         String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
-                        String name = etNamaLengkap.getText().toString();
+                        String name = etNamaBankSampah.getText().toString();
                         imageFileName = "JPEG_" + name + "_" + timeStamp;
                     }
 
@@ -405,26 +454,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
     private void validate(){
-        strNamaLengkap_Update = etNamaLengkap.getText().toString();
-        strEmail_Update = etEmail.getText().toString();
+        strNamaLengkap_Update = etNamaBankSampah.getText().toString();
+//        strEmail_Update = etEmail.getText().toString();
         strAlamat_Update = etAlamat.getText().toString();
 
         if (strNamaLengkap_Update.isEmpty()){
-            etNamaLengkap.setError(getString(R.string.MSG_FULLNAME_EMPTY));
-            etNamaLengkap.requestFocus();
+            etNamaBankSampah.setError(getString(R.string.MSG_FULLNAME_EMPTY));
+            etNamaBankSampah.requestFocus();
         }
         else if (strAlamat_Update.isEmpty()){
             etAlamat.setError(getString(R.string.MSG_ALAMAT_EMPTY));
             etAlamat.requestFocus();
-        } else if (imgProfil.getDrawable()!= null && imageFileName != null){
-            UpdateToDB(strNamaLengkap_Update, strEmail_Update, strAlamat_Update);
+        } else if (imgRegister.getDrawable()!= null && imageFileName != null){
+            UpdateToDB(strNamaLengkap_Update, strAlamat_Update);
             uploadImage();
         }else{
-            UpdateToDB(strNamaLengkap_Update, strEmail_Update, strAlamat_Update);
+            UpdateToDB(strNamaLengkap_Update, strAlamat_Update);
         }
     }
 
-    private void UpdateToDB(final String namaLengkap, final String email, final String alamat){
+    private void UpdateToDB(final String namaLengkap, final String alamat){
         customProgress.showProgress(this, "", false);
 
         String[]field_name = {"id_user", "nama_lengkap", "email", "tanggal_lahir",
@@ -438,7 +487,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         base_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.change_profile_user";
         params.put(field_name[0], getID);
         params.put(field_name[1], namaLengkap);
-        params.put(field_name[2], email);
         params.put(field_name[3], getTglLahir);
         params.put(field_name[4], alamat);
         params.put(field_name[5], strLatLong_Update);
@@ -454,7 +502,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 try {
-                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strAlamat_Update, strEmail_Update);
+                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strAlamat_Update);
                     Toasty.success(getApplicationContext(), "Data Profil Berhasil Diperbarui.", Toast.LENGTH_SHORT).show();
                     refreshActivity();
                     /*AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
@@ -554,4 +602,5 @@ public class UpdateProfileActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
 }

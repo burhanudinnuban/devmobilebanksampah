@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         etNamaLengkap = findViewById(R.id.etNamaLengkap);
         etEmail = findViewById(R.id.etEmail);
         etNoHP = findViewById(R.id.etNoHP);
-        DoB = findViewById(R.id.DateOfBirth);
+//        DoB = findViewById(R.id.DateOfBirth);
         etAlamat = findViewById(R.id.etAlamat);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);

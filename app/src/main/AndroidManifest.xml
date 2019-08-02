@@ -30,11 +30,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activities.TambahkanDaftar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".RegisterActivities.RegisterActivity" />
         <activity android:name=".MemberFragment.ListMember.RiwayatOrderMemberActivity" />
@@ -210,11 +205,11 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".Activities.SplashScreen">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.MainActivity"

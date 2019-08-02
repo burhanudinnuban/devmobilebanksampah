@@ -55,11 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.imgPicture_Profil);
         imgArrowBack = findViewById(R.id.imgArrowBack);
 
-//        tvDataProfil = findViewById(R.id.tvData_Profil);
-//        tvHistory = findViewById(R.id.tvHistory_Profil);
-//        tvPassword= findViewById(R.id.tvPassword_Profil);
-//        tvCallUs = findViewById(R.id.tvCallUs_Profil);
-//        tvFaq = findViewById(R.id.tvFaq_Profil);
+        tvDataProfil = findViewById(R.id.tvDataSampah);
+        tvHistory = findViewById(R.id.tvRiwayatOrder);
+        tvPassword= findViewById(R.id.tvGantiKataSandi);
+        tvCallUs = findViewById(R.id.tvRiwayatJual);
+//        tvFaq = findViewById(R.id.tvFaq);
         tvLogOut = findViewById(R.id.tvLogOut);
 
         //Create myDialog
@@ -75,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent history_intent = new Intent(getApplicationContext(), RiwayatOrder.class);
                 startActivity(history_intent);
             }
@@ -88,13 +89,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        tvFaq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent faq = new Intent (getApplicationContext(), Faq.class);
-                startActivity(faq);
-            }
-        });
+//        tvFaq.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent faq = new Intent (getApplicationContext(), Faq.class);
+//                startActivity(faq);
+//            }
+//        });
 
         tvCallUs.setOnClickListener(new View.OnClickListener() {
             @Override
