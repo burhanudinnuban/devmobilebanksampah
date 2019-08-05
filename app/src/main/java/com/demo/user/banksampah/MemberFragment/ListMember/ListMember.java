@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -59,6 +60,7 @@ public class ListMember extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     protected LinearLayout linear_ListMember;
     protected ConnectivityManager conMgr;
+    protected Button btDetailListMember;
 
     protected View rootView;
     protected LazyAdapter adapter;
@@ -91,6 +93,7 @@ public class ListMember extends Fragment {
         linear_ListMember = rootView.findViewById(R.id.linearLayout_ListMember);
         cd_NoData = rootView.findViewById(R.id.cd_noData);
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
+        btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
 
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -140,7 +143,7 @@ public class ListMember extends Fragment {
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            //getListMember(strIDUser);
+            getListMember(strIDUser);
         } else {
             Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
@@ -151,49 +154,50 @@ public class ListMember extends Fragment {
         return rootView;
     }
 
-    protected void getListMember(final String strIDUser) {
+    private void getListMember(final String strIDUser){
         customProgress.showProgress(getContext(), "", false);
-        String base_url = "https://dev-lestari.multiinti.io/api/method/digitalwastev2.bsh_bankapi.list_member_bank_sampah";
-        StringRequest strReq = new StringRequest(Request.Method.GET, base_url, new Response.Listener<String>() {
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_member");
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 customProgress.hideProgress();
-                JSONObject jObject;
+                Log.d("debug", "Check Login Response: " + response);
                 try {
-                   viewDataMember(response);
-                    Log.e("tag", "sukses");
+                    viewDataMember(response);
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
-                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
                     snackbar.show();
-                    Log.d("DEBUG", "Error Validate Register Response: " + t.toString());
+                    Log.d("debug", "Error Check Login Response: " + t.toString());
                 }
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("DEBUG", "Volley Error: " + error.getMessage());
                 customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
                         .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
                 snackbar.show();
+                Log.d("debug", "Volley Error: " + error.toString());
             }
         }) {
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("id_bank_sampah", "Bank Sampah Bekasi");
+                params.put("id_bank_sampah", strIDUser);
                 return params;
             }
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
+                Map<String, String>  params = new HashMap<>();
                 params.put(apiData.get("str_header"), apiData.get("str_token_value"));
                 return params;
             }
         };
 
+        // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
@@ -227,6 +231,8 @@ public class ListMember extends Fragment {
                 Log.d("tag", allOrder.toString());
 
                 adapter = new LazyAdapter(getActivity(), allOrder, 9);
+                lvListMember.setAdapter(adapter);
+
 
             /*} else {
                 //include_FormOrderList.setVisibility(View.GONE);

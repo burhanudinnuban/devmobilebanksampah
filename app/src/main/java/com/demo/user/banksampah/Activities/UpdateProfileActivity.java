@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,9 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -79,6 +75,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     //Session Class
     protected PrefManager session;
     protected HashMap<String,String> user;
+
     //Get Data From Login Process
     protected static String getNama = "";
     protected static String getFoto = "";
@@ -86,7 +83,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected static String getTglLahir = "";
     protected static String getNoHP = "";
     protected static String getAlamat = "";
-//    protected static String getEmail = "";
+    protected static String getEmail = "";
 
     @SuppressLint("StaticFieldLeak")
     protected static ImageView imgProfil;
@@ -95,14 +92,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     //Deklarasi Ke Layout
     protected ImageView imgPinCircle, imgRegister;
-    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus, etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank;
+    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus, etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah;
     protected TextView tvMaps , tvDataPengurus, tvStepOne, tvStepTwo, tvStepThree, tvStatusNoHp, tvDataRekeningBankSampah;
     protected Button btDaftarkan;
     protected LinearLayout registerBankSampah, registerPengurus,registerDetailBank;
 
 
-    protected String strNamaLengkap_Update, strLatLong_Update,
-              strAlamat_Update;
+    protected String strNamaLengkap_Update, strLatLong_Update, strNoHpBankSampah,
+              strAlamat_Update, strEmail_Update, strNamaPengurus, strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua,
+            strNamaDetailBank, strNoRekeningBank, strNamaRekeningBank, strEmailBankSampah;
 
     /*FOR GPS*/
     protected TrackGPS gps;
@@ -150,6 +148,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etNoHpPengurusDua = findViewById(R.id.etNoHpPengurusDua_Register);
         etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
         etPassword = findViewById(R.id.etPassword);
+        etEmailBankSampah = findViewById(R.id.etEmailBankSampah_Register);
         imgPinCircle = findViewById(R.id.imgPinCircle);
         imgRegister = findViewById(R.id.imgRegisterPicture);
         tvDataPengurus = findViewById(R.id.tvDataPengurus);
@@ -162,6 +161,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         registerPengurus = findViewById(R.id.linear_RegisterPengurus);
         registerBankSampah = findViewById(R.id.linear_RegisterBankSampah);
         registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
+        btDaftarkan = findViewById(R.id.btDaftarkan);
+
 
 
         //Session Instance
@@ -171,11 +172,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         getFoto = user.get(PrefManager.KEY_FOTO);
         getNoHP = user.get(PrefManager.KEY_NO_HP);
         getAlamat = user.get(PrefManager.KEY_ALAMAT);
-//        getEmail = user.get(PrefManager.KEY_EMAIL);
+        getEmail = user.get(PrefManager.KEY_EMAIL);
         getID = user.get(PrefManager.KEY_ID);
 
 
         etNamaBankSampah.setText(getNama);
+        etEmailBankSampah.setText(getEmail);
         etNoHpBankSampah.setText(getNoHP);
         etAlamat.setText(getAlamat);
 
@@ -244,6 +246,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
+        //Steps Hiden Update
         tvStepOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,39 +260,82 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 tvStepOne.setBackgroundResource(R.drawable.rectangle_aktif);
                 tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
                 tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
-
+                btDaftarkan.setVisibility(View.INVISIBLE);
             }
         });
+
         tvStepTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                registerBankSampah.setVisibility(View.GONE);
-                registerDetailBank.setVisibility(View.GONE);
-                registerPengurus.setVisibility(View.VISIBLE);
-                tvStepTwo.setBackgroundColor(Color.BLUE);
-                tvStepTwo.setTextColor(Color.WHITE);
-                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
-                tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
-                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+                if(etNamaBankSampah.getText().toString().length()==0)
+                {
+                    etNamaBankSampah.setError("Nama Bank Sampah Diperlukan");
+                    etNamaBankSampah.requestFocus();
+                }
+                else if(etEmailBankSampah.getText().toString().length()==0)
+                {
+                    etEmailBankSampah.setError("Email Bank Sampah Diperlukan");
+                    etEmailBankSampah.requestFocus();
+                }
+                else if(etNoHpBankSampah.getText().toString().length()==0)
+                {
+                    etNoHpBankSampah.setError("No Hp Bank Sampah Diperlukan");
+                    etNoHpBankSampah.requestFocus();
+                }
+                else if(etAlamat.getText().toString().length()==0)
+                {
+                    etAlamat.setError("Alamat Bank Sampah Diperlukan");
+                    etAlamat.requestFocus();
+                }
+                else
+                {
+                    registerBankSampah.setVisibility(View.GONE);
+                    registerDetailBank.setVisibility(View.GONE);
+                    registerPengurus.setVisibility(View.VISIBLE);
+                    tvStepTwo.setBackgroundColor(Color.BLUE);
+                    tvStepTwo.setTextColor(Color.WHITE);
+                    tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
+                    tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+                    btDaftarkan.setVisibility(View.INVISIBLE);
+                    tvStepTwo.setClickable(true);
+                }
+
             }
         });
+
         tvStepThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(etNamaPengurus.getText().toString().length()==0)
+                {
+                    etNamaPengurus.setError("Nama Pengurus Diperlukan");
+                    etNamaPengurus.requestFocus();
+                }
+                else if(etNoHpPengurus.getText().toString().length()==0)
+                {
+                    etNoHpPengurus.setError("No Hp Pengurus Diperlukan");
+                    etNoHpPengurus.requestFocus();
+                }
 
-                registerBankSampah.setVisibility(View.GONE);
-                registerDetailBank.setVisibility(View.VISIBLE);
-                registerPengurus.setVisibility(View.GONE);
-                tvStepThree.setBackgroundColor(Color.BLUE);
-                tvStepThree.setTextColor(Color.WHITE);
-                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
-                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
-                tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
+                else
+                    {
+                    registerBankSampah.setVisibility(View.GONE);
+                    registerDetailBank.setVisibility(View.VISIBLE);
+                    btDaftarkan.setVisibility(View.VISIBLE);
+                    registerPengurus.setVisibility(View.GONE);
+                    tvStepThree.setBackgroundColor(Color.BLUE);
+                    tvStepThree.setTextColor(Color.WHITE);
+                    tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+                    tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
+                    tvStepThree.setClickable(true);
+                    }
             }
         });
     }
@@ -453,27 +499,48 @@ public class UpdateProfileActivity extends AppCompatActivity {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    private void validate(){
+    private void validate()
+    {
         strNamaLengkap_Update = etNamaBankSampah.getText().toString();
-//        strEmail_Update = etEmail.getText().toString();
+        strEmail_Update = etEmailBankSampah.getText().toString();
+        strNoHpBankSampah = etNoHpBankSampah.getText().toString();
         strAlamat_Update = etAlamat.getText().toString();
+        strNamaPengurus = etNamaPengurus.getText().toString();
+        strNoHpPengurus = etNoHpPengurus.getText().toString();
+        strNamaPengurusDua = etNamaPengurusDua.getText().toString();
+        strNoHpPengurusDua = etNoHpPengurusDua.getText().toString();
+        strNamaDetailBank = etNamaDetailBank.getText().toString();
+        strNoRekeningBank = etNoRekeningBank.getText().toString();
+        strNamaRekeningBank = etNamaRekeningBank.getText().toString();
 
-        if (strNamaLengkap_Update.isEmpty()){
-            etNamaBankSampah.setError(getString(R.string.MSG_FULLNAME_EMPTY));
-            etNamaBankSampah.requestFocus();
+        if (etNamaDetailBank.getText().toString().length()==0)
+        {
+            etNamaDetailBank.setError("Nama Bank Diperlukan");
+            etNamaDetailBank.requestFocus();
         }
-        else if (strAlamat_Update.isEmpty()){
-            etAlamat.setError(getString(R.string.MSG_ALAMAT_EMPTY));
-            etAlamat.requestFocus();
-        } else if (imgRegister.getDrawable()!= null && imageFileName != null){
-            UpdateToDB(strNamaLengkap_Update, strAlamat_Update);
+        else if(etNoRekeningBank.getText().toString().length()==0)
+        {
+            etNoRekeningBank.setError("No Rekening Bank Diperlukan");
+            etNoRekeningBank.requestFocus();
+        }
+        else if(etNamaRekeningBank.getText().toString().length()==0)
+        {
+            etNamaRekeningBank.setError("Nama Rekening Bank Sampah");
+            etNamaRekeningBank.requestFocus();
+        }
+        else if (imgRegister.getDrawable()!= null && imageFileName != null){
+            UpdateToDB(strNamaLengkap_Update,strEmail_Update,strNoHpBankSampah, strAlamat_Update, strNamaPengurus,strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua, strNoRekeningBank
+                    ,strNamaRekeningBank, strNamaDetailBank);
             uploadImage();
-        }else{
-            UpdateToDB(strNamaLengkap_Update, strAlamat_Update);
         }
+        else
+            {
+            UpdateToDB(strNamaLengkap_Update,strEmail_Update ,strNoHpBankSampah , strAlamat_Update, strNamaPengurus,strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua, strNoRekeningBank
+            ,strNamaRekeningBank, strNamaDetailBank);
+            }
     }
 
-    private void UpdateToDB(final String namaLengkap, final String alamat){
+    private void UpdateToDB(final String namaLengkap, final String alamat,final String strNoHpBankSampah, final String strNamaLengkap_Update, final String strEmail_Update, final String strAlamat_Update, final String strNamaPengurus, final String strNoHpPengurus, final String strNamaPengurusDua, final String strNoHpPengurusDua, final String strNoRekeningBank){
         customProgress.showProgress(this, "", false);
 
         String[]field_name = {"id_user", "nama_lengkap", "email", "tanggal_lahir",
@@ -487,6 +554,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         base_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.change_profile_user";
         params.put(field_name[0], getID);
         params.put(field_name[1], namaLengkap);
+        params.put(field_name[2], strEmail_Update);
         params.put(field_name[3], getTglLahir);
         params.put(field_name[4], alamat);
         params.put(field_name[5], strLatLong_Update);

@@ -103,7 +103,7 @@ public class LazyAdapter extends BaseAdapter {
     }*/
 
     public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d, int fragment_pos) {
-        //View vi;
+        View vi;
         activity = a;
         filter_data = d;
         data = d;
@@ -680,7 +680,7 @@ public class LazyAdapter extends BaseAdapter {
 
             case 9:
                 if (convertView == null) {
-                    vi = inflater.inflate(R.layout.lv_point_order, parent, false);
+                    vi = inflater.inflate(R.layout.lv_member_list, parent, false);
 
                     holder = new ViewHolder();
                     holder.tvNamaMember = vi.findViewById(R.id.tvNamaMember_ListMember);
@@ -688,9 +688,10 @@ public class LazyAdapter extends BaseAdapter {
                     holder.tvPointMember = vi.findViewById(R.id.tvPointMember_ListMember);
 
                     vi.setTag(holder);
-                }else{
+                }else
+                    {
                     holder = (ViewHolder)vi.getTag();
-                }
+                    }
 
                 HashMap<String, String> StatusPoint_List1;
                 StatusPoint_List1 = data.get(position);
@@ -699,10 +700,13 @@ public class LazyAdapter extends BaseAdapter {
                 String strIdMember = StatusPoint_List1.get("id_member");
                 String strPointMember = StatusPoint_List1.get("point");
 
+                try
+                {
+                    holder.tvPointMember.setText("Point: " + decimalFormat.format(Double.valueOf(strPointMember)));
+                }
 
-                try {
-                    holder.tvPoints_Get.setText("Point: " + decimalFormat.format(Double.valueOf(strPointMember)));
-                }catch (NumberFormatException e){
+                catch (NumberFormatException e)
+                {
                     e.printStackTrace();
                     Log.e("tag", e.toString());
                 }
