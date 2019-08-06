@@ -30,7 +30,7 @@ import es.dmoral.toasty.Toasty;
 
 public class ChangePassword extends AppCompatActivity {
 
-    //Session Class
+    //Session Class testing
     PrefManager session;
 
     //API Process and Dialog
