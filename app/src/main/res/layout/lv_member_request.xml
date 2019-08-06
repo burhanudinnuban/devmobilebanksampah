@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/imgPicture_RequestMember"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:id="@+id/LL1"
         android:layout_margin="10dp"
         android:layout_toEndOf="@+id/imgPicture_RequestMember"
         android:layout_toRightOf="@+id/imgPicture_RequestMember"
@@ -48,5 +49,21 @@
             android:layout_height="wrap_content"
             android:text="(ID Member)" />
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/LL1"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail"
+            android:layout_gravity="right"
+            android:background="#64DD17"
+            android:textColor="#ffffff"/>
     </LinearLayout>
 </RelativeLayout>

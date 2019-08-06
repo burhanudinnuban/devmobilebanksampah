@@ -189,6 +189,9 @@ public class LazyAdapter extends BaseAdapter {
         TextView tvNamaMember;
         TextView tvIdMember;
         TextView tvPointMember;
+        TextView tvTanggalReqMember;
+        TextView tvIdReqMember;
+        TextView tvNamaReqMember;
 
 
     }
@@ -713,6 +716,44 @@ public class LazyAdapter extends BaseAdapter {
                 holder.tvIdMember.setText(strIdMember);
                 holder.tvNamaMember.setText(strNamaMember);
                 holder.tvPointMember.setText(strPointMember);
+
+                break;
+
+            case 10:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_member_request, parent, false);
+
+                    holder = new ViewHolder();
+                    holder.tvTanggalReqMember = vi.findViewById(R.id.tvTanggal_RequestMember);
+                    holder.tvIdReqMember = vi.findViewById(R.id.tvIDMember_RequestMember);
+                    holder.tvNamaReqMember = vi.findViewById(R.id.tvNamaMember_RequestMember);
+
+                    vi.setTag(holder);
+                }else
+                {
+                    holder = (ViewHolder)vi.getTag();
+                }
+
+                HashMap<String, String> status_id1;
+                status_id1 = data.get(position);
+
+                String strNamaReqMember = status_id1.get("nama_member");
+                String strIdReqMember = status_id1.get("id");
+                String strTanggalReqMember = status_id1.get("id_member");
+
+                try
+                {
+                    holder.tvIdReqMember.setText("Point: " + decimalFormat.format(Double.valueOf(strIdReqMember)));
+                }
+
+                catch (NumberFormatException e)
+                {
+                    e.printStackTrace();
+                    Log.e("tag", e.toString());
+                }
+                holder.tvIdReqMember.setText(strIdReqMember);
+                holder.tvNamaReqMember.setText(strNamaReqMember);
+                holder.tvTanggalReqMember.setText(strTanggalReqMember);
 
 
             default:
