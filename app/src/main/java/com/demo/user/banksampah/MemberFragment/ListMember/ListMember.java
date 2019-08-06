@@ -2,6 +2,7 @@ package com.demo.user.banksampah.MemberFragment.ListMember;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.RegisterActivities.RegisterPhoneActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +51,6 @@ public class ListMember extends Fragment {
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-    private ArrayList<ModelData> dataSet;
 
     protected String strIDUser;
 
@@ -66,8 +67,6 @@ public class ListMember extends Fragment {
     protected LazyAdapter adapter;
 
     protected CardView cd_NoData, cd_NoConnection;
-
-    String strNamaMember, strIdMember, strPointMember;
 
     public static ListMember newInstance() {
         return new ListMember();
@@ -94,6 +93,20 @@ public class ListMember extends Fragment {
         cd_NoData = rootView.findViewById(R.id.cd_noData);
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
         btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
+
+        //Intent Ke Detail Member Activity
+//        btDetailListMember.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                session = new PrefManager(getContext());
+//                Intent intent_detail = new Intent(getActivity(), DetailMemberActivity.class);
+////                intent_detail.putExtra("id_member", + );
+////                intent_detail.putExtra("nama_member", + getId_order());
+////                intent_detail.putExtra("point", + getId_order());
+////                intent_detail.putExtra("alamat", + getId_order());
+//                startActivity(intent_detail);
+//            }
+//        });
 
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -155,7 +168,7 @@ public class ListMember extends Fragment {
     }
 
     private void getListMember(final String strIDUser){
-        customProgress.showProgress(getContext(), "", false);
+//        customProgress.showProgress(getContext(), "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_member");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
@@ -164,6 +177,7 @@ public class ListMember extends Fragment {
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataMember(response);
+//                    customProgress.hideProgress();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
@@ -175,7 +189,6 @@ public class ListMember extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
                         .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
                 snackbar.show();

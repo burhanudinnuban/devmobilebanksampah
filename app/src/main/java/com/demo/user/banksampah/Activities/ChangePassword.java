@@ -1,6 +1,8 @@
 package com.demo.user.banksampah.Activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +10,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
+import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.RegisterActivities.RegisterActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -24,6 +34,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import es.dmoral.toasty.Toasty;
@@ -47,6 +58,9 @@ public class ChangePassword extends AppCompatActivity {
     private String strPhone;
     protected Button btUpdate;
 
+    //Parent Layout
+    ScrollView parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +80,7 @@ public class ChangePassword extends AppCompatActivity {
         etNewPwd = findViewById(R.id.etNewPwd);
         etConfirmPwd = findViewById(R.id.etConfirmPwd);
         btUpdate = findViewById(R.id.btUpdatePwd);
+        parent_layout = findViewById(R.id.parentLayout);
 
         btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,66 +131,67 @@ public class ChangePassword extends AppCompatActivity {
         }
     }
 
-    private void updatePwd(final String oldPwd, final String newPwd){
-        /*progressDialog.setMessage("Memperbarui Kata Sandi");
-        progressDialog.show();*/
-
+    protected void updatePwd(final String oldPwd, final String newPwd) {
         customProgress.showProgress(this, "", false);
+        final String[] field_name = {"no_telepon", "old_pass", "new_pass","message"};
 
-        final String[]field_name = {"no_telepon", "old_pass", "new_pass", "message"};
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String validate_url;
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
 
-        validate_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.change_pass_user";
-        params.put(field_name[0], strPhone);
-        params.put(field_name[1], oldPwd);
-        params.put(field_name[2], newPwd);
-
-        //Authorization based on POST
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(validate_url, params, new AsyncHttpResponseHandler() {
-            //If Success...
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            public void onResponse(String response) {
                 customProgress.hideProgress();
-
-                String resp_content = "";
-                //progressDialog.dismiss();
+                Log.d("DEBUG", "Register Response: " + response);
                 try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    arrayResult = rest_class.getJsonData(field_name, resp_content);
-                    JSONObject jsonObject = new JSONObject(resp_content);
-
-                    String result = jsonObject.getString(field_name[3]);
-                    if(result.equalsIgnoreCase("Password Changed")){
-                        Toasty.success(getApplicationContext(), "Berhasil Memperbarui Kata Sandi.", Toast.LENGTH_LONG).show();
-                    }else{
-                        Toasty.error(getApplicationContext(), "Kata Sandi Lama yang Anda Masukkan Salah!\nMohon Periksa Data Kembali.", Toast.LENGTH_LONG).show();
-                    }
-
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ChangePassword.this);
+                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(changePassword);
+                                    finish();
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                    Log.e("tag", "sukses");
                 } catch (Throwable t) {
-                    Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + "1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    //Toast.makeText(getApplicationContext(), getString(R.string.MSG_CODE_409) + "1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    Log.e("Tag", " 1:" + String.valueOf(t));
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
                 }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], strPhone);
+                params.put(field_name[1], oldPwd);
+                params.put(field_name[2], newPwd);
+                return params;
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                customProgress.hideProgress();
-
-                //progressDialog.dismiss();
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + "1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-                //Toast.makeText(getApplicationContext(), getString(R.string.MSG_CODE_500) + "1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-                Log.e("Tag","1: " + String.valueOf(error));
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
             }
-        });
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 }

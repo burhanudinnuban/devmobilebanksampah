@@ -213,6 +213,7 @@ public class RestProcess {
 
         //API Login
         apiErecyle.put("str_api_login", ".login");
+        apiErecyle.put("str_api_change_password", ".change_pass");
 
         //API Register
         apiErecyle.put("str_api_check_phonenumber", ".check_phonenumber");
