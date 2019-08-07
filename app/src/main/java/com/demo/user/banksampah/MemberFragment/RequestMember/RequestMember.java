@@ -191,7 +191,7 @@ public class RequestMember extends Fragment {
     }
 
     protected void viewDataMember(String resp_content){
-        String[] field_name = {"message", "id_member", "alamat", "id", "nama_member"};
+        String[] field_name = {"message", "id_member", "alamat", "id", "nama_member", "creation","foto"};
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
@@ -205,16 +205,21 @@ public class RequestMember extends Fragment {
             for (int i = 0; i < cast.length(); i++) {
                 JSONObject c = cast.getJSONObject(i);
 
-                String idReqMember= c.getString(field_name[2]);
+                String idReqMember= c.getString(field_name[1]);
+                String Alamat = c.getString(field_name[2]);
                 String idBankSampah = c.getString(field_name[3]);
                 String namaReqMember = c.getString(field_name[4]);
-                String tanggalReqMember = c.getString(field_name[3]);
+                String tanggalReqMember = c.getString(field_name[5]);
+                String foto = c.getString(field_name[6]);
 
                 HashMap<String, String> map = new HashMap<>();
 
                 map.put(field_name[1], idReqMember);
+                map.put(field_name[2], Alamat);
                 map.put(field_name[3], idBankSampah);
                 map.put(field_name[4], namaReqMember);
+                map.put(field_name[5], tanggalReqMember);
+                map.put(field_name[6], foto);
                 allOrder.add(map);
             }
 

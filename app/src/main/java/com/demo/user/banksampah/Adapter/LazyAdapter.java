@@ -3,6 +3,7 @@ package com.demo.user.banksampah.Adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TimelineOrder.TimelineOrderActivity;
 import com.loopj.android.http.AsyncHttpClient;
@@ -96,13 +98,15 @@ public class LazyAdapter extends BaseAdapter {
     private int Status_PickupTime;
     private ListView lvListDetailOrder;
     private Dialog myDialog;
-
+    Context ctx;
     /*private static class OutletHolder {
         public TextView outlet_name;
         public TextView outlet_phone;
     }*/
 
     public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d, int fragment_pos) {
+
+        this.ctx = ctx;
         View vi;
         activity = a;
         filter_data = d;
@@ -192,6 +196,9 @@ public class LazyAdapter extends BaseAdapter {
         TextView tvTanggalReqMember;
         TextView tvIdReqMember;
         TextView tvNamaReqMember;
+        Button btnDetailListMember;
+        protected PrefManager session;
+        Context ctx;
 
 
     }
@@ -685,10 +692,13 @@ public class LazyAdapter extends BaseAdapter {
                 if (convertView == null) {
                     vi = inflater.inflate(R.layout.lv_member_list, parent, false);
 
+
                     holder = new ViewHolder();
+
                     holder.tvNamaMember = vi.findViewById(R.id.tvNamaMember_ListMember);
                     holder.tvIdMember = vi.findViewById(R.id.tvIDMember_ListMember);
                     holder.tvPointMember = vi.findViewById(R.id.tvPointMember_ListMember);
+                    holder.btnDetailListMember = vi.findViewById(R.id.btnDetailListMember);
 
                     vi.setTag(holder);
                 }else
@@ -699,9 +709,32 @@ public class LazyAdapter extends BaseAdapter {
                 HashMap<String, String> StatusPoint_List1;
                 StatusPoint_List1 = data.get(position);
 
-                String strNamaMember = StatusPoint_List1.get("nama_member");
-                String strIdMember = StatusPoint_List1.get("id_member");
-                String strPointMember = StatusPoint_List1.get("point");
+                final String strNamaMember = StatusPoint_List1.get("nama_member");
+                final String strIdMember = StatusPoint_List1.get("id_member");
+                final String strPointMember = StatusPoint_List1.get("point");
+                final String strFotoMember = StatusPoint_List1.get("foto");
+                final String strId = StatusPoint_List1.get("id");
+                final String strNoTelepon = StatusPoint_List1.get("no_telepon");
+                final String strAlamatMember = StatusPoint_List1.get("alamat");
+                final String strEmailMember = StatusPoint_List1.get("email");
+                holder.btnDetailListMember.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        HashMap<String, String> empList = new HashMap<String, String>();
+                        Intent intent_detail = new Intent(activity, DetailMemberActivity.class);
+                        intent_detail.putExtra("foto", strFotoMember);
+                        intent_detail.putExtra("point", strPointMember);
+                        intent_detail.putExtra("id_member", strIdMember);
+                        intent_detail.putExtra("nama_member", strNamaMember);
+                        intent_detail.putExtra("id", strId);
+                        intent_detail.putExtra("no_telepon", strNoTelepon);
+                        intent_detail.putExtra("alamat", strAlamatMember);
+                        intent_detail.putExtra("email", strEmailMember);
+                        activity.startActivity(intent_detail);
+                    }
+                });
+
 
                 try
                 {

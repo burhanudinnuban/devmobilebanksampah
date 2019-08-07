@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,7 +44,7 @@ public class DetailMemberActivity extends AppCompatActivity {
     protected CardView cd_NoData, cd_NoConnection;
 
     protected ImageView imgDetailMember, imgPencairan, imgHubungiMember, imgRiwayatOrder, imgHapusMember;
-    protected TextView tvNamaMemberDetail, tvPointMemberDetail, tvIdMemberDetail, tvAlamatMemberDetail, tvNoHpMemberDetail, tvStatusMemberDetail;
+    protected TextView tvNamaMemberDetail, tvPointMemberDetail, tvIdMemberDetail, tvAlamatMemberDetail, tvNoHpMemberDetail, tvStatusMemberDetail, tvEmailMemberDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,15 +68,17 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvAlamatMemberDetail =findViewById(R.id.tvAlamatMember_DetailMember);
         tvNoHpMemberDetail =findViewById(R.id.tvNoHPMember_DetailMember);
         tvStatusMemberDetail =findViewById(R.id.tvStatusMember_DetailMember);
+        tvEmailMemberDetail =findViewById(R.id.tvEmailMemberDetail);
 
 //        Deklarasi String ke Rest
-        String imgDetailMember1 = getIntent().getStringExtra("base_url");
-        String tvNamaMemberDetail1 = getIntent().getStringExtra("id_order");
-        String tvPointMemberDetail1 = getIntent().getStringExtra("id_order");
-        String tvIdMemberDetail1 = getIntent().getStringExtra("id_order");
-        String tvAlamatMemberDetail1 = getIntent().getStringExtra("id_order");
-        String tvNoHpMemberDetail1 = getIntent().getStringExtra("id_order");
-        String tvStatusMemberDetail1 = getIntent().getStringExtra("id_order");
+        String imgDetailMember1 = getIntent().getStringExtra("foto");
+        String tvNamaMemberDetail1 = getIntent().getStringExtra("nama_member");
+        String tvPointMemberDetail1 = getIntent().getStringExtra("point");
+        String tvIdMemberDetail1 = getIntent().getStringExtra("id_member");
+        String tvAlamatMemberDetail1 = getIntent().getStringExtra("alamat");
+        String tvNoHpMemberDetail1 = getIntent().getStringExtra("no_telepon");
+        String tvStatusMemberDetail1 = getIntent().getStringExtra("id");
+        String tvEmailMemberDetail1 = getIntent().getStringExtra("email");
 
         tvNamaMemberDetail.setText(""+tvNamaMemberDetail1);
         tvPointMemberDetail.setText(""+tvPointMemberDetail1);
@@ -83,6 +86,7 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvAlamatMemberDetail.setText(""+tvAlamatMemberDetail1);
         tvNoHpMemberDetail.setText(""+tvNoHpMemberDetail1);
         tvStatusMemberDetail.setText(""+tvStatusMemberDetail1);
+        tvEmailMemberDetail.setText(""+tvEmailMemberDetail1);
 
         Picasso.get().load((imgDetailMember1)).into(imgDetailMember);
 

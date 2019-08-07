@@ -51,7 +51,7 @@ public class ListMember extends Fragment {
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-
+    private ArrayList<HashMap<String, String>> data;
     protected String strIDUser;
 
     protected CustomProgress customProgress;
@@ -95,18 +95,8 @@ public class ListMember extends Fragment {
         btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
 
         //Intent Ke Detail Member Activity
-//        btDetailListMember.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                session = new PrefManager(getContext());
-//                Intent intent_detail = new Intent(getActivity(), DetailMemberActivity.class);
-////                intent_detail.putExtra("id_member", + );
-////                intent_detail.putExtra("nama_member", + getId_order());
-////                intent_detail.putExtra("point", + getId_order());
-////                intent_detail.putExtra("alamat", + getId_order());
-//                startActivity(intent_detail);
-//            }
-//        });
+
+
 
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -215,7 +205,7 @@ public class ListMember extends Fragment {
     }
 
     protected void viewDataMember(String resp_content){
-        String[] field_name = {"message", "id_member", "nama_member", "point"};
+        String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","id","foto"};
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
@@ -232,12 +222,21 @@ public class ListMember extends Fragment {
                     String id_member= c.getString(field_name[1]);
                     String nama_member = c.getString(field_name[2]);
                     String point = c.getString(field_name[3]);
+                    String no_telepon = c.getString(field_name[4]);
+                    String email = c.getString(field_name[5]);
+                    String id = c.getString(field_name[6]);
+                    String foto = c.getString(field_name[7]);
+
 
                     HashMap<String, String> map = new HashMap<>();
 
                     map.put(field_name[1], id_member);
                     map.put(field_name[2], nama_member);
                     map.put(field_name[3], point);
+                    map.put(field_name[4], no_telepon);
+                    map.put(field_name[5], email);
+                    map.put(field_name[6], id);
+                    map.put(field_name[7], foto);
                     allOrder.add(map);
                 }
 
