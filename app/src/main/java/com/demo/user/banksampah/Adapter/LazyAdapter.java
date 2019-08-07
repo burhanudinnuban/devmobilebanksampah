@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
+import com.demo.user.banksampah.MemberFragment.RequestMember.DetailRequestMember;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TimelineOrder.TimelineOrderActivity;
 import com.loopj.android.http.AsyncHttpClient;
@@ -193,12 +194,15 @@ public class LazyAdapter extends BaseAdapter {
         TextView tvNamaMember;
         TextView tvIdMember;
         TextView tvPointMember;
-        TextView tvTanggalReqMember;
-        TextView tvIdReqMember;
-        TextView tvNamaReqMember;
         Button btnDetailListMember;
         protected PrefManager session;
         Context ctx;
+
+        //Untuk Fragment Position 10
+        Button btnDetailReqMember;
+        ImageView imgPictureReqMember;
+        TextView tvTanggalReqMember, tvNamaMemberReq, tvIdMemberReq;
+
 
 
     }
@@ -712,7 +716,7 @@ public class LazyAdapter extends BaseAdapter {
                 final String strNamaMember = StatusPoint_List1.get("nama_member");
                 final String strIdMember = StatusPoint_List1.get("id_member");
                 final String strPointMember = StatusPoint_List1.get("point");
-                final String strFotoMember = StatusPoint_List1.get("foto");
+//                final String strFotoMember = StatusPoint_List1.get("foto");
                 final String strId = StatusPoint_List1.get("id");
                 final String strNoTelepon = StatusPoint_List1.get("no_telepon");
                 final String strAlamatMember = StatusPoint_List1.get("alamat");
@@ -720,10 +724,8 @@ public class LazyAdapter extends BaseAdapter {
                 holder.btnDetailListMember.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        HashMap<String, String> empList = new HashMap<String, String>();
                         Intent intent_detail = new Intent(activity, DetailMemberActivity.class);
-                        intent_detail.putExtra("foto", strFotoMember);
+//                        intent_detail.putExtra("foto", strFotoMember);
                         intent_detail.putExtra("point", strPointMember);
                         intent_detail.putExtra("id_member", strIdMember);
                         intent_detail.putExtra("nama_member", strNamaMember);
@@ -758,8 +760,10 @@ public class LazyAdapter extends BaseAdapter {
 
                     holder = new ViewHolder();
                     holder.tvTanggalReqMember = vi.findViewById(R.id.tvTanggal_RequestMember);
-                    holder.tvIdReqMember = vi.findViewById(R.id.tvIDMember_RequestMember);
-                    holder.tvNamaReqMember = vi.findViewById(R.id.tvNamaMember_RequestMember);
+                    holder.tvIdMemberReq = vi.findViewById(R.id.tvIDMember_RequestMember);
+                    holder.tvNamaMemberReq = vi.findViewById(R.id.tvNamaMember_RequestMember);
+                    holder.btnDetailReqMember = vi.findViewById(R.id.btnDetailReqMember);
+                    holder.imgPictureReqMember = vi.findViewById(R.id.imgPicture_RequestMember);
 
                     vi.setTag(holder);
                 }else
@@ -767,27 +771,33 @@ public class LazyAdapter extends BaseAdapter {
                     holder = (ViewHolder)vi.getTag();
                 }
 
-                HashMap<String, String> status_id1;
-                status_id1 = data.get(position);
+                HashMap<String, String> reqMember;
+                reqMember = data.get(position);
 
-                String strNamaReqMember = status_id1.get("nama_member");
-                String strIdReqMember = status_id1.get("id");
-                String strTanggalReqMember = status_id1.get("id_member");
+                final String strNamaReqMember = reqMember.get("nama_member");
+                final String strIdReqMember = reqMember.get("id_member");
+                final String strTanggalReqMember = reqMember.get("creation");
+                final String strIdBankSampah = reqMember.get("id");
+                final String strAlamatReqMember = reqMember.get("alamat");
+//                final String strImggPictureReq = reqMember.get("photo");
 
-                try
-                {
-                    holder.tvIdReqMember.setText("Point: " + decimalFormat.format(Double.valueOf(strIdReqMember)));
-                }
+                holder.btnDetailReqMember.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent_detail = new Intent(activity, DetailRequestMember.class);
+//                        intent_detail.putExtra("foto", strImggPictureReq);
+                        intent_detail.putExtra("nama_member", strNamaReqMember);
+                        intent_detail.putExtra("id_member", strIdReqMember);
+                        intent_detail.putExtra("alamat", strAlamatReqMember);
+                        intent_detail.putExtra("creation", strTanggalReqMember);
+                        intent_detail.putExtra("id", strIdBankSampah);
+                        activity.startActivity(intent_detail);
+                    }
+                });
 
-                catch (NumberFormatException e)
-                {
-                    e.printStackTrace();
-                    Log.e("tag", e.toString());
-                }
-                holder.tvIdReqMember.setText(strIdReqMember);
-                holder.tvNamaReqMember.setText(strNamaReqMember);
+                holder.tvIdMemberReq.setText(strIdReqMember);
+                holder.tvNamaMemberReq.setText(strNamaReqMember);
                 holder.tvTanggalReqMember.setText(strTanggalReqMember);
-
 
             default:
 

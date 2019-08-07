@@ -210,8 +210,9 @@ public class RequestMember extends Fragment {
                 String idBankSampah = c.getString(field_name[3]);
                 String namaReqMember = c.getString(field_name[4]);
                 String tanggalReqMember = c.getString(field_name[5]);
-                String foto = c.getString(field_name[6]);
+//                String foto = c.getString(field_name[6]);
 
+                Log.d("DEBUG", "viewDataMember: "+Alamat);
                 HashMap<String, String> map = new HashMap<>();
 
                 map.put(field_name[1], idReqMember);
@@ -219,7 +220,7 @@ public class RequestMember extends Fragment {
                 map.put(field_name[3], idBankSampah);
                 map.put(field_name[4], namaReqMember);
                 map.put(field_name[5], tanggalReqMember);
-                map.put(field_name[6], foto);
+//                map.put(field_name[6], foto);
                 allOrder.add(map);
             }
 
