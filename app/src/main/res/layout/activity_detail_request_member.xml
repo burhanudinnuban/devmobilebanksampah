@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splash_screen"
     tools:context=".MemberFragment.RequestMember.DetailRequestMember">
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,6 +24,18 @@
         android:padding="5dp"
         app:srcCompat="@drawable/ic_navigation_profil" />
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="15dp"
+            app:cardMaxElevation="15dp"
+            app:cardCornerRadius="15dp"
+            android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="15dp">
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,29 +116,33 @@
                 android:gravity="left|start|center"
                 android:hint=": (Tanggal Create)" />
         </TableRow>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-        <Button
-            android:id="@+id/btTambahmember"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tambahkan Member"
-            android:background="#10EE19"
-            android:textColor="#ffffff"
-            android:textStyle="bold"/>
-        <Button
-            android:id="@+id/btTolakMember"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tolak Member"
-            android:background="#EE1017"
-            android:textColor="#ffffff"
-            android:textStyle="bold"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp">
+                    <Button
+                        android:id="@+id/btTambahmember"
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:text="  Tambahkan Member  "
+                        android:background="@drawable/button_green"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"/>
+                    <Button
+                        android:id="@+id/btTolakMember"
+                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:text="  Tolak Member  "
+                        android:background="@drawable/button_red"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 </LinearLayout>

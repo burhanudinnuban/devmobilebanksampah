@@ -205,7 +205,7 @@ public class ListMember extends Fragment {
     }
 
     protected void viewDataMember(String resp_content){
-        String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","id","foto"};
+        String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","foto","alamat"};
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
@@ -224,8 +224,8 @@ public class ListMember extends Fragment {
                     String point = c.getString(field_name[3]);
                     String no_telepon = c.getString(field_name[4]);
                     String email = c.getString(field_name[5]);
-                    String id = c.getString(field_name[6]);
-                    String foto = c.getString(field_name[7]);
+                    String foto = c.getString(field_name[6]);
+                    String alamat = c.getString(field_name[7]);
 
 
                     HashMap<String, String> map = new HashMap<>();
@@ -235,8 +235,8 @@ public class ListMember extends Fragment {
                     map.put(field_name[3], point);
                     map.put(field_name[4], no_telepon);
                     map.put(field_name[5], email);
-                    map.put(field_name[6], id);
-                    map.put(field_name[7], foto);
+                    map.put(field_name[6], foto);
+                    map.put(field_name[7], alamat);
                     allOrder.add(map);
                 }
 

@@ -716,7 +716,7 @@ public class LazyAdapter extends BaseAdapter {
                 final String strNamaMember = StatusPoint_List1.get("nama_member");
                 final String strIdMember = StatusPoint_List1.get("id_member");
                 final String strPointMember = StatusPoint_List1.get("point");
-//                final String strFotoMember = StatusPoint_List1.get("foto");
+                final String strFotoMember = StatusPoint_List1.get("foto");
                 final String strId = StatusPoint_List1.get("id");
                 final String strNoTelepon = StatusPoint_List1.get("no_telepon");
                 final String strAlamatMember = StatusPoint_List1.get("alamat");
@@ -725,7 +725,7 @@ public class LazyAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         Intent intent_detail = new Intent(activity, DetailMemberActivity.class);
-//                        intent_detail.putExtra("foto", strFotoMember);
+                        intent_detail.putExtra("foto", strFotoMember);
                         intent_detail.putExtra("point", strPointMember);
                         intent_detail.putExtra("id_member", strIdMember);
                         intent_detail.putExtra("nama_member", strNamaMember);
@@ -779,13 +779,13 @@ public class LazyAdapter extends BaseAdapter {
                 final String strTanggalReqMember = reqMember.get("creation");
                 final String strIdBankSampah = reqMember.get("id");
                 final String strAlamatReqMember = reqMember.get("alamat");
-//                final String strImggPictureReq = reqMember.get("photo");
+                final String strImggPictureReq = reqMember.get("photo");
 
                 holder.btnDetailReqMember.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent_detail = new Intent(activity, DetailRequestMember.class);
-//                        intent_detail.putExtra("foto", strImggPictureReq);
+                        intent_detail.putExtra("foto", strImggPictureReq);
                         intent_detail.putExtra("nama_member", strNamaReqMember);
                         intent_detail.putExtra("id_member", strIdReqMember);
                         intent_detail.putExtra("alamat", strAlamatReqMember);

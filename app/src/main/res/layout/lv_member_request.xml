@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="10dp"
+        app:cardElevation="15dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/imgPicture_RequestMember"
@@ -61,10 +71,12 @@
         <Button
             android:id="@+id/btnDetailReqMember"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="Detail"
             android:layout_gravity="right"
-            android:background="#64DD17"
+            android:background="@drawable/button_blue"
             android:textColor="#ffffff"/>
     </LinearLayout>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

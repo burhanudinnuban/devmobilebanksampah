@@ -5,10 +5,11 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
+    android:background="@drawable/splash_screen"
     tools:context=".MemberFragment.ListMember.DetailMemberActivity">
 
     <TableRow
+        android:layout_margin="15dp"
         android:id="@+id/tableRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -73,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tableRow"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:stretchColumns="1">
 
         <TableRow
@@ -85,16 +86,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="left|start|center"
+                android:gravity="left"
                 android:text="No. ID" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
 
             <TextView
                 android:id="@+id/tvIDMember_DetailMember"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="left|start|center"
-                android:hint=": (No ID Member)" />
+                android:gravity="left"
+                android:hint="No ID Member" />
         </TableRow>
 
         <TableRow
@@ -110,12 +118,19 @@
                 android:text="Alamat" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <TextView
                 android:id="@+id/tvAlamatMember_DetailMember"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left|start|center"
-                android:hint=": (Alamat Member)" />
+                android:hint="Alamat Member" />
         </TableRow>
 
         <TableRow
@@ -131,12 +146,19 @@
                 android:text="No Telepon" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <TextView
                 android:id="@+id/tvNoHPMember_DetailMember"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left|start|center"
-                android:hint=": (No HP Member)" />
+                android:hint="No HP Member" />
         </TableRow>
 
         <TableRow
@@ -152,12 +174,19 @@
                 android:text="Email" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <TextView
                 android:id="@+id/tvEmailMemberDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left|start|center"
-                android:hint=": (Email Member)" />
+                android:hint="Email Member" />
         </TableRow>
 
         <TableRow
@@ -173,12 +202,19 @@
                 android:text="Status" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <TextView
                 android:id="@+id/tvStatusMember_DetailMember"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left|start|center"
-                android:hint=": (Status Member)" />
+                android:hint="Status Member" />
         </TableRow>
     </TableLayout>
 
@@ -196,7 +232,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_margin="20dp"
         android:orientation="vertical">
 
         <TableRow
@@ -209,7 +245,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#E0F7FA">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -239,7 +276,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#E0F2F1">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -275,7 +313,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#FFF8E1">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -304,7 +343,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="#FCE4EC">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
