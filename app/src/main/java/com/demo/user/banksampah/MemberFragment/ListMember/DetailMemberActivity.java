@@ -119,7 +119,7 @@ public class DetailMemberActivity extends AppCompatActivity {
         url_foto = apiData.get("str_url_main");
         Picasso.get()
                 .load(url_foto + imgDetailMember1)
-                //.error(R.drawable.ic_navigation_profil)
+                .error(R.drawable.ic_navigation_profil)
                 .into(imgDetailMember);
 
         imgHubungiMember.setOnClickListener(new View.OnClickListener() {
