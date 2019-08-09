@@ -237,6 +237,8 @@ public class RestProcess {
         //List Member
         apiErecyle.put("str_api_list_member",".list_member_bank_sampah");
         apiErecyle.put("str_api_list_request_member",".get_list_request");
+        apiErecyle.put("str_api_acc_request_member",".approve_member");
+        apiErecyle.put("str_api_tolak_request_member",".reject_member");
 
 
         return apiErecyle;

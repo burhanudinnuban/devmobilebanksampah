@@ -42,6 +42,8 @@
     <string name="MSG_CONFIRM_EMPTY">Harap Konfirmasikan Kata Sandi Anda</string>
     <string name="MSG_PASSWORD_CHECK">Kata Sandi Tidak Sesuai! Harap Periksa Kembali.</string>
     <string name="MSG_REGIST_SUCCESS">Selamat Registrasi Berhasil!\nSilakan Masuk kedalam Aplikasi</string>
+    <string name="MSG_ACC_MEMBER">Selamat Member Berhasil Ditambahkan</string>
+    <string name="MS_HAPUS_SUCCESS">Data Berhasil Dihapus.</string>
     <string name="MSG_NO_ALREADY_EXIST">Mohon Maaf Nomor Tersebut Sudah Terdaftar</string>
     <string name="MSG_PROCESSING_DATA">Melakukan Validasi Data..</string>
 

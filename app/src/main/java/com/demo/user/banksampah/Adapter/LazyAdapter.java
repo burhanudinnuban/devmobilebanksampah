@@ -703,6 +703,7 @@ public class LazyAdapter extends BaseAdapter {
                     holder.tvIdMember = vi.findViewById(R.id.tvIDMember_ListMember);
                     holder.tvPointMember = vi.findViewById(R.id.tvPointMember_ListMember);
                     holder.btnDetailListMember = vi.findViewById(R.id.btnDetailListMember);
+                    holder.imgPhotoMember = vi.findViewById(R.id.imgPicture_Member);
 
                     vi.setTag(holder);
                 }else
@@ -748,6 +749,12 @@ public class LazyAdapter extends BaseAdapter {
                     e.printStackTrace();
                     Log.e("tag", e.toString());
                 }
+
+                url_foto = apiData.get("str_url_main");
+                Picasso.get()
+                        .load(url_foto + strFotoMember)
+                        //.error(R.drawable.ic_navigation_profil)
+                        .into(holder.imgPhotoMember);
                 holder.tvIdMember.setText(strIdMember);
                 holder.tvNamaMember.setText(strNamaMember);
                 holder.tvPointMember.setText(strPointMember);
@@ -780,6 +787,7 @@ public class LazyAdapter extends BaseAdapter {
                 final String strIdBankSampah = reqMember.get("id");
                 final String strAlamatReqMember = reqMember.get("alamat");
                 final String strImggPictureReq = reqMember.get("photo");
+                final String strIdbankSampah1 = reqMember.get("id_bank_sampah");
 
                 holder.btnDetailReqMember.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -791,10 +799,15 @@ public class LazyAdapter extends BaseAdapter {
                         intent_detail.putExtra("alamat", strAlamatReqMember);
                         intent_detail.putExtra("creation", strTanggalReqMember);
                         intent_detail.putExtra("id", strIdBankSampah);
+                        intent_detail.putExtra("id_bank_sampah", strIdbankSampah1);
                         activity.startActivity(intent_detail);
                     }
                 });
-
+                url_foto = apiData.get("str_url_main");
+                Picasso.get()
+                        .load(url_foto + strImggPictureReq)
+                        //.error(R.drawable.ic_navigation_profil)
+                        .into(holder.imgPictureReqMember);
                 holder.tvIdMemberReq.setText(strIdReqMember);
                 holder.tvNamaMemberReq.setText(strNamaReqMember);
                 holder.tvTanggalReqMember.setText(strTanggalReqMember);

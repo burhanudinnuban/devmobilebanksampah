@@ -118,6 +118,7 @@ public class ListMember extends Fragment {
                 if (getActivity() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                         //Jalanin API
+                        getListMember(strIDUser);
                     } else {
                         Snackbar snackbar = Snackbar
                                 .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);

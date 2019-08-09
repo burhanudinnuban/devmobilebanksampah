@@ -93,6 +93,7 @@ public class RequestMember extends Fragment {
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
             //Jalanin API
+            getListReqMember(strIDUser);
         } else {
             Snackbar snackbar = Snackbar
                     .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
@@ -105,6 +106,7 @@ public class RequestMember extends Fragment {
                 if (getActivity() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                         //Jalanin API
+                        getListReqMember(strIDUser);
                     } else {
                         Snackbar snackbar = Snackbar
                                 .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
@@ -119,6 +121,7 @@ public class RequestMember extends Fragment {
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     //Jalanin API
+                    getListReqMember(strIDUser);
                 } else {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
@@ -132,7 +135,7 @@ public class RequestMember extends Fragment {
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListMember(strIDUser);
+            getListReqMember(strIDUser);
         } else {
             Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
@@ -143,7 +146,7 @@ public class RequestMember extends Fragment {
 
         return rootView;
     }
-    private void getListMember(final String strIDUser){
+    private void getListReqMember(final String strIDUser){
 //        customProgress.showProgress(getContext(), "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_request_member");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
@@ -191,7 +194,7 @@ public class RequestMember extends Fragment {
     }
 
     protected void viewDataMember(String resp_content){
-        String[] field_name = {"message", "id_member", "alamat", "id", "nama_member", "creation","foto"};
+        String[] field_name = {"message", "id_member", "alamat", "id", "nama_member", "creation","foto","id_bank_sampah"};
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
@@ -210,7 +213,8 @@ public class RequestMember extends Fragment {
                 String idBankSampah = c.getString(field_name[3]);
                 String namaReqMember = c.getString(field_name[4]);
                 String tanggalReqMember = c.getString(field_name[5]);
-//                String foto = c.getString(field_name[6]);
+                String foto = c.getString(field_name[6]);
+                String id_bankSampah = c.getString(field_name[7]);
 
                 Log.d("DEBUG", "viewDataMember: "+Alamat);
                 HashMap<String, String> map = new HashMap<>();
@@ -220,7 +224,8 @@ public class RequestMember extends Fragment {
                 map.put(field_name[3], idBankSampah);
                 map.put(field_name[4], namaReqMember);
                 map.put(field_name[5], tanggalReqMember);
-//                map.put(field_name[6], foto);
+                map.put(field_name[6], foto);
+                map.put(field_name[7], id_bankSampah);
                 allOrder.add(map);
             }
 
