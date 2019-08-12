@@ -1,6 +1,7 @@
 package com.demo.user.banksampah.MemberFragment.ListMember;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,11 +13,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,7 +47,7 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class ListMember extends Fragment {
+public class ListMember extends Fragment implements SearchView.OnQueryTextListener {
 
     //Session Class
     protected PrefManager session;
@@ -63,10 +67,13 @@ public class ListMember extends Fragment {
     protected ConnectivityManager conMgr;
     protected Button btDetailListMember;
 
+    Context ctx;
     protected View rootView;
     protected LazyAdapter adapter;
 
     protected CardView cd_NoData, cd_NoConnection;
+
+    protected SearchView editsearch;
 
     public static ListMember newInstance() {
         return new ListMember();
@@ -82,6 +89,7 @@ public class ListMember extends Fragment {
         HashMap<String, String> user = session.getUserDetails();
         strIDUser = user.get(PrefManager.KEY_NAMA);
 
+        this.ctx = ctx;
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
 
@@ -94,10 +102,12 @@ public class ListMember extends Fragment {
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
         btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
 
+        // Locate the EditText in listview_main.xml
+        editsearch = rootView.findViewById(R.id.simpleSearchView);
+        editsearch.setOnQueryTextListener(this);
+
+
         //Intent Ke Detail Member Activity
-
-
-
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -269,5 +279,14 @@ public class ListMember extends Fragment {
                 Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
             }*/
         }
+    }
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        return false;
     }
 }

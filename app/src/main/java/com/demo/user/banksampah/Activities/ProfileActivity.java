@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
+import com.demo.user.banksampah.BankSampahActivities.DaftarHargaBankSampah;
 import com.demo.user.banksampah.Documentation.Faq;
 import com.demo.user.banksampah.Documentation.HubungiKami;
 import com.demo.user.banksampah.NotificationActivities.RiwayatOrder;
@@ -28,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected TextView tvNama, tvIDUser;
     protected ImageView imgProfile, imgArrowBack;
-    protected TextView tvDataProfil, tvHistory, tvPassword, tvCallUs, tvFaq, tvLogOut;
+    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga;
 
     private String url_foto;
 
@@ -56,11 +57,9 @@ public class ProfileActivity extends AppCompatActivity {
         imgArrowBack = findViewById(R.id.imgArrowBack);
 
         tvDataProfil = findViewById(R.id.tvDataSampah);
-        tvHistory = findViewById(R.id.tvRiwayatOrder);
         tvPassword= findViewById(R.id.tvGantiKataSandi);
-        tvCallUs = findViewById(R.id.tvRiwayatJual);
-//        tvFaq = findViewById(R.id.tvFaq);
         tvLogOut = findViewById(R.id.tvLogOut);
+        tvDaftarHarga = findViewById(R.id.tvDaftarHarga);
 
         //Create myDialog
         myDialog = new Dialog(this);
@@ -72,12 +71,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        tvHistory.setOnClickListener(new View.OnClickListener() {
+        tvDaftarHarga.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                Intent history_intent = new Intent(getApplicationContext(), RiwayatOrder.class);
-                startActivity(history_intent);
+            public void onClick(View view) {
+                Intent daftar_harga = new Intent(getApplicationContext(), TambahkanDaftar.class);
+                startActivity(daftar_harga);
             }
         });
 
@@ -89,21 +87,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-//        tvFaq.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent faq = new Intent (getApplicationContext(), Faq.class);
-//                startActivity(faq);
-//            }
-//        });
-
-        tvCallUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent call_us = new Intent (getApplicationContext(), HubungiKami.class);
-                startActivity(call_us);
-            }
-        });
 
         tvPassword.setOnClickListener(new View.OnClickListener() {
             @Override

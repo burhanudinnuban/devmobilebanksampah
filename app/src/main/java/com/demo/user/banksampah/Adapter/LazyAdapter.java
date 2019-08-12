@@ -714,6 +714,7 @@ public class LazyAdapter extends BaseAdapter {
                 HashMap<String, String> StatusPoint_List1;
                 StatusPoint_List1 = data.get(position);
 
+
                 final String strNamaMember = StatusPoint_List1.get("nama_member");
                 final String strIdMember = StatusPoint_List1.get("id_member");
                 final String strPointMember = StatusPoint_List1.get("point");
@@ -753,7 +754,7 @@ public class LazyAdapter extends BaseAdapter {
                 url_foto = apiData.get("str_url_main");
                 Picasso.get()
                         .load(url_foto + strFotoMember)
-                        //.error(R.drawable.ic_navigation_profil)
+                        .error(R.drawable.ic_navigation_profil)
                         .into(holder.imgPhotoMember);
                 holder.tvIdMember.setText(strIdMember);
                 holder.tvNamaMember.setText(strNamaMember);
@@ -806,7 +807,7 @@ public class LazyAdapter extends BaseAdapter {
                 url_foto = apiData.get("str_url_main");
                 Picasso.get()
                         .load(url_foto + strImggPictureReq)
-                        //.error(R.drawable.ic_navigation_profil)
+                        .error(R.drawable.ic_navigation_profil)
                         .into(holder.imgPictureReqMember);
                 holder.tvIdMemberReq.setText(strIdReqMember);
                 holder.tvNamaMemberReq.setText(strNamaReqMember);

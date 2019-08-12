@@ -29,11 +29,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MemberFragment.RequestMember.DetailRequestMember"></activity>
-        <activity android:name=".Activities.TambahkanDaftar"></activity>
+        <activity android:name=".Activities.ListHargaItem"></activity>
+        <activity android:name=".MemberFragment.RequestMember.DetailRequestMember">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"></meta-data>
+        </activity>
+        <activity android:name=".Activities.TambahkanDaftar" />
         <activity android:name=".RegisterActivities.RegisterActivity" />
         <activity android:name=".MemberFragment.ListMember.RiwayatOrderMemberActivity" />
-        <activity android:name=".MemberFragment.ListMember.DetailMemberActivity" />
+        <activity android:name=".MemberFragment.ListMember.DetailMemberActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"></meta-data>
+        </activity>
         <activity android:name=".HereMaps.ResultListActivity" />
 
         <meta-data

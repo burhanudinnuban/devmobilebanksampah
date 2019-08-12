@@ -8,6 +8,7 @@ import android.content.Intent;
 import com.demo.user.banksampah.Activities.LoginActivity;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created by Lincoln on 05/05/16.
@@ -140,6 +141,8 @@ public class PrefManager {
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
     }
+
+
 
     /*public void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);

@@ -213,7 +213,6 @@ public class DetailMemberActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-
                 builder.show();
             }
         });

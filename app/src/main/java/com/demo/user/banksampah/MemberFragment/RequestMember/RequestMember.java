@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -62,6 +64,7 @@ public class RequestMember extends Fragment {
 
     protected CardView cd_NoData, cd_NoConnection;
 
+    protected SearchView editsearch;
     public static RequestMember newInstance() {
         return new RequestMember();
     }
@@ -87,6 +90,7 @@ public class RequestMember extends Fragment {
         linear_ListRequestMember = rootView.findViewById(R.id.linearLayout_ListRequestMember);
         cd_NoData = rootView.findViewById(R.id.cd_noData);
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
+
 
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);

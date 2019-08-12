@@ -240,6 +240,9 @@ public class RestProcess {
         apiErecyle.put("str_api_acc_request_member",".approve_member");
         apiErecyle.put("str_api_tolak_request_member",".reject_member");
 
+        //Tambahankan Daftar Item
+        apiErecyle.put("str_api_add_item",".add_item");
+
 
         return apiErecyle;
     }

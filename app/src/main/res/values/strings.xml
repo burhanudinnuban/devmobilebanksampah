@@ -5,10 +5,16 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string-array name="Tipe_Sampah">
-        <item>Plastik</item>
-        <item>Kertas</item>
-        <item>Logam</item>
-        <item>Kaca</item>
+        <item>BDNG-BSH</item>
+        <item>SABUN</item>
+        <item>SABUN CUCI</item>
+        <item>RM-SABUN-COLEK</item>
+        <item>RM-BDNG-BSH</item>
+        <item>BODONG GELAS</item>
+        <item>BESI</item>
+        <item>BDNG-CMP</item>
+        <item>KARDUS</item>
+        <item>ALUMUNIUM</item>
     </string-array>
     <string name="placeholder_pcs"> Pcs</string>
     <string name="placeholder_kgs"> Kg</string>
@@ -42,6 +48,7 @@
     <string name="MSG_CONFIRM_EMPTY">Harap Konfirmasikan Kata Sandi Anda</string>
     <string name="MSG_PASSWORD_CHECK">Kata Sandi Tidak Sesuai! Harap Periksa Kembali.</string>
     <string name="MSG_REGIST_SUCCESS">Selamat Registrasi Berhasil!\nSilakan Masuk kedalam Aplikasi</string>
+    <string name="MSG_TAMBAH_ITEM">Selamat Harga Item Berhasil Ditambahkan</string>
     <string name="MSG_ACC_MEMBER">Selamat Member Berhasil Ditambahkan</string>
     <string name="MS_HAPUS_SUCCESS">Data Berhasil Dihapus.</string>
     <string name="MSG_NO_ALREADY_EXIST">Mohon Maaf Nomor Tersebut Sudah Terdaftar</string>
