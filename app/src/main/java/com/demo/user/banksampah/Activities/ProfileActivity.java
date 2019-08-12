@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
-import com.demo.user.banksampah.Documentation.Faq;
 import com.demo.user.banksampah.Documentation.HubungiKami;
 import com.demo.user.banksampah.NotificationActivities.RiwayatOrder;
 import com.demo.user.banksampah.R;
@@ -55,11 +54,11 @@ public class ProfileActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.imgPicture_Profil);
         imgArrowBack = findViewById(R.id.imgArrowBack);
 
-        tvDataProfil = findViewById(R.id.tvData_Profil);
-        tvHistory = findViewById(R.id.tvHistory_Profil);
-        tvPassword= findViewById(R.id.tvPassword_Profil);
-        tvCallUs = findViewById(R.id.tvCallUs_Profil);
-        tvFaq = findViewById(R.id.tvFaq_Profil);
+        tvDataProfil = findViewById(R.id.tvDataSampah);
+        tvHistory = findViewById(R.id.tvRiwayatOrder);
+        tvPassword = findViewById(R.id.tvGantiKataSandi);
+        tvCallUs = findViewById(R.id.tvRiwayatJual);
+//        tvFaq = findViewById(R.id.tvFaq);
         tvLogOut = findViewById(R.id.tvLogOut);
 
         //Create myDialog
@@ -75,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent history_intent = new Intent(getApplicationContext(), RiwayatOrder.class);
                 startActivity(history_intent);
             }
@@ -88,13 +88,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        tvFaq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent faq = new Intent (getApplicationContext(), Faq.class);
-                startActivity(faq);
-            }
-        });
+//        tvFaq.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent faq = new Intent (getApplicationContext(), Faq.class);
+//                startActivity(faq);
+//            }
+//        });
 
         tvCallUs.setOnClickListener(new View.OnClickListener() {
             @Override

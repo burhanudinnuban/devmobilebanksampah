@@ -60,18 +60,18 @@
             app:srcCompat="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tvData_Profil"
+            android:id="@+id/tvDataSampah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_phone_android_black_24dp"
+            android:drawableLeft="@drawable/ic_list_data"
             android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
-            android:text="Data Pribadi"
+            android:text="Data Bank Sampah"
             android:textSize="14dp" />
 
         <ImageView
@@ -83,18 +83,18 @@
             app:srcCompat="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tvHistory_Profil"
+            android:id="@+id/tvGantiKataSandi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_history"
+            android:drawableLeft="@drawable/ic_lock"
             android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
-            android:text="Riwayat Order"
+            android:text="Ganti Kata Sandi"
             android:textSize="14dp" />
 
         <ImageView
@@ -105,20 +105,6 @@
             android:layout_marginBottom="3dp"
             app:srcCompat="@android:color/darker_gray" />
 
-        <TextView
-            android:id="@+id/tvPassword_Profil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_key"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:drawablePadding="10dp"
-            android:gravity="center|left|start"
-            android:text="Ganti Kata Sandi"
-            android:textSize="14dp" />
 
         <ImageView
             android:id="@+id/imgGaris4"
@@ -129,18 +115,18 @@
             app:srcCompat="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tvCallUs_Profil"
+            android:id="@+id/tvDaftarHarga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_call"
+            android:drawableLeft="@drawable/ic_money"
             android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
-            android:text="Hubungi Kami"
+            android:text="Daftar harga"
             android:textSize="14dp" />
 
         <ImageView
@@ -152,18 +138,18 @@
             app:srcCompat="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tvFaq_Profil"
+            android:id="@+id/tvRiwayatOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_info"
+            android:drawableLeft="@drawable/ic_histori"
             android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
-            android:text="FAQ"
+            android:text="Riwayat Order"
             android:textSize="14dp" />
 
         <ImageView
@@ -175,18 +161,18 @@
             app:srcCompat="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tvGantiUnit_Profil"
+            android:id="@+id/tvRiwayatJual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_info"
+            android:drawableLeft="@drawable/ic_shop"
             android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
-            android:text="Ganti Unit"
+            android:text="Riwayat Jual"
             android:textSize="14dp" />
 
         <ImageView
@@ -246,7 +232,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="15dp"
-        android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
+        android:drawableLeft="@drawable/ic_out"
         android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
         android:drawablePadding="10dp"
         android:gravity="center|left"

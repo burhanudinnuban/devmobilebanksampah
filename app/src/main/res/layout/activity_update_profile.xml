@@ -1,182 +1,495 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+    android:background="@color/colorBorderWhite"
     tools:context=".Activities.UpdateProfileActivity">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/timeline_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center|top">
+        android:layout_alignParentTop="true"
+        android:layout_margin="15dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="25sp"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvStepOne"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/rectangle_aktif"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="1"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvStepTwo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rectangle_non"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvStepThree"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/rectangle_non"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/timeline_register"
+        android:fillViewport="true">
 
         <RelativeLayout
-            android:id="@+id/relative_foto"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/tvTitle"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfil_Update"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_camera_16_dp" />
-
-            <ImageView
-                android:id="@+id/imgAdd"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/ic_add_circle_16_dp" />
-        </RelativeLayout>
-
-        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etNamaLengkap_Update"
+            <LinearLayout
+                android:id="@+id/linear_RegisterBankSampah"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="Nama Lengkap"
-                android:inputType="text"
-                android:textColor="@color/colorLogin"
-                android:textSize="15dp"
-                app:font="@font/sourcesansproregular" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="visible">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etEmail_Update"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="Email"
-                android:inputType="textWebEmailAddress"
-                android:textColor="@color/colorLogin"
-                android:textSize="15dp"
-                app:font="@font/sourcesansproregular" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etNoHP_Update"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="Nomor Ponsel"
-                android:enabled="false"
-                android:inputType="number"
-                android:textColor="@color/colorLogin"
-                android:textSize="15dp"
-                app:font="@font/sourcesansproregular" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/DateOfBirth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etTanggalLahir_Update"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:focusableInTouchMode="false"
-                android:hint="Tanggal Lahir"
-                android:inputType="datetime|text"
-                android:textColor="@color/colorLogin"
-                android:textSize="15dp"
-                app:font="@font/sourcesansproregular" />
-        </android.support.design.widget.TextInputLayout>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/etAlamat_Update"
+                <TextView
+                    android:id="@+id/tvStatusNoHP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="Alamat Lengkap"
-                    android:inputType="textMultiLine|text"
-                    android:lineSpacingExtra="3sp"
-                    android:textColor="@color/colorLogin"
-                    android:textSize="15dp"
-                    app:font="@font/sourcesansproregular" />
-            </android.support.design.widget.TextInputLayout>
+                    android:text="TextView"
+                    android:visibility="gone" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Data Bank Sampah"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
 
-                    <ImageView
-                        android:id="@+id/imgPinCircle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="false"
-                        android:src="@drawable/ic_person_pin_circle_green_30_dp" />
+                <ImageView
+                    android:id="@+id/imgRegisterPicture"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_camera_16_dp" />
 
-                    <TextView
-                        android:id="@+id/textView4"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNamaBankSampah_Register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nama Unit Bank Sampah"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etEmailBankSampah_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Email Unit Bank Sampah"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNoHpBankSampah_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nomor Telepon"
+                        android:inputType="number"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/etAlamat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:hint="Alamat Lengkap"
+                            android:inputType="textMultiLine|text"
+                            android:lineSpacingExtra="3sp"
+                            android:textColor="@color/colorLogin"
+                            android:textSize="15sp"
+                            app:font="@font/sourcesansproregular" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
                         android:gravity="center"
-                        android:text="View Maps"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="9sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-        </TableRow>
+                        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnSimpan_Update"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/ic_btn_default"
-            android:text="Simpan Perubahan"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBorderWhite"
-            android:textSize="17sp" />
-    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/imgPinCircle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="false"
+                            android:src="@drawable/ic_person_pin_circle_green_30_dp" />
 
-</ScrollView>
+                        <TextView
+                            android:id="@+id/tvMaps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="View Maps"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="9sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </TableRow>
+
+                <!--<ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/colorAccent" />-->
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--app:passwordToggleEnabled="true"-->
+                <!--app:passwordToggleTint="@color/colorPrimary">-->
+
+                <!--<android.support.design.widget.TextInputEditText-->
+                <!--android:id="@+id/etPassword"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:hint="Kata Sandi"-->
+                <!--android:inputType="text|textPassword"-->
+                <!--android:textColor="@color/colorLogin"-->
+                <!--android:textSize="15sp"-->
+                <!--app:font="@font/sourcesansproregular" />-->
+                <!--</android.support.design.widget.TextInputLayout>-->
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--app:passwordToggleEnabled="true"-->
+                <!--app:passwordToggleTint="@color/colorPrimary">-->
+
+                <!--<android.support.design.widget.TextInputEditText-->
+                <!--android:id="@+id/etConfirmPassword"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:hint="Konfirmasi Kata Sandi"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:textColor="@color/colorLogin"-->
+                <!--android:textSize="15sp"-->
+                <!--app:font="@font/sourcesansproregular" />-->
+                <!--</android.support.design.widget.TextInputLayout>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_RegisterPengurus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvDataPengurus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Data Pengurus"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNamaPengurus_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nama Pengurus #1"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNoHpPengurus_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nomor Telepon Pengurus #1"
+                        android:inputType="number"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15dp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/colorAccent"
+                    android:visibility="gone" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNamaPengurusDua_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nama Pengurus #2"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textColorHighlight="@color/colorCardDS"
+                        android:textColorLink="@color/colorCardDS"
+                        android:textCursorDrawable="@color/colorCardDS"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNoHpPengurusDua_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nomor Telepon Pengurus #2"
+                        android:inputType="number"
+                        android:textColor="@color/colorLogin"
+                        android:textColorHighlight="@color/colorCardDS"
+                        android:textColorLink="@color/colorCardDS"
+                        android:textCursorDrawable="@color/colorCardDS"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_RegisterDetailBank"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvDataRekeningBankSampah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Data Rekening Bank Sampah"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNamaDetailBank_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nama Bank"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNoRekeningBank_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nomor Rekening Bank Sampah"
+                        android:inputType="number"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etNamaRekeningBank_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Nama Rekening"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <!--<Button
+                    android:id="@+id/btDaftarkan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/ic_btn_default"
+                    android:text="Daftarkan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBorderWhite"
+                    android:textSize="17sp" />-->
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btDaftarkan"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/ic_btn_default"
+                android:text="Daftarkan"
+                android:textAllCaps="false"
+                android:textColor="@color/colorBorderWhite"
+                android:textSize="17sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <!--<Button
+        android:id="@+id/btDaftarkan"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ic_btn_default"
+        android:text="Daftarkan"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBorderWhite"
+        android:textSize="16sp" />-->
+</RelativeLayout>

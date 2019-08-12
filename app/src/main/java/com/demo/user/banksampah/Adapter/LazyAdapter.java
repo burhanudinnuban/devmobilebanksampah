@@ -3,6 +3,7 @@ package com.demo.user.banksampah.Adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
+import com.demo.user.banksampah.MemberFragment.RequestMember.DetailRequestMember;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TimelineOrder.TimelineOrderActivity;
 import com.loopj.android.http.AsyncHttpClient;
@@ -36,7 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -96,14 +99,16 @@ public class LazyAdapter extends BaseAdapter {
     private int Status_PickupTime;
     private ListView lvListDetailOrder;
     private Dialog myDialog;
-
+    Context ctx;
     /*private static class OutletHolder {
         public TextView outlet_name;
         public TextView outlet_phone;
     }*/
 
     public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d, int fragment_pos) {
-        //View vi;
+
+        this.ctx = ctx;
+        View vi;
         activity = a;
         filter_data = d;
         data = d;
@@ -123,67 +128,6 @@ public class LazyAdapter extends BaseAdapter {
 
     public long getItemId(int position) {
         return position;
-    }
-
-    //Testing Holder
-    static class ViewHolder{
-        //Untuk Fragment Position 1 dan 2
-        TextView tvJenisSampah;
-        ImageView imgJenisSampah;
-
-        //Untuk Fragment Position 3
-        TextView tvJenisSampah_Incoming;
-        TextView tvBeratSampah_Incoming;
-        TextView tvPoints_Incoming;
-        TextView tvTanggal_Incoming;
-        ImageView imgDelete_Incoming;
-
-        //Untuk Fragment Position 4
-        TextView tvJenisSampah_Summary;
-        TextView tvJumlahKg_Summary;
-        TextView tvJumlahPoints_Summary;
-        TextView tvParentID_Summary;
-
-        //Untuk Fragment Position 5
-        TextView tvOrderID_List;
-        TextView tvStatusOrder_List;
-        TextView tvTotalKg_List;
-        TextView tvTotalPoints_List;
-        TextView tvAlamat_List;
-        ImageView imgFotoSampah_List;
-        ImageView imgViewDetail;
-        ImageView imgArrowDropDown;
-        ImageView imgArrowUp;
-        Button btnDetail_List;
-        Button btnTelusuri_List;
-        Button btnHide_List;
-        Button btnCancelOrder_List;
-        CardView cdDetail;
-        CardView cdHide;
-        TableRow tblAlamat_List;
-        TableRow tblFoto_List;
-
-        //Untuk Fragment Position 6
-        TextView tvOrderID_Confirm;
-        TextView tvHari_Confirm;
-        TextView tvTanggal_Confirm;
-        TextView tvJam_Confirm;
-        TextView tvStatus_Confirm;
-        Button btnYes_Confirm;
-        Button btnNo_Confirm;
-        TableRow tblButton_Confirm;
-
-        //Untuk Fragment Position 7
-        TextView tvOrderID_Picker;
-        TextView tvName_Picker;
-        TextView tvTipeTruck_Picker;
-        TextView tvNopol_Picker;
-        TextView tvDetail_Picker;
-
-        //Untuk Fragment Position 8
-        TextView tvPoints_Get;
-        TextView tvIDOrder_Get;
-
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -341,7 +285,7 @@ public class LazyAdapter extends BaseAdapter {
 
             case 5:
                 if (convertView == null) {
-                    vi = inflater.inflate(R.layout.lv_list_order, parent, false);
+                    vi = inflater.inflate(R.layout.lv_member_list, parent, false);
 
                     myDialog = new Dialog(activity);
 
@@ -671,11 +615,202 @@ public class LazyAdapter extends BaseAdapter {
 
                 break;
 
+            case 9:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_member_list, parent, false);
+
+
+                    holder = new ViewHolder();
+
+                    holder.tvNamaMember = vi.findViewById(R.id.tvNamaMember_ListMember);
+                    holder.tvIdMember = vi.findViewById(R.id.tvIDMember_ListMember);
+                    holder.tvPointMember = vi.findViewById(R.id.tvPointMember_ListMember);
+                    holder.btnDetailListMember = vi.findViewById(R.id.btnDetailListMember);
+
+                    vi.setTag(holder);
+                } else {
+                    holder = (ViewHolder) vi.getTag();
+                }
+
+                HashMap<String, String> StatusPoint_List1;
+                StatusPoint_List1 = data.get(position);
+
+                final String strNamaMember = StatusPoint_List1.get("nama_member");
+                final String strIdMember = StatusPoint_List1.get("id_member");
+                final String strPointMember = StatusPoint_List1.get("point");
+//                final String strFotoMember = StatusPoint_List1.get("foto");
+                final String strId = StatusPoint_List1.get("id");
+                final String strNoTelepon = StatusPoint_List1.get("no_telepon");
+                final String strAlamatMember = StatusPoint_List1.get("alamat");
+                final String strEmailMember = StatusPoint_List1.get("email");
+                holder.btnDetailListMember.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent_detail = new Intent(activity, DetailMemberActivity.class);
+//                        intent_detail.putExtra("foto", strFotoMember);
+                        intent_detail.putExtra("point", strPointMember);
+                        intent_detail.putExtra("id_member", strIdMember);
+                        intent_detail.putExtra("nama_member", strNamaMember);
+                        intent_detail.putExtra("id", strId);
+                        intent_detail.putExtra("no_telepon", strNoTelepon);
+                        intent_detail.putExtra("alamat", strAlamatMember);
+                        intent_detail.putExtra("email", strEmailMember);
+                        activity.startActivity(intent_detail);
+                    }
+                });
+
+
+                try {
+                    holder.tvPointMember.setText("Point: " + decimalFormat.format(Double.valueOf(strPointMember)));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    Log.e("tag", e.toString());
+                }
+                holder.tvIdMember.setText(strIdMember);
+                holder.tvNamaMember.setText(strNamaMember);
+                holder.tvPointMember.setText(strPointMember);
+
+                break;
+
+            case 10:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_member_request, parent, false);
+
+                    holder = new ViewHolder();
+                    holder.tvTanggalReqMember = vi.findViewById(R.id.tvTanggal_RequestMember);
+                    holder.tvIdMemberReq = vi.findViewById(R.id.tvIDMember_RequestMember);
+                    holder.tvNamaMemberReq = vi.findViewById(R.id.tvNamaMember_RequestMember);
+                    holder.btnDetailReqMember = vi.findViewById(R.id.btnDetailReqMember);
+                    holder.imgPictureReqMember = vi.findViewById(R.id.imgPicture_RequestMember);
+
+                    vi.setTag(holder);
+                } else {
+                    holder = (ViewHolder) vi.getTag();
+                }
+
+                HashMap<String, String> reqMember;
+                reqMember = data.get(position);
+
+                final String strNamaReqMember = reqMember.get("nama_member");
+                final String strIdReqMember = reqMember.get("id_member");
+                final String strTanggalReqMember = reqMember.get("creation");
+                final String strIdBankSampah = reqMember.get("id");
+                final String strAlamatReqMember = reqMember.get("alamat");
+//                final String strImggPictureReq = reqMember.get("photo");
+
+                holder.btnDetailReqMember.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent_detail = new Intent(activity, DetailRequestMember.class);
+//                        intent_detail.putExtra("foto", strImggPictureReq);
+                        intent_detail.putExtra("nama_member", strNamaReqMember);
+                        intent_detail.putExtra("id_member", strIdReqMember);
+                        intent_detail.putExtra("alamat", strAlamatReqMember);
+                        intent_detail.putExtra("creation", strTanggalReqMember);
+                        intent_detail.putExtra("id", strIdBankSampah);
+                        activity.startActivity(intent_detail);
+                    }
+                });
+
+                holder.tvIdMemberReq.setText(strIdReqMember);
+                holder.tvNamaMemberReq.setText(strNamaReqMember);
+                holder.tvTanggalReqMember.setText(strTanggalReqMember);
+                break;
+            case 11:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_incoming_order_data, parent, false);
+
+                    myDialog = new Dialog(activity);
+
+                    holder = new ViewHolder();
+                    holder.tvJenis_item_incoming_order = vi.findViewById(R.id.tvJenisSampah_IncomingOrder);
+                    holder.tvBeratSampah_incoming_order = vi.findViewById(R.id.tvBeratSampah_IncomingOrder);
+                    holder.tvPoints_incoming_order = vi.findViewById(R.id.tvPoints_IncomingOrder);
+                    vi.setTag(holder);
+                } else {
+                    holder = (ViewHolder) vi.getTag();
+                }
+
+                HashMap<String, String> ListOrderFragment;
+                ListOrderFragment = data.get(position);
+
+
+                final String strJenis_item_incoming_order = ListOrderFragment.get("jenis_item");
+                final String strBeratSampah_incoming_order = ListOrderFragment.get("berat_item");
+                final String strPointSampah_incoming_order = ListOrderFragment.get("harga_per_kilo");
+
+                try {
+                    holder.tvPoints_incoming_order.setText("Point: " + decimalFormat.format(Double.valueOf(strPointSampah_incoming_order)));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    Log.e("tag", e.toString());
+                }
+
+
+//                //Data Picker
+//                if (strStatusOrder != null && strStatusOrder.equalsIgnoreCase("On Process")) {
+//                    strNamaPicker = ListDataOrder.get("nama_picker");
+//                    strNoKendaraan = ListDataOrder.get("no_kendaraan");
+//                    strFotoPicker = ListDataOrder.get("foto_picker");
+//                    strTipeKendaraan = ListDataOrder.get("tipe_kendaraan");
+//                }
+//
+//                final String namaPicker = strNamaPicker;
+//                final String noKendaraan = strNoKendaraan;
+//                final String fotoPicker = strFotoPicker;
+//                final String tipeKendaraan = strTipeKendaraan;
+
+                holder.tvJenis_item_incoming_order.setText(strJenis_item_incoming_order);
+                holder.tvBeratSampah_incoming_order.setText(strBeratSampah_incoming_order);
+                holder.tvPoints_incoming_order.setText(strPointSampah_incoming_order);
+
+
             default:
 
                 break;
         }
         return vi;
+    }
+
+    private void Delete_IncomingOrderLine(final String ID_IncomingOrder, final String ID_OrderLine, final int position) {
+        String[] field_name = {"name", "inc_order", "message"};
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        RequestParams params = new RequestParams();
+        String delete_url;
+
+        final ProgressDialog dialog = new ProgressDialog(activity);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(true);
+        dialog.setMessage("Menghapus Data Terpilih, Harap Menunggu..");
+        dialog.show();
+
+        delete_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.delete_item_order_line";
+        params.put(field_name[0], ID_OrderLine);
+        params.put(field_name[1], ID_IncomingOrder);
+
+        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
+        client.post(delete_url, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                dialog.dismiss();
+                String resp_content = "";
+                resp_content = new String(responseBody, StandardCharsets.UTF_8);
+                try {
+                    viewFromDB(resp_content, position);
+                    Log.e("tag", "sukses");
+                } catch (Throwable t) {
+                    Toasty.error(activity, activity.getString(R.string.MSG_CODE_409) + "1 : " + activity.getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                dialog.dismiss();
+                Toasty.error(activity, activity.getString(R.string.MSG_CODE_500) + " 1 : " + activity.getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     //<---------------------- Fragment Position 3 - Incoming Order ---------------------->
@@ -706,47 +841,32 @@ public class LazyAdapter extends BaseAdapter {
         }
     }
 
-    private void Delete_IncomingOrderLine(final String ID_IncomingOrder, final String ID_OrderLine, final int position) {
-        String[] field_name = {"name", "inc_order", "message"};
-
+    private void getDetailOrderLine(final String strListOrderID) {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         RequestParams params = new RequestParams();
-        String delete_url;
+        String list_detail_order_url;
 
-        final ProgressDialog dialog = new ProgressDialog(activity);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(true);
-        dialog.setMessage("Menghapus Data Terpilih, Harap Menunggu..");
-        dialog.show();
-
-        delete_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.delete_item_order_line";
-        params.put(field_name[0], ID_OrderLine);
-        params.put(field_name[1], ID_IncomingOrder);
+        list_detail_order_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.get_order_line";
+        params.put("id_order", strListOrderID);
 
         client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(delete_url, params, new AsyncHttpResponseHandler() {
+        client.post(list_detail_order_url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                dialog.dismiss();
-                String resp_content = "";
+                String resp_content = null;
+
+                resp_content = new String(responseBody, StandardCharsets.UTF_8);
                 try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    viewFromDB(resp_content, position);
-                    Log.e("tag", "sukses");
+                    displayOrderDetail(resp_content);
                 } catch (Throwable t) {
-                    Toasty.error(activity, activity.getString(R.string.MSG_CODE_409) + "1 : " + activity.getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                    Toasty.error(activity, "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                dialog.dismiss();
-                Toasty.error(activity, activity.getString(R.string.MSG_CODE_500) + " 1 : " + activity.getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
+                Toasty.error(activity, "Periksa Koneksi Anda 1", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -809,36 +929,54 @@ public class LazyAdapter extends BaseAdapter {
         }
     }
 
-    private void getDetailOrderLine(final String strListOrderID) {
+    private void CancelOrder(final String strOrderID, final int position) {
+        String[] field_name = {"id_order", "message"};
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         RequestParams params = new RequestParams();
-        String list_detail_order_url;
+        String cancel_order_url;
 
-        list_detail_order_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.get_order_line";
-        params.put("id_order", strListOrderID);
+        final ProgressDialog dialog = new ProgressDialog(activity);
+        dialog.setMessage("Membatalkan Order, Harap Menunggu...");
+        dialog.show();
+
+        cancel_order_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.cancel_order";
+        params.put(field_name[0], strOrderID);
 
         client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(list_detail_order_url, params, new AsyncHttpResponseHandler() {
+        client.post(cancel_order_url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String resp_content = null;
+                dialog.dismiss();
+                String resp_content = "";
+                resp_content = new String(responseBody, StandardCharsets.UTF_8);
+                try {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setMessage("Berhasil Membatalkan Order Terpilih!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    myDialog.dismiss();
+                                    data.remove(position);
+                                    LazyAdapter.this.notifyDataSetChanged();
+                                    /*Intent a = new Intent(activity, MainActivity.class);
+                                    activity.startActivity(a);
+                                    activity.finish();*/
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
 
-                try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    displayOrderDetail(resp_content);
                 } catch (Throwable t) {
-                    Toasty.error(activity, "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Terjadi Kesalahan, Mohon Periksa Data Kembali 2", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toasty.error(activity, "Periksa Koneksi Anda 1", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                Toast.makeText(activity, activity.getString(R.string.MSG_REQ_FAILED), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -942,86 +1080,6 @@ public class LazyAdapter extends BaseAdapter {
         }
     }
 
-    private void CancelOrder(final String strOrderID, final int position) {
-        String[] field_name = {"id_order", "message"};
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String cancel_order_url;
-
-        final ProgressDialog dialog = new ProgressDialog(activity);
-        dialog.setMessage("Membatalkan Order, Harap Menunggu...");
-        dialog.show();
-
-        cancel_order_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.cancel_order";
-        params.put(field_name[0], strOrderID);
-
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(cancel_order_url, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                dialog.dismiss();
-                String resp_content = "";
-                try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setMessage("Berhasil Membatalkan Order Terpilih!")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    myDialog.dismiss();
-                                    data.remove(position);
-                                    LazyAdapter.this.notifyDataSetChanged();
-                                    /*Intent a = new Intent(activity, MainActivity.class);
-                                    activity.startActivity(a);
-                                    activity.finish();*/
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-
-                } catch (Throwable t) {
-                    Toast.makeText(activity, "Terjadi Kesalahan, Mohon Periksa Data Kembali 2", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                dialog.dismiss();
-                Toast.makeText(activity, activity.getString(R.string.MSG_REQ_FAILED), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-    //<---------------------- Fragment Position 5 - List Order---------------------->
-
-
-    //<---------------------- Fragment Position 6 - Konfirmasi Penjemputan ---------------------->
-    private void showDialog(final String strIDOrder_List, final int Status_PickupTime) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-        alertDialogBuilder.setTitle("Konfirmasi Penjemputan");
-        alertDialogBuilder
-                .setMessage("Jika Anda Yakin, Tekan Tombol 'OK'")
-                .setIcon(R.drawable.ic_logo)
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Update(strIDOrder_List, Status_PickupTime);
-                    }
-                })
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
     private void Update(final String strIDOrder_List, final int Status_PickupTime) {
         String[] field_name = {"id_order", "data_int", "message"};
 
@@ -1044,11 +1102,7 @@ public class LazyAdapter extends BaseAdapter {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 dialog.dismiss();
                 String resp_content = "";
-                try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                resp_content = new String(responseBody, StandardCharsets.UTF_8);
                 try {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     if (Status_PickupTime == 1) {
@@ -1084,6 +1138,30 @@ public class LazyAdapter extends BaseAdapter {
             }
         });
     }
+    //<---------------------- Fragment Position 5 - List Order---------------------->
+
+
+    //<---------------------- Fragment Position 6 - Konfirmasi Penjemputan ---------------------->
+    private void showDialog(final String strIDOrder_List, final int Status_PickupTime) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+        alertDialogBuilder.setTitle("Konfirmasi Penjemputan");
+        alertDialogBuilder
+                .setMessage("Jika Anda Yakin, Tekan Tombol 'OK'")
+                .setIcon(R.drawable.ic_logo)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Update(strIDOrder_List, Status_PickupTime);
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
     private void showPickerDetail(final String strIDOrder_List) {
         final String[] field_name = {"id_order", "message", "no_kendaraan", "tanggal_penjemputan", "waktu_penjemputan",
@@ -1106,11 +1184,7 @@ public class LazyAdapter extends BaseAdapter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String resp_content = "";
-                try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                resp_content = new String(responseBody, StandardCharsets.UTF_8);
                 try {
                     JSONObject jsonObject = new JSONObject(resp_content);
                     JSONArray jsonArray = jsonObject.getJSONArray(field_name[1]);
@@ -1141,6 +1215,80 @@ public class LazyAdapter extends BaseAdapter {
                 Toasty.error(activity, activity.getString(R.string.MSG_CODE_500) + "1 : " + activity.getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    //Testing Holder
+    static class ViewHolder {
+        protected PrefManager session;
+        //Untuk Fragment Position 1 dan 2
+        TextView tvJenisSampah;
+        ImageView imgJenisSampah;
+        //Untuk Fragment Position 3
+        TextView tvJenisSampah_Incoming;
+        TextView tvBeratSampah_Incoming;
+        TextView tvPoints_Incoming;
+        TextView tvTanggal_Incoming;
+        ImageView imgDelete_Incoming;
+        //Untuk Fragment Position 4
+        TextView tvJenisSampah_Summary;
+        TextView tvJumlahKg_Summary;
+        TextView tvJumlahPoints_Summary;
+        TextView tvParentID_Summary;
+        //Untuk Fragment Position 5
+        TextView tvOrderID_List;
+        TextView tvStatusOrder_List;
+        TextView tvTotalKg_List;
+        TextView tvTotalPoints_List;
+        TextView tvAlamat_List;
+        ImageView imgFotoSampah_List;
+        ImageView imgViewDetail;
+        ImageView imgArrowDropDown;
+        ImageView imgArrowUp;
+        Button btnDetail_List;
+        Button btnTelusuri_List;
+        Button btnHide_List;
+        Button btnCancelOrder_List;
+        CardView cdDetail;
+        CardView cdHide;
+        TableRow tblAlamat_List;
+        TableRow tblFoto_List;
+        //Untuk Fragment Position 6
+        TextView tvOrderID_Confirm;
+        TextView tvHari_Confirm;
+        TextView tvTanggal_Confirm;
+        TextView tvJam_Confirm;
+        TextView tvStatus_Confirm;
+        Button btnYes_Confirm;
+        Button btnNo_Confirm;
+        TableRow tblButton_Confirm;
+        //Untuk Fragment Position 7
+        TextView tvOrderID_Picker;
+        TextView tvName_Picker;
+        TextView tvTipeTruck_Picker;
+        TextView tvNopol_Picker;
+        TextView tvDetail_Picker;
+        //Untuk Fragment Position 8
+        TextView tvPoints_Get;
+        TextView tvIDOrder_Get;
+        //Untuk Fragment Position 9
+        ImageView imgPhotoMember;
+        TextView tvNamaMember;
+        TextView tvIdMember;
+        TextView tvPointMember;
+        Button btnDetailListMember;
+        Context ctx;
+
+        //Untuk Fragment Position 10
+        Button btnDetailReqMember;
+        ImageView imgPictureReqMember;
+        TextView tvTanggalReqMember, tvNamaMemberReq, tvIdMemberReq;
+
+        //Untuk Fragment Position 11
+        TextView tvJenis_item_incoming_order;
+        TextView tvBeratSampah_incoming_order;
+        TextView tvPoints_incoming_order;
+
+
     }
     //<---------------------- Fragment Position 6 - Konfirmasi Penjemputan ---------------------->
 

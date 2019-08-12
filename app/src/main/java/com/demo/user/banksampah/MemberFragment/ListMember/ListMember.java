@@ -9,19 +9,36 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
+import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 public class ListMember extends Fragment {
 
@@ -31,6 +48,8 @@ public class ListMember extends Fragment {
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
+    protected String strIDUser;
+    protected Button btDetailListMember;
 
     protected CustomProgress customProgress;
 
@@ -39,6 +58,7 @@ public class ListMember extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     protected LinearLayout linear_ListMember;
     protected ConnectivityManager conMgr;
+    private ArrayList<HashMap<String, String>> data;
 
     protected View rootView;
     protected LazyAdapter adapter;
@@ -55,8 +75,9 @@ public class ListMember extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_list_member, container, false);
-
         session = new PrefManager(getContext());
+        HashMap<String, String> user = session.getUserDetails();
+        strIDUser = user.get(PrefManager.KEY_NAMA);
 
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
@@ -68,12 +89,19 @@ public class ListMember extends Fragment {
         linear_ListMember = rootView.findViewById(R.id.linearLayout_ListMember);
         cd_NoData = rootView.findViewById(R.id.cd_noData);
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
+        btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
+
+        //Intent Ke Detail Member Activity
+
+
 
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
             //Jalanin API
+            getListMember(strIDUser);
+
         } else {
             Snackbar snackbar = Snackbar
                     .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
@@ -89,7 +117,8 @@ public class ListMember extends Fragment {
                     } else {
                         Snackbar snackbar = Snackbar
                                 .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-                        snackbar.show();                    }
+                        snackbar.show();
+                    }
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -108,6 +137,133 @@ public class ListMember extends Fragment {
             }
         });
 
+        if (getActivity() != null) {
+            conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+            getListMember(strIDUser);
+        } else {
+            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            cd_NoConnection.setVisibility(View.VISIBLE);
+            cd_NoData.setVisibility(View.GONE);
+            linear_ListMember.setVisibility(View.GONE);
+
+        }
         return rootView;
+    }
+
+    private void getListMember(final String strIDUser) {
+//        customProgress.showProgress(getContext(), "", false);
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_member");
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                customProgress.hideProgress();
+                Log.d("debug", "Check Login Response: " + response);
+                try {
+                    viewDataMember(response);
+//                    customProgress.hideProgress();
+                } catch (Throwable t) {
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("debug", "Error Check Login Response: " + t.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                Log.d("debug", "Volley Error: " + error.toString());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id_bank_sampah", strIDUser);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+    }
+
+    protected void viewDataMember(String resp_content) {
+        String[] field_name = {"message", "id_member", "nama_member", "point", "no_telepon", "email", "id", "foto"};
+
+        try {
+            JSONObject jsonObject = new JSONObject(resp_content);
+            String message = jsonObject.getString(field_name[0]);
+
+            //if (!message.equalsIgnoreCase("Invalid")) {
+            ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+            JSONArray cast = jsonObject.getJSONArray(field_name[0]);
+            Log.e("tag", String.valueOf(cast.length()));
+
+            for (int i = 0; i < cast.length(); i++) {
+                JSONObject c = cast.getJSONObject(i);
+
+                String id_member = c.getString(field_name[1]);
+                String nama_member = c.getString(field_name[2]);
+                String point = c.getString(field_name[3]);
+                String no_telepon = c.getString(field_name[4]);
+                String email = c.getString(field_name[5]);
+                String id = c.getString(field_name[6]);
+                String foto = c.getString(field_name[7]);
+
+
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put(field_name[1], id_member);
+                map.put(field_name[2], nama_member);
+                map.put(field_name[3], point);
+                map.put(field_name[4], no_telepon);
+                map.put(field_name[5], email);
+                map.put(field_name[6], id);
+                map.put(field_name[7], foto);
+                allOrder.add(map);
+            }
+
+            Log.d("tag", allOrder.toString());
+
+            adapter = new LazyAdapter(getActivity(), allOrder, 9);
+            lvListMember.setAdapter(adapter);
+
+
+            /*} else {
+                //include_FormOrderList.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                linear_listOrder.setVisibility(View.GONE);
+                cd_NoConnection.setVisibility(View.GONE);
+                *//*if (getContext() != null) {
+                    Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+                }*//*
+            }*/
+
+        } catch (JSONException e) {
+            if (getContext() != null) {
+                Toasty.error(getContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+            }
+            Log.e("tag", " 2 :" + e);
+            e.printStackTrace();
+            /*include_FormOrderList.setVisibility(View.GONE);
+            linear_NoData.setVisibility(View.VISIBLE);
+            if(getContext()!=null) {
+                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+            }*/
+        }
     }
 }

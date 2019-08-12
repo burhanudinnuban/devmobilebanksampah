@@ -1,9 +1,9 @@
 package com.demo.user.banksampah.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.Intent;
 
 import com.demo.user.banksampah.Activities.LoginActivity;
 
@@ -79,11 +79,11 @@ public class PrefManager {
         editor.commit();
     }
 
-    public void updateProfil(String nama, String latlong, String alamat, String email){
+    public void updateProfil(String nama, String latlong, String alamat) {
         editor.putString(KEY_NAMA, nama);
         editor.putString(KEY_LATLONG, latlong);
         editor.putString(KEY_ALAMAT, alamat);
-        editor.putString(KEY_EMAIL, email);
+//        editor.putString(KEY_EMAIL, email);
         editor.commit();
     }
 

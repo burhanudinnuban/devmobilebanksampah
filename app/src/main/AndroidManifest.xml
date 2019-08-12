@@ -29,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterActivities.RegisterActivity"></activity>
+        <activity android:name=".MemberFragment.RequestMember.DetailRequestMember"></activity>
+        <activity android:name=".Activities.TambahkanDaftar"></activity>
+        <activity android:name=".RegisterActivities.RegisterActivity" />
         <activity android:name=".MemberFragment.ListMember.RiwayatOrderMemberActivity" />
         <activity android:name=".MemberFragment.ListMember.DetailMemberActivity" />
         <activity android:name=".HereMaps.ResultListActivity" />

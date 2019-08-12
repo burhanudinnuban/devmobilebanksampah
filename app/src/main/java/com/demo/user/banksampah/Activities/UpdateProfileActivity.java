@@ -7,22 +7,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.user.banksampah.Adapter.CustomProgress;
@@ -42,11 +43,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -69,11 +68,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected Bitmap getBitmapPicture;
     protected ByteArrayOutputStream byteArrayOutputStream;
 
+    //Linear Satu
+
     protected CustomProgress customProgress;
 
     //Session Class
     protected PrefManager session;
     protected HashMap<String,String> user;
+
     //Get Data From Login Process
     protected static String getNama = "";
     protected static String getFoto = "";
@@ -88,14 +90,17 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     protected String url_foto;
 
-    protected ImageView imgPinMaps;
-    protected EditText etNamaLengkap, etEmail, etNoHp, etTglLahir, etAlamat;
-    protected TextInputLayout DoB;
+    //Deklarasi Ke Layout
+    protected ImageView imgPinCircle, imgRegister;
+    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat, etPassword, etConfirmPassword, etNamaPengurus, etNoHpPengurus, etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah;
+    protected TextView tvMaps, tvDataPengurus, tvStepOne, tvStepTwo, tvStepThree, tvStatusNoHp, tvDataRekeningBankSampah;
+    protected Button btDaftarkan;
+    protected LinearLayout registerBankSampah, registerPengurus, registerDetailBank;
 
-    protected Button btnUpdate;
 
-    protected String strNamaLengkap_Update, strLatLong_Update, strEmail_Update,
-              strAlamat_Update;
+    protected String strNamaLengkap_Update, strLatLong_Update, strNoHpBankSampah,
+            strAlamat_Update, strEmail_Update, strNamaPengurus, strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua,
+            strNamaDetailBank, strNoRekeningBank, strNamaRekeningBank, strEmailBankSampah;
 
     /*FOR GPS*/
     protected TrackGPS gps;
@@ -131,15 +136,34 @@ public class UpdateProfileActivity extends AppCompatActivity {
         inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         outputDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
-        imgProfil = findViewById(R.id.imgProfil_Update);
-        etNamaLengkap = findViewById(R.id.etNamaLengkap_Update);
-        etEmail = findViewById(R.id.etEmail_Update);
-        etNoHp = findViewById(R.id.etNoHP_Update);
-        etTglLahir = findViewById(R.id.etTanggalLahir_Update);
-        DoB = findViewById(R.id.DateOfBirth);
-        etAlamat = findViewById(R.id.etAlamat_Update);
-        imgPinMaps = findViewById(R.id.imgPinCircle);
-        btnUpdate = findViewById(R.id.btnSimpan_Update);
+        etAlamat = findViewById(R.id.etAlamat);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        etNamaBankSampah = findViewById(R.id.etNamaBankSampah_Register);
+        etNamaDetailBank = findViewById(R.id.etNamaDetailBank_Register);
+        etNamaPengurus = findViewById(R.id.etNamaPengurus_Register);
+        etNamaPengurusDua = findViewById(R.id.etNamaPengurusDua_Register);
+        etNamaRekeningBank = findViewById(R.id.etNamaRekeningBank_Register);
+        etNoHpBankSampah = findViewById(R.id.etNoHpBankSampah_Register);
+        etNoHpPengurus = findViewById(R.id.etNoHpPengurus_Register);
+        etNoHpPengurusDua = findViewById(R.id.etNoHpPengurusDua_Register);
+        etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
+        etPassword = findViewById(R.id.etPassword);
+        etEmailBankSampah = findViewById(R.id.etEmailBankSampah_Register);
+        imgPinCircle = findViewById(R.id.imgPinCircle);
+        imgRegister = findViewById(R.id.imgRegisterPicture);
+        tvDataPengurus = findViewById(R.id.tvDataPengurus);
+        tvDataRekeningBankSampah = findViewById(R.id.tvDataRekeningBankSampah);
+        tvMaps = findViewById(R.id.tvMaps);
+        tvStatusNoHp = findViewById(R.id.tvStatusNoHP);
+        tvStepOne = findViewById(R.id.tvStepOne);
+        tvStepThree = findViewById(R.id.tvStepThree);
+        tvStepTwo = findViewById(R.id.tvStepTwo);
+        registerPengurus = findViewById(R.id.linear_RegisterPengurus);
+        registerBankSampah = findViewById(R.id.linear_RegisterBankSampah);
+        registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
+        btDaftarkan = findViewById(R.id.btDaftarkan);
+
+
 
         //Session Instance
         session = new PrefManager(getApplicationContext());
@@ -150,29 +174,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         getAlamat = user.get(PrefManager.KEY_ALAMAT);
         getEmail = user.get(PrefManager.KEY_EMAIL);
         getID = user.get(PrefManager.KEY_ID);
-        getTglLahir = user.get(PrefManager.KEY_ROLE_USER);
 
-        Log.e("tag", getFoto + "," + getTglLahir);
 
-        try {
-            Date date = inputDateFormat.parse(getTglLahir);
-            dateFixed = outputDateFormat.format(date);
-        }catch (ParseException e){
-            Log.e("tag", String.valueOf(e));
-
-            try {
-                Date date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).parse(getTglLahir);
-                dateFixed = outputDateFormat.format(date);
-            }catch (ParseException a){
-                a.printStackTrace();
-            }
-        }
-
-        etNamaLengkap.setText(getNama);
-        etEmail.setText(getEmail);
-        etNoHp.setText(getNoHP);
+        etNamaBankSampah.setText(getNama);
+        etEmailBankSampah.setText(getEmail);
+        etNoHpBankSampah.setText(getNoHP);
         etAlamat.setText(getAlamat);
-        etTglLahir.setText(dateFixed);
 
         ctd = new CountDownTimer(2000, 1000) {
             @Override
@@ -190,7 +197,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         Picasso.get()
                 .load(url_foto + getFoto)
                 //.error(R.drawable.ic_navigation_profil)
-                .into(imgProfil);
+                .into(imgPinCircle);
 
         //Get Current Location GPS
         getCurrentLocation();
@@ -199,30 +206,24 @@ public class UpdateProfileActivity extends AppCompatActivity {
         dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         dateFormatter_ToDB = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
 
-        DoB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialog();
-            }
-        });
 
-        etTglLahir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialog();
-            }
-        });
+//        etTglLahir.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDateDialog();
+//            }
+//        });
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String date = dayOfMonth + "/" + month + "/" + year;
-                etTglLahir.setText(date);
-            }
-        };
+//        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                month = month + 1;
+//                String date = dayOfMonth + "/" + month + "/" + year;
+//                etTglLahir.setText(date);
+//            }
+//        };
 
-        imgPinMaps.setOnClickListener(new View.OnClickListener() {
+        imgPinCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openMaps = new Intent(getApplicationContext(), OpenMaps.class);
@@ -230,17 +231,95 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
-        imgProfil.setOnClickListener(new View.OnClickListener() {
+        imgRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
             }
         });
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        btDaftarkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validate();
+            }
+        });
+
+        //Steps Hiden Update
+        tvStepOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerBankSampah.setVisibility(View.VISIBLE);
+                registerDetailBank.setVisibility(View.GONE);
+                registerPengurus.setVisibility(View.GONE);
+                tvStepOne.setBackgroundColor(Color.BLUE);
+                tvStepOne.setTextColor(Color.WHITE);
+                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                tvStepOne.setBackgroundResource(R.drawable.rectangle_aktif);
+                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+                btDaftarkan.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        tvStepTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (etNamaBankSampah.getText().toString().length() == 0) {
+                    etNamaBankSampah.setError("Nama Bank Sampah Diperlukan");
+                    etNamaBankSampah.requestFocus();
+                } else if (etEmailBankSampah.getText().toString().length() == 0) {
+                    etEmailBankSampah.setError("Email Bank Sampah Diperlukan");
+                    etEmailBankSampah.requestFocus();
+                } else if (etNoHpBankSampah.getText().toString().length() == 0) {
+                    etNoHpBankSampah.setError("No Hp Bank Sampah Diperlukan");
+                    etNoHpBankSampah.requestFocus();
+                } else if (etAlamat.getText().toString().length() == 0) {
+                    etAlamat.setError("Alamat Bank Sampah Diperlukan");
+                    etAlamat.requestFocus();
+                } else {
+                    registerBankSampah.setVisibility(View.GONE);
+                    registerDetailBank.setVisibility(View.GONE);
+                    registerPengurus.setVisibility(View.VISIBLE);
+                    tvStepTwo.setBackgroundColor(Color.BLUE);
+                    tvStepTwo.setTextColor(Color.WHITE);
+                    tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
+                    tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+                    btDaftarkan.setVisibility(View.INVISIBLE);
+                    tvStepTwo.setClickable(true);
+                }
+
+            }
+        });
+
+        tvStepThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etNamaPengurus.getText().toString().length() == 0) {
+                    etNamaPengurus.setError("Nama Pengurus Diperlukan");
+                    etNamaPengurus.requestFocus();
+                } else if (etNoHpPengurus.getText().toString().length() == 0) {
+                    etNoHpPengurus.setError("No Hp Pengurus Diperlukan");
+                    etNoHpPengurus.requestFocus();
+                } else {
+                    registerBankSampah.setVisibility(View.GONE);
+                    registerDetailBank.setVisibility(View.VISIBLE);
+                    btDaftarkan.setVisibility(View.VISIBLE);
+                    registerPengurus.setVisibility(View.GONE);
+                    tvStepThree.setBackgroundColor(Color.BLUE);
+                    tvStepThree.setTextColor(Color.WHITE);
+                    tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+                    tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
+                    tvStepThree.setClickable(true);
+                }
             }
         });
     }
@@ -258,20 +337,20 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         }
 
-        private void showDateDialog(){
-            Calendar newCalendar = Calendar.getInstance();
-            datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    Calendar newDate = Calendar.getInstance();
-                    newDate.set(year, month,dayOfMonth);
-                    etTglLahir.setText(dateFormatter.format(newDate.getTime()));
-                    getTglLahir = dateFormatter_ToDB.format(newDate.getTime());
-                }
-            }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            datePickerDialog.show();
-        }
+//        private void showDateDialog(){
+//            Calendar newCalendar = Calendar.getInstance();
+//            datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//                @Override
+//                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                    Calendar newDate = Calendar.getInstance();
+//                    newDate.set(year, month,dayOfMonth);
+//                    etTglLahir.setText(dateFormatter.format(newDate.getTime()));
+//                    getTglLahir = dateFormatter_ToDB.format(newDate.getTime());
+//                }
+//            }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+//            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+//            datePickerDialog.show();
+//        }
 
     private void selectImage(){
         final CharSequence[] options = {"Ambil Foto", "Pilih dari Galeri", "Batal"};
@@ -356,10 +435,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                             selectedImage = Bitmap.createScaledBitmap(selectedImage, 300, 400, false);
                             selectedImage = getResizedBitmap(selectedImage, 400);// 400 is for example, replace with desired size
-                            imgProfil.setImageBitmap(selectedImage);
+                            imgRegister.setImageBitmap(selectedImage);
 
                             String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
-                            String name = etNamaLengkap.getText().toString();
+                            String name = etNamaBankSampah.getText().toString();
                             imageFileName = "JPEG_" + name + "_" + timeStamp;
                         }
                     }catch (FileNotFoundException e){
@@ -377,10 +456,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         images = Bitmap.createScaledBitmap(images, 300, 400, false);
                         images = getResizedBitmap(images, 400);
 
-                        imgProfil.setImageBitmap(images);
+                        imgRegister.setImageBitmap(images);
 
                         String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
-                        String name = etNamaLengkap.getText().toString();
+                        String name = etNamaBankSampah.getText().toString();
                         imageFileName = "JPEG_" + name + "_" + timeStamp;
                     }
 
@@ -404,27 +483,39 @@ public class UpdateProfileActivity extends AppCompatActivity {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    private void validate(){
-        strNamaLengkap_Update = etNamaLengkap.getText().toString();
-        strEmail_Update = etEmail.getText().toString();
+    private void validate() {
+        strNamaLengkap_Update = etNamaBankSampah.getText().toString();
+        strEmail_Update = etEmailBankSampah.getText().toString();
+        strNoHpBankSampah = etNoHpBankSampah.getText().toString();
         strAlamat_Update = etAlamat.getText().toString();
+        strNamaPengurus = etNamaPengurus.getText().toString();
+        strNoHpPengurus = etNoHpPengurus.getText().toString();
+        strNamaPengurusDua = etNamaPengurusDua.getText().toString();
+        strNoHpPengurusDua = etNoHpPengurusDua.getText().toString();
+        strNamaDetailBank = etNamaDetailBank.getText().toString();
+        strNoRekeningBank = etNoRekeningBank.getText().toString();
+        strNamaRekeningBank = etNamaRekeningBank.getText().toString();
 
-        if (strNamaLengkap_Update.isEmpty()){
-            etNamaLengkap.setError(getString(R.string.MSG_FULLNAME_EMPTY));
-            etNamaLengkap.requestFocus();
-        }
-        else if (strAlamat_Update.isEmpty()){
-            etAlamat.setError(getString(R.string.MSG_ALAMAT_EMPTY));
-            etAlamat.requestFocus();
-        } else if (imgProfil.getDrawable()!= null && imageFileName != null){
-            UpdateToDB(strNamaLengkap_Update, strEmail_Update, strAlamat_Update);
+        if (etNamaDetailBank.getText().toString().length() == 0) {
+            etNamaDetailBank.setError("Nama Bank Diperlukan");
+            etNamaDetailBank.requestFocus();
+        } else if (etNoRekeningBank.getText().toString().length() == 0) {
+            etNoRekeningBank.setError("No Rekening Bank Diperlukan");
+            etNoRekeningBank.requestFocus();
+        } else if (etNamaRekeningBank.getText().toString().length() == 0) {
+            etNamaRekeningBank.setError("Nama Rekening Bank Sampah");
+            etNamaRekeningBank.requestFocus();
+        } else if (imgRegister.getDrawable() != null && imageFileName != null) {
+            UpdateToDB(strNamaLengkap_Update, strEmail_Update, strNoHpBankSampah, strAlamat_Update, strNamaPengurus, strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua, strNoRekeningBank
+                    , strNamaRekeningBank, strNamaDetailBank);
             uploadImage();
-        }else{
-            UpdateToDB(strNamaLengkap_Update, strEmail_Update, strAlamat_Update);
+        } else {
+            UpdateToDB(strNamaLengkap_Update, strEmail_Update, strNoHpBankSampah, strAlamat_Update, strNamaPengurus, strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua, strNoRekeningBank
+                    , strNamaRekeningBank, strNamaDetailBank);
         }
     }
 
-    private void UpdateToDB(final String namaLengkap, final String email, final String alamat){
+    private void UpdateToDB(final String namaLengkap, final String alamat, final String strNoHpBankSampah, final String strNamaLengkap_Update, final String strEmail_Update, final String strAlamat_Update, final String strNamaPengurus, final String strNoHpPengurus, final String strNamaPengurusDua, final String strNoHpPengurusDua, final String strNoRekeningBank) {
         customProgress.showProgress(this, "", false);
 
         String[]field_name = {"id_user", "nama_lengkap", "email", "tanggal_lahir",
@@ -438,7 +529,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         base_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.change_profile_user";
         params.put(field_name[0], getID);
         params.put(field_name[1], namaLengkap);
-        params.put(field_name[2], email);
+        params.put(field_name[2], strEmail_Update);
         params.put(field_name[3], getTglLahir);
         params.put(field_name[4], alamat);
         params.put(field_name[5], strLatLong_Update);
@@ -448,13 +539,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(final int statusCode, Header[] headers, byte[] responseBody) {
                 customProgress.hideProgress();
+                String resp_content = new String(responseBody, StandardCharsets.UTF_8);
                 try {
-                    String resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strAlamat_Update, strEmail_Update);
+                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strAlamat_Update);
                     Toasty.success(getApplicationContext(), "Data Profil Berhasil Diperbarui.", Toast.LENGTH_SHORT).show();
                     refreshActivity();
                     /*AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
@@ -469,7 +556,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     alert.show();*/
                 } catch (Throwable t) {
                     Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    Log.e("tag", " 1 :" + String.valueOf(t));
+                    Log.e("tag", " 1 :" + t);
                 }
             }
 
@@ -477,7 +564,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 customProgress.hideProgress();
                 Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + " 1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-                Log.e("Tag"," 1: " + String.valueOf(error));
+                Log.e("Tag", " 1: " + error);
             }
         });
     }
@@ -515,20 +602,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String resp_content;
-                try {
-                    resp_content = new String(responseBody, "UTF-8");
-                    Log.e("tag", resp_content);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                    Log.e("tag", String.valueOf(e));
-                }
+                resp_content = new String(responseBody, StandardCharsets.UTF_8);
+                Log.e("tag", resp_content);
                 try {
                     //Cek Lagi Nanti Disini
                     session.updatePictureProfil("/files/" + imageFileName + ".jpg");
                     Toasty.success(getApplicationContext(), "Berhasil Memperbarui Profil Picture", Toast.LENGTH_SHORT).show();
                 } catch (Throwable t) {
                     //Toast.makeText(getContext(), "Terjadi Kesalahan, Mohon Periksa Data Kembali 2", Toast.LENGTH_LONG).show();
-                    Log.e("tag", "Gagal1" + ": " +String.valueOf(t));
+                    Log.e("tag", "Gagal1" + ": " + t);
                 }
             }
 
@@ -554,4 +636,5 @@ public class UpdateProfileActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
 }

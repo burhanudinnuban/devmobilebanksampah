@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/ic_navigation_profil" />
 
     <LinearLayout
+        android:id="@+id/LinearList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -59,6 +60,25 @@
                 android:gravity="center|start|left"
                 android:text="(Point Member)"/>
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@id/LinearList"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btnDetailListMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#64DD17"
+            android:text="Details"
+            android:textColor="#ffffff" />
+
     </LinearLayout>
 
 </RelativeLayout>

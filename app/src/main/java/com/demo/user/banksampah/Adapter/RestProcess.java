@@ -213,6 +213,7 @@ public class RestProcess {
 
         //API Login
         apiErecyle.put("str_api_login", ".login");
+        apiErecyle.put("str_api_change_password", ".change_pass");
 
         //API Register
         apiErecyle.put("str_api_check_phonenumber", ".check_phonenumber");
@@ -225,12 +226,22 @@ public class RestProcess {
         //API Validate OTP
         apiErecyle.put("str_api_validate_otp", ".validate_otp");
 
+        //API Get Member Order
+        apiErecyle.put("str_api_get_member_order", ".get_member_order");
+
         //Token Authorization
         apiErecyle.put("str_header", "Authorization");
         apiErecyle.put("str_token_value", "token a5f866b606775ce:9ce154a207a7716");
 
         //Volley Setting
         apiErecyle.put("str_json_obj", "json_obj_req");
+
+
+        //List Member
+        apiErecyle.put("str_api_list_member", ".list_member_bank_sampah");
+        apiErecyle.put("str_api_list_request_member", ".get_list_request");
+
+
         return apiErecyle;
     }
 
@@ -282,7 +293,7 @@ public class RestProcess {
 
     public String hpImei(Activity activity){
         String identifier = null;
-        Context context = (Context) activity;
+        Context context = activity;
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (tm != null)
             identifier = tm.getDeviceId();
