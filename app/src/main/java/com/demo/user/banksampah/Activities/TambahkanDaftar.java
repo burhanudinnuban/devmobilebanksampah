@@ -1,6 +1,7 @@
 package com.demo.user.banksampah.Activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +17,8 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,16 +28,24 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.demo.user.banksampah.Adapter.CustomProgress;
+import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
+import com.demo.user.banksampah.Firebase.Config;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.RegisterActivities.RegisterActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,6 +53,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -57,6 +69,13 @@ public class TambahkanDaftar extends AppCompatActivity {
     private Spinner sBahan;
     private Button btnTambahkan;
     private LinearLayout parent_layout;
+
+    //An ArrayList for Spinner Items
+    private ArrayList<String> Items;
+
+    //JSON Array
+    private JSONArray result;
+
 
     //Proccess API
     protected RestProcess restClass;
@@ -86,10 +105,14 @@ public class TambahkanDaftar extends AppCompatActivity {
     //Get Data From Login Process
     protected static String getNama = "";
 
+    private Context ctx;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambahkan_daftar);
+
+        this.ctx = ctx;
 
         //Define Id Layout
         imgBahan = findViewById(R.id.imgDaftar_harga);
@@ -113,21 +136,23 @@ public class TambahkanDaftar extends AppCompatActivity {
         user = session.getUserDetails();
         getNama = user.get(PrefManager.KEY_NAMA);
 
+        //Initializing the ArrayList
+        Items = new ArrayList<String>();
         etNamaBahan.setText(getNama);
-
+        sBahan.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) ctx);
         imgBahan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
             }
         });
-
         btnTambahkan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validateData();
             }
         });
+        getData();
     }
 
     private void selectImage() {
@@ -316,8 +341,7 @@ public class TambahkanDaftar extends AppCompatActivity {
 
     protected void SaveToDB(final String strNamaBahan, final String strHargaBahan, final String strSpinner) {
         customProgress.showProgress(this, "", false);
-        final String[] field_name = {"nama_bank_sampah", "jenis_item", "harga"};
-        final String strBahan = sBahan.getSelectedItem().toString();
+        final String[] field_name = {"id_bank_sampah", "jenis_item", "harga"};
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_add_item");
 
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
@@ -408,5 +432,91 @@ public class TambahkanDaftar extends AppCompatActivity {
             android.support.v7.app.AlertDialog alert = builder.create();
             alert.show();
         }
+    }
+
+    private void getData(){
+        //Creating a string request
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,apiData.get("str_url_address")+apiData.get("str_api_list_item"),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("tag", response);
+                        getItem(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+
+                }){
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        //Creating a request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+    }
+
+    private void getItem(String response){
+        String[]field_name = {"message", "jenis_item"};
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+
+            JSONArray cast = jsonObject.getJSONArray(field_name[0]);
+            Log.e("tag", String.valueOf(cast.length()));
+
+            for (int i = 0; i < cast.length(); i++) {
+                JSONObject c = cast.getJSONObject(i);
+
+                String jenis_item= c.getString(field_name[1]);
+
+                Items.add(jenis_item);
+            }
+        } catch (JSONException e) {
+            if (getApplicationContext() != null) {
+                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+            }
+            Log.e("tag", " 2 :" + String.valueOf(e));
+            e.printStackTrace();
+        }
+        //Setting adapter to show the items in the spinner
+        sBahan.setAdapter(new ArrayAdapter<String>(TambahkanDaftar.this, android.R.layout.simple_spinner_dropdown_item, Items));
+    }
+
+
+    /*private void getItem(JSONArray j){
+        //Traversing through all the items in the json array
+        for(int i=0;i<j.length();i++){
+            try {
+                //Getting json object
+                JSONObject json = j.getJSONObject(i);
+
+                //Adding the name of the student to array list
+                Items.add(json.getString("jenis_item"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //Setting adapter to show the items in the spinner
+        sBahan.setAdapter(new ArrayAdapter<String>(TambahkanDaftar.this, android.R.layout.simple_spinner_dropdown_item, Items));
+    }
+*/
+    //this method will execute when we pic an item from the spinner
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //Setting the values to textviews for a selected item
+        sBahan.getSelectedItem().toString();
     }
 }

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.Activities.UpdateListItem;
 import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
 import com.demo.user.banksampah.MemberFragment.RequestMember.DetailRequestMember;
 import com.demo.user.banksampah.R;
@@ -202,6 +203,9 @@ public class LazyAdapter extends BaseAdapter {
         Button btnDetailReqMember;
         ImageView imgPictureReqMember;
         TextView tvTanggalReqMember, tvNamaMemberReq, tvIdMemberReq;
+
+        //Untuk Fragment Position 12
+        TextView tvJenisItem, tvHargaItem, tvDetailItem;
 
 
 
@@ -813,6 +817,45 @@ public class LazyAdapter extends BaseAdapter {
                 holder.tvNamaMemberReq.setText(strNamaReqMember);
                 holder.tvTanggalReqMember.setText(strTanggalReqMember);
 
+                break;
+
+            case 12:
+                if (convertView == null)
+                {
+                    vi = inflater.inflate(R.layout.lv_list_harga_item,parent, false);
+                    holder = new ViewHolder();
+                    holder.tvDetailItem = vi.findViewById(R.id.tvDetailItem);
+                    holder.tvHargaItem = vi.findViewById(R.id.tvHargaItem);
+                    holder.tvJenisItem = vi.findViewById(R.id.tvJenisItem);
+
+                    vi.setTag(holder);
+                }
+                else
+                {
+                    holder = (ViewHolder)vi.getTag();
+                }
+
+                HashMap<String, String> ItemList;
+                ItemList = data.get(position);
+
+                final String strJenisitem = ItemList.get("jenis_item");
+                final String strHargaitem = ItemList.get("harga_per_kilo");
+                final String strBankSampah = ItemList.get("id_bank_sampah");
+                final String strIdItem = ItemList.get("id_item");
+
+                holder.btnDetailReqMember.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent_detail = new Intent(activity, UpdateListItem.class);
+                        intent_detail.putExtra("id_item", strIdItem);
+                        intent_detail.putExtra("id_bank_sampah", strBankSampah);
+                        intent_detail.putExtra("jenis_item", strJenisitem);
+                        intent_detail.putExtra("harga_per_kilo", strHargaitem);
+                        activity.startActivity(intent_detail);
+                    }
+                });
+                holder.tvJenisItem.setText(strJenisitem);
+                holder.tvHargaItem.setText(strHargaitem);
             default:
 
                 break;

@@ -64,7 +64,6 @@
                 android:id="@+id/sBahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/Tipe_Sampah"
                 android:layout_marginBottom="10dp"
                 style="@style/Widget.AppCompat.Spinner.Underlined"></Spinner>
 

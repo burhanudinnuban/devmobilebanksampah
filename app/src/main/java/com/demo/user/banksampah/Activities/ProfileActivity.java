@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected TextView tvNama, tvIDUser;
     protected ImageView imgProfile, imgArrowBack;
-    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga;
+    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga, tvListHarga;
 
     private String url_foto;
 
@@ -60,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvPassword= findViewById(R.id.tvGantiKataSandi);
         tvLogOut = findViewById(R.id.tvLogOut);
         tvDaftarHarga = findViewById(R.id.tvDaftarHarga);
+        tvListHarga = findViewById(R.id.tvListHarga);
 
         //Create myDialog
         myDialog = new Dialog(this);
@@ -76,6 +77,14 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent daftar_harga = new Intent(getApplicationContext(), TambahkanDaftar.class);
                 startActivity(daftar_harga);
+            }
+        });
+
+        tvListHarga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent list_harga = new Intent(getApplicationContext(), ListHargaItem.class);
+                startActivity(list_harga);
             }
         });
 
