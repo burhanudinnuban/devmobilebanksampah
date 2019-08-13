@@ -35,9 +35,11 @@ public class PrefManager {
     public static final String KEY_FOTO = "pref_foto";
     public static final String KEY_ID = "pref_id";
     public static final String KEY_ROLE_USER = "pref_role_user";
+    public static final String KEY_ID_ITEM = "pref_id_item";
+    public static final String KEY_HARGA_ITEM = "pref_harga_item";
+    public static final String KEY_JENIS_ITEM = "pref_jenis_item";
 
     public static final String KEY_TOKEN = "pref_token_firebase";
-
     //private static final String KEY_FRAGMENT = "pref_fragment";
     //private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 

@@ -205,7 +205,7 @@ public class LazyAdapter extends BaseAdapter {
         TextView tvTanggalReqMember, tvNamaMemberReq, tvIdMemberReq;
 
         //Untuk Fragment Position 12
-        TextView tvJenisItem, tvHargaItem, tvDetailItem;
+        TextView tvJenisItem, tvHargaItem, tvDetailItem, tvIdItem;
 
 
 
@@ -828,6 +828,7 @@ public class LazyAdapter extends BaseAdapter {
                     holder.tvHargaItem = vi.findViewById(R.id.tvHargaItem);
                     holder.tvJenisItem = vi.findViewById(R.id.tvJenisItem);
 
+
                     vi.setTag(holder);
                 }
                 else
@@ -843,7 +844,17 @@ public class LazyAdapter extends BaseAdapter {
                 final String strBankSampah = ItemList.get("id_bank_sampah");
                 final String strIdItem = ItemList.get("id_item");
 
-                holder.btnDetailReqMember.setOnClickListener(new View.OnClickListener() {
+                try
+                {
+                    holder.tvHargaItem.setText("Rp " + decimalFormat.format(Double.valueOf(strHargaitem))+"/Kg");
+                }
+
+                catch (NumberFormatException e)
+                {
+                    e.printStackTrace();
+                    Log.e("tag", e.toString());
+                }
+                holder.tvDetailItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent_detail = new Intent(activity, UpdateListItem.class);
@@ -855,7 +866,6 @@ public class LazyAdapter extends BaseAdapter {
                     }
                 });
                 holder.tvJenisItem.setText(strJenisitem);
-                holder.tvHargaItem.setText(strHargaitem);
             default:
 
                 break;

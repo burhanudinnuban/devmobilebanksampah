@@ -1,58 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <android.support.v7.widget.CardView
+    <ImageView
+        android:id="@+id/imgGaris"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="5dp">
-    <LinearLayout
+        app:srcCompat="@android:color/darker_gray" />
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgGaris1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="|"
-            android:layout_margin="5dp"
-            android:visibility="invisible"/>
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/darker_gray"
+            android:layout_marginRight="15dp" />
         <TextView
             android:id="@+id/tvJenisItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Jenis Item"
-            android:layout_margin="5dp"/>
-        <TextView
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:maxLength="15"/>
+        <ImageView
+            android:id="@+id/imgGaris2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="|"
-            android:layout_margin="5dp"
-            android:visibility="invisible"/>
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/darker_gray"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"/>
         <TextView
             android:id="@+id/tvHargaItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/cdBtnDetail"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Harga Item"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="15"
+            android:textSize="12sp" />
+        <ImageView
+            android:id="@+id/imgGaris3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Harga"
-            android:layout_margin="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="|"
-            android:layout_margin="5dp"
-            android:visibility="invisible"/>
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/darker_gray"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"/>
         <TextView
             android:id="@+id/tvDetailItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:textColor="#0081FF"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"/>
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
+            android:textColor="#0083FF"
+            android:drawableRight="@drawable/arrow_right"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+            android:id="@+id/imgGaris9"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/darker_gray"
+            android:layout_marginLeft="15dp"/>
+
+    </TableRow>
+    <ImageView
+        android:id="@+id/imgGaris4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:color/darker_gray" />
 </LinearLayout>

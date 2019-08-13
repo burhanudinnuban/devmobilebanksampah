@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +77,7 @@ public class ListHargaItem extends AppCompatActivity {
         cd_NoData = findViewById(R.id.cd_noData);
         cd_NoConnection = findViewById(R.id.cd_noInternet);
         mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
+
 
         tvHargaItem =findViewById(R.id.tvHargaItem);
         tvJenisItem = findViewById(R.id.tvJenisItem);
@@ -144,7 +146,6 @@ public class ListHargaItem extends AppCompatActivity {
 
     }
     private void getListItem(final String strIDUser){
-//        customProgress.showProgress(getContext(), "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_daftar");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
@@ -153,7 +154,6 @@ public class ListHargaItem extends AppCompatActivity {
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataMember(response);
-//                    customProgress.hideProgress();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(llParent, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
@@ -162,7 +162,6 @@ public class ListHargaItem extends AppCompatActivity {
                 }
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 Snackbar snackbar = Snackbar
@@ -171,7 +170,6 @@ public class ListHargaItem extends AppCompatActivity {
                 Log.d("debug", "Volley Error: " + error.toString());
             }
         }) {
-
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -185,12 +183,9 @@ public class ListHargaItem extends AppCompatActivity {
                 return params;
             }
         };
-
         // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
-
-
 
     protected void viewDataMember(String resp_content){
         String[] field_name = {"message", "id_item", "id_bank_sampah", "jenis_item","harga_per_kilo"};
@@ -227,27 +222,12 @@ public class ListHargaItem extends AppCompatActivity {
             lvHargaItem.setAdapter(adapter);
 
 
-            /*} else {
-                //include_FormOrderList.setVisibility(View.GONE);
-                cd_NoData.setVisibility(View.VISIBLE);
-                linear_listOrder.setVisibility(View.GONE);
-                cd_NoConnection.setVisibility(View.GONE);
-                *//*if (getContext() != null) {
-                    Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-                }*//*
-            }*/
-
         } catch (JSONException e) {
             if (getApplicationContext() != null) {
                 Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
             }
             Log.e("tag", " 2 :" + String.valueOf(e));
             e.printStackTrace();
-            /*include_FormOrderList.setVisibility(View.GONE);
-            linear_NoData.setVisibility(View.VISIBLE);
-            if(getContext()!=null) {
-                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-            }*/
         }
     }
 }

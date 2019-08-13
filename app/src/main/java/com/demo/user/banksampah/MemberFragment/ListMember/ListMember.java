@@ -220,7 +220,6 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
-            String message = jsonObject.getString(field_name[0]);
 
             //if (!message.equalsIgnoreCase("Invalid")) {
                 ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
