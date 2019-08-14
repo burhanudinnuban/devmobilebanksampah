@@ -245,7 +245,7 @@ public class RestProcess {
         apiErecyle.put("str_api_list_item",".get_lestari_item");
         apiErecyle.put("str_api_list_daftar",".get_item");
         apiErecyle.put("str_api_listItem_update",".update_item");
-
+        apiErecyle.put("str_api_pencairan_saldo",".pencairan_saldo");
         return apiErecyle;
     }
 

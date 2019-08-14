@@ -62,7 +62,7 @@
                 android:layout_toLeftOf="@+id/cdBtnDetail"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Harga Item"
+                android:text="Harga Item(/Kg)"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:maxLength="15"

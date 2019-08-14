@@ -97,12 +97,15 @@ public class DetailMemberActivity extends AppCompatActivity {
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra("foto");
         String tvNamaMemberDetail1 = getIntent().getStringExtra("nama_member");
-        String tvPointMemberDetail1 = getIntent().getStringExtra("point");
+        final String tvPointMemberDetail1 = getIntent().getStringExtra("point");
         final String tvIdMemberDetail1 = getIntent().getStringExtra("id_member");
         String tvAlamatMemberDetail1 = getIntent().getStringExtra("alamat");
         String tvNoHpMemberDetail1 = getIntent().getStringExtra("no_telepon");
         String tvStatusMemberDetail1 = getIntent().getStringExtra("id");
         String tvEmailMemberDetail1 = getIntent().getStringExtra("email");
+
+
+
 
         tvNamaMemberDetail.setText(""+tvNamaMemberDetail1);
         tvPointMemberDetail.setText(""+tvPointMemberDetail1);
@@ -134,34 +137,34 @@ public class DetailMemberActivity extends AppCompatActivity {
         imgPencairan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailMemberActivity.this);
-                builder.setTitle("Masukkan Jumlah Uang Yang Ingin Dicairkan");
-
+                final AlertDialog.Builder builder = new AlertDialog.Builder(DetailMemberActivity.this);
                 // Set up the input
                 final EditText input = new EditText(DetailMemberActivity.this);
-                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                builder.setView(input);
+                input.setText(m_Text);
 
+                builder.setTitle("Masukkan Jumlah Uang Yang Ingin Dicairkan")
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the textinput.setInputType(InputType.TYPE_CLASS_TEXT);
+                .setView(input)
                 // Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         m_Text = input.getText().toString();
-                        final String[] field_name = {"id_member","jumlah_withdraw"};
-                        String base_url = apiData.get("str_url_address") + (".delete_member");
+                        final String[] field_name = {"id_member","jumlah_withdraw","id_bank_sampah"};
+                        String base_url = apiData.get("str_url_address") + apiData.get("str_api_pencairan_saldo");
                         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Log.d("DEBUG", "Register Response: " + response);
                                 try {
                                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailMemberActivity.this);
-                                    builder.setMessage(R.string.MS_HAPUS_SUCCESS)
+                                    builder.setMessage(R.string.MS_PENCAIRAN_SALDO)
                                             .setCancelable(false)
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
-                                                    startActivity(changePassword);
+                                                    Intent pencairan = new Intent(getApplicationContext(), MainActivity.class);
+                                                    startActivity(pencairan);
                                                     finish();
                                                 }
                                             });
@@ -180,10 +183,6 @@ public class DetailMemberActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                                customProgress.hideProgress();
-                                Snackbar snackbar = Snackbar
-                                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
-                                snackbar.show();
                             }
                         }) {
                             @Override
@@ -191,7 +190,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                                 Map<String, String> params = new HashMap<>();
                                 params.put(field_name[0], tvIdMemberDetail1);
                                 params.put(field_name[1], m_Text);
-
+                                params.put(field_name[2], strIDUser);
                                 return params;
                             }
 
@@ -211,6 +210,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        dialog.dismiss();
                     }
                 });
                 builder.show();
@@ -220,81 +220,87 @@ public class DetailMemberActivity extends AppCompatActivity {
         imgHapusMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailMemberActivity.this);
-                builder.setTitle("Hapus Member!!!");
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailMemberActivity.this);
+                builder.setMessage(R.string.MS_HAPUS_SUCCESS)
+                        .setCancelable(false)
+                        .setTitle("Konfirmasi Hapus")
+                        .setMessage("Apakah Anda yakin?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                if(tvPointMemberDetail1.equals("0.0")) {
+                                    final String[] field_name = {"id_member"};
+                                    String base_url = apiData.get("str_url_address") + (".delete_member");
+                                    StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Log.d("DEBUG", "Register Response: " + response);
+                                            try {
+                                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailMemberActivity.this);
+                                                builder.setMessage(R.string.MS_HAPUS_SUCCESS)
+                                                        .setCancelable(false)
+                                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int id) {
+                                                                Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                                                startActivity(changePassword);
+                                                                finish();
+                                                            }
+                                                        });
+                                                android.app.AlertDialog alert = builder.create();
+                                                alert.show();
+                                                Log.e("tag", "sukses");
 
-                // Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                final String[] field_name = {"id_member"};
-                String base_url = apiData.get("str_url_address") + (".delete_member");
-                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("DEBUG", "Register Response: " + response);
-                        try {
-                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailMemberActivity.this);
-                            builder.setMessage(R.string.MS_HAPUS_SUCCESS)
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(changePassword);
-                                            finish();
+                                            } catch (Throwable t) {
+                                                Snackbar snackbar = Snackbar
+                                                        .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                                                snackbar.show();
+                                                Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
+                                            }
                                         }
-                                    });
-                            android.app.AlertDialog alert = builder.create();
-                            alert.show();
-                            Log.e("tag", "sukses");
-                        } catch (Throwable t) {
-                            Snackbar snackbar = Snackbar
-                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                            Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                                    }, new Response.ErrorListener() {
 
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                                            customProgress.hideProgress();
+                                            Snackbar snackbar = Snackbar
+                                                    .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                                            snackbar.show();
+                                        }
+                                    }) {
+                                        @Override
+                                        protected Map<String, String> getParams() {
+                                            Map<String, String> params = new HashMap<>();
+                                            params.put(field_name[0], tvIdMemberDetail1);
+
+                                            return params;
+                                        }
+
+                                        @Override
+                                        public Map<String, String> getHeaders() throws AuthFailureError {
+                                            Map<String, String> params = new HashMap<>();
+                                            params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                            return params;
+                                        }
+                                    };
+
+                                    // Adding request to request queue
+                                    VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                                }else{
+                                    Toast.makeText(DetailMemberActivity.this, "Nominal Saldo Masih tersedia.", Toast.LENGTH_SHORT).show();
+                                }
+                                }
+                        })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                        customProgress.hideProgress();
-                        Snackbar snackbar = Snackbar
-                                .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
-                        snackbar.show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<>();
-                        params.put(field_name[0], tvIdMemberDetail1);
-
-                        return params;
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                        return params;
-                    }
-                };
-
-                // Adding request to request queue
-                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-            }
-
-        });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
                 });
+                android.app.AlertDialog alert = builder.create();
+                alert.show();
+                Log.e("tag", "sukses");}
 
-                builder.show();
-            }
+
         });
     }
     public void CreateAlertDialogWithRadioButtonGroup(){

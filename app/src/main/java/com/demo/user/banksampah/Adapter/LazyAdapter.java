@@ -846,7 +846,7 @@ public class LazyAdapter extends BaseAdapter {
 
                 try
                 {
-                    holder.tvHargaItem.setText("Rp " + decimalFormat.format(Double.valueOf(strHargaitem))+"/Kg");
+                    holder.tvHargaItem.setText("Rp " + decimalFormat.format(Double.valueOf(strHargaitem)));
                 }
 
                 catch (NumberFormatException e)

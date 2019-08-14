@@ -8,11 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
-        app:cardElevation="8dp">
+        app:cardElevation="8dp"
+        android:layout_margin="8dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="3dp">
 
     <ImageView
         android:id="@+id/imgPicture_RequestMember"

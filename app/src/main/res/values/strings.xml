@@ -52,6 +52,7 @@
     <string name="MSG_TAMBAH_ITEM">Selamat Harga Item Berhasil Ditambahkan</string>
     <string name="MSG_ACC_MEMBER">Selamat Member Berhasil Ditambahkan</string>
     <string name="MS_HAPUS_SUCCESS">Data Berhasil Dihapus.</string>
+    <string name="MS_PENCAIRAN_SALDO">Menunggu Konfirmasi.</string>
     <string name="MSG_NO_ALREADY_EXIST">Mohon Maaf Nomor Tersebut Sudah Terdaftar</string>
     <string name="MSG_PROCESSING_DATA">Melakukan Validasi Data..</string>
 

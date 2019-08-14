@@ -96,7 +96,6 @@ public class UpdateListItem extends AppCompatActivity {
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                customProgress.hideProgress();
                 Log.d("DEBUG 1", "Update Item Response: " + response);
                 try {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateListItem.this);
@@ -112,6 +111,7 @@ public class UpdateListItem extends AppCompatActivity {
                     android.app.AlertDialog alert = builder.create();
                     alert.show();
                     Log.d("tag", "sukses");
+                    customProgress.hideProgress();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);

@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp"
-        android:layout_margin="10dp">
+        android:layout_margin="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="3dp"
         android:gravity="center">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgPicture_Member"
