@@ -162,7 +162,6 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
                     Log.d("tag1", "error");
                     e.printStackTrace();
                 }
-
             }
 
             @Override

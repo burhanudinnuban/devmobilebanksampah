@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:color/darker_gray" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right"
+            android:visibility="invisible"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="(Tanggal Lahir)"
+            android:textSize="12sp" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:color/darker_gray" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvJenisItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="(Jenis Item)"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:maxLength="15"/>
+
+        <TextView
+            android:id="@+id/tvHargaItem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/cdBtnDetail"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="(Harga Item(/Kg))"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="16"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDetailItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Point)"
+            android:textColor="#0083FF"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
+
+
+    </TableRow>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:color/darker_gray" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Total"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:maxLength="15"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/darker_gray" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/cdBtnDetail"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="(Jumlah Berat)"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:maxLength="16"
+            android:textSize="12sp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@android:color/darker_gray" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Jumlah Point)"
+            android:textColor="#0083FF"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
+
+    </TableRow>
+
+</LinearLayout>

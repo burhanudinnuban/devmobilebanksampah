@@ -1,5 +1,4 @@
 package com.demo.user.banksampah.Adapter;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -205,10 +204,7 @@ public class LazyAdapter extends BaseAdapter {
         TextView tvTanggalReqMember, tvNamaMemberReq, tvIdMemberReq;
 
         //Untuk Fragment Position 12
-        TextView tvJenisItem, tvHargaItem, tvDetailItem, tvIdItem;
-
-
-
+        TextView tvJenisItem, tvHargaItem, tvDetailItem;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -867,6 +863,7 @@ public class LazyAdapter extends BaseAdapter {
                 });
                 holder.tvJenisItem.setText(strJenisitem);
                 break;
+
             case 13:
                 if (convertView == null) {
                     vi = inflater.inflate(R.layout.lv_order_user,parent,false);

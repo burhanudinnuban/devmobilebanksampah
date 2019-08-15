@@ -3,6 +3,7 @@ package com.demo.user.banksampah.MemberFragment.RequestMember;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,131 +95,162 @@ public class DetailRequestMember extends AppCompatActivity {
         btTolakMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String[] field_name = {"id_member", "id_bank_sampah"};
-                String base_url = apiData.get("str_url_address") + apiData.get("str_api_tolak_request_member");
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailRequestMember.this);
 
-                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        customProgress.hideProgress();
-                        Log.d("DEBUG", "Register Response: " + response);
-                        try {
-                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailRequestMember.this);
-                            builder.setMessage(R.string.MSG_REGIST_SUCCESS)
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            Intent DetailReqMember = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(DetailReqMember);
-                                            finish();
+                builder
+                        .setTitle("Tolak Member!!")
+                        .setPositiveButton("Tolak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                final String[] field_name = {"id_member", "id_bank_sampah"};
+                                String base_url = apiData.get("str_url_address") + apiData.get("str_api_tolak_request_member");
+
+                                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        customProgress.hideProgress();
+                                        Log.d("DEBUG", "Register Response: " + response);
+                                        try {
+                                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailRequestMember.this);
+                                            builder
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int id) {
+                                                            Intent DetailReqMember = new Intent(getApplicationContext(), MainActivity.class);
+                                                            startActivity(DetailReqMember);
+                                                            finish();
+                                                        }
+                                                    });
+                                            android.app.AlertDialog alert = builder.create();
+                                            alert.show();
+                                            Log.e("tag", "sukses");
+                                        } catch (Throwable t) {
+                                            Snackbar snackbar = Snackbar
+                                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                                            snackbar.show();
+                                            Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
                                         }
-                                    });
-                            android.app.AlertDialog alert = builder.create();
-                            alert.show();
-                            Log.e("tag", "sukses");
-                        } catch (Throwable t) {
-                            Snackbar snackbar = Snackbar
-                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                            Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                                    }
+                                }, new Response.ErrorListener() {
 
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                                        customProgress.hideProgress();
+                                        Snackbar snackbar = Snackbar
+                                                .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
+                                    }
+                                }) {
+                                    @Override
+                                    protected Map<String, String> getParams() {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put(field_name[0], strIdReqMember);
+                                        params.put(field_name[1], strIdBankSampah1);
+
+                                        return params;
+                                    }
+
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                        return params;
+                                    }
+                                };
+
+                                // Adding request to request queue
+                                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                            }
+                        });
+                builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                        customProgress.hideProgress();
-                        Snackbar snackbar = Snackbar
-                                .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
-                        snackbar.show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
                     }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<>();
-                        params.put(field_name[0], strIdReqMember);
-                        params.put(field_name[1], strIdBankSampah1);
-
-                        return params;
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                        return params;
-                    }
-                };
-
-                // Adding request to request queue
-                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                });
+                builder.show();
             }
         });
 
         btTerimaMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String[] field_name = {"id_member", "id_bank_sampah"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailRequestMember.this);
+                builder
+                        .setTitle("Terima Member")
+                        .setPositiveButton("Terima", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                final String[] field_name = {"id_member", "id_bank_sampah"};
 
-                String base_url = apiData.get("str_url_address") + apiData.get("str_api_acc_request_member");
+                                String base_url = apiData.get("str_url_address") + apiData.get("str_api_acc_request_member");
 
-                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        customProgress.hideProgress();
-                        Log.d("DEBUG", "Register Response: " + response);
-                        try {
-                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailRequestMember.this);
-                            builder.setMessage(R.string.MSG_REGIST_SUCCESS)
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            Intent DetailReqMember = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(DetailReqMember);
-                                            finish();
+                                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        customProgress.hideProgress();
+                                        Log.d("DEBUG", "Register Response: " + response);
+                                        try {
+                                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailRequestMember.this);
+                                            builder.setMessage(R.string.MSG_ACC_MEMBER)
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int id) {
+                                                            Intent DetailReqMember = new Intent(getApplicationContext(), MainActivity.class);
+                                                            startActivity(DetailReqMember);
+                                                            finish();
+                                                        }
+                                                    });
+                                            android.app.AlertDialog alert = builder.create();
+                                            alert.show();
+                                            Log.e("tag", "sukses");
+                                        } catch (Throwable t) {
+                                            Snackbar snackbar = Snackbar
+                                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                                            snackbar.show();
+                                            Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
                                         }
-                                    });
-                            android.app.AlertDialog alert = builder.create();
-                            alert.show();
-                            Log.e("tag", "sukses");
-                        } catch (Throwable t) {
-                            Snackbar snackbar = Snackbar
-                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                            Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                                    }
+                                }, new Response.ErrorListener() {
 
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                                        customProgress.hideProgress();
+                                        Snackbar snackbar = Snackbar
+                                                .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                                        snackbar.show();
+                                    }
+                                }) {
+                                    @Override
+                                    protected Map<String, String> getParams() {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put(field_name[0], strIdReqMember);
+                                        params.put(field_name[1], strIdBankSampah1);
+
+                                        return params;
+                                    }
+
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                        return params;
+                                    }
+                                };
+
+                                // Adding request to request queue
+                                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                            }
+                        });
+                builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                        customProgress.hideProgress();
-                        Snackbar snackbar = Snackbar
-                                .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
-                        snackbar.show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<>();
-                        params.put(field_name[0], strIdReqMember);
-                        params.put(field_name[1], strIdBankSampah1);
-
-                        return params;
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                        return params;
-                    }
-                };
-
-                // Adding request to request queue
-                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                });
+                builder.show();
             }
         });
     }

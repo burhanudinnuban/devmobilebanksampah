@@ -16,11 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-
     private Context _context;
     private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
-
     public ExpandableListAdapter(Context context, List<String> listHeader,
                                  HashMap<String, List<String>> listChildData){
         this._context = context;
@@ -45,7 +43,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         final String childText = (String)getChild(groupPosition, childPosition);
         DecimalFormat decimalFormat = new DecimalFormat(",###.##");
-
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater)this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -67,6 +67,7 @@ public class DetailMemberActivity extends AppCompatActivity {
 
     protected View rootView;
     protected LazyAdapter adapter;
+    protected LazyAdapter adapter1;
     protected ListView lvUserOrder;
 
     protected CardView cd_NoData, cd_NoConnection;
@@ -89,18 +90,18 @@ public class DetailMemberActivity extends AppCompatActivity {
         apiData = rest_class.apiErecycle();
 
         //        Deklarasi dari layout ke aktivity
-        imgDetailMember =findViewById(R.id.imgPicture_DetailMember);
-        imgPencairan =findViewById(R.id.imgPencairan);
-        imgHubungiMember =findViewById(R.id.imgHubungiMember);
-        imgHapusMember =findViewById(R.id.imgHapusMember);
-        imgRiwayatOrder =findViewById(R.id.imgRiwayatOrder);
-        tvNamaMemberDetail =findViewById(R.id.tvNamaMember_DetailMember);
-        tvPointMemberDetail =findViewById(R.id.tvPointMember_DetailMember);
-        tvIdMemberDetail =findViewById(R.id.tvIDMember_DetailMember);
-        tvAlamatMemberDetail =findViewById(R.id.tvAlamatMember_DetailMember);
-        tvNoHpMemberDetail =findViewById(R.id.tvNoHPMember_DetailMember);
-        tvStatusMemberDetail =findViewById(R.id.tvStatusMember_DetailMember);
-        tvEmailMemberDetail =findViewById(R.id.tvEmailMemberDetail);
+        imgDetailMember = findViewById(R.id.imgPicture_DetailMember);
+        imgPencairan = findViewById(R.id.imgPencairan);
+        imgHubungiMember = findViewById(R.id.imgHubungiMember);
+        imgHapusMember = findViewById(R.id.imgHapusMember);
+        imgRiwayatOrder = findViewById(R.id.imgRiwayatOrder);
+        tvNamaMemberDetail = findViewById(R.id.tvNamaMember_DetailMember);
+        tvPointMemberDetail = findViewById(R.id.tvPointMember_DetailMember);
+        tvIdMemberDetail = findViewById(R.id.tvIDMember_DetailMember);
+        tvAlamatMemberDetail = findViewById(R.id.tvAlamatMember_DetailMember);
+        tvNoHpMemberDetail = findViewById(R.id.tvNoHPMember_DetailMember);
+        tvStatusMemberDetail = findViewById(R.id.tvStatusMember_DetailMember);
+        tvEmailMemberDetail = findViewById(R.id.tvEmailMemberDetail);
         lvUserOrder = findViewById(R.id.listView_orderUser);
 
 //        Deklarasi String ke Rest
@@ -114,15 +115,13 @@ public class DetailMemberActivity extends AppCompatActivity {
         String tvEmailMemberDetail1 = getIntent().getStringExtra("email");
 
 
-
-
-        tvNamaMemberDetail.setText(""+tvNamaMemberDetail1);
-        tvPointMemberDetail.setText(""+tvPointMemberDetail1);
-        tvIdMemberDetail.setText(""+tvIdMemberDetail1);
-        tvAlamatMemberDetail.setText(""+tvAlamatMemberDetail1);
-        tvNoHpMemberDetail.setText(""+tvNoHpMemberDetail1);
-        tvStatusMemberDetail.setText(""+tvStatusMemberDetail1);
-        tvEmailMemberDetail.setText(""+tvEmailMemberDetail1);
+        tvNamaMemberDetail.setText("" + tvNamaMemberDetail1);
+        tvPointMemberDetail.setText("" + tvPointMemberDetail1);
+        tvIdMemberDetail.setText("" + tvIdMemberDetail1);
+        tvAlamatMemberDetail.setText("" + tvAlamatMemberDetail1);
+        tvNoHpMemberDetail.setText("" + tvNoHpMemberDetail1);
+        tvStatusMemberDetail.setText("" + tvStatusMemberDetail1);
+        tvEmailMemberDetail.setText("" + tvEmailMemberDetail1);
 
         Picasso.get().load((imgDetailMember1)).into(imgDetailMember);
 
@@ -137,93 +136,102 @@ public class DetailMemberActivity extends AppCompatActivity {
         imgRiwayatOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    customProgress.showProgress(DetailMemberActivity.this, "", false);
-                    final String[] FieldName = {"id_user","id_bank_sampah"};
+                customProgress.showProgress(DetailMemberActivity.this, "", false);
+                final String[] FieldName = {"id_user", "id_bank_sampah"};
 
-                    String base_url = apiData.get("str_url_address") + apiData.get("str_api_history_order_user");
-                    StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
+                String base_url = apiData.get("str_url_address") + apiData.get("str_api_history_order_user");
+                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        customProgress.hideProgress();
+                        Log.d("debug", "Check Login Response: " + response);
+                        try {
+//                                viewOrderUser();
                             customProgress.hideProgress();
-                            Log.d("debug", "Check Login Response: " + response);
-                            try {
-                                viewOrderUser(response);
-                                customProgress.hideProgress();
-                            } catch (Throwable t) {
-                                Snackbar snackbar = Snackbar
-                                        .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                                snackbar.show();
-                                Log.d("debug", "Error Check Login Response: " + t.toString());
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
+                        } catch (Throwable t) {
                             Snackbar snackbar = Snackbar
-                                    .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
                             snackbar.show();
-                            Log.d("debug", "Volley Error: " + error.toString());
+                            Log.d("debug", "Error Check Login Response: " + t.toString());
                         }
-                    }) {
+                    }
+                }, new Response.ErrorListener() {
 
-                        @Override
-                        protected Map<String, String> getParams() {
-                            Map<String, String> params = new HashMap<>();
-                            params.put(FieldName[0], tvIdMemberDetail1);
-                            params.put(FieldName[1], strIDUser);
-                            return params;
-                        }
-                        @Override
-                        public Map<String, String> getHeaders() throws AuthFailureError {
-                            Map<String, String>  params = new HashMap<>();
-                            params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                            return params;
-                        }
-                    };
-                    // Adding request to request queue
-                    VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-                }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Snackbar snackbar = Snackbar
+                                .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        Log.d("debug", "Volley Error: " + error.toString());
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put(FieldName[0], tvIdMemberDetail1);
+                        params.put(FieldName[1], strIDUser);
+                        return params;
+                    }
 
-                protected void viewOrderUser(String resp_content){
-                    String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","foto","alamat"};
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                        return params;
+                    }
+                };
+                // Adding request to request queue
+                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+            }
 
-                    try {
-                        JSONObject jsonObject = new JSONObject(resp_content);
+            protected void viewOrderUser(String resp_content) {
+                String[] field_name = {"message", "nama", "creation", "berat_total", "item_order_history_line","point_total"};
+                String[] field_name1 = {"jenis_item", "point"};
 
-                        //if (!message.equalsIgnoreCase("Invalid")) {
-                        ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
-                        JSONArray cast = jsonObject.getJSONArray(field_name[0]);
-                        Log.e("tag", String.valueOf(cast.length()));
+                try {
+                    JSONObject jsonObject = new JSONObject(resp_content);
+                    ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+                    ArrayList<HashMap<String, String>> allOrder1 = new ArrayList<>();
 
+                    JSONArray cast = jsonObject.getJSONArray(field_name[0]);
+                    JSONArray cast1 = jsonObject.getJSONArray(field_name[4]);
+                    Log.e("tag", String.valueOf(cast.length()));
+                    Log.e("tag", String.valueOf(cast1.length()));
                         for (int i = 0; i < cast.length(); i++) {
                             JSONObject c = cast.getJSONObject(i);
 
-                            String id_member= c.getString(field_name[1]);
-                            String nama_member = c.getString(field_name[2]);
-                            String point = c.getString(field_name[3]);
-                            String no_telepon = c.getString(field_name[4]);
-                            String email = c.getString(field_name[5]);
-                            String foto = c.getString(field_name[6]);
-                            String alamat = c.getString(field_name[7]);
-
+                            String nama_user = c.getString(field_name[1]);
+                            String tanggal_order = c.getString(field_name[2]);
+                            String berat_total = c.getString(field_name[3]);
+                            String point_total = c.getString(field_name[5]);
 
                             HashMap<String, String> map = new HashMap<>();
 
-                            map.put(field_name[1], id_member);
-                            map.put(field_name[2], nama_member);
-                            map.put(field_name[3], point);
-                            map.put(field_name[4], no_telepon);
-                            map.put(field_name[5], email);
-                            map.put(field_name[6], foto);
-                            map.put(field_name[7], alamat);
+                            map.put(field_name[1], nama_user);
+                            map.put(field_name[2], tanggal_order);
+                            map.put(field_name[3], berat_total);
+                            map.put(field_name[5], point_total);
                             allOrder.add(map);
+
+                            for (int x = 0; x< cast1.length(); x++){
+                                JSONObject D = cast1.getJSONObject(x);
+                                String jenis_item = D.getString(field_name1[0]);
+                                String point = D.getString(field_name1[1]);
+                                HashMap<String, String> map1 = new HashMap<>();
+                                map1.put(field_name1[0], jenis_item);
+                                map1.put(field_name1[1],point);
+                                allOrder1.add(map1);
+                            }
                         }
 
-                        Log.d("tag", allOrder.toString());
 
-                        adapter = new LazyAdapter(DetailMemberActivity.this, allOrder, 13);
-                        lvUserOrder.setAdapter(adapter);
+                    Log.d("tag", allOrder.toString());
+                    Log.d("tag", allOrder1.toString());
+
+                    adapter = new LazyAdapter(DetailMemberActivity.this, allOrder,  13);
+                    adapter1 = new LazyAdapter(DetailMemberActivity.this, allOrder1,  14);
+                    lvUserOrder.setAdapter(adapter);
+                    lvUserOrder.setAdapter(adapter1);
 
 
             /*} else {
@@ -236,28 +244,27 @@ public class DetailMemberActivity extends AppCompatActivity {
                 }*//*
             }*/
 
-                    } catch (JSONException e) {
-                        if (DetailMemberActivity.this != null) {
-                            Toasty.error(DetailMemberActivity.this, getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                        }
-                        Log.e("tag", " 2 :" + String.valueOf(e));
-                        e.printStackTrace();
+                } catch (JSONException e) {
+                    if (DetailMemberActivity.this != null) {
+                        Toasty.error(DetailMemberActivity.this, getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                    }
+                    Log.e("tag", " 2 :" + String.valueOf(e));
+                    e.printStackTrace();
             /*include_FormOrderList.setVisibility(View.GONE);
             linear_NoData.setVisibility(View.VISIBLE);
             if(getContext()!=null) {
                 Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
             }*/
-                    }
                 }
+            }
         });
 
         imgHubungiMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreateAlertDialogWithRadioButtonGroup() ;
+                CreateAlertDialogWithRadioButtonGroup();
             }
         });
-
 
 
         imgPencairan.setOnClickListener(new View.OnClickListener() {
@@ -269,69 +276,69 @@ public class DetailMemberActivity extends AppCompatActivity {
                 input.setText(m_Text);
 
                 builder.setTitle("Masukkan Jumlah Uang Yang Ingin Dicairkan")
-                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the textinput.setInputType(InputType.TYPE_CLASS_TEXT);
-                .setView(input)
-                // Set up the buttons
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        m_Text = input.getText().toString();
-                        final String[] field_name = {"id_member","jumlah_withdraw","id_bank_sampah"};
-                        String base_url = apiData.get("str_url_address") + apiData.get("str_api_pencairan_saldo");
-                        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.d("DEBUG", "Register Response: " + response);
-                                try {
-                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailMemberActivity.this);
-                                    builder.setMessage(R.string.MS_PENCAIRAN_SALDO)
-                                            .setCancelable(false)
-                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    Intent pencairan = new Intent(getApplicationContext(), MainActivity.class);
-                                                    startActivity(pencairan);
-                                                    finish();
-                                                }
-                                            });
-                                    android.app.AlertDialog alert = builder.create();
-                                    alert.show();
-                                    Log.e("tag", "sukses");
-                                } catch (Throwable t) {
-                                    Snackbar snackbar = Snackbar
-                                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                                    snackbar.show();
-                                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
-                                }
-                            }
-                        }, new Response.ErrorListener() {
+                        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the textinput.setInputType(InputType.TYPE_CLASS_TEXT);
+                        .setView(input)
+                        // Set up the buttons
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                             @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                            }
-                        }) {
-                            @Override
-                            protected Map<String, String> getParams() {
-                                Map<String, String> params = new HashMap<>();
-                                params.put(field_name[0], tvIdMemberDetail1);
-                                params.put(field_name[1], m_Text);
-                                params.put(field_name[2], strIDUser);
-                                return params;
-                            }
+                            public void onClick(DialogInterface dialog, int which) {
+                                m_Text = input.getText().toString();
+                                final String[] field_name = {"id_member", "jumlah_withdraw", "id_bank_sampah"};
+                                String base_url = apiData.get("str_url_address") + apiData.get("str_api_pencairan_saldo");
+                                StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Log.d("DEBUG", "Register Response: " + response);
+                                        try {
+                                            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(DetailMemberActivity.this);
+                                            builder.setMessage(R.string.MS_PENCAIRAN_SALDO)
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int id) {
+                                                            Intent pencairan = new Intent(getApplicationContext(), MainActivity.class);
+                                                            startActivity(pencairan);
+                                                            finish();
+                                                        }
+                                                    });
+                                            android.app.AlertDialog alert = builder.create();
+                                            alert.show();
+                                            Log.e("tag", "sukses");
+                                        } catch (Throwable t) {
+                                            Snackbar snackbar = Snackbar
+                                                    .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                                            snackbar.show();
+                                            Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
 
-                            @Override
-                            public Map<String, String> getHeaders() throws AuthFailureError {
-                                Map<String, String> params = new HashMap<>();
-                                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                                return params;
-                            }
-                        };
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                                    }
+                                }) {
+                                    @Override
+                                    protected Map<String, String> getParams() {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put(field_name[0], tvIdMemberDetail1);
+                                        params.put(field_name[1], m_Text);
+                                        params.put(field_name[2], strIDUser);
+                                        return params;
+                                    }
 
-                        // Adding request to request queue
-                        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-                    }
-                });
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                        return params;
+                                    }
+                                };
+
+                                // Adding request to request queue
+                                VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                            }
+                        });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -353,7 +360,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                         .setMessage("Apakah Anda yakin?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                if(tvPointMemberDetail1.equals("0.0")) {
+                                if (tvPointMemberDetail1.equals("0.0")) {
                                     final String[] field_name = {"id_member"};
                                     String base_url = apiData.get("str_url_address") + (".delete_member");
                                     StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
@@ -400,7 +407,6 @@ public class DetailMemberActivity extends AppCompatActivity {
 
                                             return params;
                                         }
-
                                         @Override
                                         public Map<String, String> getHeaders() throws AuthFailureError {
                                             Map<String, String> params = new HashMap<>();
@@ -411,26 +417,28 @@ public class DetailMemberActivity extends AppCompatActivity {
 
                                     // Adding request to request queue
                                     VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-                                }else{
+                                } else {
                                     Toast.makeText(DetailMemberActivity.this, "Nominal Saldo Masih tersedia.", Toast.LENGTH_SHORT).show();
                                 }
-                                }
+                            }
                         })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
                 android.app.AlertDialog alert = builder.create();
                 alert.show();
-                Log.e("tag", "sukses");}
+                Log.e("tag", "sukses");
+            }
 
 
         });
     }
-    public void CreateAlertDialogWithRadioButtonGroup(){
-        CharSequence[] values = {" Phone Call "," Message "};
+
+    public void CreateAlertDialogWithRadioButtonGroup() {
+        CharSequence[] values = {" Phone Call ", " Message "};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(DetailMemberActivity.this);
 
@@ -452,15 +460,15 @@ public class DetailMemberActivity extends AppCompatActivity {
                         }
                         break;
                     case 1:
-                        if(!TextUtils.isEmpty(message) && !TextUtils.isEmpty(phoneNo)) {
+                        if (!TextUtils.isEmpty(message) && !TextUtils.isEmpty(phoneNo)) {
                             Intent smsIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNo));
                             smsIntent.putExtra("sms_body", message);
                             startActivity(smsIntent);
                         }
                         break;
-            }
+                }
                 alertDialog1.dismiss();
-        }
+            }
         });
         alertDialog1 = builder.create();
         alertDialog1.show();

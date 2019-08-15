@@ -139,8 +139,6 @@ public class DaftarHargaBankSampah extends AppCompatActivity {
                     for (int b = 0; b < getData.length(); b++){
                         JSONObject getChildData = getData.getJSONObject(b);
 
-//                        data_child = new ArrayList<>();
-
                         String point_per_kg = getChildData.getString(field_name[2]);
                         String jenis_sampah = getChildData.getString(field_name[4]);
                         parent = getChildData.getString(field_name[3]);
