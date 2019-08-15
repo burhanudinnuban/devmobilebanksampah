@@ -21,10 +21,9 @@ import java.util.Map;
 /**
  * Created by anthon on 9/9/2016.
  */
+
 public class RestProcess {
     private HashMap<String,String> gbl_sysMsg;
-
-
     public String extractJson(String response, String activity_str, HashMap<String, String> sysMsg){
         String return_value="";
         String resp_card_number,resp_amount,resp_pts_earned,resp_tx_id,resp_var_message;
@@ -246,6 +245,8 @@ public class RestProcess {
         apiErecyle.put("str_api_list_daftar",".get_item");
         apiErecyle.put("str_api_listItem_update",".update_item");
         apiErecyle.put("str_api_pencairan_saldo",".pencairan_saldo");
+        apiErecyle.put("str_api_history_order_user",".get_history_order");
+        apiErecyle.put("str_api_update_profile",".change_profile");
         return apiErecyle;
     }
 

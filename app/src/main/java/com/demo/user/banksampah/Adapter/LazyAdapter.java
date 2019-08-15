@@ -866,6 +866,15 @@ public class LazyAdapter extends BaseAdapter {
                     }
                 });
                 holder.tvJenisItem.setText(strJenisitem);
+                break;
+            case 13:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_order_user,parent,false);
+                    holder = new ViewHolder();
+                }
+                HashMap<String, String> ListUser;
+                ListUser = data.get(position);
+
             default:
 
                 break;

@@ -9,11 +9,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -52,6 +55,9 @@ public class RequestMember extends Fragment {
 
     private CustomProgress customProgress;
 
+    //if (!message.equalsIgnoreCase("Invalid")) {
+    ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+
     protected LinearLayout parent_layout;
     protected ListView lvListRequestMember;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -64,7 +70,7 @@ public class RequestMember extends Fragment {
 
     protected CardView cd_NoData, cd_NoConnection;
 
-    protected SearchView editsearch;
+    protected AutoCompleteTextView editsearch;
     public static RequestMember newInstance() {
         return new RequestMember();
     }
@@ -90,25 +96,87 @@ public class RequestMember extends Fragment {
         linear_ListRequestMember = rootView.findViewById(R.id.linearLayout_ListRequestMember);
         cd_NoData = rootView.findViewById(R.id.cd_noData);
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
+        editsearch = rootView.findViewById(R.id.etSearchReq);
+
+        editsearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String[] field_name = {"message", "id_member", "alamat", "id", "nama_member", "creation","foto","id_bank_sampah"};
+                /*try {*/
+
+                ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
+
+                Log.e("tag1", allOrderSearch.toString());
+
+                try {
+                    for (int x = 0; x < allOrder.size(); x++) {
+                        JSONObject c = new JSONObject(allOrder.get(x));
+
+                        String idReqMember= c.getString(field_name[1]);
+                        String Alamat = c.getString(field_name[2]);
+                        String idBankSampah = c.getString(field_name[3]);
+                        String namaReqMember = c.getString(field_name[4]);
+                        String tanggalReqMember = c.getString(field_name[5]);
+                        String foto = c.getString(field_name[6]);
+                        String id_bankSampah = c.getString(field_name[7]);
+
+                        if(namaReqMember.toLowerCase().contains(editsearch.getText().toString().toLowerCase())) {
+
+                            HashMap<String, String> map = new HashMap<>();
+
+                            map.put(field_name[1], idReqMember);
+                            map.put(field_name[2], Alamat);
+                            map.put(field_name[3], idBankSampah);
+                            map.put(field_name[4], namaReqMember);
+                            map.put(field_name[5], tanggalReqMember);
+                            map.put(field_name[6], foto);
+                            map.put(field_name[7], id_bankSampah);
+                            allOrderSearch.add(map);
+
+                        }
+                    }
+
+                    Log.d("tag1", allOrderSearch.toString());
+
+                    adapter = new LazyAdapter(getActivity(), allOrderSearch, 10);
+                    lvListRequestMember.setAdapter(adapter);
+                } catch (JSONException e) {
+                    Log.d("tag1", "error");
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
-        if (getActivity() != null)
-            conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            //Jalanin API
-            getListReqMember(strIDUser);
-        } else {
-            Snackbar snackbar = Snackbar
-                    .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
+//        if (getActivity() != null)
+//            conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+//            //Jalanin API
+//            getListReqMember(strIDUser);
+//        } else {
+//            Snackbar snackbar = Snackbar
+//                    .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
+//            snackbar.show();
+//        }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (getActivity() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+                        allOrder.clear();
                         //Jalanin API
                         getListReqMember(strIDUser);
                     } else {
@@ -145,7 +213,6 @@ public class RequestMember extends Fragment {
             cd_NoConnection.setVisibility(View.VISIBLE);
             cd_NoData.setVisibility(View.GONE);
             linear_ListRequestMember.setVisibility(View.GONE);
-
         }
 
         return rootView;
@@ -204,8 +271,7 @@ public class RequestMember extends Fragment {
             JSONObject jsonObject = new JSONObject(resp_content);
             String message = jsonObject.getString(field_name[0]);
 
-            //if (!message.equalsIgnoreCase("Invalid")) {
-            ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+
             JSONArray cast = jsonObject.getJSONArray(field_name[0]);
             Log.e("tag", String.valueOf(cast.length()));
 

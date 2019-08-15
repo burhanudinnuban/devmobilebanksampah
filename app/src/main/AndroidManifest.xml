@@ -29,7 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.UpdateListItem"></activity>
+        <activity android:name=".MemberFragment.ListMember.ListOrderUser"></activity>
+        <activity android:name=".Activities.UpdateListItem" />
         <activity android:name=".Activities.ListHargaItem" />
         <activity android:name=".MemberFragment.RequestMember.DetailRequestMember">
             <meta-data

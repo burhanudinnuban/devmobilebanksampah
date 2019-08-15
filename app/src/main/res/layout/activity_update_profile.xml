@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/ParentUpdateProfile"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -209,58 +211,25 @@
                     </LinearLayout>
 
                 </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <Button
+                        android:id="@+id/btnNext1"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:text="NEXT"
+                        android:background="@drawable/button_blue"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:layout_margin="5dp"/>
 
-                <!--<ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/colorAccent" />-->
-
-                <!--<android.support.design.widget.TextInputLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--app:passwordToggleEnabled="true"-->
-                    <!--app:passwordToggleTint="@color/colorPrimary">-->
-
-                    <!--<android.support.design.widget.TextInputEditText-->
-                        <!--android:id="@+id/etPassword"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:hint="Kata Sandi"-->
-                        <!--android:inputType="text|textPassword"-->
-                        <!--android:textColor="@color/colorLogin"-->
-                        <!--android:textSize="15sp"-->
-                        <!--app:font="@font/sourcesansproregular" />-->
-                <!--</android.support.design.widget.TextInputLayout>-->
-
-                <!--<android.support.design.widget.TextInputLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:layout_marginRight="20dp"-->
-                    <!--app:passwordToggleEnabled="true"-->
-                    <!--app:passwordToggleTint="@color/colorPrimary">-->
-
-                    <!--<android.support.design.widget.TextInputEditText-->
-                        <!--android:id="@+id/etConfirmPassword"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="10dp"-->
-                        <!--android:hint="Konfirmasi Kata Sandi"-->
-                        <!--android:inputType="textPassword"-->
-                        <!--android:textColor="@color/colorLogin"-->
-                        <!--android:textSize="15sp"-->
-                        <!--app:font="@font/sourcesansproregular" />-->
-                <!--</android.support.design.widget.TextInputLayout>-->
-
+                </TableRow>
             </LinearLayout>
 
+            //2
             <LinearLayout
                 android:id="@+id/linear_RegisterPengurus"
                 android:layout_width="match_parent"
@@ -317,6 +286,24 @@
                         app:font="@font/sourcesansproregular" />
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etJabatanPengurus_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Jabatan Pengurus #1"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15dp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -366,8 +353,50 @@
                         android:textSize="15sp"
                         app:font="@font/sourcesansproregular" />
                 </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etJabatanPengurus2_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Jabatan Pengurus #2"
+                        android:inputType="text"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15dp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/btnPrevious2"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
+                    android:text="PREVIOUS"
+                    android:background="@drawable/button_red"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"/>
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/btnNext2"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:text="NEXT"
+                    android:background="@drawable/button_blue"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"/>
             </LinearLayout>
 
+
+            //3
             <LinearLayout
                 android:id="@+id/linear_RegisterDetailBank"
                 android:layout_width="match_parent"
@@ -441,55 +470,38 @@
                         android:textSize="15sp"
                         app:font="@font/sourcesansproregular" />
                 </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/btnPrevious3"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
+                    android:text="PREVIOUS"
+                    android:background="@drawable/button_red"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"/>
 
-                <!--<Button
+                <Button
+                    android:layout_gravity="center"
                     android:id="@+id/btDaftarkan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/ic_btn_default"
-                    android:text="Daftarkan"
+                    android:text=" UPDATE "
                     android:textAllCaps="false"
                     android:textColor="@color/colorBorderWhite"
-                    android:textSize="17sp" />-->
+                    android:textSize="17sp"
+                    android:visibility="gone" />
+
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btDaftarkan"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/ic_btn_default"
-                android:text="Daftarkan"
-                android:textAllCaps="false"
-                android:textColor="@color/colorBorderWhite"
-                android:textSize="17sp"
-                android:visibility="gone" />
-
         </RelativeLayout>
     </ScrollView>
-
-    <!--<Button
-        android:id="@+id/btDaftarkan"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginLeft="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/ic_btn_default"
-        android:text="Daftarkan"
-        android:textAllCaps="false"
-        android:textColor="@color/colorBorderWhite"
-        android:textSize="16sp" />-->
 </RelativeLayout>

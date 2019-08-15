@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,12 +24,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
+import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TrackGPS;
@@ -49,6 +57,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import es.dmoral.toasty.Toasty;
@@ -90,17 +99,19 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     protected String url_foto;
 
+    protected RelativeLayout parent_layout;
     //Deklarasi Ke Layout
     protected ImageView imgPinCircle, imgRegister;
-    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus, etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah;
+    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus,
+            etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah, etJabatanPengurus, etJabatanPengurus2;
     protected TextView tvMaps , tvDataPengurus, tvStepOne, tvStepTwo, tvStepThree, tvStatusNoHp, tvDataRekeningBankSampah;
-    protected Button btDaftarkan;
+    protected Button btDaftarkan, btnNext, btnNext2, btnPrev2, btnPrev3;
     protected LinearLayout registerBankSampah, registerPengurus,registerDetailBank;
 
 
     protected String strNamaLengkap_Update, strLatLong_Update, strNoHpBankSampah,
               strAlamat_Update, strEmail_Update, strNamaPengurus, strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua,
-            strNamaDetailBank, strNoRekeningBank, strNamaRekeningBank, strEmailBankSampah;
+            strNamaDetailBank, strNoRekeningBank, strNamaRekeningBank, strEmailBankSampah, strJabatanPengurus, strJabatanPengurus2;
 
     /*FOR GPS*/
     protected TrackGPS gps;
@@ -149,6 +160,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
         etPassword = findViewById(R.id.etPassword);
         etEmailBankSampah = findViewById(R.id.etEmailBankSampah_Register);
+        etJabatanPengurus = findViewById(R.id.etJabatanPengurus_Register);
+        etJabatanPengurus2 = findViewById(R.id.etJabatanPengurus2_Register);
         imgPinCircle = findViewById(R.id.imgPinCircle);
         imgRegister = findViewById(R.id.imgRegisterPicture);
         tvDataPengurus = findViewById(R.id.tvDataPengurus);
@@ -162,6 +175,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
         registerBankSampah = findViewById(R.id.linear_RegisterBankSampah);
         registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
         btDaftarkan = findViewById(R.id.btDaftarkan);
+        parent_layout = findViewById(R.id.ParentUpdateProfile);
+        btnNext = findViewById(R.id.btnNext1);
+        btnNext2 = findViewById(R.id.btnNext2);
+        btnPrev2 = findViewById(R.id.btnPrevious2);
+        btnPrev3 = findViewById(R.id.btnPrevious3);
 
 
 
@@ -320,7 +338,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     etNoHpPengurus.setError("No Hp Pengurus Diperlukan");
                     etNoHpPengurus.requestFocus();
                 }
-
+                else if(etJabatanPengurus.getText().toString().length()==0)
+                {
+                    etJabatanPengurus.setError("Jabatan Pengurus Diperlukan");
+                    etJabatanPengurus.requestFocus();
+                }
                 else
                     {
                     registerBankSampah.setVisibility(View.GONE);
@@ -507,8 +529,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
         strAlamat_Update = etAlamat.getText().toString();
         strNamaPengurus = etNamaPengurus.getText().toString();
         strNoHpPengurus = etNoHpPengurus.getText().toString();
+        strJabatanPengurus = etJabatanPengurus.getText().toString();
         strNamaPengurusDua = etNamaPengurusDua.getText().toString();
         strNoHpPengurusDua = etNoHpPengurusDua.getText().toString();
+        strJabatanPengurus2 = etJabatanPengurus2.getText().toString();
         strNamaDetailBank = etNamaDetailBank.getText().toString();
         strNoRekeningBank = etNoRekeningBank.getText().toString();
         strNamaRekeningBank = etNamaRekeningBank.getText().toString();
@@ -529,73 +553,203 @@ public class UpdateProfileActivity extends AppCompatActivity {
             etNamaRekeningBank.requestFocus();
         }
         else if (imgRegister.getDrawable()!= null && imageFileName != null){
-            UpdateToDB(strNamaLengkap_Update,strEmail_Update,strNoHpBankSampah, strAlamat_Update, strNamaPengurus,strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua, strNoRekeningBank
-                    ,strNamaRekeningBank, strNamaDetailBank);
+            UpdateProfile();
+            AddPengurus();
+            AddRekeningBank();
             uploadImage();
         }
         else
             {
-            UpdateToDB(strNamaLengkap_Update,strEmail_Update ,strNoHpBankSampah , strAlamat_Update, strNamaPengurus,strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua, strNoRekeningBank
-            ,strNamaRekeningBank, strNamaDetailBank);
+            UpdateProfile();
+            AddPengurus();
+            AddRekeningBank();
             }
     }
 
-    private void UpdateToDB(final String namaLengkap, final String alamat,final String strNoHpBankSampah, final String strNamaLengkap_Update, final String strEmail_Update, final String strAlamat_Update, final String strNamaPengurus, final String strNoHpPengurus, final String strNamaPengurusDua, final String strNoHpPengurusDua, final String strNoRekeningBank){
+    private void UpdateProfile(){
         customProgress.showProgress(this, "", false);
+        final String[] field_name = {"id_bank_sampah", "email", "alamat","jam_operasional","latlong"};
 
-        String[]field_name = {"id_user", "nama_lengkap", "email", "tanggal_lahir",
-                "alamat", "latlong"};
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_update_profile");
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String base_url;
-
-        base_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.change_profile_user";
-        params.put(field_name[0], getID);
-        params.put(field_name[1], namaLengkap);
-        params.put(field_name[2], strEmail_Update);
-        params.put(field_name[3], getTglLahir);
-        params.put(field_name[4], alamat);
-        params.put(field_name[5], strLatLong_Update);
-
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(base_url, params, new AsyncHttpResponseHandler() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
-            public void onSuccess(final int statusCode, Header[] headers, byte[] responseBody) {
+            public void onResponse(String response) {
                 customProgress.hideProgress();
+                Log.d("DEBUG", "Register Response: " + response);
                 try {
-                    String resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strAlamat_Update);
-                    Toasty.success(getApplicationContext(), "Data Profil Berhasil Diperbarui.", Toast.LENGTH_SHORT).show();
-                    refreshActivity();
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(UpdateProfileActivity.this);
-                    builder.setMessage("Selamat! Profil Berhasil Diperbarui.")
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
+                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    refreshActivity();
+                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(changePassword);
+                                    finish();
                                 }
                             });
-                    AlertDialog alert = builder.create();
-                    alert.show();*/
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                    Log.e("tag", "sukses");
                 } catch (Throwable t) {
-                    Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    Log.e("tag", " 1 :" + String.valueOf(t));
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
                 }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], "");
+                return params;
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                customProgress.hideProgress();
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + " 1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-                Log.e("Tag"," 1: " + String.valueOf(error));
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
             }
-        });
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+    }
+
+    private void AddPengurus(){
+        customProgress.showProgress(this, "", false);
+        final String[] field_name = {"no_telepon", "old_pass", "new_pass","message"};
+
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                customProgress.hideProgress();
+                Log.d("DEBUG", "Register Response: " + response);
+                try {
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
+                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(changePassword);
+                                    finish();
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                    Log.e("tag", "sukses");
+                } catch (Throwable t) {
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], "");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+    }
+
+    private void AddRekeningBank(){
+        customProgress.showProgress(this, "", false);
+        final String[] field_name = {"no_telepon", "old_pass", "new_pass","message"};
+
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                customProgress.hideProgress();
+                Log.d("DEBUG", "Register Response: " + response);
+                try {
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
+                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(changePassword);
+                                    finish();
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                    Log.e("tag", "sukses");
+                } catch (Throwable t) {
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], "");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
     private void uploadImage(){

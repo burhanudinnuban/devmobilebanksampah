@@ -39,8 +39,15 @@ import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 public class DetailMemberActivity extends AppCompatActivity {
     //Session Class
@@ -60,6 +67,7 @@ public class DetailMemberActivity extends AppCompatActivity {
 
     protected View rootView;
     protected LazyAdapter adapter;
+    protected ListView lvUserOrder;
 
     protected CardView cd_NoData, cd_NoConnection;
 
@@ -93,6 +101,7 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvNoHpMemberDetail =findViewById(R.id.tvNoHPMember_DetailMember);
         tvStatusMemberDetail =findViewById(R.id.tvStatusMember_DetailMember);
         tvEmailMemberDetail =findViewById(R.id.tvEmailMemberDetail);
+        lvUserOrder = findViewById(R.id.listView_orderUser);
 
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra("foto");
@@ -124,6 +133,123 @@ public class DetailMemberActivity extends AppCompatActivity {
                 .load(url_foto + imgDetailMember1)
                 .error(R.drawable.ic_navigation_profil)
                 .into(imgDetailMember);
+
+        imgRiwayatOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    customProgress.showProgress(DetailMemberActivity.this, "", false);
+                    final String[] FieldName = {"id_user","id_bank_sampah"};
+
+                    String base_url = apiData.get("str_url_address") + apiData.get("str_api_history_order_user");
+                    StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            customProgress.hideProgress();
+                            Log.d("debug", "Check Login Response: " + response);
+                            try {
+                                viewOrderUser(response);
+                                customProgress.hideProgress();
+                            } catch (Throwable t) {
+                                Snackbar snackbar = Snackbar
+                                        .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                                snackbar.show();
+                                Log.d("debug", "Error Check Login Response: " + t.toString());
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Snackbar snackbar = Snackbar
+                                    .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                            snackbar.show();
+                            Log.d("debug", "Volley Error: " + error.toString());
+                        }
+                    }) {
+
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put(FieldName[0], tvIdMemberDetail1);
+                            params.put(FieldName[1], strIDUser);
+                            return params;
+                        }
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String>  params = new HashMap<>();
+                            params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                            return params;
+                        }
+                    };
+                    // Adding request to request queue
+                    VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                }
+
+                protected void viewOrderUser(String resp_content){
+                    String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","foto","alamat"};
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(resp_content);
+
+                        //if (!message.equalsIgnoreCase("Invalid")) {
+                        ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+                        JSONArray cast = jsonObject.getJSONArray(field_name[0]);
+                        Log.e("tag", String.valueOf(cast.length()));
+
+                        for (int i = 0; i < cast.length(); i++) {
+                            JSONObject c = cast.getJSONObject(i);
+
+                            String id_member= c.getString(field_name[1]);
+                            String nama_member = c.getString(field_name[2]);
+                            String point = c.getString(field_name[3]);
+                            String no_telepon = c.getString(field_name[4]);
+                            String email = c.getString(field_name[5]);
+                            String foto = c.getString(field_name[6]);
+                            String alamat = c.getString(field_name[7]);
+
+
+                            HashMap<String, String> map = new HashMap<>();
+
+                            map.put(field_name[1], id_member);
+                            map.put(field_name[2], nama_member);
+                            map.put(field_name[3], point);
+                            map.put(field_name[4], no_telepon);
+                            map.put(field_name[5], email);
+                            map.put(field_name[6], foto);
+                            map.put(field_name[7], alamat);
+                            allOrder.add(map);
+                        }
+
+                        Log.d("tag", allOrder.toString());
+
+                        adapter = new LazyAdapter(DetailMemberActivity.this, allOrder, 13);
+                        lvUserOrder.setAdapter(adapter);
+
+
+            /*} else {
+                //include_FormOrderList.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                linear_listOrder.setVisibility(View.GONE);
+                cd_NoConnection.setVisibility(View.GONE);
+                *//*if (getContext() != null) {
+                    Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+                }*//*
+            }*/
+
+                    } catch (JSONException e) {
+                        if (DetailMemberActivity.this != null) {
+                            Toasty.error(DetailMemberActivity.this, getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                        }
+                        Log.e("tag", " 2 :" + String.valueOf(e));
+                        e.printStackTrace();
+            /*include_FormOrderList.setVisibility(View.GONE);
+            linear_NoData.setVisibility(View.VISIBLE);
+            if(getContext()!=null) {
+                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+            }*/
+                    }
+                }
+        });
 
         imgHubungiMember.setOnClickListener(new View.OnClickListener() {
             @Override

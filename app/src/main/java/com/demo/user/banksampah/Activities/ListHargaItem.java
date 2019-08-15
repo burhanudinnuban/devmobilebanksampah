@@ -7,10 +7,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +48,9 @@ public class ListHargaItem extends AppCompatActivity {
     private LinearLayout llParent, llItem;
     private ListView lvHargaItem;
 
+    //if (!message.equalsIgnoreCase("Invalid")) {
+    ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+
     //Session Class
     protected PrefManager session;
 
@@ -62,6 +68,8 @@ public class ListHargaItem extends AppCompatActivity {
     protected ConnectivityManager conMgr;
 
     protected String strIDUser;
+
+    protected AutoCompleteTextView editSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,21 +92,76 @@ public class ListHargaItem extends AppCompatActivity {
         llParent = findViewById(R.id.parentItem);
         llItem = findViewById(R.id.linearLayout_ListItem);
         lvHargaItem = findViewById(R.id.lvHargaItem);
+        editSearch = findViewById(R.id.etSearchItem);
 
-        //Intent Ke Detail Member Activity
-        if (getApplicationContext() != null)
-            conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected())
-        {
-            //Jalanin API
-            getListItem(strIDUser);
+            }
 
-        } else {
-            Snackbar snackbar = Snackbar
-                    .make(llParent, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                String[] field_name = {"message", "id_item", "id_bank_sampah", "jenis_item","harga_per_kilo"};
+
+                ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
+
+                Log.e("tag1", allOrderSearch.toString());
+
+                try {
+                    for (int x = 0; x < allOrder.size(); x++) {
+                        JSONObject c = new JSONObject(allOrder.get(x));
+
+                        String id_item= c.getString(field_name[1]);
+                        String id_bank_sampah = c.getString(field_name[2]);
+                        String jenis_item = c.getString(field_name[3]);
+                        String harga_per_kilo = c.getString(field_name[4]);
+
+                        if(jenis_item.toLowerCase().contains(editSearch.getText().toString().toLowerCase())) {
+
+                            HashMap<String, String> map = new HashMap<>();
+
+                            map.put(field_name[1], id_item);
+                            map.put(field_name[2], id_bank_sampah);
+                            map.put(field_name[3], jenis_item);
+                            map.put(field_name[4], harga_per_kilo);
+                            allOrderSearch.add(map);
+                        }
+                    }
+
+                    Log.d("tag1", allOrderSearch.toString());
+
+                    adapter = new LazyAdapter(ListHargaItem.this, allOrderSearch, 12);
+                    lvHargaItem.setAdapter(adapter);
+                } catch (JSONException e) {
+                    Log.d("tag1", "error");
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+//        //Intent Ke Detail Member Activity
+//        if (getApplicationContext() != null)
+//            conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected())
+//        {
+//            //Jalanin API
+//            allOrder.clear();
+//            getListItem(strIDUser);
+//
+//        } else {
+//            Snackbar snackbar = Snackbar
+//                    .make(llParent, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
+//            snackbar.show();
+//        }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -106,6 +169,7 @@ public class ListHargaItem extends AppCompatActivity {
                 if (getApplicationContext() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                         //Jalanin API
+                        allOrder.clear();
                         getListItem(strIDUser);
                     } else {
                         Snackbar snackbar = Snackbar
@@ -193,8 +257,7 @@ public class ListHargaItem extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
 
-            //if (!message.equalsIgnoreCase("Invalid")) {
-            ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+
             JSONArray cast = jsonObject.getJSONArray(field_name[0]);
             Log.e("tag", String.valueOf(cast.length()));
 

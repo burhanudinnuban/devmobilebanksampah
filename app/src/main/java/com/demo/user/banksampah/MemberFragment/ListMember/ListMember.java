@@ -10,14 +10,20 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -43,6 +49,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
@@ -55,11 +62,10 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-    private ArrayList<HashMap<String, String>> data;
     protected String strIDUser;
 
     protected CustomProgress customProgress;
-
+    ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
     protected LinearLayout parent_layout;
     protected ListView lvListMember;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -73,8 +79,9 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
 
     protected CardView cd_NoData, cd_NoConnection;
 
-    protected SearchView editsearch;
-
+    protected ImageView imgSearch;
+    private AppCompatAutoCompleteTextView etSearch;
+    String inputSearch;
     public static ListMember newInstance() {
         return new ListMember();
     }
@@ -86,7 +93,7 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
 
         rootView = inflater.inflate(R.layout.fragment_list_member, container, false);
         session = new PrefManager(getContext());
-        HashMap<String, String> user = session.getUserDetails();
+        final HashMap<String, String> user = session.getUserDetails();
         strIDUser = user.get(PrefManager.KEY_NAMA);
 
         this.ctx = ctx;
@@ -102,12 +109,69 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
         btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
 
-        // Locate the EditText in listview_main.xml
-        editsearch = rootView.findViewById(R.id.simpleSearchView);
-        editsearch.setOnQueryTextListener(this);
+        imgSearch = rootView.findViewById(R.id.imgSearch);
+        etSearch = rootView.findViewById(R.id.etSearch);
 
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        //Intent Ke Detail Member Activity
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","foto","alamat"};
+
+                    ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
+
+                    Log.e("tag1", allOrderSearch.toString());
+
+                try {
+                    for (int x = 0; x < allOrder.size(); x++) {
+                        JSONObject c = new JSONObject(allOrder.get(x));
+
+                        String id_member = c.getString(field_name[1]);
+                        String nama_member = c.getString(field_name[2]);
+                        String point = c.getString(field_name[3]);
+                        String no_telepon = c.getString(field_name[4]);
+                        String email = c.getString(field_name[5]);
+                        String foto = c.getString(field_name[6]);
+                        String alamat = c.getString(field_name[7]);
+
+                        if(nama_member.toLowerCase().contains(etSearch.getText().toString().toLowerCase())) {
+
+                            HashMap<String, String> map = new HashMap<>();
+
+                            map.put(field_name[1], id_member);
+                            map.put(field_name[2], nama_member);
+                            map.put(field_name[3], point);
+                            map.put(field_name[4], no_telepon);
+                            map.put(field_name[5], email);
+                            map.put(field_name[6], foto);
+                            map.put(field_name[7], alamat);
+                            allOrderSearch.add(map);
+                        }
+                    }
+
+                    Log.d("tag1", allOrderSearch.toString());
+
+                    adapter = new LazyAdapter(getActivity(), allOrderSearch, 9);
+                    lvListMember.setAdapter(adapter);
+                } catch (JSONException e) {
+                    Log.d("tag1", "error");
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        /*//Intent Ke Detail Member Activity
         if (getActivity() != null)
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -120,7 +184,7 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             Snackbar snackbar = Snackbar
                     .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
             snackbar.show();
-        }
+        }*/
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -128,6 +192,7 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
                 if (getActivity() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                         //Jalanin API
+                        allOrder.clear();
                         getListMember(strIDUser);
                     } else {
                         Snackbar snackbar = Snackbar
@@ -174,11 +239,11 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                customProgress.hideProgress();
+//                customProgress.hideProgress();
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataMember(response);
-//                    customProgress.hideProgress();
+
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
@@ -190,6 +255,7 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
 
             @Override
             public void onErrorResponse(VolleyError error) {
+//                customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
                         .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
                 snackbar.show();
@@ -222,9 +288,9 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             JSONObject jsonObject = new JSONObject(resp_content);
 
             //if (!message.equalsIgnoreCase("Invalid")) {
-                ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+
                 JSONArray cast = jsonObject.getJSONArray(field_name[0]);
-                Log.e("tag", String.valueOf(cast.length()));
+                Log.e("tag_cast", String.valueOf(cast.length()));
 
                 for (int i = 0; i < cast.length(); i++) {
                     JSONObject c = cast.getJSONObject(i);
@@ -250,21 +316,10 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
                     allOrder.add(map);
                 }
 
-                Log.d("tag", allOrder.toString());
+                Log.d("tag_allorder", allOrder.toString());
 
                 adapter = new LazyAdapter(getActivity(), allOrder, 9);
                 lvListMember.setAdapter(adapter);
-
-
-            /*} else {
-                //include_FormOrderList.setVisibility(View.GONE);
-                cd_NoData.setVisibility(View.VISIBLE);
-                linear_listOrder.setVisibility(View.GONE);
-                cd_NoConnection.setVisibility(View.GONE);
-                *//*if (getContext() != null) {
-                    Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-                }*//*
-            }*/
 
         } catch (JSONException e) {
             if (getContext() != null) {
@@ -283,9 +338,20 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
         return false;
     }
 
-
     public boolean onQueryTextChange(String newText) {
         String text = newText;
         return false;
     }
+
+    private void initView() {
+        registerForContextMenu(lvListMember);
+    }
+
+//    private void loadData() {
+//        PrefManager prefManager = new PrefManager(getContext());
+//        List<> pre
+//        if (strIDUser != null) {
+//            lvListMember.setAdapter(new LazyAdapter(getContext(), ));
+//        }
+//    }
 }

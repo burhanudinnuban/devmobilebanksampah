@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent"
+    android:id="@+id/parentUser"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,25 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
+        <SearchView
+            android:id="@+id/simpleSearchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <AutoCompleteTextView
-                android:id="@+id/etSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:hint="Cari Disini"/>
-            <ImageView
-                android:id="@+id/imgSearch"
-                android:layout_weight="1.8"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_search"/>
-        </LinearLayout>
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Here" />
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
@@ -40,7 +27,7 @@
             android:layout_marginEnd="15dp">
 
             <ListView
-                android:id="@+id/listView_Member"
+                android:id="@+id/listView_orderUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@null"
