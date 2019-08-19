@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvAlamatBankSampah"
-        android:layout_marginTop="10dp"
+        android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/border_rectangle" />
+        android:background="@drawable/ic_background_2" />
 </RelativeLayout>

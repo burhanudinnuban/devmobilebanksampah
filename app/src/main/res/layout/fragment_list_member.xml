@@ -15,20 +15,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:weightSum="2">
+
             <AutoCompleteTextView
                 android:id="@+id/etSearch"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:hint="Cari Disini"/>
+                android:drawableLeft="@drawable/ic_search1"
+                android:drawablePadding="5dp"
+                android:hint="Cari Disini"
+                android:layout_marginLeft="10dp"/>
+
             <ImageView
-                android:id="@+id/imgSearch"
-                android:layout_weight="1.8"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_search"/>
+                android:id="@+id/imgScanMemberReg"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:background="@drawable/scanlogo"
+                android:layout_marginEnd="10dp"/>
+
         </LinearLayout>
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"

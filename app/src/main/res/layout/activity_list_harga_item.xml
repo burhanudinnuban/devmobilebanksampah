@@ -16,19 +16,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
+
             <AutoCompleteTextView
+                android:drawableLeft="@drawable/ic_search1"
+                android:drawablePadding="5dp"
                 android:id="@+id/etSearchItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:layout_marginLeft="10dp"
-                android:hint="Cari Disini"/>
-            <ImageView
-                android:id="@+id/imgSearch"
-                android:layout_weight="1.8"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_search"/>
+                android:hint="Cari Disini" />
+
         </LinearLayout>
         <ImageView
             android:id="@+id/imgGaris4"

@@ -109,8 +109,8 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
         cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
         btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
 
-        imgSearch = rootView.findViewById(R.id.imgSearch);
         etSearch = rootView.findViewById(R.id.etSearch);
+
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override

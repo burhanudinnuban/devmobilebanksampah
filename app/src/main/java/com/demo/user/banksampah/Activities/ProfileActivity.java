@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected TextView tvNama, tvIDUser;
     protected ImageView imgProfile, imgArrowBack;
-    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga, tvListHarga;
+    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga, tvListHarga, tvAddPengurus, tvAddRekBank;
 
     private String url_foto;
 
@@ -61,6 +61,22 @@ public class ProfileActivity extends AppCompatActivity {
         tvLogOut = findViewById(R.id.tvLogOut);
         tvDaftarHarga = findViewById(R.id.tvDaftarHarga);
         tvListHarga = findViewById(R.id.tvListHarga);
+        tvAddPengurus = findViewById(R.id.tvAddPengurus);
+        tvAddRekBank = findViewById(R.id.tvAddRekBank);
+
+        tvAddPengurus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        tvAddRekBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         //Create myDialog
         myDialog = new Dialog(this);

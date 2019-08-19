@@ -106,12 +106,8 @@ dependencies {
     //Here Maps
     implementation(name: 'HERE-sdk', ext: 'aar')
 
-    // universal image loader
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-
-    // circular image view library
-    implementation 'de.hdodenhof:circleimageview:3.0.0'
-
+    implementation 'com.google.android.gms:play-services-places:11.8.0'
+    implementation 'com.google.android.gms:play-services-location:11.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

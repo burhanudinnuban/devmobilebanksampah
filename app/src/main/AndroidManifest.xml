@@ -29,7 +29,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MemberFragment.ListMember.ListOrderUser"></activity>
+        <activity android:name=".GoogleMaps.PlaceAutoCompleteActivity"></activity>
+        <activity android:name=".MemberFragment.ListMember.ListOrderUser" />
         <activity android:name=".Activities.UpdateListItem" />
         <activity android:name=".Activities.ListHargaItem" />
         <activity android:name=".MemberFragment.RequestMember.DetailRequestMember">
@@ -58,7 +59,6 @@
         <activity android:name=".BankSampahActivities.DaftarHargaBankSampah" />
         <activity android:name=".BankSampahActivities.CariBankSampah" />
         <activity android:name=".MapsActivities.PickupDetailActivity" />
-        <activity android:name=".MapsActivities.PickupActivity" />
         <activity
             android:name=".NotificationActivities.RiwayatOrder"
             android:configChanges="orientation"

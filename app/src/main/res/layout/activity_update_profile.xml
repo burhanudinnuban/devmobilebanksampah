@@ -9,65 +9,64 @@
     android:background="@color/colorBorderWhite"
     tools:context=".Activities.UpdateProfileActivity">
 
-    <RelativeLayout
-        android:id="@+id/timeline_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_margin="15dp">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/timeline_register"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_margin="15dp">-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="25sp"
-            android:background="@color/colorPrimary" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="5dp"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginTop="25sp"-->
+            <!--android:background="@color/colorPrimary" />-->
 
-        <TextView
-            android:id="@+id/tvStepOne"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/rectangle_aktif"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="1"
-            android:textColor="#ffffff"
-            android:textSize="25sp"/>
+        <!--<TextView-->
+            <!--android:id="@+id/tvStepOne"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:background="@drawable/rectangle_aktif"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="1"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="25sp"/>-->
 
-        <TextView
-            android:id="@+id/tvStepTwo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/rectangle_non"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="2"
-            android:textColor="@color/colorPrimary"
-            android:textSize="25sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvStepTwo"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:background="@drawable/rectangle_non"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="2"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="25sp" />-->
 
-        <TextView
-            android:id="@+id/tvStepThree"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/rectangle_non"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="3"
-            android:textColor="@color/colorPrimary"
-            android:textSize="25sp" />
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/tvStepThree"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:background="@drawable/rectangle_non"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="3"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="25sp" />-->
+    <!--</RelativeLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/timeline_register"
         android:fillViewport="true">
 
         <RelativeLayout
@@ -92,20 +91,38 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginBottom="15dp"
+                    android:gravity="center"
                     android:text="Data Bank Sampah"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     android:visibility="visible" />
 
-                <ImageView
-                    android:id="@+id/imgRegisterPicture"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                <RelativeLayout
+                    android:id="@+id/relative_foto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/ic_camera_16_dp" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="15dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgRegisterPicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/border_rectangle"/>
+
+                    <ImageView
+                        android:id="@+id/imgAdd"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_add_circle_16_dp" />
+                </RelativeLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -119,6 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:hint="Nama Unit Bank Sampah"
+                        android:screenReaderFocusable="true"
                         android:inputType="text"
                         android:textColor="@color/colorLogin"
                         android:textSize="15sp"
@@ -156,6 +174,24 @@
                         android:layout_marginBottom="10dp"
                         android:hint="Nomor Telepon"
                         android:inputType="number"
+                        android:textColor="@color/colorLogin"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/etJaOperasional_Register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Jam Operasional"
+                        android:inputType="text"
                         android:textColor="@color/colorLogin"
                         android:textSize="15sp"
                         app:font="@font/sourcesansproregular" />
@@ -204,304 +240,37 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="View Maps"
+                            android:text="Choose Location"
                             android:textColor="@color/colorAccent"
                             android:textSize="9sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                 </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+
                     <Button
-                        android:id="@+id/btnNext1"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:text="NEXT"
-                        android:background="@drawable/button_blue"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:textColor="#fff"
-                        android:layout_margin="5dp"/>
-
-                </TableRow>
-            </LinearLayout>
-
-            //2
-            <LinearLayout
-                android:id="@+id/linear_RegisterPengurus"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/tvDataPengurus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="Data Pengurus"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNamaPengurus_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nama Pengurus #1"
-                        android:inputType="text"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15sp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNoHpPengurus_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nomor Telepon Pengurus #1"
-                        android:inputType="number"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15dp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etJabatanPengurus_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Jabatan Pengurus #1"
-                        android:inputType="text"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15dp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/colorAccent"
-                    android:visibility="gone" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNamaPengurusDua_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nama Pengurus #2"
-                        android:inputType="text"
-                        android:textColor="@color/colorLogin"
-                        android:textColorHighlight="@color/colorCardDS"
-                        android:textColorLink="@color/colorCardDS"
-                        android:textCursorDrawable="@color/colorCardDS"
-                        android:textSize="15sp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNoHpPengurusDua_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nomor Telepon Pengurus #2"
-                        android:inputType="number"
-                        android:textColor="@color/colorLogin"
-                        android:textColorHighlight="@color/colorCardDS"
-                        android:textColorLink="@color/colorCardDS"
-                        android:textCursorDrawable="@color/colorCardDS"
-                        android:textSize="15sp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etJabatanPengurus2_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Jabatan Pengurus #2"
-                        android:inputType="text"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15dp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_gravity="center"
+                        android:id="@+id/btUpdatebankSampah"
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/ic_btn_default"
+                        android:text=" UPDATE "
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorBorderWhite"
+                        android:textSize="17sp" />
                 <Button
-                    android:layout_gravity="center"
-                    android:id="@+id/btnPrevious2"
-                    android:layout_width="75dp"
-                    android:layout_height="30dp"
-                    android:text="PREVIOUS"
-                    android:background="@drawable/button_red"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:layout_margin="5dp"/>
-                <Button
-                    android:layout_gravity="center"
-                    android:id="@+id/btnNext2"
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
-                    android:text="NEXT"
-                    android:background="@drawable/button_blue"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:layout_margin="5dp"/>
-            </LinearLayout>
-
-
-            //3
-            <LinearLayout
-                android:id="@+id/linear_RegisterDetailBank"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/tvDataRekeningBankSampah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="Data Rekening Bank Sampah"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNamaDetailBank_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nama Bank"
-                        android:inputType="text"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15sp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNoRekeningBank_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nomor Rekening Bank Sampah"
-                        android:inputType="number"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15sp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/etNamaRekeningBank_Register"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:hint="Nama Rekening"
-                        android:inputType="text"
-                        android:textColor="@color/colorLogin"
-                        android:textSize="15sp"
-                        app:font="@font/sourcesansproregular" />
-                </android.support.design.widget.TextInputLayout>
-                <Button
-                    android:layout_gravity="center"
-                    android:id="@+id/btnPrevious3"
-                    android:layout_width="75dp"
-                    android:layout_height="30dp"
-                    android:text="PREVIOUS"
-                    android:background="@drawable/button_red"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:layout_margin="5dp"/>
-
-                <Button
-                    android:layout_gravity="center"
-                    android:id="@+id/btDaftarkan"
-                    android:layout_width="80dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="50dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/ic_btn_default"
-                    android:text=" UPDATE "
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorBorderWhite"
-                    android:textSize="17sp"
-                    android:visibility="gone" />
+                    android:onClick="openAutoPlace"
+                    android:text="Place Auto Complete"/>
 
 
             </LinearLayout>
-
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

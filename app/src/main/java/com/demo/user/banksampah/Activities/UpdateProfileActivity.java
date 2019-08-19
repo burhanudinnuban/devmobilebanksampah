@@ -1,22 +1,25 @@
 package com.demo.user.banksampah.Activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -38,12 +41,10 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
+
+import com.demo.user.banksampah.GoogleMaps.PlaceAutoCompleteActivity;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TrackGPS;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.MySSLSocketFactory;
-import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -51,15 +52,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import cz.msebera.android.httpclient.Header;
 import es.dmoral.toasty.Toasty;
 
 public class UpdateProfileActivity extends AppCompatActivity {
@@ -67,6 +67,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String,String> apiData;
+
+    protected ArrayList<HashMap<String, String>> arrayValidateOTP = new ArrayList<>();
 
     //Untuk DatePicker
     protected DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -93,6 +95,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     protected static String getNoHP = "";
     protected static String getAlamat = "";
     protected static String getEmail = "";
+    protected static String getLatLong = "";
+    protected static String getJamOperasional = "";
 
     @SuppressLint("StaticFieldLeak")
     protected static ImageView imgProfil;
@@ -101,8 +105,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     protected RelativeLayout parent_layout;
     //Deklarasi Ke Layout
-    protected ImageView imgPinCircle, imgRegister;
-    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus,
+    protected ImageView imgPinCircle, imgRegister, imgAdd;
+    protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus, etJamOperasional, etLatLong,
             etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah, etJabatanPengurus, etJabatanPengurus2;
     protected TextView tvMaps , tvDataPengurus, tvStepOne, tvStepTwo, tvStepThree, tvStatusNoHp, tvDataRekeningBankSampah;
     protected Button btDaftarkan, btnNext, btnNext2, btnPrev2, btnPrev3;
@@ -111,7 +115,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     protected String strNamaLengkap_Update, strLatLong_Update, strNoHpBankSampah,
               strAlamat_Update, strEmail_Update, strNamaPengurus, strNoHpPengurus, strNamaPengurusDua, strNoHpPengurusDua,
-            strNamaDetailBank, strNoRekeningBank, strNamaRekeningBank, strEmailBankSampah, strJabatanPengurus, strJabatanPengurus2;
+            strNamaDetailBank, strNoRekeningBank, strNamaRekeningBank, strEmailBankSampah, strJabatanPengurus, strJabatanPengurus2, strJamOperasional, strLatLong;
 
     /*FOR GPS*/
     protected TrackGPS gps;
@@ -150,38 +154,60 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etAlamat = findViewById(R.id.etAlamat);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         etNamaBankSampah = findViewById(R.id.etNamaBankSampah_Register);
-        etNamaDetailBank = findViewById(R.id.etNamaDetailBank_Register);
-        etNamaPengurus = findViewById(R.id.etNamaPengurus_Register);
-        etNamaPengurusDua = findViewById(R.id.etNamaPengurusDua_Register);
-        etNamaRekeningBank = findViewById(R.id.etNamaRekeningBank_Register);
+//        etNamaDetailBank = findViewById(R.id.etNamaDetailBank_Register);
+//        etNamaPengurus = findViewById(R.id.etNamaPengurus_Register);
+//        etNamaPengurusDua = findViewById(R.id.etNamaPengurusDua_Register);
+//        etNamaRekeningBank = findViewById(R.id.etNamaRekeningBank_Register);
         etNoHpBankSampah = findViewById(R.id.etNoHpBankSampah_Register);
-        etNoHpPengurus = findViewById(R.id.etNoHpPengurus_Register);
-        etNoHpPengurusDua = findViewById(R.id.etNoHpPengurusDua_Register);
-        etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
+//        etNoHpPengurus = findViewById(R.id.etNoHpPengurus_Register);
+//        etNoHpPengurusDua = findViewById(R.id.etNoHpPengurusDua_Register);
+//        etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
         etPassword = findViewById(R.id.etPassword);
         etEmailBankSampah = findViewById(R.id.etEmailBankSampah_Register);
-        etJabatanPengurus = findViewById(R.id.etJabatanPengurus_Register);
-        etJabatanPengurus2 = findViewById(R.id.etJabatanPengurus2_Register);
+//        etJabatanPengurus = findViewById(R.id.etJabatanPengurus_Register);
+//        etJabatanPengurus2 = findViewById(R.id.etJabatanPengurus2_Register);
         imgPinCircle = findViewById(R.id.imgPinCircle);
         imgRegister = findViewById(R.id.imgRegisterPicture);
-        tvDataPengurus = findViewById(R.id.tvDataPengurus);
-        tvDataRekeningBankSampah = findViewById(R.id.tvDataRekeningBankSampah);
+//        tvDataPengurus = findViewById(R.id.tvDataPengurus);
+//        tvDataRekeningBankSampah = findViewById(R.id.tvDataRekeningBankSampah);
         tvMaps = findViewById(R.id.tvMaps);
         tvStatusNoHp= findViewById(R.id.tvStatusNoHP);
-        tvStepOne= findViewById(R.id.tvStepOne);
-        tvStepThree = findViewById(R.id.tvStepThree);
-        tvStepTwo = findViewById(R.id.tvStepTwo);
-        registerPengurus = findViewById(R.id.linear_RegisterPengurus);
+//        tvStepOne= findViewById(R.id.tvStepOne);
+//        tvStepThree = findViewById(R.id.tvStepThree);
+//        tvStepTwo = findViewById(R.id.tvStepTwo);
+//        registerPengurus = findViewById(R.id.linear_RegisterPengurus);
         registerBankSampah = findViewById(R.id.linear_RegisterBankSampah);
-        registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
-        btDaftarkan = findViewById(R.id.btDaftarkan);
+//        registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
+        btDaftarkan = findViewById(R.id.btUpdatebankSampah);
         parent_layout = findViewById(R.id.ParentUpdateProfile);
-        btnNext = findViewById(R.id.btnNext1);
-        btnNext2 = findViewById(R.id.btnNext2);
-        btnPrev2 = findViewById(R.id.btnPrevious2);
-        btnPrev3 = findViewById(R.id.btnPrevious3);
+//        btnNext = findViewById(R.id.btnNext1);
+//        btnNext2 = findViewById(R.id.btnNext2);
+//        btnPrev2 = findViewById(R.id.btnPrevious2);
+//        btnPrev3 = findViewById(R.id.btnPrevious3);
+        imgAdd = findViewById(R.id.imgAdd);
+        etJamOperasional = findViewById(R.id.etJaOperasional_Register);
 
 
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(this, "Membutuhkan Izin Lokasi", Toast.LENGTH_SHORT).show();
+            } else {
+
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        1);
+            }
+        } else {
+            // Permission has already been granted
+            Toast.makeText(this, "Izin Lokasi diberikan", Toast.LENGTH_SHORT).show();
+        }
 
         //Session Instance
         session = new PrefManager(getApplicationContext());
@@ -192,12 +218,19 @@ public class UpdateProfileActivity extends AppCompatActivity {
         getAlamat = user.get(PrefManager.KEY_ALAMAT);
         getEmail = user.get(PrefManager.KEY_EMAIL);
         getID = user.get(PrefManager.KEY_ID);
+        getLatLong = user.get(PrefManager.KEY_LATLONG);
+        getJamOperasional = user.get(PrefManager.KEY_JAM_OPERASIONAL);
+
+
 
 
         etNamaBankSampah.setText(getNama);
+        etNamaBankSampah.setEnabled(false);
         etEmailBankSampah.setText(getEmail);
         etNoHpBankSampah.setText(getNoHP);
+        etNoHpBankSampah.setEnabled(false);
         etAlamat.setText(getAlamat);
+        etJamOperasional.setText(getJamOperasional);
 
         ctd = new CountDownTimer(2000, 1000) {
             @Override
@@ -214,8 +247,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
         url_foto = apiData.get("str_url_main");
         Picasso.get()
                 .load(url_foto + getFoto)
-                //.error(R.drawable.ic_navigation_profil)
-                .into(imgPinCircle);
+                .error(R.drawable.ic_navigation_profil)
+                .into(imgRegister);
 
         //Get Current Location GPS
         getCurrentLocation();
@@ -256,6 +289,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 selectImage();
             }
         });
+        imgAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
 
         btDaftarkan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,102 +303,102 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
-        //Steps Hiden Update
-        tvStepOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerBankSampah.setVisibility(View.VISIBLE);
-                registerDetailBank.setVisibility(View.GONE);
-                registerPengurus.setVisibility(View.GONE);
-                tvStepOne.setBackgroundColor(Color.BLUE);
-                tvStepOne.setTextColor(Color.WHITE);
-                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                tvStepOne.setBackgroundResource(R.drawable.rectangle_aktif);
-                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
-                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
-                btDaftarkan.setVisibility(View.INVISIBLE);
-            }
-        });
-
-        tvStepTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(etNamaBankSampah.getText().toString().length()==0)
-                {
-                    etNamaBankSampah.setError("Nama Bank Sampah Diperlukan");
-                    etNamaBankSampah.requestFocus();
-                }
-                else if(etEmailBankSampah.getText().toString().length()==0)
-                {
-                    etEmailBankSampah.setError("Email Bank Sampah Diperlukan");
-                    etEmailBankSampah.requestFocus();
-                }
-                else if(etNoHpBankSampah.getText().toString().length()==0)
-                {
-                    etNoHpBankSampah.setError("No Hp Bank Sampah Diperlukan");
-                    etNoHpBankSampah.requestFocus();
-                }
-                else if(etAlamat.getText().toString().length()==0)
-                {
-                    etAlamat.setError("Alamat Bank Sampah Diperlukan");
-                    etAlamat.requestFocus();
-                }
-                else
-                {
-                    registerBankSampah.setVisibility(View.GONE);
-                    registerDetailBank.setVisibility(View.GONE);
-                    registerPengurus.setVisibility(View.VISIBLE);
-                    tvStepTwo.setBackgroundColor(Color.BLUE);
-                    tvStepTwo.setTextColor(Color.WHITE);
-                    tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
-                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
-                    tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
-                    btDaftarkan.setVisibility(View.INVISIBLE);
-                    tvStepTwo.setClickable(true);
-                }
-
-            }
-        });
-
-        tvStepThree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(etNamaPengurus.getText().toString().length()==0)
-                {
-                    etNamaPengurus.setError("Nama Pengurus Diperlukan");
-                    etNamaPengurus.requestFocus();
-                }
-                else if(etNoHpPengurus.getText().toString().length()==0)
-                {
-                    etNoHpPengurus.setError("No Hp Pengurus Diperlukan");
-                    etNoHpPengurus.requestFocus();
-                }
-                else if(etJabatanPengurus.getText().toString().length()==0)
-                {
-                    etJabatanPengurus.setError("Jabatan Pengurus Diperlukan");
-                    etJabatanPengurus.requestFocus();
-                }
-                else
-                    {
-                    registerBankSampah.setVisibility(View.GONE);
-                    registerDetailBank.setVisibility(View.VISIBLE);
-                    btDaftarkan.setVisibility(View.VISIBLE);
-                    registerPengurus.setVisibility(View.GONE);
-                    tvStepThree.setBackgroundColor(Color.BLUE);
-                    tvStepThree.setTextColor(Color.WHITE);
-                    tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
-                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
-                    tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
-                    tvStepThree.setClickable(true);
-                    }
-            }
-        });
+//        //Steps Hiden Update
+//        tvStepOne.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                registerBankSampah.setVisibility(View.VISIBLE);
+//                registerDetailBank.setVisibility(View.GONE);
+//                registerPengurus.setVisibility(View.GONE);
+//                tvStepOne.setBackgroundColor(Color.BLUE);
+//                tvStepOne.setTextColor(Color.WHITE);
+//                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+//                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+//                tvStepOne.setBackgroundResource(R.drawable.rectangle_aktif);
+//                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+//                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+//                btDaftarkan.setVisibility(View.INVISIBLE);
+//            }
+//        });
+//
+//        tvStepTwo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(etNamaBankSampah.getText().toString().length()==0)
+//                {
+//                    etNamaBankSampah.setError("Nama Bank Sampah Diperlukan");
+//                    etNamaBankSampah.requestFocus();
+//                }
+//                else if(etEmailBankSampah.getText().toString().length()==0)
+//                {
+//                    etEmailBankSampah.setError("Email Bank Sampah Diperlukan");
+//                    etEmailBankSampah.requestFocus();
+//                }
+//                else if(etNoHpBankSampah.getText().toString().length()==0)
+//                {
+//                    etNoHpBankSampah.setError("No Hp Bank Sampah Diperlukan");
+//                    etNoHpBankSampah.requestFocus();
+//                }
+//                else if(etAlamat.getText().toString().length()==0)
+//                {
+//                    etAlamat.setError("Alamat Bank Sampah Diperlukan");
+//                    etAlamat.requestFocus();
+//                }
+//                else
+//                {
+//                    registerBankSampah.setVisibility(View.GONE);
+//                    registerDetailBank.setVisibility(View.GONE);
+//                    registerPengurus.setVisibility(View.VISIBLE);
+//                    tvStepTwo.setBackgroundColor(Color.BLUE);
+//                    tvStepTwo.setTextColor(Color.WHITE);
+//                    tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+//                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+//                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+//                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
+//                    tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
+//                    btDaftarkan.setVisibility(View.INVISIBLE);
+//                    tvStepTwo.setClickable(true);
+//                }
+//
+//            }
+//        });
+//
+//        tvStepThree.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(etNamaPengurus.getText().toString().length()==0)
+//                {
+//                    etNamaPengurus.setError("Nama Pengurus Diperlukan");
+//                    etNamaPengurus.requestFocus();
+//                }
+//                else if(etNoHpPengurus.getText().toString().length()==0)
+//                {
+//                    etNoHpPengurus.setError("No Hp Pengurus Diperlukan");
+//                    etNoHpPengurus.requestFocus();
+//                }
+//                else if(etJabatanPengurus.getText().toString().length()==0)
+//                {
+//                    etJabatanPengurus.setError("Jabatan Pengurus Diperlukan");
+//                    etJabatanPengurus.requestFocus();
+//                }
+//                else
+//                    {
+//                    registerBankSampah.setVisibility(View.GONE);
+//                    registerDetailBank.setVisibility(View.VISIBLE);
+//                    btDaftarkan.setVisibility(View.VISIBLE);
+//                    registerPengurus.setVisibility(View.GONE);
+//                    tvStepThree.setBackgroundColor(Color.BLUE);
+//                    tvStepThree.setTextColor(Color.WHITE);
+//                    tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+//                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
+//                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
+//                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
+//                    tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
+//                    tvStepThree.setClickable(true);
+//                    }
+//            }
+//        });
     }
 
         //Get Current Location
@@ -527,42 +566,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
         strEmail_Update = etEmailBankSampah.getText().toString();
         strNoHpBankSampah = etNoHpBankSampah.getText().toString();
         strAlamat_Update = etAlamat.getText().toString();
-        strNamaPengurus = etNamaPengurus.getText().toString();
-        strNoHpPengurus = etNoHpPengurus.getText().toString();
-        strJabatanPengurus = etJabatanPengurus.getText().toString();
-        strNamaPengurusDua = etNamaPengurusDua.getText().toString();
-        strNoHpPengurusDua = etNoHpPengurusDua.getText().toString();
-        strJabatanPengurus2 = etJabatanPengurus2.getText().toString();
-        strNamaDetailBank = etNamaDetailBank.getText().toString();
-        strNoRekeningBank = etNoRekeningBank.getText().toString();
-        strNamaRekeningBank = etNamaRekeningBank.getText().toString();
+        strJamOperasional = etJamOperasional.getText().toString();
+        strLatLong_Update = etLatLong.getText().toString();
 
-        if (etNamaDetailBank.getText().toString().length()==0)
+        if (etEmailBankSampah.getText().toString().length()==0)
         {
-            etNamaDetailBank.setError("Nama Bank Diperlukan");
-            etNamaDetailBank.requestFocus();
+            etEmailBankSampah.setError("Email Bank Sampah Diperlukan");
+            etEmailBankSampah.requestFocus();
         }
-        else if(etNoRekeningBank.getText().toString().length()==0)
+        else if(etAlamat.getText().toString().length()==0)
         {
-            etNoRekeningBank.setError("No Rekening Bank Diperlukan");
-            etNoRekeningBank.requestFocus();
-        }
-        else if(etNamaRekeningBank.getText().toString().length()==0)
-        {
-            etNamaRekeningBank.setError("Nama Rekening Bank Sampah");
-            etNamaRekeningBank.requestFocus();
+            etAlamat.setError("Alamat Bank Sampah Diperlukan");
+            etAlamat.requestFocus();
         }
         else if (imgRegister.getDrawable()!= null && imageFileName != null){
             UpdateProfile();
-            AddPengurus();
-            AddRekeningBank();
             uploadImage();
         }
         else
             {
             UpdateProfile();
-            AddPengurus();
-            AddRekeningBank();
             }
     }
 
@@ -583,6 +606,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strEmail_Update, strAlamat_Update, strJamOperasional);
                                     Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(changePassword);
                                     finish();
@@ -612,7 +636,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(field_name[0], "");
+                params.put(field_name[0], strNamaLengkap_Update);
+                params.put(field_name[1], strEmail_Update);
+                params.put(field_name[2], strAlamat_Update);
+                params.put(field_name[3], strJamOperasional);
+                params.put(field_name[4], strLatLong_Update);
                 return params;
             }
 
@@ -628,192 +656,71 @@ public class UpdateProfileActivity extends AppCompatActivity {
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
-    private void AddPengurus(){
+
+    private void uploadImage() {
         customProgress.showProgress(this, "", false);
-        final String[] field_name = {"no_telepon", "old_pass", "new_pass","message"};
+        final String[] field_name = {"doctype", "docname", "filename", "isprivate", "filedata", "docfield"};
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_upload_image");
 
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
-
-        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                customProgress.hideProgress();
-                Log.d("DEBUG", "Register Response: " + response);
-                try {
-                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
-                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(changePassword);
-                                    finish();
-                                }
-                            });
-                    android.app.AlertDialog alert = builder.create();
-                    alert.show();
-                    Log.e("tag", "sukses");
-                } catch (Throwable t) {
-                    Snackbar snackbar = Snackbar
-                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                customProgress.hideProgress();
-                Snackbar snackbar = Snackbar
-                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
-                snackbar.show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put(field_name[0], "");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                return params;
-            }
-        };
-
-        // Adding request to request queue
-        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-    }
-
-    private void AddRekeningBank(){
-        customProgress.showProgress(this, "", false);
-        final String[] field_name = {"no_telepon", "old_pass", "new_pass","message"};
-
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
-
-        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                customProgress.hideProgress();
-                Log.d("DEBUG", "Register Response: " + response);
-                try {
-                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
-                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(changePassword);
-                                    finish();
-                                }
-                            });
-                    android.app.AlertDialog alert = builder.create();
-                    alert.show();
-                    Log.e("tag", "sukses");
-                } catch (Throwable t) {
-                    Snackbar snackbar = Snackbar
-                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("DEBUG", "Volley Error: " + error.getMessage());
-                customProgress.hideProgress();
-                Snackbar snackbar = Snackbar
-                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
-                snackbar.show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put(field_name[0], "");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
-                return params;
-            }
-        };
-
-        // Adding request to request queue
-        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-    }
-
-    private void uploadImage(){
-        String[] field_name = {"doctype", "docname", "filename", "isprivate", "filedata", "from_form", "docfield"};
-
-        getBitmapPicture = ((BitmapDrawable)UpdateProfileActivity.imgProfil.getDrawable()).getBitmap();
+        //Get Image and Convert to Base64
+        getBitmapPicture = ((BitmapDrawable) UpdateProfileActivity.imgProfil.getDrawable()).getBitmap();
         getBitmapPicture.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream);
-
-        byte[]imageInByte = byteArrayOutputStream.toByteArray();
+        byte[] imageInByte = byteArrayOutputStream.toByteArray();
         ConvertImageToBase64 = Base64.encodeToString(imageInByte, Base64.DEFAULT);
         StrImageUploadToDB += ConvertImageToBase64;
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String upload_image_url;
+        String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
+        String name = etNamaBankSampah.getText().toString();
+        imageFileName = "JPEG_" + name + "_" + timeStamp;
 
-        Log.e("tag", "id user : " + getID);
-        Log.e("tag", "image file : " + imageFileName);
-        //Log.e("tag", "image code : " + StrImageUploadToDB);
-        Log.e("tag", "image base64 : " + ConvertImageToBase64);
-
-        upload_image_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.upload_image_token";
-        params.put(field_name[0], "Master Customer");
-        params.put(field_name[1], getID);
-        params.put(field_name[2], imageFileName+".jpg");
-        params.put(field_name[3], "0");
-        params.put(field_name[4], StrImageUploadToDB);
-        params.put(field_name[6], "image");
-
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(upload_image_url, params, new AsyncHttpResponseHandler() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String resp_content;
+            public void onResponse(String response) {
+                customProgress.hideProgress();
+                Log.d("DEBUG", "Validate Response: " + response);
                 try {
-                    resp_content = new String(responseBody, "UTF-8");
-                    Log.e("tag", resp_content);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                    Log.e("tag", String.valueOf(e));
-                }
-                try {
-                    //Cek Lagi Nanti Disini
-                    session.updatePictureProfil("/files/" + imageFileName + ".jpg");
-                    Toasty.success(getApplicationContext(), "Berhasil Memperbarui Profil Picture", Toast.LENGTH_SHORT).show();
+                    Toasty.success(getApplicationContext(), "Berhasil Mengupload Gambar", Toast.LENGTH_SHORT).show();
                 } catch (Throwable t) {
-                    //Toast.makeText(getContext(), "Terjadi Kesalahan, Mohon Periksa Data Kembali 2", Toast.LENGTH_LONG).show();
-                    Log.e("tag", "Gagal1" + ": " +String.valueOf(t));
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    //Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + "1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                    Log.d("DEBUG", "Error Upload Image Response: " + t.toString());
                 }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], "Master Customer");
+                params.put(field_name[1], getID);
+                params.put(field_name[2], imageFileName + ".jpg");
+                params.put(field_name[3], "0");
+                params.put(field_name[4], StrImageUploadToDB);
+                params.put(field_name[5], "image");
+                return params;
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + " 1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
             }
-        });
-    }
+        };
 
-    public void refreshActivity(){
-        Intent a = new Intent(UpdateProfileActivity.this, MainActivity.class);
-        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(a);
-        finish();
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
     @Override
@@ -824,5 +731,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
-
+    public void openAutoPlace(View view) {
+        startActivity(new Intent(this, PlaceAutoCompleteActivity.class));
+    }
 }

@@ -38,6 +38,7 @@ public class PrefManager {
     public static final String KEY_ID_ITEM = "pref_id_item";
     public static final String KEY_HARGA_ITEM = "pref_harga_item";
     public static final String KEY_JENIS_ITEM = "pref_jenis_item";
+    public static final String KEY_JAM_OPERASIONAL = "pref_operasional";
 
     public static final String KEY_TOKEN = "pref_token_firebase";
     //private static final String KEY_FRAGMENT = "pref_fragment";
@@ -82,12 +83,15 @@ public class PrefManager {
         editor.commit();
     }
 
-    public void updateProfil(String nama, String latlong, String alamat){
+    public void updateProfil(String nama,String latlong, String email, String alamat, String jam){
         editor.putString(KEY_NAMA, nama);
+        editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_LATLONG, latlong);
         editor.putString(KEY_ALAMAT, alamat);
+        editor.putString(KEY_JAM_OPERASIONAL,jam );
 //        editor.putString(KEY_EMAIL, email);
         editor.commit();
+        editor.apply();
     }
 
     public void updatePictureProfil(String image_profil){
@@ -118,7 +122,8 @@ public class PrefManager {
         user.put(KEY_FOTO, pref.getString(KEY_FOTO, null));
         user.put(KEY_ID, pref.getString(KEY_ID, null));
         user.put(KEY_ROLE_USER, pref.getString(KEY_ROLE_USER, null));
-
+        user.put(KEY_JAM_OPERASIONAL, pref.getString(KEY_JAM_OPERASIONAL, null));
+        user.put(KEY_LATLONG, pref.getString(KEY_LATLONG, null));
         return user;
     }
 

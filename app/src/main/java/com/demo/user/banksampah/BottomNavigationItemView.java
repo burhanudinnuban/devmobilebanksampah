@@ -16,6 +16,7 @@
 
 package com.demo.user.banksampah;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -89,6 +90,7 @@ public class BottomNavigationItemView extends FrameLayout implements MenuView.It
         mLargeLabel = (TextView) findViewById(android.support.design.R.id.largeLabel);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void initialize(MenuItemImpl itemData, int menuType) {
         mItemData = itemData;
@@ -201,6 +203,7 @@ public class BottomNavigationItemView extends FrameLayout implements MenuView.It
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public int[] onCreateDrawableState(final int extraSpace) {
         final int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
@@ -234,6 +237,7 @@ public class BottomNavigationItemView extends FrameLayout implements MenuView.It
         return true;
     }
 
+    @SuppressLint("RestrictedApi")
     public void setIconTintList(ColorStateList tint) {
         mIconTint = tint;
         if (mItemData != null) {

@@ -23,7 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:background="@drawable/border_style"
+        android:background="@drawable/border_rectangle"
         android:padding="5dp"
         app:srcCompat="@drawable/ic_navigation_profil" />
 
@@ -81,7 +81,7 @@
             android:layout_height="30dp"
             android:text="Detail"
             android:layout_gravity="right"
-            android:background="@drawable/button_blue"
+            android:background="@drawable/ic_btn_default"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="12dp"/>

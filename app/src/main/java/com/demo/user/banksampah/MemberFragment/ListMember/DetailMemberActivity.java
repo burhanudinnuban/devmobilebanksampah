@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -68,7 +69,7 @@ public class DetailMemberActivity extends AppCompatActivity {
     protected View rootView;
     protected LazyAdapter adapter;
     protected LazyAdapter adapter1;
-    protected ListView lvUserOrder;
+    protected ExpandableListView ELListOrderUser;
 
     protected CardView cd_NoData, cd_NoConnection;
 
@@ -102,7 +103,7 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvNoHpMemberDetail = findViewById(R.id.tvNoHPMember_DetailMember);
         tvStatusMemberDetail = findViewById(R.id.tvStatusMember_DetailMember);
         tvEmailMemberDetail = findViewById(R.id.tvEmailMemberDetail);
-        lvUserOrder = findViewById(R.id.listView_orderUser);
+        ELListOrderUser = findViewById(R.id.ELListOrderUser);
 
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra("foto");
@@ -230,8 +231,8 @@ public class DetailMemberActivity extends AppCompatActivity {
 
                     adapter = new LazyAdapter(DetailMemberActivity.this, allOrder,  13);
                     adapter1 = new LazyAdapter(DetailMemberActivity.this, allOrder1,  14);
-                    lvUserOrder.setAdapter(adapter);
-                    lvUserOrder.setAdapter(adapter1);
+//                    ExpandableListView.setAdapter(adapter);
+//                    ExpandableListView.setAdapter(adapter1);
 
 
             /*} else {

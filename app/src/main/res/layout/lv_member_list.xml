@@ -25,7 +25,7 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center"
         android:src="@drawable/ic_navigation_profil"
-        android:background="@drawable/border_style"
+        android:background="@drawable/border_rectangle"
         android:padding="5dp" />
 
     <LinearLayout
@@ -91,7 +91,7 @@
                 android:id="@+id/btnDetailListMember"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
-                android:background="@drawable/button_blue"
+                android:background="@drawable/ic_btn_default"
                 android:text="Details"
                 android:textStyle="bold"
                 android:textSize="12dp"

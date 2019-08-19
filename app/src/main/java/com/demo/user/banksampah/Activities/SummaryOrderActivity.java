@@ -36,7 +36,6 @@ import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.BuildConfig;
-import com.demo.user.banksampah.MapsActivities.PickupActivity;
 import com.demo.user.banksampah.R;
 
 /*import com.google.android.gms.location.places.Place;
@@ -299,18 +298,18 @@ public class SummaryOrderActivity extends AppCompatActivity {
             }
         });
 
-        btnKonfirmasi_Penjemputan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //validate(strAlamat, getNameOrder_Result);
-                Intent intent_a = new Intent(getApplicationContext(), PickupActivity.class);
-                intent_a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent_a.putExtra("EXTRA_ID_ORDER", getOrder_ID_Result);
-                intent_a.putExtra("EXTRA_LATLONG", strLatLong);
-                startActivity(intent_a);
-                finish();
-            }
-        });
+//        btnKonfirmasi_Penjemputan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //validate(strAlamat, getNameOrder_Result);
+//                Intent intent_a = new Intent(getApplicationContext(), PickupActivity.class);
+//                intent_a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent_a.putExtra("EXTRA_ID_ORDER", getOrder_ID_Result);
+//                intent_a.putExtra("EXTRA_LATLONG", strLatLong);
+//                startActivity(intent_a);
+//                finish();
+//            }
+//        });
 
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -574,18 +573,18 @@ public class SummaryOrderActivity extends AppCompatActivity {
 
         myDialog.setCanceledOnTouchOutside(false);
 
-        btnOk_Popup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_a = new Intent(getApplicationContext(), PickupActivity.class);
-                intent_a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent_a.putExtra("EXTRA_ID_ORDER", getOrder_ID_Result);
-                intent_a.putExtra("EXTRA_LATLONG", strLatLong);
-                startActivity(intent_a);
-                finish();
-                myDialog.dismiss();
-            }
-        });
+//        btnOk_Popup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_a = new Intent(getApplicationContext(), PickupActivity.class);
+//                intent_a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent_a.putExtra("EXTRA_ID_ORDER", getOrder_ID_Result);
+//                intent_a.putExtra("EXTRA_LATLONG", strLatLong);
+//                startActivity(intent_a);
+//                finish();
+//                myDialog.dismiss();
+//            }
+//        });
 
         //Customization for Dialog..
         if(myDialog.getWindow()!=null) {
