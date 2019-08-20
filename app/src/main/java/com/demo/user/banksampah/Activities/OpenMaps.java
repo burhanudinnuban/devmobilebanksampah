@@ -128,6 +128,8 @@ public class OpenMaps extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     private static boolean hasPermissions(Context context, String... permissions) {
@@ -184,7 +186,7 @@ public class OpenMaps extends AppCompatActivity {
                         map = mapFragment.getMap();
                         schemes = map.getMapSchemes();
                         map.setMapScheme(schemes.get(0));
-                        map.setCenter(new GeoCoordinate(latitude, longitude, 0.5f), Map.Animation.LINEAR);
+                        map.setCenter(new GeoCoordinate(-6.117664, 106.906349, 0.0), Map.Animation.LINEAR);
                         map.setZoomLevel(16, Map.Animation.LINEAR);
 
                         //Add Marker Icon

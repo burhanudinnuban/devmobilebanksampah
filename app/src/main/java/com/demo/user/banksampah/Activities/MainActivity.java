@@ -36,14 +36,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.demo.user.banksampah.NotificationActivities.SubNotificationActivity;
-
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.BottomNavigationViewNew;
-import com.demo.user.banksampah.MainFragment.MemberFragment;
-import com.demo.user.banksampah.MainFragment.SalesFragment;
 import com.demo.user.banksampah.MainFragment.HomeFragment;
+import com.demo.user.banksampah.MainFragment.MemberFragment;
 import com.demo.user.banksampah.MainFragment.ReceiveFragment;
+import com.demo.user.banksampah.MainFragment.SalesFragment;
+import com.demo.user.banksampah.NotificationActivities.SubNotificationActivity;
 import com.demo.user.banksampah.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;

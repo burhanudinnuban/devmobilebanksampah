@@ -247,6 +247,9 @@ public class RestProcess {
         apiErecyle.put("str_api_pencairan_saldo",".pencairan_saldo");
         apiErecyle.put("str_api_history_order_user",".get_history_order");
         apiErecyle.put("str_api_update_profile",".change_profile");
+        apiErecyle.put( "str_api_uploud_photo", ".upload_image_token" );
+        apiErecyle.put( "str_api_tambah_pengurus", ".add_pengurus" );
+        apiErecyle.put( "str_api_list_pengurus", ".list_pengurus" );
         return apiErecyle;
     }
 

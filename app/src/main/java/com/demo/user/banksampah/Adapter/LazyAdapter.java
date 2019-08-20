@@ -1,4 +1,5 @@
 package com.demo.user.banksampah.Adapter;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -205,6 +206,10 @@ public class LazyAdapter extends BaseAdapter {
 
         //Untuk Fragment Position 12
         TextView tvJenisItem, tvHargaItem, tvDetailItem;
+
+        //Untuk Fragment Position 13
+        TextView tvNamaPengurus, tvJabatan;
+        Button btnAddPengurus, btnHapusPengurus, btnEditPengurus;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -866,11 +871,53 @@ public class LazyAdapter extends BaseAdapter {
 
             case 13:
                 if (convertView == null) {
-                    vi = inflater.inflate(R.layout.lv_order_user,parent,false);
+                    vi = inflater.inflate(R.layout.lv_pengurus,parent,false);
                     holder = new ViewHolder();
+                    holder.tvNamaPengurus = vi.findViewById(R.id.tvNamaPengurus);
+                    holder.tvJabatan = vi.findViewById(R.id.tvJabatan);
+                    holder.btnHapusPengurus = vi.findViewById(R.id.btnHapusPengurus);
+                    holder.btnEditPengurus = vi.findViewById(R.id.btnEditPengurus);
+
+                    vi.setTag(holder);
                 }
-                HashMap<String, String> ListUser;
-                ListUser = data.get(position);
+                else
+                {
+                    holder = (ViewHolder)vi.getTag();
+                }
+                HashMap<String, String> ListPengurus;
+                ListPengurus = data.get(position);
+
+                final String strNamaPengurus = ListPengurus.get("nama_pengurus");
+                final String strJabatan = ListPengurus.get("jabatan");
+                final String strBanksampah = ListPengurus.get("id_bank_sampah");
+
+                holder.tvNamaPengurus.setText(strNamaPengurus);
+                holder.tvJabatan.setText(strJabatan);
+
+                break;
+
+            case 14:
+                if (convertView == null) {
+                    vi = inflater.inflate(R.layout.lv_pengurus,parent,false);
+                    holder = new ViewHolder();
+                    holder.tvNamaPengurus = vi.findViewById(R.id.tvNamaPengurus);
+                    holder.tvJabatan = vi.findViewById(R.id.tvJabatan);
+                    holder.btnHapusPengurus = vi.findViewById(R.id.btnHapusPengurus);
+                    holder.btnEditPengurus = vi.findViewById(R.id.btnEditPengurus);
+
+                    vi.setTag(holder);
+                }
+                else
+                {
+                    holder = (ViewHolder)vi.getTag();
+                }
+                HashMap<String, String> ListRekeningBank;
+                ListRekeningBank = data.get(position);
+
+                final String strNamaBank = ListRekeningBank.get("nama_pengurus");
+                final String strNoRek = ListRekeningBank.get("jabatan");
+                final String strPemilik = ListRekeningBank.get("id_bank_sampah");
+
 
             default:
 

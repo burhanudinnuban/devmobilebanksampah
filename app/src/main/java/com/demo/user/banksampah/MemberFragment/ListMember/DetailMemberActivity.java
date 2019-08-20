@@ -4,24 +4,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,9 +25,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.ChangePassword;
 import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
+import com.demo.user.banksampah.Adapter.ExpandableListAdapter;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
@@ -69,6 +64,8 @@ public class DetailMemberActivity extends AppCompatActivity {
     protected View rootView;
     protected LazyAdapter adapter;
     protected LazyAdapter adapter1;
+    protected ExpandableListAdapter expandableListAdapter;
+    protected ExpandableListAdapter expandableListAdapter1;
     protected ExpandableListView ELListOrderUser;
 
     protected CardView cd_NoData, cd_NoConnection;
@@ -147,7 +144,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                         customProgress.hideProgress();
                         Log.d("debug", "Check Login Response: " + response);
                         try {
-//                                viewOrderUser();
+                                viewOrderUser(response);
                             customProgress.hideProgress();
                         } catch (Throwable t) {
                             Snackbar snackbar = Snackbar

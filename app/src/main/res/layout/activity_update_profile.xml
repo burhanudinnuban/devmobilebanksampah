@@ -197,6 +197,7 @@
                         app:font="@font/sourcesansproregular" />
                 </android.support.design.widget.TextInputLayout>
 
+
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -221,6 +222,7 @@
                             app:font="@font/sourcesansproregular" />
                     </android.support.design.widget.TextInputLayout>
 
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -244,6 +246,23 @@
                             android:textColor="@color/colorAccent"
                             android:textSize="9sp"
                             android:textStyle="bold" />
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/etLatlong"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:inputType="textMultiLine|text"
+                                android:lineSpacingExtra="3sp"
+                                android:textColor="@color/colorLogin"
+                                android:textSize="15sp"
+                                app:font="@font/sourcesansproregular"
+                                android:visibility="invisible"/>
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
                 </TableRow>
@@ -263,11 +282,6 @@
                         android:textAllCaps="false"
                         android:textColor="@color/colorBorderWhite"
                         android:textSize="17sp" />
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="openAutoPlace"
-                    android:text="Place Auto Complete"/>
 
 
             </LinearLayout>

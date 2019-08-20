@@ -15,11 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -218,7 +216,7 @@ public class RequestMember extends Fragment {
         return rootView;
     }
     private void getListReqMember(final String strIDUser){
-//        customProgress.showProgress(getContext(), "", false);
+        customProgress.showProgress(getContext(), "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_request_member");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
@@ -227,7 +225,7 @@ public class RequestMember extends Fragment {
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataMember(response);
-//                    customProgress.hideProgress();
+                    customProgress.hideProgress();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);

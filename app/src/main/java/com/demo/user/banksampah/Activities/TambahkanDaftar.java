@@ -8,12 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -34,14 +34,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.demo.user.banksampah.Adapter.CustomProgress;
-import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
-import com.demo.user.banksampah.Firebase.Config;
 import com.demo.user.banksampah.R;
-import com.demo.user.banksampah.RegisterActivities.RegisterActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,10 +69,6 @@ public class TambahkanDaftar extends AppCompatActivity {
 
     //An ArrayList for Spinner Items
     private ArrayList<String> Items;
-
-    //JSON Array
-    private JSONArray result;
-
 
     //Proccess API
     protected RestProcess restClass;
@@ -496,24 +489,6 @@ public class TambahkanDaftar extends AppCompatActivity {
     }
 
 
-    /*private void getItem(JSONArray j){
-        //Traversing through all the items in the json array
-        for(int i=0;i<j.length();i++){
-            try {
-                //Getting json object
-                JSONObject json = j.getJSONObject(i);
-
-                //Adding the name of the student to array list
-                Items.add(json.getString("jenis_item"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //Setting adapter to show the items in the spinner
-        sBahan.setAdapter(new ArrayAdapter<String>(TambahkanDaftar.this, android.R.layout.simple_spinner_dropdown_item, Items));
-    }
-*/
     //this method will execute when we pic an item from the spinner
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         //Setting the values to textviews for a selected item

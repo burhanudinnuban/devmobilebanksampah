@@ -1,9 +1,7 @@
 package com.demo.user.banksampah.MemberFragment.ListMember;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,13 +14,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -36,12 +30,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
-import com.demo.user.banksampah.Adapter.ModelData;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
-import com.demo.user.banksampah.RegisterActivities.RegisterPhoneActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +41,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
@@ -81,7 +72,6 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
 
     protected ImageView imgSearch;
     private AppCompatAutoCompleteTextView etSearch;
-    String inputSearch;
     public static ListMember newInstance() {
         return new ListMember();
     }
@@ -110,7 +100,6 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
         btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
 
         etSearch = rootView.findViewById(R.id.etSearch);
-
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override

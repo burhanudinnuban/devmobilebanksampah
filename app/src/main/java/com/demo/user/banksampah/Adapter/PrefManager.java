@@ -1,14 +1,13 @@
 package com.demo.user.banksampah.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.Intent;
 
 import com.demo.user.banksampah.Activities.LoginActivity;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * Created by Lincoln on 05/05/16.
@@ -89,7 +88,6 @@ public class PrefManager {
         editor.putString(KEY_LATLONG, latlong);
         editor.putString(KEY_ALAMAT, alamat);
         editor.putString(KEY_JAM_OPERASIONAL,jam );
-//        editor.putString(KEY_EMAIL, email);
         editor.commit();
         editor.apply();
     }

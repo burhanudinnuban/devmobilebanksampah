@@ -1,6 +1,7 @@
-package com.demo.user.banksampah.Activities;
+package com.demo.user.banksampah.DataPengurus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -39,59 +40,65 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class ListHargaItem extends AppCompatActivity {
-
-    private TextView tvJenisItem, tvHargaItem;
-    private LinearLayout llParent, llItem;
-    private ListView lvHargaItem;
-
-    //if (!message.equalsIgnoreCase("Invalid")) {
-    ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+public class ListViewDataPengurus extends AppCompatActivity {
 
     //Session Class
     protected PrefManager session;
 
-    protected View rootView;
-
     /*API process and dialog*/
-    private RestProcess rest_class;
-    private HashMap<String, String> apiData;
-    private ArrayList<HashMap<String, String>> data;
-    private CustomProgress customProgress;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private LazyAdapter adapter;
-    protected CardView cd_NoData, cd_NoConnection;
-
-    protected ConnectivityManager conMgr;
-
+    protected RestProcess rest_class;
+    protected HashMap<String, String> apiData;
     protected String strIDUser;
 
-    protected AutoCompleteTextView editSearch;
+    protected CustomProgress customProgress;
+    ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
+    protected LinearLayout parent_layout;
+    protected ListView lvListMember;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    protected LinearLayout linear_ListMember;
+    protected ConnectivityManager conMgr;
+    Context ctx;
+    protected View rootView;
+    protected LazyAdapter adapter;
+
+    protected CardView cd_NoData, cd_NoConnection;
+
+    private AutoCompleteTextView etSearch;
+    protected Button btnAddPengurus;
+
+    //Get Data From Login Process
+    protected static String getNama = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_harga_item);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_list_view_data_pengurus );
+
+        session = new PrefManager(this);
+        final HashMap<String, String> user = session.getUserDetails();
+        getNama = user.get(PrefManager.KEY_NAMA);
 
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
 
-        session = new PrefManager(getApplicationContext());
-        HashMap<String, String> user = session.getUserDetails();
-        strIDUser = user.get(PrefManager.KEY_NAMA);
-        customProgress = CustomProgress.getInstance();
         cd_NoData = findViewById(R.id.cd_noData);
         cd_NoConnection = findViewById(R.id.cd_noInternet);
+        parent_layout = findViewById(R.id.parent);
+        customProgress = CustomProgress.getInstance();
+        lvListMember = findViewById(R.id.listViewPengurus);
         mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
+        btnAddPengurus = findViewById( R.id.btnAddPengurus );
 
+        btnAddPengurus.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent add = new Intent( ListViewDataPengurus.this, DataPengurus.class );
+                startActivity( add );
+            }
+        } );
 
-        tvHargaItem =findViewById(R.id.tvHargaItem);
-        tvJenisItem = findViewById(R.id.tvJenisItem);
-        llParent = findViewById(R.id.parentItem);
-        llItem = findViewById(R.id.linearLayout_ListItem);
-        lvHargaItem = findViewById(R.id.lvHargaItem);
-        editSearch = findViewById(R.id.etSearchItem);
-
-        editSearch.addTextChangedListener(new TextWatcher() {
+        etSearch = findViewById(R.id.etSearch);
+        etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -100,7 +107,7 @@ public class ListHargaItem extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String[] field_name = {"message", "id_item", "id_bank_sampah", "jenis_item","harga_per_kilo"};
+                String[] field_name = {"message", "nama_pengurus", "jabatan","id_bank_sampah"};
 
                 ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
 
@@ -110,32 +117,29 @@ public class ListHargaItem extends AppCompatActivity {
                     for (int x = 0; x < allOrder.size(); x++) {
                         JSONObject c = new JSONObject(allOrder.get(x));
 
-                        String id_item= c.getString(field_name[1]);
-                        String id_bank_sampah = c.getString(field_name[2]);
-                        String jenis_item = c.getString(field_name[3]);
-                        String harga_per_kilo = c.getString(field_name[4]);
+                        String nama_pengurus = c.getString(field_name[1]);
+                        String jabatan = c.getString(field_name[2]);
+                        String namabanksampah = c.getString(field_name[3]);
 
-                        if(jenis_item.toLowerCase().contains(editSearch.getText().toString().toLowerCase())) {
+                        if(nama_pengurus.toLowerCase().contains(etSearch.getText().toString().toLowerCase())) {
 
                             HashMap<String, String> map = new HashMap<>();
 
-                            map.put(field_name[1], id_item);
-                            map.put(field_name[2], id_bank_sampah);
-                            map.put(field_name[3], jenis_item);
-                            map.put(field_name[4], harga_per_kilo);
+                            map.put(field_name[1], nama_pengurus);
+                            map.put(field_name[2], jabatan);
+                            map.put(field_name[3], namabanksampah);
                             allOrderSearch.add(map);
                         }
                     }
 
                     Log.d("tag1", allOrderSearch.toString());
 
-                    adapter = new LazyAdapter(ListHargaItem.this, allOrderSearch, 12);
-                    lvHargaItem.setAdapter(adapter);
+                    adapter = new LazyAdapter(ListViewDataPengurus.this, allOrderSearch, 13);
+                    lvListMember.setAdapter(adapter);
                 } catch (JSONException e) {
                     Log.d("tag1", "error");
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -143,23 +147,6 @@ public class ListHargaItem extends AppCompatActivity {
 
             }
         });
-
-//        //Intent Ke Detail Member Activity
-//        if (getApplicationContext() != null)
-//            conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected())
-//        {
-//            //Jalanin API
-//            allOrder.clear();
-//            getListItem(strIDUser);
-//
-//        } else {
-//            Snackbar snackbar = Snackbar
-//                    .make(llParent, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-//            snackbar.show();
-//        }
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -167,10 +154,10 @@ public class ListHargaItem extends AppCompatActivity {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                         //Jalanin API
                         allOrder.clear();
-                        getListItem(strIDUser);
+                        getListPengurus();
                     } else {
                         Snackbar snackbar = Snackbar
-                                .make(llParent, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
+                                .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
                         snackbar.show();
                     }
                 }
@@ -185,56 +172,59 @@ public class ListHargaItem extends AppCompatActivity {
                     //Jalanin API
                 } else {
                     Snackbar snackbar = Snackbar
-                            .make(llParent, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
+                            .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
                     snackbar.show();
                 }
             }
         });
 
         if (getApplicationContext() != null) {
-            conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            conMgr = (ConnectivityManager)(getApplicationContext()).getSystemService(Context.CONNECTIVITY_SERVICE);
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListItem(strIDUser);
+            getListPengurus();
         } else {
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
             cd_NoData.setVisibility(View.GONE);
-            llItem.setVisibility(View.GONE);
+            linear_ListMember.setVisibility(View.GONE);
 
         }
-
     }
-    private void getListItem(final String strIDUser){
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_daftar");
-        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+    private void getListPengurus(){
+        customProgress.showProgress(ListViewDataPengurus.this, "", false);
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_pengurus");
+        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 customProgress.hideProgress();
                 Log.d("debug", "Check Login Response: " + response);
                 try {
-                    viewDataMember(response);
+                    viewDataPengurus(response);
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
-                            .make(llParent, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
                     snackbar.show();
                     Log.d("debug", "Error Check Login Response: " + t.toString());
                 }
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
+//                customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
-                        .make(llParent, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 Log.d("debug", "Volley Error: " + error.toString());
             }
         }) {
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("id_bank_sampah", strIDUser);
+                params.put("id_bank_sampah", getNama);
                 return params;
             }
             @Override
@@ -244,43 +234,40 @@ public class ListHargaItem extends AppCompatActivity {
                 return params;
             }
         };
+
         // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
-    protected void viewDataMember(String resp_content){
-        String[] field_name = {"message", "id_item", "id_bank_sampah", "jenis_item","harga_per_kilo"};
+    protected void viewDataPengurus(String resp_content){
+        String[] field_name = {"message", "id_bank_sampah", "nama_pengurus", "jabatan"};
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
 
+            //if (!message.equalsIgnoreCase("Invalid")) {
 
             JSONArray cast = jsonObject.getJSONArray(field_name[0]);
-            Log.e("tag", String.valueOf(cast.length()));
+            Log.e("tag_cast", String.valueOf(cast.length()));
 
             for (int i = 0; i < cast.length(); i++) {
                 JSONObject c = cast.getJSONObject(i);
 
-                String id_item= c.getString(field_name[1]);
-                String id_bank_sampah = c.getString(field_name[2]);
-                String jenis_item = c.getString(field_name[3]);
-                String harga_per_kilo = c.getString(field_name[4]);
+                String nama_pengurus = c.getString(field_name[2]);
+                String jabatan = c.getString(field_name[3]);
 
                 HashMap<String, String> map = new HashMap<>();
 
-                map.put(field_name[1], id_item);
-                map.put(field_name[2], id_bank_sampah);
-                map.put(field_name[3], jenis_item);
-                map.put(field_name[4], harga_per_kilo);
+                map.put(field_name[2], nama_pengurus);
+                map.put(field_name[3], jabatan);
 
                 allOrder.add(map);
             }
 
-            Log.d("tag", allOrder.toString());
+            Log.d("tag_allorder", allOrder.toString());
 
-            adapter = new LazyAdapter(ListHargaItem.this, allOrder, 12);
-            lvHargaItem.setAdapter(adapter);
-
+            adapter = new LazyAdapter(ListViewDataPengurus.this, allOrder, 13);
+            lvListMember.setAdapter(adapter);
 
         } catch (JSONException e) {
             if (getApplicationContext() != null) {
@@ -288,6 +275,11 @@ public class ListHargaItem extends AppCompatActivity {
             }
             Log.e("tag", " 2 :" + String.valueOf(e));
             e.printStackTrace();
+            /*include_FormOrderList.setVisibility(View.GONE);
+            linear_NoData.setVisibility(View.VISIBLE);
+            if(getContext()!=null) {
+                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
+            }*/
         }
     }
 }

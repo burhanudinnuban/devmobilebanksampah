@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,10 +15,7 @@ import android.widget.TextView;
 
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
-import com.demo.user.banksampah.BankSampahActivities.DaftarHargaBankSampah;
-import com.demo.user.banksampah.Documentation.Faq;
-import com.demo.user.banksampah.Documentation.HubungiKami;
-import com.demo.user.banksampah.NotificationActivities.RiwayatOrder;
+import com.demo.user.banksampah.DataPengurus.ListViewDataPengurus;
 import com.demo.user.banksampah.R;
 import com.squareup.picasso.Picasso;
 
@@ -29,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected TextView tvNama, tvIDUser;
     protected ImageView imgProfile, imgArrowBack;
-    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga, tvListHarga, tvAddPengurus, tvAddRekBank;
+    protected TextView tvDataProfil, tvPassword, tvCallUs, tvLogOut, tvDaftarHarga, tvListHarga, tvAddPengurus, tvAddRekBank, tvPencairanSaldo;
 
     private String url_foto;
 
@@ -63,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvListHarga = findViewById(R.id.tvListHarga);
         tvAddPengurus = findViewById(R.id.tvAddPengurus);
         tvAddRekBank = findViewById(R.id.tvAddRekBank);
+        tvPencairanSaldo = findViewById( R.id.tvPencairanLestari );
 
         tvAddPengurus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +132,13 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+        tvAddPengurus.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent add = new Intent( getApplicationContext(), ListViewDataPengurus.class );
+                startActivity( add );
+            }
+        } );
 
         //Test
         /*if(getIntent().getExtras() != null){

@@ -50,6 +50,7 @@
     <string name="MSG_REGIST_SUCCESS">Selamat Registrasi Berhasil!\nSilakan Masuk kedalam Aplikasi</string>
     <string name="MSG_UPDATE_ITEM_SUCCESS">Selamat Harga Item Berhasil Diubah.</string>
     <string name="MSG_TAMBAH_ITEM">Selamat Harga Item Berhasil Ditambahkan</string>
+    <string name="MSG_TAMBAH_PENGURUS">Selamat Pengurus Berhasil Ditambahkan</string>
     <string name="MSG_ACC_MEMBER">Selamat Member Berhasil Ditambahkan</string>
     <string name="MS_HAPUS_SUCCESS">Data Berhasil Dihapus.</string>
     <string name="MS_PENCAIRAN_SALDO">Menunggu Konfirmasi.</string>

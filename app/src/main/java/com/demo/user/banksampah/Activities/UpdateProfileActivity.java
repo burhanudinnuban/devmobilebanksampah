@@ -1,12 +1,10 @@
 package com.demo.user.banksampah.Activities;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,8 +14,6 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -41,8 +37,6 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
-
-import com.demo.user.banksampah.GoogleMaps.PlaceAutoCompleteActivity;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TrackGPS;
 import com.squareup.picasso.Picasso;
@@ -107,7 +101,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     //Deklarasi Ke Layout
     protected ImageView imgPinCircle, imgRegister, imgAdd;
     protected EditText etNamaBankSampah, etNoHpBankSampah, etAlamat,etPassword, etConfirmPassword,etNamaPengurus, etNoHpPengurus, etJamOperasional, etLatLong,
-            etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah, etJabatanPengurus, etJabatanPengurus2;
+            etNamaPengurusDua, etNoHpPengurusDua, etNamaDetailBank, etNoRekeningBank, etNamaRekeningBank, etEmailBankSampah, etJabatanPengurus,
+            etJabatanPengurus2;
     protected TextView tvMaps , tvDataPengurus, tvStepOne, tvStepTwo, tvStepThree, tvStatusNoHp, tvDataRekeningBankSampah;
     protected Button btDaftarkan, btnNext, btnNext2, btnPrev2, btnPrev3;
     protected LinearLayout registerBankSampah, registerPengurus,registerDetailBank;
@@ -186,28 +181,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 //        btnPrev3 = findViewById(R.id.btnPrevious3);
         imgAdd = findViewById(R.id.imgAdd);
         etJamOperasional = findViewById(R.id.etJaOperasional_Register);
-
-
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Toast.makeText(this, "Membutuhkan Izin Lokasi", Toast.LENGTH_SHORT).show();
-            } else {
-
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                        1);
-            }
-        } else {
-            // Permission has already been granted
-            Toast.makeText(this, "Izin Lokasi diberikan", Toast.LENGTH_SHORT).show();
-        }
+        etLatLong = findViewById( R.id.etLatlong );
 
         //Session Instance
         session = new PrefManager(getApplicationContext());
@@ -231,6 +205,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etNoHpBankSampah.setEnabled(false);
         etAlamat.setText(getAlamat);
         etJamOperasional.setText(getJamOperasional);
+        etLatLong.setText( getLatLong );
 
         ctd = new CountDownTimer(2000, 1000) {
             @Override
@@ -279,7 +254,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openMaps = new Intent(getApplicationContext(), OpenMaps.class);
-                startActivityForResult(openMaps, ADDRESS_REQUEST_CODE);
+                startActivityForResult(openMaps, 2);
             }
         });
 
@@ -499,6 +474,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 case ADDRESS_REQUEST_CODE:
                     String lokasi = data.getStringExtra("Alamat_Lokasi");
                     etAlamat.setText(lokasi);
+                    etLatLong.setText( strLatLong_Update );
 
                     strLatLong_Update = data.getStringExtra("LatLong_Lokasi");
                     Log.e("tag updt latlong", data.getStringExtra("LatLong_Lokasi"));
@@ -567,7 +543,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         strNoHpBankSampah = etNoHpBankSampah.getText().toString();
         strAlamat_Update = etAlamat.getText().toString();
         strJamOperasional = etJamOperasional.getText().toString();
-        strLatLong_Update = etLatLong.getText().toString();
+        strLatLong = etLatLong.getText().toString();
 
         if (etEmailBankSampah.getText().toString().length()==0)
         {
@@ -606,9 +582,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    session.updateProfil(strNamaLengkap_Update, strLatLong_Update, strEmail_Update, strAlamat_Update, strJamOperasional);
-                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(changePassword);
+                                    session.updateProfil(strNamaLengkap_Update, strLatLong, strEmail_Update, strAlamat_Update, strJamOperasional);
+                                    Intent UpdateProfil = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(UpdateProfil);
                                     finish();
                                 }
                             });
@@ -640,7 +616,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 params.put(field_name[1], strEmail_Update);
                 params.put(field_name[2], strAlamat_Update);
                 params.put(field_name[3], strJamOperasional);
-                params.put(field_name[4], strLatLong_Update);
+                params.put(field_name[4], strLatLong);
                 return params;
             }
 
@@ -660,7 +636,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private void uploadImage() {
         customProgress.showProgress(this, "", false);
         final String[] field_name = {"doctype", "docname", "filename", "isprivate", "filedata", "docfield"};
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_upload_image");
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_uploud_photo");
 
         //Get Image and Convert to Base64
         getBitmapPicture = ((BitmapDrawable) UpdateProfileActivity.imgProfil.getDrawable()).getBitmap();
@@ -730,8 +706,5 @@ public class UpdateProfileActivity extends AppCompatActivity {
         startActivity(a);
         finish();
         super.onBackPressed();
-    }
-    public void openAutoPlace(View view) {
-        startActivity(new Intent(this, PlaceAutoCompleteActivity.class));
     }
 }
