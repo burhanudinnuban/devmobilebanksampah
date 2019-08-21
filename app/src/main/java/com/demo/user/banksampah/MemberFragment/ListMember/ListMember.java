@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -60,7 +61,7 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
     protected LinearLayout parent_layout;
     protected ListView lvListMember;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    protected LinearLayout linear_ListMember;
+    protected RelativeLayout linear_ListMember;
     protected ConnectivityManager conMgr;
     protected Button btDetailListMember;
 

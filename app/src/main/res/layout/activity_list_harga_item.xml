@@ -6,115 +6,129 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout_ListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+            <!--<AutoCompleteTextView-->
+                <!--android:drawableLeft="@drawable/ic_search1"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:id="@+id/etSearchItem"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.3"-->
+                <!--android:hint="Cari Disini" />-->
+        <TextView
+            android:id="@+id/tvJudul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Daftar Item"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_margin="15dp"/>
+
         <LinearLayout
+            android:id="@+id/parentKolom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <AutoCompleteTextView
-                android:drawableLeft="@drawable/ic_search1"
-                android:drawablePadding="5dp"
-                android:id="@+id/etSearchItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.3"
-                android:hint="Cari Disini" />
-
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/imgGaris4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:layout_below="@+id/tvJudul"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"/>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_marginLeft="15dp">
             <ImageView
                 android:id="@+id/imgGaris"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:color/darker_gray"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Jenis Item"
-                android:textSize="12sp"
-                android:maxLines="1"
-                android:maxLength="15"
-                android:textColor="#000"
-                android:textStyle="bold"/>
-            <ImageView
-                android:id="@+id/imgGaris1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:color/darker_gray"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp" />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/cdBtnDetail"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Harga Item(/Kg)"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:maxLength="15"
-                android:textSize="12sp"
-                android:textColor="#000"
-                android:textStyle="bold"/>
-            <ImageView
-                android:id="@+id/imgGaris2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:color/darker_gray"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit"
-                android:textColor="#0083FF"
-                android:drawableRight="@drawable/arrow_right"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:visibility="invisible"/>
+                app:srcCompat="@android:color/darker_gray" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgGaris1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:color/darker_gray"
+                    android:layout_marginRight="15dp" />
+                <TextView
+                    android:id="@+id/tvJenisItem"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Jenis Item"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:maxLength="15"
+                    android:textStyle="bold"
+                    android:textColor="#000000"/>
+                <ImageView
+                    android:id="@+id/imgGaris2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:color/darker_gray"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/tvHargaItem"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/cdBtnDetail"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Harga Item(/Kg)"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:maxLength="15"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"/>
+                <ImageView
+                    android:id="@+id/imgGaris3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:color/darker_gray"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"/>
+                <ImageView
+                    android:id="@+id/btnEditPengurus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit"
+                    android:layout_margin="5dp"
+                    android:visibility="invisible"/>
+                <ImageView
+                    android:id="@+id/btnHapusPengurus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete"
+                    android:layout_marginLeft="5dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginRight="5dp"
+                    android:visibility="invisible"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:color/darker_gray" />
+            </TableRow>
             <ImageView
-                android:id="@+id/imgGaris6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:color/darker_gray"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"/>
-        </TableRow>
-        <ImageView
-            android:id="@+id/imgGaris5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:color/darker_gray"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"/>
+                android:id="@+id/imgGaris4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:color/darker_gray" />
+        </LinearLayout>
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp">
+            android:layout_marginEnd="15dp"
+            android:layout_below="@+id/parentKolom">
             <ListView
                 android:id="@+id/lvHargaItem"
                 android:layout_width="match_parent"
@@ -123,7 +137,16 @@
                 android:dividerHeight="0dp">
             </ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
-    </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbaddItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/swipeToRefresh"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_add_circle" />
+    </RelativeLayout>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cd_noData"

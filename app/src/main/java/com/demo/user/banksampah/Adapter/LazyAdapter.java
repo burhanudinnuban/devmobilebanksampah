@@ -19,13 +19,20 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Activities.UpdateListItem;
+import com.demo.user.banksampah.DataPengurus.EditPengurus;
 import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
 import com.demo.user.banksampah.MemberFragment.RequestMember.DetailRequestMember;
 import com.demo.user.banksampah.R;
@@ -48,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import es.dmoral.toasty.Toasty;
@@ -94,7 +102,7 @@ public class LazyAdapter extends BaseAdapter {
     //private String getMessage_Result = null;
 
     //Untuk Cek Order Detail List
-    protected TextView tvOrderID, tvStatusOrder, tvTotalKg, tvTotalPoints, tvAlamat;
+    protected TextView tvOrderID, tvStatusOrder, tvTotalKg, tvTotalPoints, tvAlamat, tvIdPengurus;
     //private String strOrderID, strIDOrder_List;
     //private String strIDOrder_List;
     private int Status_PickupTime;
@@ -206,10 +214,13 @@ public class LazyAdapter extends BaseAdapter {
 
         //Untuk Fragment Position 12
         TextView tvJenisItem, tvHargaItem, tvDetailItem;
+        ImageView imgEditItem, imgHapusItem;
 
         //Untuk Fragment Position 13
-        TextView tvNamaPengurus, tvJabatan;
-        Button btnAddPengurus, btnHapusPengurus, btnEditPengurus;
+        TextView tvNamaPengurus, tvJabatan, tvIdPengurus;
+        ImageView btnHapusPengurus, btnEditPengurus;
+        RelativeLayout parent_layout;
+
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -825,10 +836,10 @@ public class LazyAdapter extends BaseAdapter {
                 {
                     vi = inflater.inflate(R.layout.lv_list_harga_item,parent, false);
                     holder = new ViewHolder();
-                    holder.tvDetailItem = vi.findViewById(R.id.tvDetailItem);
+                    holder.imgEditItem = vi.findViewById(R.id.btnEditItem);
+                    holder.imgHapusItem = vi.findViewById(R.id.btnHapusItem);
                     holder.tvHargaItem = vi.findViewById(R.id.tvHargaItem);
                     holder.tvJenisItem = vi.findViewById(R.id.tvJenisItem);
-
 
                     vi.setTag(holder);
                 }
@@ -855,7 +866,14 @@ public class LazyAdapter extends BaseAdapter {
                     e.printStackTrace();
                     Log.e("tag", e.toString());
                 }
-                holder.tvDetailItem.setOnClickListener(new View.OnClickListener() {
+                holder.imgHapusItem.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        hapusItem( strIdItem );
+                    }
+                } );
+
+                holder.imgEditItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent_detail = new Intent(activity, UpdateListItem.class);
@@ -877,6 +895,7 @@ public class LazyAdapter extends BaseAdapter {
                     holder.tvJabatan = vi.findViewById(R.id.tvJabatan);
                     holder.btnHapusPengurus = vi.findViewById(R.id.btnHapusPengurus);
                     holder.btnEditPengurus = vi.findViewById(R.id.btnEditPengurus);
+                    holder.tvIdPengurus = vi.findViewById( R.id.id_pengurus );
 
                     vi.setTag(holder);
                 }
@@ -890,9 +909,30 @@ public class LazyAdapter extends BaseAdapter {
                 final String strNamaPengurus = ListPengurus.get("nama_pengurus");
                 final String strJabatan = ListPengurus.get("jabatan");
                 final String strBanksampah = ListPengurus.get("id_bank_sampah");
+                final String strIdPengurus = ListPengurus.get("name");
+
+                holder.btnEditPengurus.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent editPengurus = new Intent( activity, EditPengurus.class );
+                        editPengurus.putExtra("nama_pengurus", strNamaPengurus);
+                        editPengurus.putExtra("jabatan", strJabatan);
+                        editPengurus.putExtra("id_bank_sampah", strBanksampah);
+                        editPengurus.putExtra("name", strIdPengurus);
+                        activity.startActivity( editPengurus );
+                    }
+                } );
+
+                holder.btnHapusPengurus.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        hapusPengurus( strIdPengurus );
+                    }
+                } );
 
                 holder.tvNamaPengurus.setText(strNamaPengurus);
                 holder.tvJabatan.setText(strJabatan);
+                holder.tvIdPengurus.setText(strIdPengurus);
 
                 break;
 
@@ -918,9 +958,7 @@ public class LazyAdapter extends BaseAdapter {
                 final String strNoRek = ListRekeningBank.get("jabatan");
                 final String strPemilik = ListRekeningBank.get("id_bank_sampah");
 
-
             default:
-
                 break;
         }
         return vi;
@@ -1489,5 +1527,141 @@ public class LazyAdapter extends BaseAdapter {
         }
     }
     //<---------------------- Fragment Position 7 & 8 - Driver Details ---------------------->
+
+    //<---------------------- Fragment Position 13 - Incoming Order ---------------------->
+    private void hapusPengurus(final String str_id_pengurus){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+        builder.setMessage(R.string.MS_HAPUS_SUCCESS)
+                .setCancelable(false)
+                .setTitle("Konfirmasi Hapus")
+                .setMessage("Apakah Anda yakin?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        final String[] field_name = {"id_pengurus"};
+                        String base_url = apiData.get("str_url_address") + (".delete_pengurus");
+                        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("DEBUG", "Register Response: " + response);
+                                try {
+                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+                                    builder.setMessage(R.string.MS_HAPUS_SUCCESS)
+                                            .setCancelable(false)
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    Intent hapusPengurus = new Intent(activity, MainActivity.class);
+                                                    activity.startActivity(hapusPengurus);
+                                                    activity.finish();
+                                                }
+                                            });
+                                    android.app.AlertDialog alert = builder.create();
+                                    alert.show();
+                                    Log.e("tag", "sukses");
+                                } catch (Throwable t) {
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }) {
+                            @Override
+                            protected Map<String, String> getParams() {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(field_name[0],str_id_pengurus);
+                                return params;
+                            }
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                return params;
+                            }
+                        };
+                        // Adding request to request queue
+                        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        android.app.AlertDialog alert = builder.create();
+        alert.show();
+        Log.e("tag", "sukses");
+    }
+    //<---------------------- Fragment Position 13 - Incoming Order ---------------------->
+
+    //<---------------------- Fragment Position 12 - Incoming Order ---------------------->
+
+    private void hapusItem(final String str_id_item){
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+        builder.setMessage("Item Berhasil Dihapus.")
+                .setCancelable(false)
+                .setTitle("Konfirmasi Hapus")
+                .setMessage("Apakah Anda yakin?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        final String[] field_name = {"id_item"};
+                        String base_url = apiData.get("str_url_address") + (".delete_item");
+                        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("DEBUG", "Register Response: " + response);
+                                try {
+                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+                                    builder.setMessage(R.string.MS_HAPUS_SUCCESS)
+                                            .setCancelable(false)
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    Intent hapusPengurus = new Intent(activity, MainActivity.class);
+                                                    activity.startActivity(hapusPengurus);
+                                                    activity.finish();
+                                                }
+                                            });
+                                    android.app.AlertDialog alert = builder.create();
+                                    alert.show();
+                                    Log.e("tag", "sukses");
+                                } catch (Throwable t) {
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }) {
+                            @Override
+                            protected Map<String, String> getParams() {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(field_name[0],str_id_item);
+                                return params;
+                            }
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                return params;
+                            }
+                        };
+                        // Adding request to request queue
+                        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        android.app.AlertDialog alert = builder.create();
+        alert.show();
+        Log.e("tag", "sukses");
+    }
+    //<---------------------- Fragment Position 12 - Incoming Order ---------------------->
+
 }
 

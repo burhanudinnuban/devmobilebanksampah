@@ -344,7 +344,7 @@ public class TambahkanDaftar extends AppCompatActivity {
                 Log.d("DEBUG", "Register Response: " + response);
                 try {
                     AlertDialog.Builder builder = new AlertDialog.Builder(TambahkanDaftar.this);
-                    builder.setMessage(R.string.MSG_TAMBAH_ITEM)
+                    builder.setMessage("Item Berhasil Ditambahkan.")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {

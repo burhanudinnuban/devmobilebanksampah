@@ -47,7 +47,7 @@ public class DataPengurus extends AppCompatActivity {
     protected HashMap<String,String> user;
 
     //Get Data From Login Process
-    protected static String getNama = "";
+    protected static String getNama = "", id_pengurus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

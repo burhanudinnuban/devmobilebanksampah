@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <ImageView
         android:id="@+id/imgGaris"
         android:layout_width="match_parent"
@@ -56,21 +60,25 @@
             app:srcCompat="@android:color/darker_gray"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"/>
-        <TextView
-            android:id="@+id/tvDetailItem"
+        <ImageView
+            android:id="@+id/btnEditItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit"
-            android:textColor="#0083FF"
-            android:drawableRight="@drawable/arrow_right"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"/>
+            android:src="@drawable/ic_edit"
+            android:layout_margin="5dp"/>
         <ImageView
-            android:id="@+id/imgGaris9"
+            android:id="@+id/btnHapusItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:layout_marginLeft="5dp"
+            android:layout_margin="5dp"
+            android:layout_marginRight="5dp"/>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:srcCompat="@android:color/darker_gray"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginLeft="5dp"
+            app:srcCompat="@android:color/darker_gray" />
 
     </TableRow>
     <ImageView
@@ -78,4 +86,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@android:color/darker_gray" />
+
+    </LinearLayout>
 </LinearLayout>

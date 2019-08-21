@@ -1,14 +1,14 @@
 package com.demo.user.banksampah.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -66,6 +66,7 @@ public class ListHargaItem extends AppCompatActivity {
 
     protected String strIDUser;
 
+    protected FloatingActionButton fbaddItem;
     protected AutoCompleteTextView editSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,62 +88,17 @@ public class ListHargaItem extends AppCompatActivity {
         tvHargaItem =findViewById(R.id.tvHargaItem);
         tvJenisItem = findViewById(R.id.tvJenisItem);
         llParent = findViewById(R.id.parentItem);
-        llItem = findViewById(R.id.linearLayout_ListItem);
         lvHargaItem = findViewById(R.id.lvHargaItem);
-        editSearch = findViewById(R.id.etSearchItem);
+        fbaddItem = findViewById( R.id.fbaddItem );
 
-        editSearch.addTextChangedListener(new TextWatcher() {
+        fbaddItem.setOnClickListener( new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void onClick(View view) {
+                Intent additem = new Intent( ListHargaItem.this, TambahkanDaftar.class );
+                startActivity( additem );
             }
+        } );
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                String[] field_name = {"message", "id_item", "id_bank_sampah", "jenis_item","harga_per_kilo"};
-
-                ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
-
-                Log.e("tag1", allOrderSearch.toString());
-
-                try {
-                    for (int x = 0; x < allOrder.size(); x++) {
-                        JSONObject c = new JSONObject(allOrder.get(x));
-
-                        String id_item= c.getString(field_name[1]);
-                        String id_bank_sampah = c.getString(field_name[2]);
-                        String jenis_item = c.getString(field_name[3]);
-                        String harga_per_kilo = c.getString(field_name[4]);
-
-                        if(jenis_item.toLowerCase().contains(editSearch.getText().toString().toLowerCase())) {
-
-                            HashMap<String, String> map = new HashMap<>();
-
-                            map.put(field_name[1], id_item);
-                            map.put(field_name[2], id_bank_sampah);
-                            map.put(field_name[3], jenis_item);
-                            map.put(field_name[4], harga_per_kilo);
-                            allOrderSearch.add(map);
-                        }
-                    }
-
-                    Log.d("tag1", allOrderSearch.toString());
-
-                    adapter = new LazyAdapter(ListHargaItem.this, allOrderSearch, 12);
-                    lvHargaItem.setAdapter(adapter);
-                } catch (JSONException e) {
-                    Log.d("tag1", "error");
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
 //        //Intent Ke Detail Member Activity
 //        if (getApplicationContext() != null)

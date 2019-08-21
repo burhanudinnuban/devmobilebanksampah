@@ -222,7 +222,6 @@ public class DetailMemberActivity extends AppCompatActivity {
                             }
                         }
 
-
                     Log.d("tag", allOrder.toString());
                     Log.d("tag", allOrder1.toString());
 
@@ -430,8 +429,6 @@ public class DetailMemberActivity extends AppCompatActivity {
                 alert.show();
                 Log.e("tag", "sukses");
             }
-
-
         });
     }
 
@@ -470,6 +467,5 @@ public class DetailMemberActivity extends AppCompatActivity {
         });
         alertDialog1 = builder.create();
         alertDialog1.show();
-
     }
 }

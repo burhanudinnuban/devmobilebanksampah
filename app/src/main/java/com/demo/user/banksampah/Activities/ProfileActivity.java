@@ -56,7 +56,6 @@ public class ProfileActivity extends AppCompatActivity {
         tvDataProfil = findViewById(R.id.tvDataSampah);
         tvPassword= findViewById(R.id.tvGantiKataSandi);
         tvLogOut = findViewById(R.id.tvLogOut);
-        tvDaftarHarga = findViewById(R.id.tvDaftarHarga);
         tvListHarga = findViewById(R.id.tvListHarga);
         tvAddPengurus = findViewById(R.id.tvAddPengurus);
         tvAddRekBank = findViewById(R.id.tvAddRekBank);
@@ -83,14 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProfilePopUp(v);
-            }
-        });
-
-        tvDaftarHarga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent daftar_harga = new Intent(getApplicationContext(), TambahkanDaftar.class);
-                startActivity(daftar_harga);
             }
         });
 

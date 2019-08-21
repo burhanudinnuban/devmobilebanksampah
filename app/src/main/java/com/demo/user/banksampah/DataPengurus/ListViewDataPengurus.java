@@ -4,16 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -64,7 +62,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
     protected CardView cd_NoData, cd_NoConnection;
 
     private AutoCompleteTextView etSearch;
-    protected Button btnAddPengurus;
+    protected FloatingActionButton btnAddPengurus;
 
     //Get Data From Login Process
     protected static String getNama = "";
@@ -87,7 +85,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
         customProgress = CustomProgress.getInstance();
         lvListMember = findViewById(R.id.listViewPengurus);
         mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
-        btnAddPengurus = findViewById( R.id.btnAddPengurus );
+        btnAddPengurus = findViewById( R.id.fbaddPengurus );
 
         btnAddPengurus.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -97,56 +95,9 @@ public class ListViewDataPengurus extends AppCompatActivity {
             }
         } );
 
-        etSearch = findViewById(R.id.etSearch);
-        etSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String[] field_name = {"message", "nama_pengurus", "jabatan","id_bank_sampah"};
-
-                ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
-
-                Log.e("tag1", allOrderSearch.toString());
-
-                try {
-                    for (int x = 0; x < allOrder.size(); x++) {
-                        JSONObject c = new JSONObject(allOrder.get(x));
-
-                        String nama_pengurus = c.getString(field_name[1]);
-                        String jabatan = c.getString(field_name[2]);
-                        String namabanksampah = c.getString(field_name[3]);
-
-                        if(nama_pengurus.toLowerCase().contains(etSearch.getText().toString().toLowerCase())) {
-
-                            HashMap<String, String> map = new HashMap<>();
-
-                            map.put(field_name[1], nama_pengurus);
-                            map.put(field_name[2], jabatan);
-                            map.put(field_name[3], namabanksampah);
-                            allOrderSearch.add(map);
-                        }
-                    }
-
-                    Log.d("tag1", allOrderSearch.toString());
-
-                    adapter = new LazyAdapter(ListViewDataPengurus.this, allOrderSearch, 13);
-                    lvListMember.setAdapter(adapter);
-                } catch (JSONException e) {
-                    Log.d("tag1", "error");
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -170,6 +121,8 @@ public class ListViewDataPengurus extends AppCompatActivity {
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     //Jalanin API
+                    allOrder.clear();
+                    getListPengurus();
                 } else {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
@@ -183,7 +136,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListPengurus();
+
         } else {
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
@@ -192,6 +145,14 @@ public class ListViewDataPengurus extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        allOrder.clear();
+        getListPengurus();
+    }
+
     private void getListPengurus(){
         customProgress.showProgress(ListViewDataPengurus.this, "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_pengurus");
@@ -240,7 +201,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
     }
 
     protected void viewDataPengurus(String resp_content){
-        String[] field_name = {"message", "id_bank_sampah", "nama_pengurus", "jabatan"};
+        String[] field_name = {"message", "id_bank_sampah", "nama_pengurus", "jabatan","name"};
 
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
@@ -255,11 +216,13 @@ public class ListViewDataPengurus extends AppCompatActivity {
 
                 String nama_pengurus = c.getString(field_name[2]);
                 String jabatan = c.getString(field_name[3]);
+                String id_pengurus = c.getString(field_name[4]);
 
                 HashMap<String, String> map = new HashMap<>();
 
                 map.put(field_name[2], nama_pengurus);
                 map.put(field_name[3], jabatan);
+                map.put(field_name[4], id_pengurus);
 
                 allOrder.add(map);
             }

@@ -32,7 +32,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".DataRekeningBank.ListViewRekeningBank"></activity>
+        <activity android:name=".DataPengurus.EditPengurus"></activity>
+        <activity android:name=".DataRekeningBank.ListViewRekeningBank" />
         <activity android:name=".DataRekeningBank.DataRekeningBank" />
         <activity android:name=".DataPengurus.ListViewDataPengurus" />
         <activity android:name=".DataPengurus.DataPengurus" />
