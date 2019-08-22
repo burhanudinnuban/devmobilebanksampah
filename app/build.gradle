@@ -115,9 +115,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-analytics:11.8.0'
     implementation 'com.google.android.libraries.places:places:1.1.0'
 
+    implementation 'com.andrognito.pinlockview:pinlockview:2.1.0'
 
     //Here Maps
     implementation(name: 'HERE-sdk', ext: 'aar')
+
 }
 
 apply plugin: 'com.google.gms.google-services'

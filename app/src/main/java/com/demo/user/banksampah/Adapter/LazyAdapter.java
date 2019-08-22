@@ -712,7 +712,6 @@ public class LazyAdapter extends BaseAdapter {
                 if (convertView == null) {
                     vi = inflater.inflate(R.layout.lv_member_list, parent, false);
 
-
                     holder = new ViewHolder();
 
                     holder.tvNamaMember = vi.findViewById(R.id.tvNamaMember_ListMember);
@@ -729,7 +728,6 @@ public class LazyAdapter extends BaseAdapter {
 
                 HashMap<String, String> StatusPoint_List1;
                 StatusPoint_List1 = data.get(position);
-
 
                 final String strNamaMember = StatusPoint_List1.get("nama_member");
                 final String strIdMember = StatusPoint_List1.get("id_member");
@@ -754,7 +752,6 @@ public class LazyAdapter extends BaseAdapter {
                         activity.startActivity(intent_detail);
                     }
                 });
-
 
                 try
                 {

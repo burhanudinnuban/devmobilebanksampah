@@ -81,7 +81,6 @@ public class ListViewRekeningBank extends AppCompatActivity {
         lvListMember = findViewById(R.id.listViewPengurus);
         mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
 
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

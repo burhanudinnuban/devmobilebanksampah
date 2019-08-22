@@ -17,6 +17,18 @@
         <item name="android:actionMenuTextColor">@color/colorFragmenTittleFont</item>
     </style>
 
+
+        <style name="pin_edittext_style">
+            <item name="android:gravity">center</item>
+            <item name="android:cursorVisible">false</item>
+            <item name="android:maxLength">1</item>
+            <item name="android:minEms">2</item>
+            <item name="android:inputType">textPassword</item>
+            <item name="android:focusable">true</item>
+            <item name="android:focusableInTouchMode">true</item>
+        </style>
+
+
     <style name="TextLabel" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/gradLoginBoxCenter</item>

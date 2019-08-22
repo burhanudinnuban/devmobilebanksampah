@@ -57,6 +57,10 @@
     <string name="MSG_NO_ALREADY_EXIST">Mohon Maaf Nomor Tersebut Sudah Terdaftar</string>
     <string name="MSG_PROCESSING_DATA">Melakukan Validasi Data..</string>
 
+    <string name="app_name1">PinProject</string>
+    <string name="pin_content_desc">PIN input field</string>
+    <string name="pin_label_text">PIN</string>
+
     <string name="MSG_FALSE_LOGIN">Nomor Telepon atau Kata Sandi yang Anda Masukkan Salah!</string>
     <string name="MSG_SUCCESS_SEND_OTP">Kode Aktivasi Telah Dikirimkan ke Nomor Telepon Anda. Silakan Masukkan Kode Aktivasi Tersebut</string>
 
