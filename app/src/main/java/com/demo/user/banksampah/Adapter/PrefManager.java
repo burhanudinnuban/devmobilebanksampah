@@ -24,6 +24,7 @@ public class PrefManager {
     private static final String PREF_NAME = "eRecyclePref";
 
     private static final String IS_LOGIN = "isLoggedIn";
+    private static final String IS_PIN = "isPinInput";
 
     public static final String KEY_NO_HP = "pref_no_hp";
     public static final String KEY_NAMA = "pref_nama";
@@ -33,6 +34,7 @@ public class PrefManager {
     public static final String KEY_EMAIL = "pref_email";
     public static final String KEY_FOTO = "pref_foto";
     public static final String KEY_ID = "pref_id";
+    public static final String KEY_PIN = "pref_pin";
     public static final String KEY_ROLE_USER = "pref_role_user";
     public static final String KEY_ID_ITEM = "pref_id_item";
     public static final String KEY_HARGA_ITEM = "pref_harga_item";
@@ -82,6 +84,23 @@ public class PrefManager {
         editor.commit();
     }
 
+    //Create Login Session
+    public void createPinSession(String no_hp, String nama, String point, String latlong,
+                                   String alamat, String email, String foto, String id, String role_user){
+        editor.putBoolean(IS_LOGIN, true);
+
+        editor.putString(KEY_NO_HP, no_hp);
+        editor.putString(KEY_NAMA, nama);
+        editor.putString(KEY_POINT, point);
+        editor.putString(KEY_LATLONG, latlong);
+        editor.putString(KEY_ALAMAT, alamat);
+        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_FOTO, foto);
+        editor.putString(KEY_ID, id);
+        editor.putString(KEY_ROLE_USER, role_user);
+        editor.commit();
+    }
+
     public void updateProfil(String nama,String latlong, String email, String alamat, String jam){
         editor.putString(KEY_NAMA, nama);
         editor.putString(KEY_EMAIL, email);
@@ -92,9 +111,12 @@ public class PrefManager {
         editor.apply();
     }
 
-    public void updatePictureProfil(String image_profil){
-        editor.putString(KEY_FOTO, image_profil);
+    public void CheckPin(String no_telepon,String pin){
+        editor.putBoolean(IS_PIN, true);
+        editor.putString(KEY_NO_HP, no_telepon);
+        editor.putString(KEY_PIN, pin);
         editor.commit();
+        editor.apply();
     }
 
     //Check if User Status is Login Or Not
@@ -122,6 +144,7 @@ public class PrefManager {
         user.put(KEY_ROLE_USER, pref.getString(KEY_ROLE_USER, null));
         user.put(KEY_JAM_OPERASIONAL, pref.getString(KEY_JAM_OPERASIONAL, null));
         user.put(KEY_LATLONG, pref.getString(KEY_LATLONG, null));
+        user.put(KEY_PIN, pref.getString(KEY_PIN, null));
         return user;
     }
 
@@ -145,6 +168,11 @@ public class PrefManager {
     //Checking for Login
     public boolean isLoggedIn(){
         return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    //Checking for Pin
+    public boolean isPinIn(){
+        return pref.getBoolean(IS_PIN, false);
     }
 
 

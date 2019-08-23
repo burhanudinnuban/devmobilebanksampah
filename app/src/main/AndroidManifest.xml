@@ -32,12 +32,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".PencairanSaldo.PencairanNasabah"></activity>
+        <activity android:name=".Pin.CheckPin" />
         <activity android:name=".DataPengurus.EditPengurus" />
         <activity android:name=".DataRekeningBank.ListViewRekeningBank" />
         <activity android:name=".DataRekeningBank.DataRekeningBank" />
         <activity android:name=".DataPengurus.ListViewDataPengurus" />
         <activity android:name=".DataPengurus.DataPengurus" />
-        <activity android:name=".GoogleMaps.PlaceAutoCompleteActivity" />
         <activity android:name=".MemberFragment.ListMember.ListOrderUser" />
         <activity android:name=".Activities.UpdateListItem" />
         <activity android:name=".Activities.ListHargaItem" />
