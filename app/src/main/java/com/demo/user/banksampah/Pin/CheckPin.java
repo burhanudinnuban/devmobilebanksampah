@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
-import com.demo.user.banksampah.PencairanSaldo.PencairanNasabah;
+import com.demo.user.banksampah.PencairanSaldo.Nasabah.PencairanNasabah;
 import com.demo.user.banksampah.R;
 
 import org.json.JSONException;
@@ -48,9 +47,8 @@ public class CheckPin extends AppCompatActivity {
     protected CustomProgress customProgress;
 
     //Pin
-    protected TextView tvNum1, tvNum2, tvNum3, tvNum4, tvNum5, tvNum6, tvNum7, tvNum8, tvNum9, tvNum0, tvDel;
-    protected ImageView img1, img2, img3, img4, img5, img6, imgCancel;
-    protected Button btnSubmit;
+    protected TextView tvNum1, tvNum2, tvNum3, tvNum4, tvNum5, tvNum6, tvNum7, tvNum8, tvNum9, tvNum0, tvDel, tvLupaPin;
+    protected ImageView img1, img2, img3, img4, img5, img6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +75,7 @@ public class CheckPin extends AppCompatActivity {
         tvNum9 = findViewById( R.id.tvNum9 );
         tvNum0 = findViewById( R.id.tvNum0 );
         tvDel = findViewById( R.id.tvDel );
+        tvLupaPin = findViewById( R.id.etLupaPin );
         img1 = findViewById( R.id.img1 );
         img2 = findViewById( R.id.img2 );
         img3 = findViewById( R.id.img3 );
@@ -84,6 +83,13 @@ public class CheckPin extends AppCompatActivity {
         img5 = findViewById( R.id.img5 );
         img6 = findViewById( R.id.img6 );
 
+        tvLupaPin.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent lupaPin = new Intent( CheckPin.this, LupaPin.class );
+                startActivity( lupaPin );
+            }
+        } );
 
         tvNum0.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -217,21 +223,16 @@ public class CheckPin extends AppCompatActivity {
             }
         } );
 
-        btnSubmit = findViewById( R.id.btnsubmit );
-        // if button is clicked, close the custom dialog
-        btnSubmit.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listPin.size() == 6) {
-                    String pin = "";
-                    for (int i = 0; i < listPin.size(); i++) {
-                        pin = pin + listPin.get( i );
-                    }
-                    Log.d( "tag", pin );
-                    SaveToDB( pin );
-                }
-            }
-        } );
+//        btnSubmit = findViewById( R.id.btnsubmit );
+//        // if button is clicked, close the custom dialog
+//        btnSubmit.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (listPin.size() == 6) {
+//
+//                }
+//            }
+//        } );
     }
 
     protected void SaveToDB(final String Pin) {
@@ -301,17 +302,17 @@ public class CheckPin extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStart() {
-        if (session.isPinIn()) {
-//            HashMap<String, String> user = session.getUserDetails();
-//            strNo_Telepon = user.get( PrefManager.KEY_NO_HP );
-            Intent intent_session = new Intent( CheckPin.this, PencairanNasabah.class );
-            startActivity( intent_session );
-            finish();
-        }
-        super.onStart();
-    }
+//    @Override
+//    public void onStart() {
+//        if (session.isPinIn()) {
+////            HashMap<String, String> user = session.getUserDetails();
+////            strNo_Telepon = user.get( PrefManager.KEY_NO_HP );
+//            Intent intent_session = new Intent( CheckPin.this, PencairanNasabah.class );
+//            startActivity( intent_session );
+//            finish();
+//        }
+//        super.onStart();
+//    }
 
     private void checkPinSize() {
         img1.setBackgroundResource( R.drawable.border_rectangle );
@@ -344,8 +345,14 @@ public class CheckPin extends AppCompatActivity {
 
         if (listPin.size() == 6) {
             img6.setBackgroundResource( R.drawable.border_rectangle_dark );
-        } else {
-
+            String pin = "";
+            for (int i = 0; i < listPin.size(); i++) {
+                pin = pin + listPin.get( i );
+            }
+            Log.d( "tag", pin );
+            SaveToDB( pin );
+        } else
+            {
         }
         Log.d( "tag", String.valueOf( listPin ) );
     }

@@ -32,8 +32,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".PencairanSaldo.PencairanNasabah"></activity>
+        <activity android:name=".Pin.LupaPin"></activity>
+        <activity android:name=".Pin.CheckSetPin" />
+        <activity android:name=".PencairanSaldo.Nasabah.PencairanNasabah" />
         <activity android:name=".Pin.CheckPin" />
+        <activity android:name=".Pin.CreatePin" />
         <activity android:name=".DataPengurus.EditPengurus" />
         <activity android:name=".DataRekeningBank.ListViewRekeningBank" />
         <activity android:name=".DataRekeningBank.DataRekeningBank" />

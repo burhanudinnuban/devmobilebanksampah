@@ -32,7 +32,7 @@ import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
-import com.demo.user.banksampah.Pin.CheckPin;
+import com.demo.user.banksampah.Pin.CheckSetPin;
 import com.demo.user.banksampah.R;
 import com.squareup.picasso.Picasso;
 
@@ -150,7 +150,7 @@ public class DetailMemberActivity extends AppCompatActivity {
         imgPencairan.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent checkpin = new Intent( DetailMemberActivity.this, CheckPin.class );
+                Intent checkpin = new Intent( DetailMemberActivity.this, CheckSetPin.class );
                 startActivity( checkpin );
 //                String strIdMemberDetail = tvIdMemberDetail.getText().toString();
 //                PencairanSaldoNasabah( strIdMemberDetail );
