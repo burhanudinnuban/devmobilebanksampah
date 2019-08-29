@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
@@ -16,32 +17,36 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
+import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.MySSLSocketFactory;
-import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import cz.msebera.android.httpclient.Header;
 import es.dmoral.toasty.Toasty;
 
 public class ListOrderFragment extends Fragment {
 
+    private final String TAG = ListOrderFragment.class.getSimpleName();
+    protected LinearLayout parent_layout;
+
     //Session Class
     protected PrefManager session;
-    protected String strIDUser;
+    protected String strIDUser, strNamaUser;
 
     /*API process and dialog*/
     protected RestProcess rest_class;
@@ -58,7 +63,6 @@ public class ListOrderFragment extends Fragment {
     protected View rootView;
     protected LazyAdapter adapter;
 
-    protected View include_FormOrderList;
     protected CardView cd_NoData, cd_NoConnection;
 
     public static ListOrderFragment newInstance() {
@@ -75,6 +79,11 @@ public class ListOrderFragment extends Fragment {
         session = new PrefManager(getContext());
         HashMap<String, String> user = session.getUserDetails();
         strIDUser = user.get(PrefManager.KEY_ID);
+        strNamaUser = user.get(PrefManager.KEY_NAMA);
+
+        Toast.makeText(getContext(), strNamaUser, Toast.LENGTH_SHORT).show();
+
+        parent_layout = rootView.findViewById(R.id.parent);
 
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
@@ -97,13 +106,12 @@ public class ListOrderFragment extends Fragment {
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListOrder(strIDUser);
+            getListOrder(strNamaUser);
         } else {
             Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
             cd_NoData.setVisibility(View.GONE);
             linear_listOrder.setVisibility(View.GONE);
-
         }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -111,7 +119,7 @@ public class ListOrderFragment extends Fragment {
             public void onRefresh() {
                 if (getActivity() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                        getListOrder(strIDUser);
+                        getListOrder(strNamaUser);
                     } else {
                         Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                     }
@@ -124,7 +132,7 @@ public class ListOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                    getListOrder(strIDUser);
+                    getListOrder(strNamaUser);
                 } else {
                     Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
@@ -133,125 +141,128 @@ public class ListOrderFragment extends Fragment {
                 }
             }
         });
-
         return rootView;
     }
 
+//        Button btnScan = rootView.findViewById(R.id.btnScan);
+//        btnScan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), QrCodeScannerActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        return rootView;
+
+
     @Override
     public void onResume() {
-        /*if (getActivity() != null) {
+        if (getActivity() != null) {
             if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                getListOrder(strIDUser);
+                getListOrder(strNamaUser);
             } else {
                 Toast.makeText(getContext(), "No Internet Connection",
                         Toast.LENGTH_LONG).show();
             }
         }
-        Log.e("tag", "OnResume");*/
+        Log.e("tag", "OnResume");
         super.onResume();
     }
 
     private void getListOrder(final String strIDUser) {
-        /*dialog.setMessage("Mengambil Data, Harap Menunggu");
-        dialog.show();*/
-        customProgress.showProgress(getContext(), "", false);
+        String base_url = apiData.get("str_url_address") + (".get_member_order");
+        final String[] field_name = {"id_bank_sampah"};
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String list_order_url;
-
-        list_order_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.get_order";
-        params.put("id_user", strIDUser);
-
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(list_order_url, params, new AsyncHttpResponseHandler() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            public void onResponse(String response) {
                 customProgress.hideProgress();
-                String resp_content = "";
+                Log.d(TAG, "Get List Order Response: " + response);
                 try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    displayOrder(resp_content);
+                    displayOrder(response);
                 } catch (Throwable t) {
-                    if (getContext() != null) {
-                        Toasty.error(getContext(), getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    }
-                    Log.e("tag", " 1 :" + String.valueOf(t));
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d(TAG, "Error Get List Order Response: " + t.toString());
                 }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "Volley Error: " + error.getMessage());
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], strIDUser);
+                return params;
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                customProgress.hideProgress();
-                if (getContext() != null) {
-                    Toasty.error(getContext(), getString(R.string.MSG_CODE_500) + " 1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-//                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-                }
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
             }
-        });
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
     private void displayOrder(String resp_content) {
-        String[] field_name = {"message", "berat_total", "total_point", "id_user", "name", "order_status", "image", "alamat", "latlong",
-                "nama_picker", "no_kendaraan", "foto_picker", "tipe_kendaraan"};
+        String[] field_name = {"message", "nama_bank_sampah", "berat_total", "nama", "status_order", "point_total", "name", "creation"};
 
         try {
-            JSONObject jsonObject = new JSONObject(resp_content);
-            String message = jsonObject.getString(field_name[0]);
-
-            if (!message.equalsIgnoreCase("Invalid")) {
+            JSONObject jsonObject = new JSONObject(resp_content.toString());
+            if (!jsonObject.toString().equals("{}")) {
                 ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
-                JSONArray cast = jsonObject.getJSONArray(field_name[0]);
-                Log.e("tag", String.valueOf(cast.length()));
+                Log.e("tag status", String.valueOf(jsonObject));
 
+                JSONArray cast = jsonObject.getJSONArray("message");
                 for (int i = 0; i < cast.length(); i++) {
                     JSONObject c = cast.getJSONObject(i);
 
-                    String beratTotal_Result = c.getString(field_name[1]);
-                    String totalPoint_Result = c.getString(field_name[2]);
-                    String idUser_Result = c.getString(field_name[3]);
-                    String orderName_Result = c.getString(field_name[4]);
-                    String status_Result = c.getString(field_name[5]);
-                    String image_Result = c.getString(field_name[6]);
-                    String alamat_Result = c.getString(field_name[7]);
-                    String latlong_Result = c.getString(field_name[8]);
+                    String namabanksampahresult = c.getString(field_name[1]);
+                    String berat_total = c.getString(field_name[2]);
+                    String nama = c.getString(field_name[3]);
+                    String status_order = c.getString(field_name[4]);
+                    String point_total = c.getString(field_name[5]);
+                    String name = c.getString(field_name[6]);
+                    String creation = c.getString(field_name[7]);
 
-                    //Detail Picker
-                    String namaPicker_Result = c.getString(field_name[9]);
-                    String noKendaraan_Result = c.getString(field_name[10]);
-                    String fotoPicker_Result = c.getString(field_name[11]);
-                    String tipeKendaraan_Result = c.getString(field_name[12]);
 
-                    Log.e("tag_order", orderName_Result);
 
                     HashMap<String, String> map = new HashMap<>();
-
-                    map.put(field_name[1], beratTotal_Result);
-                    map.put(field_name[2], totalPoint_Result);
-                    map.put(field_name[3], idUser_Result);
-                    map.put(field_name[4], orderName_Result);
-                    map.put(field_name[5], status_Result);
-                    map.put(field_name[6], image_Result);
-                    map.put(field_name[7], alamat_Result);
-
-                    //Detail Picker
-                    map.put(field_name[8], latlong_Result);
-                    map.put(field_name[9], namaPicker_Result);
-                    map.put(field_name[10], noKendaraan_Result);
-                    map.put(field_name[11], fotoPicker_Result);
-                    map.put(field_name[12], tipeKendaraan_Result);
+                    map.put(field_name[1], namabanksampahresult);
+                    map.put(field_name[2], berat_total);
+                    map.put(field_name[3], nama);
+                    map.put(field_name[4], status_order);
+                    map.put(field_name[5], point_total);
+                    map.put(field_name[6], name);
+                    map.put(field_name[7], creation);
 
                     allOrder.add(map);
                 }
 
-                Log.d("tag", allOrder.toString());
+//
 
-                adapter = new LazyAdapter(getActivity(), allOrder, 5);
+
+//                    //Detail Picker
+//                    String namaPicker_Result = c.getString(field_name[9]);
+//                    String noKendaraan_Result = c.getString(field_name[10]);
+//                    String fotoPicker_Result = c.getString(field_name[11]);
+//                    String tipeKendaraan_Result = c.getString(field_name[12]);
+
+                adapter = new LazyAdapter(getActivity(), allOrder, 11);
                 lvListOrder.setAdapter(adapter);
 
                 cd_NoConnection.setVisibility(View.GONE);
@@ -272,7 +283,7 @@ public class ListOrderFragment extends Fragment {
             if (getContext() != null) {
                 Toasty.error(getContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
             }
-            Log.e("tag", " 2 :" + String.valueOf(e));
+            Log.e("tag", " 2 :" + e);
             e.printStackTrace();
             /*include_FormOrderList.setVisibility(View.GONE);
             linear_NoData.setVisibility(View.VISIBLE);

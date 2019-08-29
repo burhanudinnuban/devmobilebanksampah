@@ -6,22 +6,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Histori Order User"
-        android:textColor="#000000"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_margin="5dp"/>
+
     <RelativeLayout
         android:id="@+id/linearLayout_ListMember"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="10dp">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
@@ -31,12 +23,13 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_below="@+id/Search">
+            android:layout_below="@+id/Search"
+            android:layout_centerInParent="true">
 
             <ListView
-                android:id="@+id/listView_OrderUser"
+                android:id="@+id/listView_OrderUserDetail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:divider="@null"
                 android:dividerHeight="0dp">
             </ListView>

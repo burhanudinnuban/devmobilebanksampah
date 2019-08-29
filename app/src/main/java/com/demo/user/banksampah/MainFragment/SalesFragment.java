@@ -365,8 +365,8 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
     private void showPopUpBarcode() {
         myDialog.setContentView(R.layout.pop_up_select_barcode);
 
-        Button btnCamera_Barcode = myDialog.findViewById(R.id.btnCamera_BarcodePopUp);
-        Button btnManual_Barcode = myDialog.findViewById(R.id.btnManual_BarcodePopUp);
+        Button btnCamera_Barcode = myDialog.findViewById(R.id.tvScanBarcode_PopUp);
+        Button btnManual_Barcode = myDialog.findViewById(R.id.tvManualBarcode_PopUp);
         Button btnCancel_Barcode = myDialog.findViewById(R.id.btnCancel_BarcodePopUp);
 
         btnCamera_Barcode.setOnClickListener(new View.OnClickListener() {
@@ -445,33 +445,33 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
 
         //Initiation if Data Exist -->
         cdDataBarcode = myDialog.findViewById(R.id.cardView_DataBarcode);
-        cdCalculated = myDialog.findViewById(R.id.cdCalculated);
-        cdInputKg = myDialog.findViewById(R.id.cdInputKg);
+//        cdCalculated = myDialog.findViewById(R.id.cdCalculated);
+//        cdInputKg = myDialog.findViewById(R.id.cdInputKg);
 
         tvProduk = myDialog.findViewById(R.id.tvNamaProduk_PopUp);
-        tvTipe = myDialog.findViewById(R.id.tvTipe_PopUp);
+//        tvTipe = myDialog.findViewById(R.id.tvTipe_PopUp);
         tvNoBarcode = myDialog.findViewById(R.id.tvNoBarcode_PopUp);
-        tvPerusahaan = myDialog.findViewById(R.id.tvPerusahaan_PopUp);
+//        tvPerusahaan = myDialog.findViewById(R.id.tvPerusahaan_PopUp);
         tvJenis = myDialog.findViewById(R.id.tvJenis_PopUp);
-        tvCompare = myDialog.findViewById(R.id.tvCompare_PopUp);
+//        tvCompare = myDialog.findViewById(R.id.tvCompare_PopUp);
 
-        etInputKg = myDialog.findViewById(R.id.etInputKg_PopUp);
-        etInputPcs = myDialog.findViewById(R.id.etInputPcs_PopUp);
+//        etInputKg = myDialog.findViewById(R.id.etInputKg_PopUp);
+//        etInputPcs = myDialog.findViewById(R.id.etInputPcs_PopUp);
 
-        etCalculate = myDialog.findViewById(R.id.etCalculate_PopUp);
+//        etCalculate = myDialog.findViewById(R.id.etCalculate_PopUp);
 
-        btnSimpanSampah = myDialog.findViewById(R.id.btnSimpanLimbah_PopUp);
-        btnOrderBaru = myDialog.findViewById(R.id.btnOrderBaru_PopUp);
+        btnSimpanSampah = myDialog.findViewById(R.id.btnTerima_PopUp);
+        btnOrderBaru = myDialog.findViewById(R.id.btnTolakOrder_PopUp);
 
-        linearLayout_ProdukTerdaftar = myDialog.findViewById(R.id.LinearLayout_ProdukTerdaftar_PopUp);
+        linearLayout_ProdukTerdaftar = myDialog.findViewById(R.id.LinearLayout_Accept_PopUp);
         //Initiation if Data Exist <--
 
         //Initiation if Data Not Exist -->
-        tvTakTerdaftar = myDialog.findViewById(R.id.tvTidakTerdaftar_PopUp);
+//        tvTakTerdaftar = myDialog.findViewById(R.id.tvTidakTerdaftar_PopUp);
 
-        btnFavorite = myDialog.findViewById(R.id.imbFavorite_PopUp);
+//        btnFavorite = myDialog.findViewById(R.id.imbFavorite_PopUp);
         //linearLayout_ProdukTakTerdaftar= (LinearLayout)myDialog.findViewById(R.id.LinearLayout_ProdukTakTerdaftar_PopUp);
-        cd_ProdukTakTerdaftar_PopUp = myDialog.findViewById(R.id.cd_ProdukTakTerdaftar_PopUp);
+//        cd_ProdukTakTerdaftar_PopUp = myDialog.findViewById(R.id.cd_ProdukTakTerdaftar_PopUp);
         //Initiation if Data Not Exist -->
 
         //Check If User Already Have Order or Not

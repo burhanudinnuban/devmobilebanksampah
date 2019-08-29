@@ -34,7 +34,6 @@ public class CheckSetPin extends AppCompatActivity {
     protected String pref_getName;
     ArrayList<HashMap<String, String>> arrayPin = new ArrayList<>();
 
-
     //API dialog progress loading
     protected CustomProgress customProgress;
 
@@ -48,7 +47,6 @@ public class CheckSetPin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_check_set_pin );
         //Session Instance
         session = new PrefManager( getApplicationContext() );
         user = session.getUserDetails();

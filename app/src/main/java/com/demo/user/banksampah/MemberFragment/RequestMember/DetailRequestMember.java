@@ -2,10 +2,10 @@ package com.demo.user.banksampah.MemberFragment.RequestMember;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,13 +18,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.ChangePassword;
 import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
-import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
 import com.demo.user.banksampah.R;
 import com.squareup.picasso.Picasso;
 
@@ -86,7 +84,7 @@ public class DetailRequestMember extends AppCompatActivity {
         url_foto = apiData.get("str_url_main");
         Picasso.get()
                 .load(url_foto + strDetailPhotoReqmember)
-                //.error(R.drawable.ic_navigation_profil)
+                .error(R.drawable.ic_navigation_profil)
                 .into(imgPictureReq);
 
         final ImageView image = new ImageView(this);

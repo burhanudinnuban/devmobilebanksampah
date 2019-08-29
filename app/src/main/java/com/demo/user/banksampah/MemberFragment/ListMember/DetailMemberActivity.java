@@ -13,7 +13,6 @@ import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,15 +35,8 @@ import com.demo.user.banksampah.Pin.CheckSetPin;
 import com.demo.user.banksampah.R;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import es.dmoral.toasty.Toasty;
 
 public class DetailMemberActivity extends AppCompatActivity {
     //Session Class
@@ -55,7 +47,7 @@ public class DetailMemberActivity extends AppCompatActivity {
     protected HashMap<String, String> apiData;
 
     protected String strIDUser;
-
+    private String idMember;
     protected CustomProgress customProgress;
 
     protected LinearLayout parent_layout;
@@ -101,7 +93,6 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvNoHpMemberDetail = findViewById( R.id.tvNoHPMember_DetailMember );
         tvStatusMemberDetail = findViewById( R.id.tvStatusMember_DetailMember );
         tvEmailMemberDetail = findViewById( R.id.tvEmailMemberDetail );
-        ELListOrderUser = findViewById( R.id.ELListOrderUser );
 
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra( "foto" );
@@ -112,7 +103,6 @@ public class DetailMemberActivity extends AppCompatActivity {
         String tvNoHpMemberDetail1 = getIntent().getStringExtra( "no_telepon" );
         String tvStatusMemberDetail1 = getIntent().getStringExtra( "id" );
         String tvEmailMemberDetail1 = getIntent().getStringExtra( "email" );
-
 
         tvNamaMemberDetail.setText( "" + tvNamaMemberDetail1 );
         tvPointMemberDetail.setText( "" + tvPointMemberDetail1 );
@@ -135,8 +125,9 @@ public class DetailMemberActivity extends AppCompatActivity {
         imgRiwayatOrder.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strIdMemberDetail = tvStatusMemberDetail.getText().toString();
-                RiwayatOrderuser( strIdMemberDetail );
+                Intent listOrderUser = new Intent( DetailMemberActivity.this, ListOrderUser.class );
+                listOrderUser.putExtra( "id_member", tvIdMemberDetail1 );
+                startActivity( listOrderUser );
             }
         } );
 
@@ -177,6 +168,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         if (tvPointMemberDetail1.equals( "0.0" )) {
                             final String[] field_name = {"id_member"};
+
                             String base_url = apiData.get( "str_url_address" ) + (".delete_member");
                             StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
                                 @Override
@@ -219,7 +211,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                                 protected Map<String, String> getParams() {
                                     Map<String, String> params = new HashMap<>();
                                     params.put( field_name[0], strIdMemberDetail );
-
+                                    Log.d( "123", "onClick: " + strIdMemberDetail );
                                     return params;
                                 }
 
@@ -247,209 +239,6 @@ public class DetailMemberActivity extends AppCompatActivity {
         android.app.AlertDialog alert = builder.create();
         alert.show();
         Log.e( "tag", "sukses" );
-    }
-
-    public void PencairanSaldoNasabah(String strIdMemberDetail) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder( DetailMemberActivity.this );
-        // Set up the input
-        final EditText input = new EditText( DetailMemberActivity.this );
-        input.setText( m_Text );
-
-        builder.setTitle( "Masukkan Jumlah Uang Yang Ingin Dicairkan" )
-                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the textinput.setInputType(InputType.TYPE_CLASS_TEXT);
-                .setView( input )
-                // Set up the buttons
-                .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        m_Text = input.getText().toString();
-                        final String[] field_name = {"id_member", "jumlah_withdraw", "id_bank_sampah"};
-                        String base_url = apiData.get( "str_url_address" ) + apiData.get( "str_api_pencairan_saldo" );
-                        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.d( "DEBUG", "Register Response: " + response );
-                                try {
-                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder( DetailMemberActivity.this );
-                                    builder.setMessage( R.string.MS_PENCAIRAN_SALDO )
-                                            .setCancelable( false )
-                                            .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    Intent pencairan = new Intent( getApplicationContext(), MainActivity.class );
-                                                    startActivity( pencairan );
-                                                    finish();
-                                                }
-                                            } );
-                                    android.app.AlertDialog alert = builder.create();
-                                    alert.show();
-                                    Log.e( "tag", "sukses" );
-                                } catch (Throwable t) {
-                                    Snackbar snackbar = Snackbar
-                                            .make( parent_layout, getString( R.string.MSG_CODE_409 ) + " 1: " + getString( R.string.MSG_CHECK_DATA ), Snackbar.LENGTH_SHORT );
-                                    snackbar.show();
-                                    Log.d( "DEBUG", "Error Validate Change Password Response: " + t.toString() );
-                                }
-                            }
-                        }, new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d( "DEBUG", "Volley Error: " + error.getMessage() );
-                            }
-                        } ) {
-                            @Override
-                            protected Map<String, String> getParams() {
-                                Map<String, String> params = new HashMap<>();
-                                params.put( field_name[0], strIdMemberDetail );
-                                params.put( field_name[1], m_Text );
-                                params.put( field_name[2], strIDUser );
-                                return params;
-                            }
-
-                            @Override
-                            public Map<String, String> getHeaders() throws AuthFailureError {
-                                Map<String, String> params = new HashMap<>();
-                                params.put( apiData.get( "str_header" ), apiData.get( "str_token_value" ) );
-                                return params;
-                            }
-                        };
-
-                        // Adding request to request queue
-                        VolleyController.getInstance().addToRequestQueue( strReq, apiData.get( "str_json_obj" ) );
-                    }
-                } );
-        builder.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                dialog.dismiss();
-            }
-        } );
-        builder.show();
-    }
-
-    public void RiwayatOrderuser(String strIdMemberUser) {
-        customProgress.showProgress( DetailMemberActivity.this, "", false );
-        final String[] FieldName = {"id_user", "id_bank_sampah"};
-
-        String base_url = apiData.get( "str_url_address" ) + apiData.get( "str_api_history_order_user" );
-        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                customProgress.hideProgress();
-                Log.d( "debug", "Check Login Response: " + response );
-                try {
-                    viewOrderUser( response );
-                    customProgress.hideProgress();
-                } catch (Throwable t) {
-                    Snackbar snackbar = Snackbar
-                            .make( parent_layout, getString( R.string.MSG_CODE_409 ) + "1: " + getString( R.string.MSG_CHECK_DATA ), Snackbar.LENGTH_SHORT );
-                    snackbar.show();
-                    Log.d( "debug", "Error Check Login Response: " + t.toString() );
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Snackbar snackbar = Snackbar
-                        .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 1: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
-                snackbar.show();
-                Log.d( "debug", "Volley Error: " + error.toString() );
-            }
-        } ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put( FieldName[0], strIdMemberUser );
-                params.put( FieldName[1], strIDUser );
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put( apiData.get( "str_header" ), apiData.get( "str_token_value" ) );
-                return params;
-            }
-        };
-        // Adding request to request queue
-        VolleyController.getInstance().addToRequestQueue( strReq, apiData.get( "str_json_obj" ) );
-    }
-
-    protected void viewOrderUser(String resp_content) {
-        String[] field_name = {"message", "nama", "creation", "berat_total", "item_order_history_line", "point_total"};
-        String[] field_name1 = {"jenis_item", "point"};
-
-        try {
-            JSONObject jsonObject = new JSONObject( resp_content );
-            ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
-            ArrayList<HashMap<String, String>> allOrder1 = new ArrayList<>();
-
-            JSONArray cast = jsonObject.getJSONArray( field_name[0] );
-            JSONArray cast1 = jsonObject.getJSONArray( field_name[4] );
-            Log.e( "tag", String.valueOf( cast.length() ) );
-            Log.e( "tag", String.valueOf( cast1.length() ) );
-
-            for (int i = 0; i < cast.length(); i++) {
-                JSONObject c = cast.getJSONObject( i );
-
-                String nama_user = c.getString( field_name[1] );
-                String tanggal_order = c.getString( field_name[2] );
-                String berat_total = c.getString( field_name[3] );
-                String point_total = c.getString( field_name[5] );
-
-                HashMap<String, String> map = new HashMap<>();
-
-                map.put( field_name[1], nama_user );
-                map.put( field_name[2], tanggal_order );
-                map.put( field_name[3], berat_total );
-                map.put( field_name[5], point_total );
-                allOrder.add( map );
-
-                for (int x = 0; x < cast1.length(); x++) {
-                    JSONObject D = cast1.getJSONObject( x );
-                    String jenis_item = D.getString( field_name1[0] );
-                    String point = D.getString( field_name1[1] );
-                    HashMap<String, String> map1 = new HashMap<>();
-                    map1.put( field_name1[0], jenis_item );
-                    map1.put( field_name1[1], point );
-                    allOrder1.add( map1 );
-                }
-            }
-
-            Log.d( "tag", allOrder.toString() );
-            Log.d( "tag", allOrder1.toString() );
-
-            adapter = new LazyAdapter( DetailMemberActivity.this, allOrder, 13 );
-            adapter1 = new LazyAdapter( DetailMemberActivity.this, allOrder1, 14 );
-//                    ExpandableListView.setAdapter(adapter);
-//                    ExpandableListView.setAdapter(adapter1);
-
-
-            /*} else {
-                //include_FormOrderList.setVisibility(View.GONE);
-                cd_NoData.setVisibility(View.VISIBLE);
-                linear_listOrder.setVisibility(View.GONE);
-                cd_NoConnection.setVisibility(View.GONE);
-                *//*if (getContext() != null) {
-                    Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-                }*//*
-            }*/
-
-        } catch (JSONException e) {
-            if (DetailMemberActivity.this != null) {
-                Toasty.error( DetailMemberActivity.this, getString( R.string.MSG_CODE_409 ) + " 2: " + getString( R.string.MSG_CHECK_DATA ), Toast.LENGTH_LONG ).show();
-            }
-            Log.e( "tag", " 2 :" + String.valueOf( e ) );
-            e.printStackTrace();
-            /*include_FormOrderList.setVisibility(View.GONE);
-            linear_NoData.setVisibility(View.VISIBLE);
-            if(getContext()!=null) {
-                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-            }*/
-        }
     }
 
     public void CreateAlertDialogWithRadioButtonGroup() {

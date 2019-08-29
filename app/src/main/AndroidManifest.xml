@@ -32,7 +32,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Pin.LupaPin"></activity>
+        <activity android:name=".MemberFragment.ListMember.DetailHistoryUser"></activity>
+        <activity android:name=".Pin.LupaPin" />
         <activity android:name=".Pin.CheckSetPin" />
         <activity android:name=".PencairanSaldo.Nasabah.PencairanNasabah" />
         <activity android:name=".Pin.CheckPin" />

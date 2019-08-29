@@ -268,8 +268,7 @@ public class ProfileActivity extends AppCompatActivity {
             myDialog.show();
         }
     }
-
-
+    
     public void ProfilePopUp(View v) {
         //Initiate Variable Image
         ImageView imgProfilCache;

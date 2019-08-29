@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/flParent">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -17,98 +18,75 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvOrderTanggal_List"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="(Tanggal Order)"
+                android:textSize="12sp"
+                android:textColor="#000000"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@android:color/darker_gray" />
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tvOrderID_List"
+                    android:id="@+id/tvNamaItem"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center|start|left"
-                    android:text="(Order ID)"
+                    android:text="Nama Item"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tvStatusOrder_List"
+                    android:id="@+id/tvKg"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
-                    android:layout_toLeftOf="@+id/cdBtnDetail"
                     android:layout_weight="1"
-                    android:gravity="center|right|end"
-                    android:text="(Status Order)"
+                    android:gravity="center"
+                    android:text="Berat Item"
                     android:textSize="12sp" />
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cdBtnDetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="5dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+                <TextView
+                    android:id="@+id/tvPoints"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|right|end"
+                    android:text="Point Item"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/btnDetail_ListOrder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:background="@color/colorDivider"
-                        android:text="Detail"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorBorderWhite"
-                        android:textSize="13sp" />
-                </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cdBtnHide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="5dp"
-                    android:visibility="gone"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
-
-                    <Button
-                        android:id="@+id/btnHide_ListOrder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:background="@color/colorDivider"
-                        android:text="Hide"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorBorderWhite"
-                        android:textSize="13sp"
-                        android:visibility="visible" />
-                </android.support.v7.widget.CardView>
             </TableRow>
 
-            <!--<android.support.v7.widget.CardView-->
-            <!--android:id="@+id/cdnTelusuri"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_marginStart="5dp"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:layout_gravity="end|right"-->
-            <!--app:cardCornerRadius="10dp"-->
-            <!--app:cardElevation="2dp">-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cdnTelusuri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="end|right"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+                <ImageView
+                    android:id="@+id/imgViewDetail_List"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_pageview"
+                    android:onClick="showDetailOrder"></ImageView>
+            </android.support.v7.widget.CardView>
 
-            <!--<Button-->
-            <!--android:id="@+id/btnTelusuri_ListOrder"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:background="@color/colorAccent"-->
-            <!--android:text="Telusuri"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textColor="@color/colorBorderWhite"-->
-            <!--android:textSize="13sp" />-->
-            <!--</android.support.v7.widget.CardView>-->
-
-            <TableRow
+           <!-- <TableRow
                 android:id="@+id/tblTelusuri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,23 +94,23 @@
                 android:layout_gravity="end|right"
                 android:layout_marginTop="5dp">
 
-                <TextView
-                    android:id="@+id/tvOrderIDD"
+                &lt;!&ndash;<TextView
+                    android:id="@+id/tvNameOrderTo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_weight="1"
                     android:gravity="center|start|left"
-                    android:text="(ID Order)"
+                    android:text="(Order To: Lestari)"
                     android:textSize="12sp" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"/>
+                    android:layout_weight="0.5"/>&ndash;&gt;
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cdnEditData"
+                    android:id="@+id/cdnTelusuri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -141,11 +119,11 @@
                     app:cardElevation="2dp">
 
                     <Button
-                        android:id="@+id/btnEditData"
+                        android:id="@+id/btnTelusuri_ListOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:background="@color/colorAccent"
-                        android:text="Edit"
+                        android:text="Telusuri"
                         android:textAllCaps="false"
                         android:textColor="@color/colorBorderWhite"
                         android:textSize="13sp" />
@@ -159,9 +137,9 @@
                 android:layout_height="150dp" />-->
 
             <!--<ListView-->
-            <!--android:id="@+id/lvDetail_Sampah"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="150dp">-->
+                <!--android:id="@+id/lvDetail_Sampah"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="150dp">-->
             <!--</ListView>-->
 
             <ImageView
@@ -183,7 +161,8 @@
                     android:layout_weight="0.5"
                     android:gravity="center|start|left"
                     android:text="Total"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/tvTotalKg"
@@ -192,7 +171,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="(Total Kg)"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:textColor="#000000"/>
 
                 <TextView
                     android:id="@+id/tvTotalPoints"
@@ -206,12 +186,6 @@
                     android:textStyle="bold" />
 
 
-                <ImageView
-                    android:id="@+id/imgViewDetail_List"
-                    android:layout_width="0dp"
-                    android:layout_height="14dp"
-                    android:layout_weight="0.5"
-                    android:src="@drawable/ic_pageview" />
             </TableRow>
 
             <TableRow
@@ -281,50 +255,25 @@
                 android:src="@drawable/ic_navigation_profil"
                 android:visibility="gone" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-                <Button
-                    android:id="@+id/btnAccept_Order_List"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/TableRow_TotalPoints"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/ic_rounded_button"
-                    android:gravity="center"
-                    android:text="Selesaikan Orderan"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorBtnFont"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
-                <Button
-                    android:id="@+id/btnCancel_Order_List"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:layout_below="@+id/TableRow_TotalPoints"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/ic_rounded_button"
-                    android:gravity="center"
-                    android:text="Batalkan Order"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorBtnFont"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
+            <Button
+                android:id="@+id/btnCancel_Order_List"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/TableRow_TotalPoints"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/ic_rounded_button"
+                android:gravity="center"
+                android:text="Batalkan Order"
+                android:textAllCaps="false"
+                android:textColor="@color/colorBtnFont"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
-
-            </LinearLayout>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
