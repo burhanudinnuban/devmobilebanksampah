@@ -1,7 +1,12 @@
 package com.demo.user.banksampah.MemberFragment.ListMember;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +34,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.demo.user.banksampah.Activities.QRScanActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
@@ -46,15 +52,17 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class ListMember extends Fragment implements SearchView.OnQueryTextListener {
+public class ListMember extends Fragment  {
 
     //Session Class
     protected PrefManager session;
-
+    private final static int BARCODE_REQUEST_CODE = 1;
+    protected String contents, format;
+    ArrayList<HashMap<String, String>> ScanStatus = new ArrayList<>();
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-    protected String strIDUser;
+    protected String strNamaBankSampah, strMessage;
 
     protected CustomProgress customProgress;
     ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
@@ -71,8 +79,10 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
 
     protected CardView cd_NoData, cd_NoConnection;
 
-    protected ImageView imgSearch;
+    protected ImageView imgScanMember;
     private AppCompatAutoCompleteTextView etSearch;
+    private Dialog ScanDialog;
+
     public static ListMember newInstance() {
         return new ListMember();
     }
@@ -82,27 +92,39 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_list_member, container, false);
-        session = new PrefManager(getContext());
+        rootView = inflater.inflate( R.layout.fragment_list_member, container, false );
+        session = new PrefManager( getContext() );
         final HashMap<String, String> user = session.getUserDetails();
-        strIDUser = user.get(PrefManager.KEY_NAMA);
+        strNamaBankSampah = user.get( PrefManager.KEY_NAMA );
+
 
         this.ctx = ctx;
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
 
-        parent_layout = rootView.findViewById(R.id.parent);
+        parent_layout = rootView.findViewById( R.id.parent );
         customProgress = CustomProgress.getInstance();
-        lvListMember = rootView.findViewById(R.id.listView_Member);
-        mSwipeRefreshLayout = rootView.findViewById(R.id.swipeToRefresh);
-        linear_ListMember = rootView.findViewById(R.id.linearLayout_ListMember);
-        cd_NoData = rootView.findViewById(R.id.cd_noData);
-        cd_NoConnection = rootView.findViewById(R.id.cd_noInternet);
-        btDetailListMember = rootView.findViewById(R.id.btnDetailListMember);
+        lvListMember = rootView.findViewById( R.id.listView_Member );
+        mSwipeRefreshLayout = rootView.findViewById( R.id.swipeToRefresh );
+        linear_ListMember = rootView.findViewById( R.id.linearLayout_ListMember );
+        cd_NoData = rootView.findViewById( R.id.cd_noData );
+        cd_NoConnection = rootView.findViewById( R.id.cd_noInternet );
+        btDetailListMember = rootView.findViewById( R.id.btnDetailListMember );
 
-        etSearch = rootView.findViewById(R.id.etSearch);
+        imgScanMember = rootView.findViewById( R.id.imgScanMemberReg );
+        etSearch = rootView.findViewById( R.id.etSearch );
 
-        etSearch.addTextChangedListener(new TextWatcher() {
+        imgScanMember.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scanmember = new Intent( getContext(), QRScanActivity.class );
+                scanmember.putExtra( "SCAN_MODE", "BARCODE_MODE" );
+                startActivity( scanmember );
+                startActivityForResult( scanmember, BARCODE_REQUEST_CODE );
+            }
+        } );
+
+        etSearch.addTextChangedListener( new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -111,45 +133,45 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","foto","alamat"};
+                String[] field_name = {"message", "id_member", "nama_member", "point", "no_telepon", "email", "foto", "alamat"};
 
-                    ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
+                ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
 
-                    Log.e("tag1", allOrderSearch.toString());
+                Log.e( "tag1", allOrderSearch.toString() );
 
                 try {
                     for (int x = 0; x < allOrder.size(); x++) {
-                        JSONObject c = new JSONObject(allOrder.get(x));
+                        JSONObject c = new JSONObject( allOrder.get( x ) );
 
-                        String id_member = c.getString(field_name[1]);
-                        String nama_member = c.getString(field_name[2]);
-                        String point = c.getString(field_name[3]);
-                        String no_telepon = c.getString(field_name[4]);
-                        String email = c.getString(field_name[5]);
-                        String foto = c.getString(field_name[6]);
-                        String alamat = c.getString(field_name[7]);
+                        String id_member = c.getString( field_name[1] );
+                        String nama_member = c.getString( field_name[2] );
+                        String point = c.getString( field_name[3] );
+                        String no_telepon = c.getString( field_name[4] );
+                        String email = c.getString( field_name[5] );
+                        String foto = c.getString( field_name[6] );
+                        String alamat = c.getString( field_name[7] );
 
-                        if(nama_member.toLowerCase().contains(etSearch.getText().toString().toLowerCase())) {
+                        if (nama_member.toLowerCase().contains( etSearch.getText().toString().toLowerCase() )) {
 
                             HashMap<String, String> map = new HashMap<>();
 
-                            map.put(field_name[1], id_member);
-                            map.put(field_name[2], nama_member);
-                            map.put(field_name[3], point);
-                            map.put(field_name[4], no_telepon);
-                            map.put(field_name[5], email);
-                            map.put(field_name[6], foto);
-                            map.put(field_name[7], alamat);
-                            allOrderSearch.add(map);
+                            map.put( field_name[1], id_member );
+                            map.put( field_name[2], nama_member );
+                            map.put( field_name[3], point );
+                            map.put( field_name[4], no_telepon );
+                            map.put( field_name[5], email );
+                            map.put( field_name[6], foto );
+                            map.put( field_name[7], alamat );
+                            allOrderSearch.add( map );
                         }
                     }
 
-                    Log.d("tag1", allOrderSearch.toString());
+                    Log.d( "tag1", allOrderSearch.toString() );
 
-                    adapter = new LazyAdapter(getActivity(), allOrderSearch, 9);
-                    lvListMember.setAdapter(adapter);
+                    adapter = new LazyAdapter( getActivity(), allOrderSearch, 9 );
+                    lvListMember.setAdapter( adapter );
                 } catch (JSONException e) {
-                    Log.d("tag1", "error");
+                    Log.d( "tag1", "error" );
                     e.printStackTrace();
                 }
             }
@@ -158,7 +180,7 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        } );
 
         /*//Intent Ke Detail Member Activity
         if (getActivity() != null)
@@ -175,69 +197,69 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             snackbar.show();
         }*/
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener( new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (getActivity() != null) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                         //Jalanin API
                         allOrder.clear();
-                        getListMember(strIDUser);
+                        getListMember( strNamaBankSampah );
                     } else {
                         Snackbar snackbar = Snackbar
-                                .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
+                                .make( parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG );
                         snackbar.show();
                     }
                 }
-                mSwipeRefreshLayout.setRefreshing(false);
+                mSwipeRefreshLayout.setRefreshing( false );
             }
-        });
+        } );
 
-        cd_NoConnection.setOnClickListener(new View.OnClickListener() {
+        cd_NoConnection.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     //Jalanin API
                 } else {
                     Snackbar snackbar = Snackbar
-                            .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
+                            .make( parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG );
                     snackbar.show();
                 }
             }
-        });
+        } );
 
         if (getActivity() != null) {
-            conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            conMgr = (ConnectivityManager) getActivity().getSystemService( Context.CONNECTIVITY_SERVICE );
         }
 
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListMember(strIDUser);
+            getListMember( strNamaBankSampah );
         } else {
-            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            cd_NoConnection.setVisibility(View.VISIBLE);
-            cd_NoData.setVisibility(View.GONE);
-            linear_ListMember.setVisibility(View.GONE);
+            Toast.makeText( getContext(), "No Internet Connection", Toast.LENGTH_SHORT ).show();
+            cd_NoConnection.setVisibility( View.VISIBLE );
+            cd_NoData.setVisibility( View.GONE );
+            linear_ListMember.setVisibility( View.GONE );
 
         }
         return rootView;
     }
 
-    private void getListMember(final String strIDUser){
+    private void getListMember(final String strIDUser) {
 //        customProgress.showProgress(getContext(), "", false);
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_member");
-        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+        String base_url = apiData.get( "str_url_address" ) + apiData.get( "str_api_list_member" );
+        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 //                customProgress.hideProgress();
-                Log.d("debug", "Check Login Response: " + response);
+                Log.d( "debug", "Check Login Response: " + response );
                 try {
-                    viewDataMember(response);
+                    viewDataMember( response );
 
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
-                            .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                            .make( parent_layout, getString( R.string.MSG_CODE_409 ) + "1: " + getString( R.string.MSG_CHECK_DATA ), Snackbar.LENGTH_SHORT );
                     snackbar.show();
-                    Log.d("debug", "Error Check Login Response: " + t.toString());
+                    Log.d( "debug", "Error Check Login Response: " + t.toString() );
                 }
             }
         }, new Response.ErrorListener() {
@@ -246,75 +268,76 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             public void onErrorResponse(VolleyError error) {
 //                customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
-                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                        .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 1: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
                 snackbar.show();
-                Log.d("debug", "Volley Error: " + error.toString());
+                Log.d( "debug", "Volley Error: " + error.toString() );
             }
-        }) {
+        } ) {
 
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("id_bank_sampah", strIDUser);
+                params.put( "id_bank_sampah", strNamaBankSampah );
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<>();
-                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                Map<String, String> params = new HashMap<>();
+                params.put( apiData.get( "str_header" ), apiData.get( "str_token_value" ) );
                 return params;
             }
         };
 
         // Adding request to request queue
-        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+        VolleyController.getInstance().addToRequestQueue( strReq, apiData.get( "str_json_obj" ) );
     }
 
-    protected void viewDataMember(String resp_content){
-        String[] field_name = {"message", "id_member", "nama_member", "point","no_telepon","email","foto","alamat"};
+    protected void viewDataMember(String resp_content) {
+        String[] field_name = {"message", "id_member", "nama_member", "point", "no_telepon", "email", "foto", "alamat"};
 
         try {
-            JSONObject jsonObject = new JSONObject(resp_content);
+            JSONObject jsonObject = new JSONObject( resp_content );
 
             //if (!message.equalsIgnoreCase("Invalid")) {
 
-                JSONArray cast = jsonObject.getJSONArray(field_name[0]);
-                Log.e("tag_cast", String.valueOf(cast.length()));
+            JSONArray cast = jsonObject.getJSONArray( field_name[0] );
+            Log.e( "tag_cast", String.valueOf( cast.length() ) );
 
-                for (int i = 0; i < cast.length(); i++) {
-                    JSONObject c = cast.getJSONObject(i);
+            for (int i = 0; i < cast.length(); i++) {
+                JSONObject c = cast.getJSONObject( i );
 
-                    String id_member= c.getString(field_name[1]);
-                    String nama_member = c.getString(field_name[2]);
-                    String point = c.getString(field_name[3]);
-                    String no_telepon = c.getString(field_name[4]);
-                    String email = c.getString(field_name[5]);
-                    String foto = c.getString(field_name[6]);
-                    String alamat = c.getString(field_name[7]);
+                String id_member = c.getString( field_name[1] );
+                String nama_member = c.getString( field_name[2] );
+                String point = c.getString( field_name[3] );
+                String no_telepon = c.getString( field_name[4] );
+                String email = c.getString( field_name[5] );
+                String foto = c.getString( field_name[6] );
+                String alamat = c.getString( field_name[7] );
 
 
-                    HashMap<String, String> map = new HashMap<>();
+                HashMap<String, String> map = new HashMap<>();
 
-                    map.put(field_name[1], id_member);
-                    map.put(field_name[2], nama_member);
-                    map.put(field_name[3], point);
-                    map.put(field_name[4], no_telepon);
-                    map.put(field_name[5], email);
-                    map.put(field_name[6], foto);
-                    map.put(field_name[7], alamat);
-                    allOrder.add(map);
-                }
+                map.put( field_name[1], id_member );
+                map.put( field_name[2], nama_member );
+                map.put( field_name[3], point );
+                map.put( field_name[4], no_telepon );
+                map.put( field_name[5], email );
+                map.put( field_name[6], foto );
+                map.put( field_name[7], alamat );
+                allOrder.add( map );
+            }
 
-                Log.d("tag_allorder", allOrder.toString());
+            Log.d( "tag_allorder", allOrder.toString() );
 
-                adapter = new LazyAdapter(getActivity(), allOrder, 9);
-                lvListMember.setAdapter(adapter);
+            adapter = new LazyAdapter( getActivity(), allOrder, 9 );
+            lvListMember.setAdapter( adapter );
 
         } catch (JSONException e) {
             if (getContext() != null) {
-                Toasty.error(getContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                Toasty.error( getContext(), getString( R.string.MSG_CODE_409 ) + " 2: " + getString( R.string.MSG_CHECK_DATA ), Toast.LENGTH_LONG ).show();
             }
-            Log.e("tag", " 2 :" + String.valueOf(e));
+            Log.e( "tag", " 2 :" + String.valueOf( e ) );
             e.printStackTrace();
             /*include_FormOrderList.setVisibility(View.GONE);
             linear_NoData.setVisibility(View.VISIBLE);
@@ -323,24 +346,131 @@ public class ListMember extends Fragment implements SearchView.OnQueryTextListen
             }*/
         }
     }
-    public boolean onQueryTextSubmit(String query) {
-        return false;
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (resultCode == Activity.RESULT_OK) {
+            //Do Scan Barcode
+            if (requestCode == BARCODE_REQUEST_CODE) {
+                //Content equals Barcode Number
+                contents = intent.getStringExtra( "SCAN_RESULT" );
+//                format = intent.getStringExtra( "SCAN_RESULT_FORMAT" );
+                Log.d( "tag", contents );
+
+                if (getContext() != null) {
+                    Toasty.info( getContext(), "Kode Barcode Produk: " + contents, Toast.LENGTH_LONG ).show();
+                }
+
+                //Check Barcode data From DB
+                checkScanData( contents );
+            }
+        }
     }
 
-    public boolean onQueryTextChange(String newText) {
-        String text = newText;
-        return false;
+    private void checkScanData(final String contents) {
+        customProgress.showProgress( getContext(), "", false );
+        ScanDialog = new Dialog(getContext());
+        String base_url = apiData.get( "str_url_address" ) + ( ".scan_add_member" );
+        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                customProgress.hideProgress();
+                Log.d( "DEBUG", "Check Barcode Response: " + response );
+                try {
+                    getMember( response );
+                } catch (Throwable t) {
+                    Snackbar snackbar = Snackbar
+                            .make( parent_layout, getString( R.string.MSG_CODE_409 ) + " 1: " + getString( R.string.MSG_CHECK_DATA ), Snackbar.LENGTH_SHORT );
+                    snackbar.show();
+                    Log.d( "DEBUG", "Error Login Response: " + t.toString() );
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d( "DEBUG", "Volley Error: " + error.getMessage() );
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 1: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
+                snackbar.show();
+            }
+        } ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put( "id_user", contents );
+                params.put( "id_bank_sampah", strNamaBankSampah );
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put( apiData.get( "str_header" ), apiData.get( "str_token_value" ) );
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue( strReq, apiData.get( "str_json_obj" ) );
     }
 
-    private void initView() {
-        registerForContextMenu(lvListMember);
+    private void getMember(String resp_content) {
+        String[] field_name = {"message", "data", "status", "id_bank_sampah", "id_member", "nama_member", "alert", "point"};
+        try {
+            ScanStatus = rest_class.getJsonData( field_name, resp_content );
+            JSONObject jsonPost = new JSONObject( resp_content );
+            strMessage = jsonPost.getString( field_name[0] );
+            JSONObject cast = jsonPost.getJSONObject( field_name[1] );
+            Log.d("tag", String.valueOf( cast ) );
+            String strAlert = jsonPost.getString( field_name[6] );
+            if (strMessage.equals( "True" )) {
+
+                String strStatus = cast.getString( field_name[2] );
+                String strIdMember = cast.getString( field_name[4] );
+                String sttBankSampah= cast.getString( field_name[3] );
+                String strNamaMember = cast.getString( field_name[5] );
+                String strPoint = cast.getString( field_name[7]);
+                ScanDataMemberPopUp(strStatus, strIdMember, strNamaMember, sttBankSampah, strPoint);
+            } else {
+                Toast.makeText( getContext(), strAlert,Toast.LENGTH_SHORT ).show();
+            }
+
+        } catch (JSONException e) {
+            Snackbar snackbar = Snackbar
+                    .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 2: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
+            snackbar.show();
+            Log.e( "DEBUG", "JSON Exception Error: " + e.toString() );
+        }
     }
 
-//    private void loadData() {
-//        PrefManager prefManager = new PrefManager(getContext());
-//        List<> pre
-//        if (strIDUser != null) {
-//            lvListMember.setAdapter(new LazyAdapter(getContext(), ));
-//        }
-//    }
+    private void ScanDataMemberPopUp(String strStatus,String strIdMember,String strNamaMember,String sttBankSampah, String strPoint){
+        ScanDialog.setContentView( R.layout.activity_scan_data_member );
+        TextView tvNama, tvStatus, tvBankSampah, tvIdMember, tvPoint;
+
+        tvNama = ScanDialog.findViewById( R.id.tvNamaMember );
+        tvStatus = ScanDialog.findViewById( R.id.tvStatusMember );
+        tvBankSampah = ScanDialog.findViewById( R.id.tvNamaBankSampah );
+        tvIdMember = ScanDialog.findViewById( R.id.tvIdMember );
+        tvPoint = ScanDialog.findViewById( R.id.tvPoint );
+
+        Button btnApprove = ScanDialog.findViewById( R.id.btnApprove );
+        btnApprove.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanDialog.dismiss();
+            }
+        } );
+        tvNama.setText( strNamaMember );
+        tvStatus.setText( strStatus );
+        tvBankSampah.setText( sttBankSampah );
+        tvIdMember.setText( strIdMember );
+        tvPoint.setText( strPoint );
+
+        if (ScanDialog.getWindow()!= null){
+            ScanDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+            ScanDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+            ScanDialog.show();
+        }
+    }
 }

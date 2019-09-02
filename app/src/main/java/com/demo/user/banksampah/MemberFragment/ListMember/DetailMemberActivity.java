@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +50,7 @@ public class DetailMemberActivity extends AppCompatActivity {
     private String idMember;
     protected CustomProgress customProgress;
 
-    protected LinearLayout parent_layout;
+    protected RelativeLayout parent_layout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     protected ConnectivityManager conMgr;
 
@@ -93,7 +93,7 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvNoHpMemberDetail = findViewById( R.id.tvNoHPMember_DetailMember );
         tvStatusMemberDetail = findViewById( R.id.tvStatusMember_DetailMember );
         tvEmailMemberDetail = findViewById( R.id.tvEmailMemberDetail );
-
+        parent_layout = findViewById( R.id.parent );
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra( "foto" );
         String tvNamaMemberDetail1 = getIntent().getStringExtra( "nama_member" );
@@ -201,7 +201,6 @@ public class DetailMemberActivity extends AppCompatActivity {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     Log.d( "DEBUG", "Volley Error: " + error.getMessage() );
-                                    customProgress.hideProgress();
                                     Snackbar snackbar = Snackbar
                                             .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 1: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
                                     snackbar.show();

@@ -179,6 +179,7 @@ public class SimpanFragment extends Fragment {
 
         //*SharedPref User
         session = new PrefManager(getContext());
+
         //**Get ID User
         HashMap<String,String> user = session.getUserDetails();
         strIdUser = user.get(PrefManager.KEY_ID);
@@ -288,21 +289,21 @@ public class SimpanFragment extends Fragment {
 
     @Override
     public void onStart(){
-        checkFirstRun();
+//        checkFirstRun();
         super.onStart();
     }
 
-    @Override
-    public void onResume(){
-        getJenisSampah();
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getPointUser();
-        } else {
-            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            tvReload.setVisibility(View.VISIBLE);
-        }
-        super.onResume();
-    }
+//    @Override
+//    public void onResume(){
+////        getJenisSampah();
+//        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+////            getPointUser();
+//        } else {
+//            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+//            tvReload.setVisibility(View.VISIBLE);
+//        }
+//        super.onResume();
+//    }
 
     private void showPopUpBarcode(){
         myDialog.setContentView(R.layout.pop_up_select_barcode);

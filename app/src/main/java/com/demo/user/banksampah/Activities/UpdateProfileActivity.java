@@ -149,36 +149,16 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etAlamat = findViewById(R.id.etAlamat);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         etNamaBankSampah = findViewById(R.id.etNamaBankSampah_Register);
-//        etNamaDetailBank = findViewById(R.id.etNamaDetailBank_Register);
-//        etNamaPengurus = findViewById(R.id.etNamaPengurus_Register);
-//        etNamaPengurusDua = findViewById(R.id.etNamaPengurusDua_Register);
-//        etNamaRekeningBank = findViewById(R.id.etNamaRekeningBank_Register);
         etNoHpBankSampah = findViewById(R.id.etNoHpBankSampah_Register);
-//        etNoHpPengurus = findViewById(R.id.etNoHpPengurus_Register);
-//        etNoHpPengurusDua = findViewById(R.id.etNoHpPengurusDua_Register);
-//        etNoRekeningBank = findViewById(R.id.etNoRekeningBank_Register);
         etPassword = findViewById(R.id.etPassword);
         etEmailBankSampah = findViewById(R.id.etEmailBankSampah_Register);
-//        etJabatanPengurus = findViewById(R.id.etJabatanPengurus_Register);
-//        etJabatanPengurus2 = findViewById(R.id.etJabatanPengurus2_Register);
         imgPinCircle = findViewById(R.id.imgPinCircle);
-        imgRegister = findViewById(R.id.imgRegisterPicture);
-//        tvDataPengurus = findViewById(R.id.tvDataPengurus);
-//        tvDataRekeningBankSampah = findViewById(R.id.tvDataRekeningBankSampah);
+        imgProfil = findViewById(R.id.imgRegisterPicture);
         tvMaps = findViewById(R.id.tvMaps);
         tvStatusNoHp= findViewById(R.id.tvStatusNoHP);
-//        tvStepOne= findViewById(R.id.tvStepOne);
-//        tvStepThree = findViewById(R.id.tvStepThree);
-//        tvStepTwo = findViewById(R.id.tvStepTwo);
-//        registerPengurus = findViewById(R.id.linear_RegisterPengurus);
         registerBankSampah = findViewById(R.id.linear_RegisterBankSampah);
-//        registerDetailBank = findViewById(R.id.linear_RegisterDetailBank);
         btDaftarkan = findViewById(R.id.btUpdatebankSampah);
         parent_layout = findViewById(R.id.ParentUpdateProfile);
-//        btnNext = findViewById(R.id.btnNext1);
-//        btnNext2 = findViewById(R.id.btnNext2);
-//        btnPrev2 = findViewById(R.id.btnPrevious2);
-//        btnPrev3 = findViewById(R.id.btnPrevious3);
         imgAdd = findViewById(R.id.imgAdd);
         etJamOperasional = findViewById(R.id.etJaOperasional_Register);
         etLatLong = findViewById( R.id.etLatlong );
@@ -207,6 +187,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etJamOperasional.setText(getJamOperasional);
         etLatLong.setText( getLatLong );
 
+        url_foto = apiData.get("str_url_main");
+        Picasso.get()
+                .load(url_foto + getFoto)
+                .error(R.drawable.ic_navigation_profil)
+                .into(imgProfil);
+
         ctd = new CountDownTimer(2000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -219,11 +205,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         };
 
-        url_foto = apiData.get("str_url_main");
-        Picasso.get()
-                .load(url_foto + getFoto)
-                .error(R.drawable.ic_navigation_profil)
-                .into(imgRegister);
+
 
         //Get Current Location GPS
         getCurrentLocation();
@@ -258,7 +240,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             }
         });
 
-        imgRegister.setOnClickListener(new View.OnClickListener() {
+        imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
@@ -277,103 +259,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 validate();
             }
         });
-
-//        //Steps Hiden Update
-//        tvStepOne.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                registerBankSampah.setVisibility(View.VISIBLE);
-//                registerDetailBank.setVisibility(View.GONE);
-//                registerPengurus.setVisibility(View.GONE);
-//                tvStepOne.setBackgroundColor(Color.BLUE);
-//                tvStepOne.setTextColor(Color.WHITE);
-//                tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-//                tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-//                tvStepOne.setBackgroundResource(R.drawable.rectangle_aktif);
-//                tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
-//                tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
-//                btDaftarkan.setVisibility(View.INVISIBLE);
-//            }
-//        });
-//
-//        tvStepTwo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                if(etNamaBankSampah.getText().toString().length()==0)
-//                {
-//                    etNamaBankSampah.setError("Nama Bank Sampah Diperlukan");
-//                    etNamaBankSampah.requestFocus();
-//                }
-//                else if(etEmailBankSampah.getText().toString().length()==0)
-//                {
-//                    etEmailBankSampah.setError("Email Bank Sampah Diperlukan");
-//                    etEmailBankSampah.requestFocus();
-//                }
-//                else if(etNoHpBankSampah.getText().toString().length()==0)
-//                {
-//                    etNoHpBankSampah.setError("No Hp Bank Sampah Diperlukan");
-//                    etNoHpBankSampah.requestFocus();
-//                }
-//                else if(etAlamat.getText().toString().length()==0)
-//                {
-//                    etAlamat.setError("Alamat Bank Sampah Diperlukan");
-//                    etAlamat.requestFocus();
-//                }
-//                else
-//                {
-//                    registerBankSampah.setVisibility(View.GONE);
-//                    registerDetailBank.setVisibility(View.GONE);
-//                    registerPengurus.setVisibility(View.VISIBLE);
-//                    tvStepTwo.setBackgroundColor(Color.BLUE);
-//                    tvStepTwo.setTextColor(Color.WHITE);
-//                    tvStepThree.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-//                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-//                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
-//                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_aktif);
-//                    tvStepThree.setBackgroundResource(R.drawable.rectangle_non);
-//                    btDaftarkan.setVisibility(View.INVISIBLE);
-//                    tvStepTwo.setClickable(true);
-//                }
-//
-//            }
-//        });
-//
-//        tvStepThree.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(etNamaPengurus.getText().toString().length()==0)
-//                {
-//                    etNamaPengurus.setError("Nama Pengurus Diperlukan");
-//                    etNamaPengurus.requestFocus();
-//                }
-//                else if(etNoHpPengurus.getText().toString().length()==0)
-//                {
-//                    etNoHpPengurus.setError("No Hp Pengurus Diperlukan");
-//                    etNoHpPengurus.requestFocus();
-//                }
-//                else if(etJabatanPengurus.getText().toString().length()==0)
-//                {
-//                    etJabatanPengurus.setError("Jabatan Pengurus Diperlukan");
-//                    etJabatanPengurus.requestFocus();
-//                }
-//                else
-//                    {
-//                    registerBankSampah.setVisibility(View.GONE);
-//                    registerDetailBank.setVisibility(View.VISIBLE);
-//                    btDaftarkan.setVisibility(View.VISIBLE);
-//                    registerPengurus.setVisibility(View.GONE);
-//                    tvStepThree.setBackgroundColor(Color.BLUE);
-//                    tvStepThree.setTextColor(Color.WHITE);
-//                    tvStepTwo.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-//                    tvStepOne.setTextColor(getApplication().getResources().getColor(R.color.colorPrimary));
-//                    tvStepOne.setBackgroundResource(R.drawable.rectangle_non);
-//                    tvStepTwo.setBackgroundResource(R.drawable.rectangle_non);
-//                    tvStepThree.setBackgroundResource(R.drawable.rectangle_aktif);
-//                    tvStepThree.setClickable(true);
-//                    }
-//            }
-//        });
     }
 
         //Get Current Location
@@ -488,7 +373,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                             selectedImage = Bitmap.createScaledBitmap(selectedImage, 300, 400, false);
                             selectedImage = getResizedBitmap(selectedImage, 400);// 400 is for example, replace with desired size
-                            imgRegister.setImageBitmap(selectedImage);
+                            imgProfil.setImageBitmap(selectedImage);
 
                             String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
                             String name = etNamaBankSampah.getText().toString();
@@ -509,7 +394,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         images = Bitmap.createScaledBitmap(images, 300, 400, false);
                         images = getResizedBitmap(images, 400);
 
-                        imgRegister.setImageBitmap(images);
+                        imgProfil.setImageBitmap(images);
 
                         String timeStamp = new SimpleDateFormat("dd-MM-yy_hh.mm", Locale.getDefault()).format(new Date());
                         String name = etNamaBankSampah.getText().toString();
@@ -555,7 +440,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
             etAlamat.setError("Alamat Bank Sampah Diperlukan");
             etAlamat.requestFocus();
         }
-        else if (imgRegister.getDrawable()!= null && imageFileName != null){
+        else if (imgProfil.getDrawable()!= null && imageFileName != null){
             UpdateProfile();
             uploadImage();
         }

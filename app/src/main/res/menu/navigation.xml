@@ -3,27 +3,22 @@
 
     <item
         android:id="@+id/navigation_beranda"
-        android:icon="@drawable/ic_navigation_home"
+        android:icon="@drawable/ic_home"
         android:title="Beranda" />
 
     <item
         android:id="@+id/navigation_member"
-        android:icon="@drawable/ic_navigation_profil"
+        android:icon="@drawable/ic_person"
         android:title="Member" />
 
     <item
         android:id="@+id/navigation_sampah"
-        android:icon="@drawable/ic_trash_2"
+        android:icon="@drawable/ic_sampah"
         android:title="Sampah Masuk" />
-
-    <!--<item
-        android:id="@+id/navigation_profil"
-        android:icon="@drawable/ic_navigation_profil"
-        android:title="Profil" />-->
 
     <item
         android:id="@+id/navigation_jual"
-        android:icon="@drawable/ic_navigation_dompet"
+        android:icon="@drawable/ic_jualsampah"
         android:title="Jual Sampah" />
 
 </menu>

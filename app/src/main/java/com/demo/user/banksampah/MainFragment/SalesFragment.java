@@ -318,7 +318,7 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
         view_barcode = rootView.findViewById(R.id.cardView_Barcode);
         view_Favorite = rootView.findViewById(R.id.cardView_Favorite);
 
-        checkFirstRun();
+//        checkFirstRun();
 
         return rootView;
     }
@@ -357,8 +357,8 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
-        getJenisSampah();
-        getCurrentLocationRoute();
+//        getJenisSampah();
+//        getCurrentLocationRoute();
         super.onResume();
     }
 

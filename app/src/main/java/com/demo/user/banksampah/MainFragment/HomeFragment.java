@@ -2,51 +2,29 @@ package com.demo.user.banksampah.MainFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
-import com.demo.user.banksampah.InfoLimbahDetails;
 import com.demo.user.banksampah.R;
-import com.demo.user.banksampah.RegisterActivities.RegisterPhoneActivity;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.MySSLSocketFactory;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import cz.msebera.android.httpclient.Header;
-import es.dmoral.toasty.Toasty;
 
 public class HomeFragment extends Fragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
-    protected RelativeLayout parent_layout;
+    protected LinearLayout parent_layout;
     protected TextView tvNamaBank, tvAlamatBank;
     protected ImageView imgBankSampah;
 

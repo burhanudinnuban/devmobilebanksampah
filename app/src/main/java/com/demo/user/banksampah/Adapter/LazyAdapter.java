@@ -13,9 +13,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -1886,7 +1889,6 @@ public class LazyAdapter extends BaseAdapter {
     }
     //<---------------------- Fragment Position 12 - Incoming Order ---------------------->
 
-
     //<---------------------- Fragment Position 15 - Incoming Order ---------------------->
 
     public void getDetailOrderuser(String id_user) {
@@ -2000,19 +2002,18 @@ public class LazyAdapter extends BaseAdapter {
 
     public void showDetailOrder(String id_user) {
         myDialog.setContentView( R.layout.list_order_detail );
-        myDialog.setCanceledOnTouchOutside( false );
 
         lvListDetailOrderUser = myDialog.findViewById( R.id.listView_OrderUserDetail );
         getDetailOrderuser( id_user );
         if (myDialog.getWindow() != null) {
-            myDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
-            myDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            myDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             myDialog.show();
         }
     }
     //<---------------------- Fragment Position 15 - Incoming Order ---------------------->
 
-    /*FRAGMENT POS 11*///
+    //<---------------------- Fragment Position 11 - Incoming Order ---------------------->
 
     private void showPopUpDetaill(final String strListOrderIDD) {
         myDialog.setContentView(R.layout.form_list_order_detail);
@@ -2021,9 +2022,13 @@ public class LazyAdapter extends BaseAdapter {
         tvStatusOrderr = myDialog.findViewById(R.id.tvStatusOrder_Detail);
         tvTotalKgg = myDialog.findViewById(R.id.tvTotalKg_Detail);
         tvTotalPointss = myDialog.findViewById(R.id.tvTotalPoints_Detail);
-//        tvAlamat = myDialog.findViewById(R.id.tvAlamat_Detail);
         lvListDetailOrderr = myDialog.findViewById(R.id.listView_OrderDetails);
+        Window window = myDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
 
+        wlp.gravity = Gravity.CENTER;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        window.setAttributes(wlp);
         getDetailOrderLinee(strListOrderIDD);
 
         if (myDialog.getWindow() != null) {
@@ -2446,5 +2451,7 @@ public class LazyAdapter extends BaseAdapter {
         // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
+    //<---------------------- Fragment Position 11 - Incoming Order ---------------------->
+
 }
 

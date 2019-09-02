@@ -16,6 +16,7 @@
 
 package com.demo.user.banksampah;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -38,6 +39,7 @@ import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 /**
  * @hide For internal use only.
  */
+@SuppressLint("RestrictedApi")
 @RestrictTo(LIBRARY_GROUP)
 public class BottomNavigationMenuView extends ViewGroup implements MenuView {
     private final int mInactiveItemMaxWidth;

@@ -61,9 +61,6 @@ public class ListOrderUser extends AppCompatActivity {
     protected String tvIdMemberDetail1;
     protected Dialog myDialog;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
