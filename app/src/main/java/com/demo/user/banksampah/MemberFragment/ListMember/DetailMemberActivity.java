@@ -61,7 +61,7 @@ public class DetailMemberActivity extends AppCompatActivity {
     protected ExpandableListAdapter expandableListAdapter1;
     protected ExpandableListView ELListOrderUser;
 
-    protected CardView cd_NoData, cd_NoConnection;
+    protected CardView cd_NoData, cd_NoConnection, cvSaldo, cvTelepon, cvRiwayat, cvHapus;
 
     protected ImageView imgDetailMember, imgPencairan, imgHubungiMember, imgRiwayatOrder, imgHapusMember;
     protected TextView tvNamaMemberDetail, tvPointMemberDetail, tvIdMemberDetail, tvAlamatMemberDetail, tvNoHpMemberDetail, tvStatusMemberDetail, tvEmailMemberDetail;
@@ -93,6 +93,10 @@ public class DetailMemberActivity extends AppCompatActivity {
         tvNoHpMemberDetail = findViewById( R.id.tvNoHPMember_DetailMember );
         tvStatusMemberDetail = findViewById( R.id.tvStatusMember_DetailMember );
         tvEmailMemberDetail = findViewById( R.id.tvEmailMemberDetail );
+        cvHapus = findViewById( R.id.cvHapus );
+        cvRiwayat = findViewById( R.id.cvRiwayat );
+        cvSaldo = findViewById( R.id.cvSaldo );
+        cvTelepon = findViewById( R.id.cvTelepon );
         parent_layout = findViewById( R.id.parent );
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra( "foto" );
@@ -122,7 +126,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                 .error( R.drawable.ic_navigation_profil )
                 .into( imgDetailMember );
 
-        imgRiwayatOrder.setOnClickListener( new View.OnClickListener() {
+        cvRiwayat.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent listOrderUser = new Intent( DetailMemberActivity.this, ListOrderUser.class );
@@ -131,14 +135,14 @@ public class DetailMemberActivity extends AppCompatActivity {
             }
         } );
 
-        imgHubungiMember.setOnClickListener( new View.OnClickListener() {
+        cvTelepon.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CreateAlertDialogWithRadioButtonGroup();
             }
         } );
 
-        imgPencairan.setOnClickListener( new View.OnClickListener() {
+        cvSaldo.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent checkpin = new Intent( DetailMemberActivity.this, CheckSetPin.class );
@@ -148,7 +152,7 @@ public class DetailMemberActivity extends AppCompatActivity {
             }
         } );
 
-        imgHapusMember.setOnClickListener( new View.OnClickListener() {
+        cvHapus.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String strIdMemberDetail = tvIdMemberDetail.getText().toString();

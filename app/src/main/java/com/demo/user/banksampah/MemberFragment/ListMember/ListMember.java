@@ -119,7 +119,6 @@ public class ListMember extends Fragment  {
             public void onClick(View view) {
                 Intent scanmember = new Intent( getContext(), QRScanActivity.class );
                 scanmember.putExtra( "SCAN_MODE", "BARCODE_MODE" );
-                startActivity( scanmember );
                 startActivityForResult( scanmember, BARCODE_REQUEST_CODE );
             }
         } );

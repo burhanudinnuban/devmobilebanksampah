@@ -96,9 +96,10 @@ public class PencairanNasabah extends AppCompatActivity {
                         .setCancelable( false )
                         .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Intent pencairan = new Intent( getApplicationContext(), MainActivity.class );
-                                startActivity( pencairan );
-                                finish();
+                                    Intent pencairan = new Intent( getApplicationContext(), MainActivity.class );
+                                    startActivity( pencairan );
+                                    finish();
+
                             }
                         } );
                 android.app.AlertDialog alert = builder.create();

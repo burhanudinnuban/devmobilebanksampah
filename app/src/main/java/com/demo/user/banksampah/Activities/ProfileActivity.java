@@ -18,6 +18,7 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.DataPengurus.DataPengurus;
 import com.demo.user.banksampah.DataPengurus.ListViewDataPengurus;
+import com.demo.user.banksampah.DataRekeningBank.DataRekeningBank;
 import com.demo.user.banksampah.Pin.CreatePin;
 import com.demo.user.banksampah.R;
 import com.squareup.picasso.Picasso;
@@ -36,7 +37,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected TextView tvNum1, tvNum2, tvNum3, tvNum4, tvNum5, tvNum6, tvNum7, tvNum8, tvNum9, tvNum0, tvDel;
     protected ImageView img1, img2, img3, img4, img5, img6, imgCancel;
     protected Button btnSubmit;
-
     private String url_foto;
     private ArrayList listPin = new ArrayList();
 
@@ -108,6 +108,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvAddRekBank.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent AddRekeningBank = new Intent( ProfileActivity.this, DataRekeningBank.class );
+                startActivity( AddRekeningBank );
 
             }
         } );

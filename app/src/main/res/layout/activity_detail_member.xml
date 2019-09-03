@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgPicture_DetailMember"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -240,12 +240,12 @@
             android:layout_marginBottom="5dp">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cvSaldo"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#E0F7FA">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -271,12 +271,12 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cvTelepon"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#E0F2F1">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -308,12 +308,12 @@
             android:layout_marginBottom="5dp">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cvRiwayat"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#FFF8E1">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -338,12 +338,12 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cvHapus"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#FCE4EC">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"

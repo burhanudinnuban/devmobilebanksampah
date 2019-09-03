@@ -5,33 +5,37 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.RestProcess;
+import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.MySSLSocketFactory;
-import com.loopj.android.http.RequestParams;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import cz.msebera.android.httpclient.Header;
 import es.dmoral.toasty.Toasty;
 
 public class ResetPasswordActivity extends AppCompatActivity {
@@ -52,6 +56,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected Button btKonfirmasi_Reset;
     protected String getMessage_Result;
 
+    protected RelativeLayout parent_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
 
+        parent_layout = findViewById( R.id.layout_parent );
         etHP_Reset = findViewById(R.id.etHp_Reset);
         btKonfirmasi_Reset = findViewById(R.id.btKonfirmasi_Reset);
 
@@ -76,6 +82,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private void validateData(){
         strHP_Reset = etHP_Reset.getText().toString();
+        String resp_content = "";
         if(strHP_Reset.length() == 0){
             etHP_Reset.setError(getString(R.string.MSG_CELLPHONE_EMPTY));
             etHP_Reset.requestFocus();
@@ -84,7 +91,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             etHP_Reset.requestFocus();
         }else{
             strHP_Reset = modifNumber(strHP_Reset);
-            ValidatePhoneNumber(strHP_Reset);
+            ValidatePhoneNumber(resp_content ,strHP_Reset);
             Log.e("tag", strHP_Reset);
         }
     }
@@ -98,52 +105,68 @@ public class ResetPasswordActivity extends AppCompatActivity {
         return num;
     }
 
-    private void ValidatePhoneNumber(final String phone){
+    private void ValidatePhoneNumber(final String resp_content ,final String phone){
         customProgress.showProgress(this, "", false);
+        final String[] field_name = {"no_telepon"};
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String validate_url;
+        String base_url = apiData.get("str_url_address") + (".send_otp");
 
-        //API URL for Checking Phone Number Exist in DB or Not
-        validate_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.check_lupa_pass_user";
-        params.put("no_telepon", phone);
-
-        //Authorization based on POST
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(validate_url, params, new AsyncHttpResponseHandler() {
-            //If Success...
+        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            public void onResponse(String response) {
                 customProgress.hideProgress();
-                String resp_content ="";
+                Log.d("DEBUG", "Register Response: " + response);
                 try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    viewStatus(resp_content, phone);
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder( ResetPasswordActivity.this);
+                    builder.setMessage("Sukses")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    viewStatus(resp_content, phone );
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                    Log.e("tag", "sukses");
                 } catch (Throwable t) {
-                    Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + "1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    Log.e("Tag", " 1:" + String.valueOf(t));
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
                 }
             }
+        }, new Response.ErrorListener() {
 
-            //If Fail...
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
                 customProgress.hideProgress();
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + "1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-                Log.e("Tag","1: " + String.valueOf(error));
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], phone);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
     private void viewStatus(String resp_content, String phone){
-        String[]field_name = {"message", "otp_input", "no_telepon", "id_user"};
+        String[]field_name = {"message"};
 
         try{
             arrayResult = rest_class.getJsonData(field_name, resp_content);
@@ -151,7 +174,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
             getMessage_Result = jsonObject.getString(field_name[0]);
 
-            if(getMessage_Result.equals("OTP Send")){
+            if(getMessage_Result!=null){
                 Toasty.success(getApplicationContext(),"Kode Aktivasi Telah Dikirimkan ke Nomor Telepon Anda. Silakan Masukkan Kode Aktivasi Tersebut", Toast.LENGTH_LONG).show();
                 showOTPInput(phone);
             }
@@ -161,6 +184,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    finish();
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -209,49 +233,65 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private void ValidateOTP(final String kode, final String phone){
         customProgress.showProgress(this, "", false);
+        final String[] field_name = {"no_telepon", "otp"};
 
-        //Set HTTP Client..
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        RequestParams params = new RequestParams();
-        String otp_url;
+        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
 
-        Log.e("tag", kode +","+phone);
-
-        //API URL for Checking Phone Number Exist in DB or Not
-        otp_url = apiData.get("str_url_address") + "/method/digitalwaste.digital_waste.custom_api.validate_otp";
-        params.put("no_telepon", phone);
-        params.put("otp_input", kode);
-
-        //Authorization based on POST
-        client.addHeader(apiData.get("str_header"), apiData.get("str_token_value"));
-        client.post(otp_url, params, new AsyncHttpResponseHandler() {
-            //If Success...
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            public void onResponse(String response) {
                 customProgress.hideProgress();
-                String resp_content = "";
+                Log.d("DEBUG", "Register Response: " + response);
                 try {
-                    resp_content = new String(responseBody, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    viewStatusOTP(resp_content);
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder( ResetPasswordActivity.this);
+                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(changePassword);
+                                    finish();
+                                }
+                            });
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+                    Log.e("tag", "sukses");
                 } catch (Throwable t) {
-                    Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 1 : " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-                    Log.e("tag", " 1 :" + String.valueOf(t));
+                    Snackbar snackbar = Snackbar
+                            .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Log.d("DEBUG", "Error Validate Change Password Response: " + t.toString());
                 }
             }
+        }, new Response.ErrorListener() {
 
-            //If Fail...
             @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG", "Volley Error: " + error.getMessage());
                 customProgress.hideProgress();
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + " 1 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-                Log.e("Tag"," 1: " + String.valueOf(error));
+                Snackbar snackbar = Snackbar
+                        .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
+                snackbar.show();
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], phone);
+                params.put(field_name[1], kode);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
     private void viewStatusOTP(String resp_content){

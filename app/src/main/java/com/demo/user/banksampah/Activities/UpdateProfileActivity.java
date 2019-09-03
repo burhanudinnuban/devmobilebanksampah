@@ -3,12 +3,16 @@ package com.demo.user.banksampah.Activities;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -19,12 +23,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -132,6 +138,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private final static int GALLERY_REQUEST_CODE = 3;
     private final static int CAMERA_REQUEST_CODE = 4;
 
+    //TIme Picker
+    protected Dialog myDialog;
+    protected Button btnTimePicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +172,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
         imgAdd = findViewById(R.id.imgAdd);
         etJamOperasional = findViewById(R.id.etJaOperasional_Register);
         etLatLong = findViewById( R.id.etLatlong );
+        btnTimePicker = findViewById( R.id.btnTimePick );
+        btnTimePicker.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog = new Dialog(UpdateProfileActivity.this);
+                PopUpTimePicker();
+            }
+        } );
 
         //Session Instance
         session = new PrefManager(getApplicationContext());
@@ -176,8 +194,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         getJamOperasional = user.get(PrefManager.KEY_JAM_OPERASIONAL);
 
 
-
-
         etNamaBankSampah.setText(getNama);
         etNamaBankSampah.setEnabled(false);
         etEmailBankSampah.setText(getEmail);
@@ -185,6 +201,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etNoHpBankSampah.setEnabled(false);
         etAlamat.setText(getAlamat);
         etJamOperasional.setText(getJamOperasional);
+        etJamOperasional.setEnabled( false );
         etLatLong.setText( getLatLong );
 
         url_foto = apiData.get("str_url_main");
@@ -463,7 +480,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 Log.d("DEBUG", "Register Response: " + response);
                 try {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(UpdateProfileActivity.this);
-                    builder.setMessage(R.string.MSG_REGIST_SUCCESS)
+                    builder.setMessage("Selamat Profile Berhasil Dirubah.")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -591,5 +608,43 @@ public class UpdateProfileActivity extends AppCompatActivity {
         startActivity(a);
         finish();
         super.onBackPressed();
+    }
+
+    private void PopUpTimePicker(){
+        myDialog.setContentView( R.layout.time_picker );
+        Button btnGetTime = myDialog.findViewById( R.id.btnGetTime );
+        TimePicker picker = myDialog.findViewById(R.id.timePicker1);
+        picker.setIs24HourView(true);
+        btnGetTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hour, minute;
+                String am_pm;
+                if (Build.VERSION.SDK_INT >= 23 ){
+                    hour = picker.getHour();
+                    minute = picker.getMinute();
+                }
+                else{
+                    hour = picker.getCurrentHour();
+                    minute = picker.getCurrentMinute();
+                }
+                if(hour > 12) {
+                    am_pm = "PM";
+                    hour = hour - 12;
+                }
+                else
+                {
+                    am_pm="AM";
+                }
+                etJamOperasional.setText(hour +" "+":"+" "+ minute+" "+am_pm);
+                myDialog.dismiss();
+            }
+
+        });
+        if (myDialog.getWindow() != null) {
+            myDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+            myDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+            myDialog.show();
+        }
     }
 }

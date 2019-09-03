@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.user.banksampah.Adapter.PrefManager;
+import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.BottomNavigationViewNew;
 import com.demo.user.banksampah.MainFragment.HomeFragment;
 import com.demo.user.banksampah.MainFragment.MemberFragment;
@@ -59,7 +60,9 @@ import es.dmoral.toasty.Toasty;
 import static android.graphics.Color.WHITE;
 
 public class MainActivity extends AppCompatActivity {
-
+    /*API process and dialog*/
+    protected RestProcess rest_class;
+    protected HashMap<String,String> apiData;
     //Get Data From Login Process
     public static String strNama = "";
     public static String strFoto = "";
@@ -94,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
     //private static final String TAG = MainActivity.class.getSimpleName();
     //private BroadcastReceiver mRegistrationBroadcastReceiver;
-
+//Session Class
+    protected HashMap<String,String> user;
     public static boolean isAppRunning;
     protected Dialog myDialog;
 
+    protected String getNama= "", getNoHP = "",getFoto ="";
     //Create Static Notification
     private NotificationManager notificationManager;
     public static final String CHANNEL_ID = "test_notif";
@@ -108,12 +113,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        rest_class = new RestProcess();
+        apiData = rest_class.apiErecycle();
         imgSmallPicture = findViewById(R.id.imgRegisterPicture);
         imgPesan = findViewById(R.id.imgNotification);
         imgQRCode = findViewById(R.id.imgQrCode);
         tvNamaUser = findViewById(R.id.tvNamaUser);
         BottomNavigationViewNew navigation = findViewById(R.id.navigation);
+        //Session Instance
+        session = new PrefManager(getApplicationContext());
+        user = session.getUserDetails();
+        getNama = user.get(PrefManager.KEY_NAMA);
+        getFoto = user.get(PrefManager.KEY_FOTO);
+        getNoHP = user.get(PrefManager.KEY_NO_HP);
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         myDialog = new Dialog(this);
@@ -234,9 +246,9 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> token = session.getTokenDetails();
         strToken = token.get(PrefManager.KEY_TOKEN);
 
-        url_foto = "http://dev-erpnext.pracicointiutama.id";
+        url_foto = apiData.get("str_url_main");
         Picasso.get()
-                .load(url_foto + MainActivity.strFoto)
+                .load(url_foto + getFoto)
                 .error(R.drawable.ic_navigation_profil)
                 .into(imgSmallPicture);
 
