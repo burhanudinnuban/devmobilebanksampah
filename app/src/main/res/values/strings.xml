@@ -4,40 +4,28 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string-array name="Tipe_Sampah">
-        <item>BDNG-BSH</item>
-        <item>SABUN</item>
-        <item>SABUN CUCI</item>
-        <item>RM-SABUN-COLEK</item>
-        <item>RM-BDNG-BSH</item>
-        <item>BODONG GELAS</item>
-        <item>BESI</item>
-        <item>BDNG-CMP</item>
-        <item>KARDUS</item>
-        <item>ALUMUNIUM</item>
-    </string-array>
     <string name="placeholder_pcs"> Pcs</string>
     <string name="placeholder_kgs"> Kg</string>
     <string name="placeholder_point"> Points</string>
     <string name="MSG_SIMPAN_ORDER">Simpan Limbah Anda dan \n Tambahkan ke Orderan yang Sudah Dipilih</string>
-
     <string name="MSG_PERIZINAN_NOTIFIKASI">! Agar aplikasi eRecycle dapat berjalan dengan baik, mohon memberikan izin untuk notifikasi perangkat smartphone Anda.\n\nKlik \'OK\' untuk menuju ke Pengaturan.</string>
 
-    <!--toolbar title-->
     <string name="LBL_PENCARIAN_PRODUK">Cari Produk</string>
+
+    <!--toolbar title-->
     <string name="LBL_KERANGJANG_BELANJA">Keranjang Belanja</string>
+    <string name="MSG_CODE_501">Conflict Error in JSON </string>
 
     <!-- Message Error List-->
-    <string name="MSG_CODE_501">Conflict Error in JSON </string>
     <string name="MSG_CODE_500">Internal Server Error </string>
     <string name="MSG_CODE_409">Bad Request </string>
-
     <string name="MSG_CHECK_DATA">Mohon Periksa Data Kembali </string>
+
     <string name="MSG_TRY_AGAIN">Mohon Coba Beberapa Saat Lagi </string>
     <string name="MSG_CHECK_CONN">Mohon Periksa Koneksi Anda </string>
+    <string name="MSG_FULLNAME_EMPTY">Harap Masukan Nama Lengkap Anda</string>
 
     <!-- Message Box Registrasi -->
-    <string name="MSG_FULLNAME_EMPTY">Harap Masukan Nama Lengkap Anda</string>
     <string name="MSG_EMAIL_EMPTY">Harap Masukkan Alamat Email Anda</string>
     <string name="MSG_EMAIL_VALID">Harap Masukkan Email yang Valid</string>
     <string name="MSG_NO_HP_EMPTY">Nomor Ponsel Minimal 10 Digit</string>
@@ -56,29 +44,29 @@
     <string name="MS_PENCAIRAN_SALDO">Menunggu Konfirmasi.</string>
     <string name="MSG_NO_ALREADY_EXIST">Mohon Maaf Nomor Tersebut Sudah Terdaftar</string>
     <string name="MSG_PROCESSING_DATA">Melakukan Validasi Data..</string>
-
     <string name="app_name1">PinProject</string>
+
     <string name="pin_content_desc">PIN input field</string>
     <string name="pin_label_text">PIN</string>
-
     <string name="MSG_FALSE_LOGIN">Nomor Telepon atau Kata Sandi yang Anda Masukkan Salah!</string>
-    <string name="MSG_SUCCESS_SEND_OTP">Kode Aktivasi Telah Dikirimkan ke Nomor Telepon Anda. Silakan Masukkan Kode Aktivasi Tersebut</string>
 
+    <string name="MSG_SUCCESS_SEND_OTP">Kode Aktivasi Telah Dikirimkan ke Nomor Telepon Anda. Silakan Masukkan Kode Aktivasi Tersebut</string>
     <string name="MSG_SUCCESS_ORDER">Selamat! Berhasil Menambahkan Limbah kedalam Order.
         \nKami Akan Segera Mengirimkan Jadwal Penjemputan Sampah.</string>
 
     <string name="MSG_PICKER_COMING">Petugas Kami akan Segera Melakukan Penjemputan ke Tempat Anda</string>
-    <string name="MSG_PICKER_RESET">Kami akan Mengatur Ulang Jadwal Penjemputan Anda</string>
 
+    <string name="MSG_PICKER_RESET">Kami akan Mengatur Ulang Jadwal Penjemputan Anda</string>
     <string name="MSG_DELETE_INCOMING">Apakah Anda Yakin Menghapus Seluruh Data Kantong Limbah Sampah Tersebut?</string>
 
     <string name="MSG_SUCCESS_INPUT_FIRST_INCOMING_ORDER">Selamat! Anda Berhasil Menambahkan Limbah Pertama Kedalam Kantong. Silakan Cek Kantong Anda</string>
+
     <string name="MSG_SUCCESS_INPUT_INCOMING_ORDER">Selamat! Anda Berhasil Menambahkan Limbah Kedalam Kantong. Silakan Cek Kantong Anda</string>
-
     <string name="MSG_NO_LIMBAH">Tidak Ada Limbah Sampah di Kantong Anda.</string>
-    <string name="MSG_PURSUE_LIMBAH">Ayo Tambahkan Limbah Sampahmu!</string>
 
+    <string name="MSG_PURSUE_LIMBAH">Ayo Tambahkan Limbah Sampahmu!</string>
     <string name="MSG_REQ_SUCCESS">Proses berhasil !</string>
+
     <string name="MSG_REQ_FAILED">Periksa Koneksi Anda !</string>
     <string name="MSG_PROCESSING">Sedang diproses...</string>
     <string name="MSG_CONNECTING">Sedang koneksi...</string>
@@ -88,11 +76,11 @@
     <string name="MSG_CANCEL_ORDER">Yakin Mau Cancel Order ?</string>
     <string name="MSG_OUTLET_NO_RECORD">Daftar toko kosong.</string>
     <string name="MSG_DRIVER_NO_RECORD">Tidak ada driver online dirute ini !</string>
-
     <string name="MSG_CHECK_TNC">Harap klik setuju dengan syarat dan ketentuan.</string>
 
-
     <string name="MSG_CONFIRM_FALSE">Konfirmasi Password tidak sesuai.</string>
+
+
     <string name="MSG_PIN_KURANG">Masukkan 6 digit PIN.</string>
     <string name="MSG_PIN_EMPTY">PIN harus diisi !</string>
     <string name="MSG_CODE_EMPTY">Masukkan 8 digit kode otorisasi.</string>
@@ -101,8 +89,8 @@
     <string name="MSG_OUTLET_SELECT">Harap pilih cabangnya</string>
     <string name="MSG_OUTLET_CODE_EMPTY">Masukkan kode cabang.</string>
     <string name="MSG_OUTLET_CODE_WRONG">Kode cabang salah.</string>
-
     <string name="LBL_EMAIL">Email</string>
+
     <string name="LBL_PWD_REQ_CODE">Request Code</string>
     <string name="LBL_PWD_RESET">Change Password</string>
     <string name="LBL_PWD_CODE">Kode Otorisasi(dari email):</string>
@@ -112,27 +100,27 @@
     <string name="LBL_OUTLET_CODE">Kode Outlet</string>
     <string name="LBL_HINT_PIN">Customers Input 6 digit PIN Here</string>
     <string name="LBL_HINT_OUTLET_CODE">Input Outlet Code or Scan Outlet Code</string>
-
     <string name="LBL_FULL_NAME">Nama Lengkap</string>
+
     <string name="LBL_RELIGION">Agama:</string>
     <string name="LBL_DOB">Tanggal Lahir:</string>
     <string name="LBL_HP_NO">Nomor HP:</string>
     <string name="LBL_MEMBER_ID">Nomor Keanggotaan:</string>
     <string name="LBL_MEMBER_STATUS">Status Member:</string>
-
     <string name="TITLE_ORDER_PROCESS">Order Process</string>
+
     <string name="TITLE_TNC">Term &amp; Conditions</string>
     <string name="TITLE_ROUTE_DETAIL">Route Detail</string>
     <string name="TITLE_HOME">Home</string>
     <string name="TITLE_PROFILE">Profile</string>
     <string name="TITLE_LOGOUT">Keluar</string>
     <string name="TITLE_MERCHANT">Merchant</string>
-
     <string name="TITLE_CHANGE_PASSWORD">Ubah Password</string>
+
     <string name="TITLE_RESET_PIN">Ubah PIN</string>
-
-
     <string name="TITLE_PROMOTION">Promotion</string>
+
+
     <string name="TITLE_RESET_PASSWORD">Lupa Password</string>
     <string name="TITLE_VOUCHER">E-Coupon</string>
     <string name="TITLE_VOUCHER_TX">Transaksi E-Coupon</string>
@@ -144,11 +132,11 @@
     <string name="TITLE_MESSAGE">Notification</string>
     <string name="TITLE_CATEGORY">Kategori Produk</string>
     <string name="TITLE_PRODUCT_LIST">List Product</string>
-
     <string name="TITLE_EDIT_PROFILE">Profil</string>
 
-
     <string name="BTN_YES">Yes</string>
+
+
     <string name="BTN_NO">No</string>
     <string name="BTN_DETAIL">Open</string>
     <string name="BTN_USE">Submit</string>
@@ -160,23 +148,23 @@
     <string name="BTN_REQUEST">Request Code</string>
     <string name="BTN_SAVE">Simpan</string>
     <string name="BTN_DELETE">Delete</string>
+    <string name="LOGIN_MBR_ID_INVALID">No Handphone tidak terdaftar !</string>
 
     <!--login error msg-->
-    <string name="LOGIN_MBR_ID_INVALID">No Handphone tidak terdaftar !</string>
     <string name="LOGIN_MBR_PWD_INVALID">Password salah !</string>
     <string name="LOGIN_MBR_IMEI_INVALID">Anda sudah login diperangkat lain !</string>
     <string name="LOGIN_MBR_INACTIVE">Keanggotaan sudah tidak aktif!</string>
     <string name="LOGIN_MBR_NOT_ACTIVATED">Keanggotaan belum diaktivasi!</string>
     <string name="LOGIN_MBR_ID_AND_PASSWORD_INVALID">No Handphone dan Password Salah !</string>
+    <string name="CHANGE_PWD_CONFIRM_NOT_SAME">Konfirmasi password berbeda !</string>
 
     <!--change password error msg-->
-    <string name="CHANGE_PWD_CONFIRM_NOT_SAME">Konfirmasi password berbeda !</string>
     <string name="CHANGE_PWD_SUCCESSFUL">Berhasil!</string>
     <string name="CHANGE_PWD_MBR_NOT_LOGIN">Silahkan login terlebih dahulu.</string>
     <string name="CHANGE_PWD_INVALID_SESSION">Sesi login tidak sah !</string>
+    <string name="PWD_RST_INVALID_EMAIL">No Handphone tidak terdaftar !</string>
 
     <!--reset password error msg-->
-    <string name="PWD_RST_INVALID_EMAIL">No Handphone tidak terdaftar !</string>
     <string name="PWD_RST_SUCCESSFUL">Ubah password berhasil! Silakan Login dengan password baru Anda.</string>
     <string name="PWD_RST_MBR_STATUS_INACTIVE">Keanggotaan sudah tidak aktif!</string>
     <string name="PWD_RST_MBR_NOT_ACTIVATED">Keanggotaan belum diaktivasi!</string>
@@ -184,18 +172,18 @@
     <string name="PWD_RST_CONFIRM_NOT_SAME">Konfirmasi kata sandi berbeda!</string>
     <string name="PWD_RST_CODE_SENT">Kode otorisasi berhasil dikirim!</string>
     <string name="PWD_RST_CODE_SENT_FAILED">Kode otorisasi gagal dikirim!</string>
+    <string name="OFFER_RD_PIN_INVALID">Nomor PIN tidak sah!</string>
 
 
     <!--redeem offer error msg-->
-    <string name="OFFER_RD_PIN_INVALID">Nomor PIN tidak sah!</string>
     <string name="OFFER_RD_COUPON_INVALID">Berhasil!</string>
     <string name="OFFER_RD_COUPON_USED">Kode kupon sudah pernah digunakan!</string>
     <string name="OFFER_RD_OFFER_INVALID">Promosi tidak sah!</string>
     <string name="OFFER_RD_SUCCESS">Berhasil!</string>
     <string name="OFFER_RD_MBR_NOT_LOGIN">Silahkan login terlebih dahulu.</string>
     <string name="OFFER_RD_INVALID_SESSION">Sesi login tidak sah!</string>
-
     <string name="FIELD_DATE">Tgl:</string>
+
     <string name="FIELD_ID">Id:</string>
     <string name="FIELD_REF">Ref:</string>
     <string name="FIELD_PTS">Poin:</string>
@@ -209,19 +197,19 @@
     <string name="FIELD_TOTAL_VOL">Total Volum:</string>
     <string name="FIELD_COUPON_NO">Kode Kupon:</string>
     <string name="FIELD_RD_DATE">Tgl Penukaran:</string>
+    <string name="ACTIVATION_EMAIL_INVALID">Aktivasi email invalid !</string>
 
     <!--aktivasi error msg-->
-    <string name="ACTIVATION_EMAIL_INVALID">Aktivasi email invalid !</string>
     <string name="ACTIVATION_DONE_BEFORE">Aktivasi sudah dilakukan sebelumnya !</string>
     <string name="ACTIVATION_EMAIL_SENT">Kode aktivasi berhasil terkirim !</string>
     <string name="ACTIVATION_CODE_INVALID">Kode aktivasi invalid !</string>
     <string name="ACTIVATION_CODE_ACTIVE_BEFORE">Kode aktivasi sudah aktif sebelumnya !</string>
     <string name="ACTIVATION_CODE_ACCOUNT_INVALID">Kode aktivasi akun invalid !</string>
-
-    <!--registration error msg-->
     <string name="MEMBER_REGISTRATION_EXISTS">No Handphone sudah terdaftar!</string>
 
+    <!--registration error msg-->
     <string name="product_list">Product List</string>
+
     <string name="shopping_cart">Shopping Cart</string>
     <string name="LBL_PRODUCT_NAME">Product Name</string>
     <string name="LBL_POINTS">Points</string>
@@ -243,16 +231,16 @@
     <string name="TITLE_KERANJANG_BELANJA">Shopping Cart</string>
     <string name="LBL_PROSES">Process</string>
     <string name="action_product">Product Category</string>
-
     <string name="BTN_REGISTER">Daftar</string>
+
     <string name="LBL_PASSWORD">Password</string>
     <string name="TnC">Syarat dan Ketentuan</string>
     <string name="TITLE_REGSITER">Daftar</string>
     <string name="belumpunyaakun">Belum Memiliki Akun?</string>
     <string name="sudahpunyaakun2">Login</string>
     <string name="belumpunyaakun2">DAFTAR</string>
-
     <string name="MSG_REQ_SUCCESS_REGISTER">Cek Inbox email untuk kode aktivasi</string>
+
     <string name="BTN_KIRIM_AKTIVASI">Send Activation Code</string>
     <string name="LBL_KODE_AKTIVASI">Activation Code:</string>
     <string name="BTN_AKTIVASI">Activation</string>
@@ -263,13 +251,13 @@
     <string name="abaikan">Abaikan</string>
     <string name="lengkapi">Lengkapi</string>
     <string name="TITLE_TUKAR_POIN">Redeem Process</string>
-
     <string name="MSG_KOTA_EMPTY">Harap isi kota Anda!</string>
+
     <string name="MSG_KODEPOS_EMPTY">Harap isi kode pos Anda!</string>
     <string name="MSG_STATE_EMPTY">Harap isi provinsi Anda!</string>
     <string name="BTN_SELESAI">Selesai</string>
-
     <string name="MSG_REQ_POINT">Proses gagal, pastikan poin Anda cukup untuk melakukan penukaran!</string>
+
     <string name="MSG_COUNTRY_EMPTY">Harap isi asal negara!</string>
     <string name="MSG_CONTACT_EMPTY">Harap isi nama penerima!</string>
     <string name="BTN_KODE_AKTIVASI">Send Activation Code</string>
@@ -289,14 +277,14 @@
     <string name="MSG_KODEPOS_FIVE_DIGIT">Kode pos harus 5 digit angka!</string>
     <string name="MSG_CELLPHONE_TEN_DIGIT">Harap isi No HP minimal 10 digit angka!</string>
     <string name="TITLE_POINT_TX">Transaksi Penukaran Poin</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
+
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="openDrawer">Drawer dibuka</string>
     <string name="closeDrawer">Drawer ditutup</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="TITLE_EVOUCHER">E-Coupon</string>
     <string name="TITLE_DEALS">Deals</string>
     <string name="TITLE_PRODUCT_PACKET_LIST">List Product</string>
@@ -315,8 +303,8 @@
     <string name="MSG_CONFIRMATION_LOGOUT_PIN">Silakan login kembali untuk dapat mengakses PIN baru !</string>
     <string name="TITLE_DETAIL_ITEM">Detail Item</string>
     <string name="TITLE_POINTS_DETAILS">Points Expiry</string>
-
     <string name="SANDBOX">https://app.sandbox.veritrans.co.id/snap/v2/vtweb/</string>
+
     <string name="LBL_BELI_SEKARANG">Buy Now</string>
     <string name="MSG_VOUCHER_BUY">Beli paket ini dengan</string>
     <string name="TITLE_TRANSAKSI_CASH">Transaksi Pembelian Cash</string>
@@ -355,13 +343,13 @@
     <string name="MSG_PIN_OLD_EMPTY">PIN yang lama harus diisi.</string>
     <string name="MSG_PIN_NEW_EMPTY">PIN yang baru harus diisi.</string>
     <string name="MSG_PIN_CON_EMPTY">Konfirmasi PIN harus diisi.</string>
-
     <string name="MSG_RUTE_KOSONG">Rute Harus Diisi !</string>
+
     <string name="MSG_CATATAN_PENUMPANG">Catatan Penumpang Harus Diisi !</string>
     <string name="MSG_JUMLAH_PENUMPANG">Jumlah Penumpang Harus Diisi !</string>
     <string name="BTN_CONTACT_NOW">Hubungi Sekarang</string>
-
     <string name="title">Rating Driver</string>
+
     <string name="msg000">Sangat Baik</string>
     <string name="msg001">Baik</string>
     <string name="msg002">Cukup Baik</string>
@@ -374,6 +362,18 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
     <string name="section_format">Hello World from section: %1$d</string>
-
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+    <string-array name="Tipe_Sampah">
+        <item>BDNG-BSH</item>
+        <item>SABUN</item>
+        <item>SABUN CUCI</item>
+        <item>RM-SABUN-COLEK</item>
+        <item>RM-BDNG-BSH</item>
+        <item>BODONG GELAS</item>
+        <item>BESI</item>
+        <item>BDNG-CMP</item>
+        <item>KARDUS</item>
+        <item>ALUMUNIUM</item>
+    </string-array>
 </resources>

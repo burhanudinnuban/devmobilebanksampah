@@ -4,22 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.user.banksampah">
 
-    <dist:module dist:instant="true" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- Permission Firebase -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <application
         android:name=".Adapter.VolleyController"
         android:allowBackup="true"
@@ -32,55 +16,120 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Pin.LupaPin" />
-        <activity android:name=".Pin.CheckSetPin" />
-        <activity android:name=".PencairanSaldo.Nasabah.PencairanNasabah" />
-        <activity android:name=".Pin.CheckPin" />
-        <activity android:name=".Pin.CreatePin" />
-        <activity android:name=".DataPengurus.EditPengurus" />
-        <activity android:name=".DataRekeningBank.ListViewRekeningBank" />
-        <activity android:name=".DataRekeningBank.DataRekeningBank" />
-        <activity android:name=".DataPengurus.ListViewDataPengurus" />
-        <activity android:name=".DataPengurus.DataPengurus" />
-        <activity android:name=".MemberFragment.ListMember.ListOrderUser" />
-        <activity android:name=".Activities.UpdateListItem" />
-        <activity android:name=".Activities.ListHargaItem" />
-        <activity android:name=".MemberFragment.RequestMember.DetailRequestMember">
+        <activity android:name=".DataRekeningBank.PencairanSaldoBankSampah"></activity>
+        <activity android:name=".IntroStart" />
+        <activity
+            android:name=".Pin.LupaPin"
+            android:configChanges="orientation"
+            android:label="Lupa Security Pin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pin.CheckSetPin"
+            android:configChanges="orientation"
+            android:label="Check Create Pin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PencairanSaldo.Nasabah.PencairanNasabah"
+            android:configChanges="orientation"
+            android:label="Pencairan Saldo Nasabah"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pin.CheckPin"
+            android:label="Pin Check In" />
+        <activity
+            android:name=".Pin.CreatePin"
+            android:label="Create Pin" />
+        <activity
+            android:name=".DataPengurus.EditPengurus"
+            android:configChanges="orientation"
+            android:label="Edit Data Pengurus"
+            android:parentActivityName=".DataPengurus.ListViewDataPengurus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataRekeningBank.ListViewRekeningBank"
+            android:configChanges="orientation"
+            android:label="Daftar Rekening Bank"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataRekeningBank.DataRekeningBank"
+            android:configChanges="orientation"
+            android:label="Rekening Bank"
+            android:parentActivityName=".DataRekeningBank.ListViewRekeningBank"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataPengurus.ListViewDataPengurus"
+            android:configChanges="orientation"
+            android:label="Daftar Pengurus"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataPengurus.DataPengurus"
+            android:configChanges="orientation"
+            android:label="Tambahkan Data Pengurus"
+            android:parentActivityName=".DataPengurus.ListViewDataPengurus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MemberFragment.ListMember.ListOrderUser"
+            android:configChanges="orientation"
+            android:label="Daftar Order User"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataItem.UpdateListItem"
+            android:configChanges="orientation"
+            android:label="Update Harga item"
+            android:parentActivityName=".DataItem.ListHargaItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DataItem.ListHargaItem"
+            android:configChanges="orientation"
+            android:label="Daftar Harga Item"
+            android:parentActivityName=".Services.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MemberFragment.RequestMember.DetailRequestMember"
+            android:label="Daftar Request Member">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".Activities.TambahkanDaftar" />
-        <activity android:name=".RegisterActivities.RegisterActivity" />
-        <activity android:name=".MemberFragment.ListMember.RiwayatOrderMemberActivity" />
-        <activity android:name=".MemberFragment.ListMember.DetailMemberActivity">
+        <activity
+            android:name=".DataItem.TambahkanDaftar"
+            android:configChanges="orientation"
+            android:label="Tambahkan Daftar Item"
+            android:parentActivityName=".DataItem.ListHargaItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterActivities.RegisterActivity"
+            android:label="Registrasi Akun" />
+        <activity
+            android:name=".MemberFragment.ListMember.DetailMemberActivity"
+            android:label="Detail Member">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".HereMaps.ResultListActivity" />
-
-        <meta-data
-            android:name="com.here.android.maps.appid"
-            android:value="@string/here_maps_app_id" />
-        <meta-data
-            android:name="com.here.android.maps.apptoken"
-            android:value="@string/here_maps_app_token" />
-
         <activity android:name=".TimelineOrder.TimelineOrderActivity" />
-        <activity android:name=".BankSampahActivities.DaftarHargaBankSampah" />
+        <activity
+            android:name=".BankSampahActivities.DaftarHargaBankSampah"
+            android:configChanges="orientation"
+            android:label="Daftar Harga Bank Sampah"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".BankSampahActivities.CariBankSampah" />
         <activity
             android:name=".NotificationActivities.RiwayatOrder"
             android:configChanges="orientation"
             android:label="Riwayat Order"
-            android:parentActivityName=".Activities.ProfileActivity"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Documentation.HubungiKami"
             android:configChanges="orientation"
             android:label="Hubungi Kami"
-            android:parentActivityName=".Activities.ProfileActivity"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.OpenMaps"
@@ -90,25 +139,25 @@
             android:name=".Activities.IntroSliderActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBarHide" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ResetPasswordActivities.ChangeResetPasswordActivity"
             android:configChanges="orientation"
             android:label="Perbarui Kata Sandi"
-            android:parentActivityName=".Activities.LoginActivity"
+            android:parentActivityName=".Services.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ResetPasswordActivities.ResetPasswordActivity"
             android:configChanges="orientation"
             android:label="Lupa Kata Sandi"
-            android:parentActivityName=".Activities.LoginActivity"
+            android:parentActivityName=".Services.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.ChangePassword"
+            android:name=".Services.ChangePassword"
             android:configChanges="orientation"
             android:label="Perbarui Kata Sandi"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.ProfileActivity"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -122,14 +171,14 @@
             android:name=".Documentation.Faq"
             android:configChanges="orientation"
             android:label="Frequently Asked Information"
-            android:parentActivityName=".Activities.ProfileActivity"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".InfoLimbahDetails"
             android:configChanges="orientation"
             android:label="Informasi Sampah"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Services.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".NotificationActivities.PointGetStatus"
@@ -155,19 +204,21 @@
             android:configChanges="orientation"
             android:label="Notifikasi"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Services.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.UpdateProfileActivity"
+            android:name=".ProfileBankSampah.UpdateProfileActivity"
             android:configChanges="orientation"
             android:label="Perbarui Data Profil"
-            android:parentActivityName=".Activities.ProfileActivity"
+            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.OrderDetailsActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".Activities.QRScanActivity" />
+        <activity
+            android:name=".Activities.QRScanActivity"
+            android:label="QRCode Scaning" />
         <activity
             android:name=".Activities.SummaryOrderActivity"
             android:configChanges="orientation"
@@ -175,33 +226,28 @@
             android:label="Daftar Sampah"
             android:largeHeap="true"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Services.MainActivity"
             android:screenOrientation="portrait" />
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
         <activity
-            android:name=".Activities.ProfileActivity"
+            android:name=".ProfileBankSampah.ProfileActivity"
             android:configChanges="orientation"
             android:label="Data Profil"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Services.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBarHide" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".RegisterActivities.OtpActivity"
             android:configChanges="orientation"
             android:label="Aktivasi Akun"
-            android:parentActivityName=".Activities.LoginActivity"
+            android:parentActivityName=".Services.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivities.RegisterPhoneActivity"
             android:configChanges="orientation"
             android:label="Daftar Nomor Telepon"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.LoginActivity"
+            android:parentActivityName=".Services.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TrashDetailOrder"
@@ -215,18 +261,10 @@
             android:configChanges="orientation"
             android:label="Daftar Pilihan Sampah"
             android:launchMode="singleTop"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Services.MainActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".WebViewTest" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <activity android:name=".Activities.SplashScreen">
+        <activity android:name=".Services.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -234,14 +272,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Services.MainActivity"
             android:configChanges="orientation"
             android:hardwareAccelerated="true"
             android:largeHeap="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBarHide"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Services.LoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
+        <meta-data
+            android:name="com.here.android.maps.appid"
+            android:value="@string/here_maps_app_id" />
+        <meta-data
+            android:name="com.here.android.maps.apptoken"
+            android:value="@string/here_maps_app_token" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
@@ -251,6 +306,16 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorCardES" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <service
             android:name=".Services.MyFirebaseMessagingServices"
@@ -262,21 +327,25 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".Activities.LoginActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBarHide" />
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- Permission Firebase -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <dist:module dist:instant="true" />
 
 </manifest>

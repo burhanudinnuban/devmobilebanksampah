@@ -41,32 +41,6 @@
                     android:textStyle="bold"
                     android:visibility="visible" />
 
-                <RelativeLayout
-                    android:id="@+id/relative_foto"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="15dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgRegisterPicture"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/border_rectangle"/>
-
-                    <ImageView
-                        android:id="@+id/imgAdd"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_add_circle_16_dp" />
-                </RelativeLayout>
-
                 <TextView
                     android:id="@+id/tvBankSampahPengurus"
                     android:layout_width="match_parent"
@@ -85,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:hint="Nama Pengurus"
+                        android:drawableLeft="@drawable/ic_user"
                         android:screenReaderFocusable="true"
                         android:inputType="text"
                         android:textColor="@color/colorLogin"
@@ -104,6 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:hint="Jabatan Pengurus"
+                        android:drawableLeft="@drawable/ic_user"
                         android:inputType="text"
                         android:textColor="@color/colorLogin"
                         android:textSize="15sp"
@@ -115,16 +91,17 @@
                 <Button
                     android:layout_gravity="center"
                     android:id="@+id/btEditPengurus"
-                    android:layout_width="90dp"
+                    android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="50dp"
                     android:layout_marginBottom="30dp"
-                    android:background="@drawable/ic_btn_default"
+                    android:background="@drawable/button_green"
                     android:text=" UPDATE "
                     android:textAllCaps="false"
+                    android:textStyle="bold"
                     android:textColor="@color/colorBorderWhite"
                     android:textSize="17sp" />
 

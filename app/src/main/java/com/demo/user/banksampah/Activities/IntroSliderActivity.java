@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.demo.user.banksampah.IntroStart;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.Services.SliderAdapter;
 
 public class IntroSliderActivity extends AppCompatActivity {
 
@@ -19,7 +21,8 @@ public class IntroSliderActivity extends AppCompatActivity {
     protected LinearLayout mDotLayout;
     protected TextView[] mDots;
     protected SliderAdapter slideAdapter;
-    protected Button btnNext, btnPrevious, btnStart;
+    protected LinearLayout btnNext, btnPrevious;
+    protected Button btnStart;
     protected int mCurrentPage;
 
     @Override
@@ -50,7 +53,7 @@ public class IntroSliderActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent login = new Intent(IntroSliderActivity.this, LoginActivity.class);
+                Intent login = new Intent(IntroSliderActivity.this, IntroStart.class);
                 startActivity(login);
             }
         });
@@ -72,13 +75,13 @@ public class IntroSliderActivity extends AppCompatActivity {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.colorPrimary));
+            mDots[i].setTextColor(getResources().getColor(R.color.ColorGeneral));
 
             mDotLayout.addView(mDots[i]);
         }
 
         if(mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
+            mDots[position].setTextColor(getResources().getColor(R.color.colorBgLightGray));
         }
     }
 
@@ -98,8 +101,6 @@ public class IntroSliderActivity extends AppCompatActivity {
                 btnPrevious.setEnabled(false);
                 btnPrevious.setVisibility(View.INVISIBLE);
 
-                btnNext.setText("Next");
-
             }else if(i == mDots.length-1){
                 Log.e("tag", String.valueOf(mDots.length-1));
 
@@ -109,7 +110,6 @@ public class IntroSliderActivity extends AppCompatActivity {
                 btnPrevious.setVisibility(View.VISIBLE);
 
                 //btnNext.setText("Start");
-                btnPrevious.setText("Back");
 
                 /*Intent login = new Intent(IntroSliderActivity.this, LoginActivity.class);
                 startActivity(login);*/
@@ -122,8 +122,6 @@ public class IntroSliderActivity extends AppCompatActivity {
                 btnStart.setVisibility(View.INVISIBLE);
                 btnNext.setVisibility(View.VISIBLE);
 
-                btnNext.setText("Next");
-                btnPrevious.setText("Back");
             }
         }
 

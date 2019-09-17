@@ -72,11 +72,11 @@
             </android.support.design.widget.TextInputLayout>
             <Button
                 android:id="@+id/btnAddRekBank"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@drawable/ic_btn_default"
+                android:background="@drawable/button_green"
                 android:text="Add Rekening"
-                android:textSize="12dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
                 android:layout_gravity="center"

@@ -10,6 +10,7 @@
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp"
         android:layout_margin="8dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +38,24 @@
         android:layout_toEndOf="@+id/imgPicture_RequestMember"
         android:layout_toRightOf="@+id/imgPicture_RequestMember"
         android:orientation="vertical">
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_contacts_black_24dp" />
+            <TextView
+                android:id="@+id/tvIDMember_RequestMember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(ID Member)"
+                android:textColor="@color/ColorGeneral"
+                android:maxLines="1"
+                android:maxLength="15"/>
+        </LinearLayout>
         <TextView
             android:id="@+id/tvTanggal_RequestMember"
             android:layout_width="wrap_content"
@@ -45,8 +63,9 @@
             android:gravity="center|start|left"
             android:layout_marginBottom="5dp"
             android:text="(Tgl Request)"
+            android:textColor="@color/ColorGeneral"
             android:maxLines="1"
-            android:maxLength="15"/>
+            android:maxLength="10"/>
 
         <TextView
             android:id="@+id/tvNamaMember_RequestMember"
@@ -54,14 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="(Nama Member)"
-            android:maxLines="1"
-            android:maxLength="15"/>
-
-        <TextView
-            android:id="@+id/tvIDMember_RequestMember"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(ID Member)"
+            android:textColor="@color/ColorGeneral"
             android:maxLines="1"
             android:maxLength="15"/>
 
@@ -81,7 +93,7 @@
             android:layout_height="30dp"
             android:text="Detail"
             android:layout_gravity="right"
-            android:background="@drawable/ic_btn_default"
+            android:background="@drawable/ic_button_rectangle_general"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="12dp"/>

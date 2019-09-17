@@ -1,21 +1,22 @@
 package com.demo.user.banksampah.MemberFragment.ListMember;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ExpandableListView;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
-import com.demo.user.banksampah.Adapter.ExpandableListAdapter;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
@@ -47,26 +46,18 @@ public class DetailMemberActivity extends AppCompatActivity {
     protected HashMap<String, String> apiData;
 
     protected String strIDUser;
-    private String idMember;
     protected CustomProgress customProgress;
 
-    protected RelativeLayout parent_layout;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    protected LinearLayout parent_layout;
     protected ConnectivityManager conMgr;
 
     protected View rootView;
     protected LazyAdapter adapter;
-    protected LazyAdapter adapter1;
-    protected ExpandableListAdapter expandableListAdapter;
-    protected ExpandableListAdapter expandableListAdapter1;
-    protected ExpandableListView ELListOrderUser;
 
-    protected CardView cd_NoData, cd_NoConnection, cvSaldo, cvTelepon, cvRiwayat, cvHapus;
+    protected CardView cd_NoData, cvSaldo, cvTelepon, cvRiwayat, cvHapus;
 
-    protected ImageView imgDetailMember, imgPencairan, imgHubungiMember, imgRiwayatOrder, imgHapusMember;
+    protected ImageView imgDetailMember, imgPencairan, imgHubungiMember, imgRiwayatOrder, imgHapusMember, arrowBack;
     protected TextView tvNamaMemberDetail, tvPointMemberDetail, tvIdMemberDetail, tvAlamatMemberDetail, tvNoHpMemberDetail, tvStatusMemberDetail, tvEmailMemberDetail;
-    protected AlertDialog alertDialog1;
-    private String m_Text = "";
     protected String url_foto;
 
     @Override
@@ -98,6 +89,13 @@ public class DetailMemberActivity extends AppCompatActivity {
         cvSaldo = findViewById( R.id.cvSaldo );
         cvTelepon = findViewById( R.id.cvTelepon );
         parent_layout = findViewById( R.id.parent );
+        arrowBack = findViewById( R.id.arrowBack );
+        arrowBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        } );
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra( "foto" );
         String tvNamaMemberDetail1 = getIntent().getStringExtra( "nama_member" );
@@ -107,6 +105,8 @@ public class DetailMemberActivity extends AppCompatActivity {
         String tvNoHpMemberDetail1 = getIntent().getStringExtra( "no_telepon" );
         String tvStatusMemberDetail1 = getIntent().getStringExtra( "id" );
         String tvEmailMemberDetail1 = getIntent().getStringExtra( "email" );
+
+        session.DetailMember( tvPointMemberDetail1, tvIdMemberDetail1 );
 
         tvNamaMemberDetail.setText( "" + tvNamaMemberDetail1 );
         tvPointMemberDetail.setText( "" + tvPointMemberDetail1 );
@@ -147,8 +147,6 @@ public class DetailMemberActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent checkpin = new Intent( DetailMemberActivity.this, CheckSetPin.class );
                 startActivity( checkpin );
-//                String strIdMemberDetail = tvIdMemberDetail.getText().toString();
-//                PencairanSaldoNasabah( strIdMemberDetail );
             }
         } );
 
@@ -184,8 +182,6 @@ public class DetailMemberActivity extends AppCompatActivity {
                                                 .setCancelable( false )
                                                 .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
-                                                        Intent changePassword = new Intent( getApplicationContext(), MainActivity.class );
-                                                        startActivity( changePassword );
                                                         finish();
                                                     }
                                                 } );
@@ -214,6 +210,7 @@ public class DetailMemberActivity extends AppCompatActivity {
                                 protected Map<String, String> getParams() {
                                     Map<String, String> params = new HashMap<>();
                                     params.put( field_name[0], strIdMemberDetail );
+                                    params.put( "id_bank_sampah", strIDUser );
                                     Log.d( "123", "onClick: " + strIdMemberDetail );
                                     return params;
                                 }
@@ -245,39 +242,51 @@ public class DetailMemberActivity extends AppCompatActivity {
     }
 
     public void CreateAlertDialogWithRadioButtonGroup() {
-        CharSequence[] values = {" Phone Call ", " Message "};
+        Dialog mydialog = new Dialog( DetailMemberActivity.this );
+        CardView cvMessage, cvCall;
+        ImageView imgExit;
+        mydialog.setContentView( R.layout.alert_call_n_message );
+        cvMessage = mydialog.findViewById( R.id.cvMessage );
+        cvCall = mydialog.findViewById( R.id.cvCall );
+        imgExit = mydialog.findViewById( R.id.imgExit );
 
-        AlertDialog.Builder builder = new AlertDialog.Builder( DetailMemberActivity.this );
-
-        builder.setTitle( "Select Your Choice" );
-
-        builder.setSingleChoiceItems( values, -1, new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int item) {
+        cvCall.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 String phoneNo = tvNoHpMemberDetail.getText().toString();
-                String message = tvNoHpMemberDetail.getText().toString();
-                switch (item) {
-                    case 0:
-
-                        if (!TextUtils.isEmpty( phoneNo )) {
-                            String dial = "tel:" + phoneNo;
-                            startActivity( new Intent( Intent.ACTION_DIAL, Uri.parse( dial ) ) );
-                        } else {
-                            Toast.makeText( DetailMemberActivity.this, "Enter a phone number", Toast.LENGTH_SHORT ).show();
-                        }
-                        break;
-                    case 1:
-                        if (!TextUtils.isEmpty( message ) && !TextUtils.isEmpty( phoneNo )) {
-                            Intent smsIntent = new Intent( Intent.ACTION_SENDTO, Uri.parse( "smsto:" + phoneNo ) );
-                            smsIntent.putExtra( "sms_body", message );
-                            startActivity( smsIntent );
-                        }
-                        break;
+                if (!TextUtils.isEmpty( phoneNo )) {
+                    String dial = "tel:" + phoneNo;
+                    startActivity( new Intent( Intent.ACTION_DIAL, Uri.parse( dial ) ) );
+                } else {
+                    Toast.makeText( DetailMemberActivity.this, "Enter a phone number", Toast.LENGTH_SHORT ).show();
                 }
-                alertDialog1.dismiss();
             }
         } );
-        alertDialog1 = builder.create();
-        alertDialog1.show();
+
+        cvMessage.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNo = tvNoHpMemberDetail.getText().toString();
+                String message = tvNoHpMemberDetail.getText().toString();
+                if (!TextUtils.isEmpty( message ) && !TextUtils.isEmpty( phoneNo )) {
+                    Intent smsIntent = new Intent( Intent.ACTION_SENDTO, Uri.parse( "smsto:" + phoneNo ) );
+                    smsIntent.putExtra( "sms_body", message );
+                    startActivity( smsIntent );
+                }
+            }
+        } );
+
+        imgExit.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mydialog.dismiss();
+            }
+        } );
+
+        if (mydialog.getWindow() != null) {
+            mydialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+            mydialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+            mydialog.show();
+        }
     }
 }

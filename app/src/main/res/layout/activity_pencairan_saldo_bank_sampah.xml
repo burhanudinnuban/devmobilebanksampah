@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parentLayout"
+    tools:context=".DataRekeningBank.PencairanSaldoBankSampah">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="6dp"
+        android:layout_margin="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Massukkan Jumlah Uang Yang Ingin Dicairkan"
+                android:gravity="center"
+                android:textColor="@color/ColorGeneral"/>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvBankAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Account"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/tvNoRek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Rekening"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/tvIdBankSampahDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ID Bank Sampah"
+                    android:gravity="center"/>
+
+            </TableRow>
+            <ImageView
+                android:id="@+id/imgBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_user"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/etJumlahWithdraw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_rectangle_button_line"
+                android:textAlignment="center"
+                android:hint="Jumlah Withdraw : Rp 10,000"
+                android:layout_margin="5dp"/>
+            <Button
+                android:id="@+id/btnCairkan"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Cairkan Saldo"
+                android:layout_marginRight="75dp"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/ic_button_rectangle_general"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

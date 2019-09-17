@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +48,7 @@ public class RequestMember extends Fragment {
 
     //Session Class
     protected PrefManager session;
-
+    private ShimmerFrameLayout mShimmerViewContainer;
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
@@ -65,8 +67,10 @@ public class RequestMember extends Fragment {
     protected  ListView listView;
     protected View rootView;
     protected LazyAdapter adapter;
+    protected Context ctx;
 
     protected CardView cd_NoData, cd_NoConnection;
+
 
     protected AutoCompleteTextView editsearch;
     public static RequestMember newInstance() {
@@ -79,7 +83,7 @@ public class RequestMember extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_request_member, container, false);
-
+        mShimmerViewContainer = rootView.findViewById(R.id.shimmer_view_container);
         session = new PrefManager(getContext());
         HashMap<String, String> user = session.getUserDetails();
         strIDUser = user.get(PrefManager.KEY_NAMA);
@@ -87,6 +91,7 @@ public class RequestMember extends Fragment {
         listView = rootView.findViewById(R.id.listView_RequestMember);
         apiData = rest_class.apiErecycle();
 
+        ctx = getContext();
         parent_layout = rootView.findViewById(R.id.parent);
         customProgress = CustomProgress.getInstance();
         lvListRequestMember = rootView.findViewById(R.id.listView_RequestMember);
@@ -108,13 +113,11 @@ public class RequestMember extends Fragment {
                 /*try {*/
 
                 ArrayList<HashMap<String, String>> allOrderSearch = new ArrayList<>();
-
                 Log.e("tag1", allOrderSearch.toString());
 
                 try {
                     for (int x = 0; x < allOrder.size(); x++) {
                         JSONObject c = new JSONObject(allOrder.get(x));
-
                         String idReqMember= c.getString(field_name[1]);
                         String Alamat = c.getString(field_name[2]);
                         String idBankSampah = c.getString(field_name[3]);
@@ -124,9 +127,7 @@ public class RequestMember extends Fragment {
                         String id_bankSampah = c.getString(field_name[7]);
 
                         if(namaReqMember.toLowerCase().contains(editsearch.getText().toString().toLowerCase())) {
-
                             HashMap<String, String> map = new HashMap<>();
-
                             map.put(field_name[1], idReqMember);
                             map.put(field_name[2], Alamat);
                             map.put(field_name[3], idBankSampah);
@@ -135,7 +136,16 @@ public class RequestMember extends Fragment {
                             map.put(field_name[6], foto);
                             map.put(field_name[7], id_bankSampah);
                             allOrderSearch.add(map);
-
+                        } else if (idReqMember.toLowerCase().contains(editsearch.getText().toString().toLowerCase())){
+                            HashMap<String, String> map = new HashMap<>();
+                            map.put(field_name[1], idReqMember);
+                            map.put(field_name[2], Alamat);
+                            map.put(field_name[3], idBankSampah);
+                            map.put(field_name[4], namaReqMember);
+                            map.put(field_name[5], tanggalReqMember);
+                            map.put(field_name[6], foto);
+                            map.put(field_name[7], id_bankSampah);
+                            allOrderSearch.add(map);
                         }
                     }
 
@@ -155,32 +165,36 @@ public class RequestMember extends Fragment {
             }
         });
 
-
-
-//        if (getActivity() != null)
-//            conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-//            //Jalanin API
-//            getListReqMember(strIDUser);
-//        } else {
-//            Snackbar snackbar = Snackbar
-//                    .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-//            snackbar.show();
-//        }
+        if (ctx != null) {
+            conMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+            allOrder.clear();
+            getListReqMember( strIDUser );
+            cd_NoConnection.setVisibility( View.GONE );
+            cd_NoData.setVisibility( View.GONE );
+            linear_ListRequestMember.setVisibility( View.VISIBLE );
+        }else {
+            Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            cd_NoConnection.setVisibility(View.VISIBLE);
+            cd_NoData.setVisibility(View.GONE);
+            linear_ListRequestMember.setVisibility(View.GONE);
+        }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (getActivity() != null) {
-                    if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                        allOrder.clear();
-                        //Jalanin API
-                        getListReqMember(strIDUser);
-                    } else {
-                        Snackbar snackbar = Snackbar
-                                .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-                        snackbar.show();                    }
+                if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+                    allOrder.clear();
+                    getListReqMember( strIDUser );
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.GONE );
+                    linear_ListRequestMember.setVisibility( View.VISIBLE );
+                } else {
+                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    cd_NoConnection.setVisibility(View.VISIBLE);
+                    cd_NoData.setVisibility(View.GONE);
+                    linear_ListRequestMember.setVisibility(View.GONE);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -190,33 +204,23 @@ public class RequestMember extends Fragment {
             @Override
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                    //Jalanin API
-                    getListReqMember(strIDUser);
+                    allOrder.clear();
+                    getListReqMember( strIDUser );
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.GONE );
+                    linear_ListRequestMember.setVisibility( View.VISIBLE );
                 } else {
-                    Snackbar snackbar = Snackbar
-                            .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    cd_NoConnection.setVisibility(View.VISIBLE);
+                    cd_NoData.setVisibility(View.GONE);
+                    linear_ListRequestMember.setVisibility(View.GONE);
                 }
             }
         });
 
-        if (getActivity() != null) {
-            conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        }
-
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-            getListReqMember(strIDUser);
-        } else {
-            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            cd_NoConnection.setVisibility(View.VISIBLE);
-            cd_NoData.setVisibility(View.GONE);
-            linear_ListRequestMember.setVisibility(View.GONE);
-        }
-
         return rootView;
     }
     private void getListReqMember(final String strIDUser){
-        customProgress.showProgress(getContext(), "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_request_member");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
@@ -225,7 +229,9 @@ public class RequestMember extends Fragment {
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataMember(response);
-                    customProgress.hideProgress();
+                    // Stopping Shimmer Effect's animation after data is loaded to ListView
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
@@ -325,5 +331,28 @@ public class RequestMember extends Fragment {
                 Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
             }*/
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.setVisibility( View.VISIBLE );
+        mShimmerViewContainer.startShimmerAnimation();
+        timerDelayRemoveDialog();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
+
+    public void timerDelayRemoveDialog(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 }

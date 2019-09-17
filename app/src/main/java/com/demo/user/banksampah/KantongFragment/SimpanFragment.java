@@ -41,7 +41,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.Services.MainActivity;
 import com.demo.user.banksampah.Activities.QRScanActivity;
 import com.demo.user.banksampah.Activities.TrashDetail;
 import com.demo.user.banksampah.Adapter.CustomProgress;

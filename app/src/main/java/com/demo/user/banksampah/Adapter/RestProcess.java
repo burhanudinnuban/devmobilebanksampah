@@ -227,7 +227,7 @@ public class RestProcess {
 
         //Token Authorization
         apiErecyle.put("str_header", "Authorization");
-        apiErecyle.put("str_token_value", "token a5f866b606775ce:9ce154a207a7716");
+        apiErecyle.put("str_token_value", "token 3313f7fb94a3997:dfe1becfc518ce9");
 
         //Volley Setting
         apiErecyle.put("str_json_obj", "json_obj_req");
@@ -274,23 +274,22 @@ public class RestProcess {
             map_gen.put("var_message",var_message);
             arrayReturn.add(map_gen);
             //if (var_result_flag.equals("1")) {
-                JSONArray result_array = new JSONArray(var_result);
+            JSONArray result_array = new JSONArray(var_result);
 
-                for (i = 0; i < result_array.length(); i++) {
-                    JSONObject obj = result_array.getJSONObject(i);
+            for (i = 0; i < result_array.length(); i++) {
+                JSONObject obj = result_array.getJSONObject(i);
 
-                    map_gen = new HashMap<String, String>();
+                map_gen = new HashMap<String, String>();
                     /*for (int j = 0; j < field_name.length; j++) {
                         map_gen.put(field_name[j], obj.getString(field_name[j]));
                     }*/
-                    for(int j=0;j<obj.length();j++){
-                        String json_key = obj.names().getString(j);
-                        String json_value = obj.getString(json_key);
-                        map_gen.put(json_key,json_value);
-                    }
-
-                    arrayReturn.add(map_gen);
+                for(int j=0;j<obj.length();j++){
+                    String json_key = obj.names().getString(j);
+                    String json_value = obj.getString(json_key);
+                    map_gen.put(json_key,json_value);
                 }
+                arrayReturn.add(map_gen);
+            }
             //}
         } catch (JSONException e) {
             e.printStackTrace();

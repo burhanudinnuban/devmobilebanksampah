@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ProfileActivity">
+    tools:context=".ProfileBankSampah.ProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/ic_background_2"
+            android:background="@color/ColorGeneral"
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -58,13 +58,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/imgGaris2"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
+            app:cardElevation="3dp"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="5dp">
 
         <TextView
             android:id="@+id/tvDataSampah"
@@ -74,137 +76,84 @@
             android:layout_marginTop="3dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_list_data"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawableLeft="@drawable/ic_person_pin"
+            android:drawableRight="@drawable/ic_forward"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
-            android:text="Data Bank Sampah"
-            android:textColor="#000000"
+            android:text="Profile Bank Sampah"
+            android:textColor="@color/ColorGeneral"
             android:textSize="14dp" />
+        </android.support.v7.widget.CardView>
 
-        <ImageView
-            android:id="@+id/imgGaris7"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
-
-        <TextView
-            android:id="@+id/tvAddRekBank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_list_data"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:drawablePadding="10dp"
-            android:textColor="#000000"
-            android:gravity="center|left|start"
-            android:text="Data Rekening Bank"
-            android:textSize="14dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
-
-        <TextView
-            android:id="@+id/tvAddPengurus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_list_data"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:drawablePadding="10dp"
-            android:textColor="#000000"
-            android:gravity="center|left|start"
-            android:text="Data Pengurus"
-            android:textSize="14dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
-
+            app:cardElevation="3dp"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="5dp">
         <TextView
             android:id="@+id/tvGantiKataSandi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:textColor="#000000"
+            android:textColor="@color/ColorGeneral"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:drawableLeft="@drawable/ic_lock_gray"
+            android:drawableRight="@drawable/ic_forward"
             android:drawablePadding="10dp"
             android:gravity="center|left|start"
             android:text="Ganti Kata Sandi"
             android:textSize="14dp" />
+        </android.support.v7.widget.CardView>
 
-        <ImageView
-            android:id="@+id/imgGaris5"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
+            app:cardElevation="3dp"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/tvDataRekeningBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/ColorGeneral"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:drawableLeft="@drawable/ic_bank"
+                android:drawableRight="@drawable/ic_forward"
+                android:drawablePadding="10dp"
+                android:gravity="center|left|start"
+                android:text="Rekening Bank"
+                android:textSize="14dp" />
+        </android.support.v7.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvListHarga"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_histori"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:drawablePadding="10dp"
-            android:textColor="#000000"
-            android:gravity="center|left|start"
-            android:text="Daftar Item"
-            android:textSize="14dp" />
+            app:cardElevation="3dp"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/tvDataPengurus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/ColorGeneral"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:drawableLeft="@drawable/ic_grub"
+                android:drawableRight="@drawable/ic_forward"
+                android:drawablePadding="10dp"
+                android:gravity="center|left|start"
+                android:text="Pengurus"
+                android:textSize="14dp" />
+        </android.support.v7.widget.CardView>
 
-        <ImageView
-            android:id="@+id/imgGaris6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
-        <TextView
-            android:id="@+id/tvPencairanLestari"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:drawableLeft="@drawable/ic_money"
-            android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-            android:drawablePadding="10dp"
-            android:textColor="#000000"
-            android:gravity="center|left|start"
-            android:text="Pencairan Saldo"
-            android:textSize="14dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@android:color/darker_gray" />
     </LinearLayout>
 </ScrollView>
 
@@ -243,14 +192,6 @@
 
     </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imgGaris8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_above="@+id/tvLogOut"
-            app:srcCompat="@android:color/darker_gray" />
-
     <TextView
         android:id="@+id/tvLogOut"
         android:layout_width="wrap_content"
@@ -261,23 +202,23 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="15dp"
-        android:textColor="#A58A8A"
-        android:drawableTop="@drawable/ic_power_settings_new_black_24dp"
+        android:textColor="#FF0000"
+        android:drawableTop="@drawable/ic_power_settings_new_red_24dp"
         android:gravity="center"
         android:text="Logout"
         android:textSize="14sp"
         android:textStyle="bold"/>
 
-    <ImageView
-        android:id="@+id/imgArrowBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_arrow_white" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imgArrowBack"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:src="@drawable/ic_arrow_white" />-->
 
 </RelativeLayout>

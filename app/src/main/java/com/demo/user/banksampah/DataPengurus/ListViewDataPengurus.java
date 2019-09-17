@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,6 +27,7 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,15 +56,14 @@ public class ListViewDataPengurus extends AppCompatActivity {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     protected LinearLayout linear_ListMember;
     protected ConnectivityManager conMgr;
-    Context ctx;
+    protected Context ctx;
+
     protected View rootView;
     protected LazyAdapter adapter;
 
     protected CardView cd_NoData, cd_NoConnection;
-
-    private AutoCompleteTextView etSearch;
     protected FloatingActionButton btnAddPengurus;
-
+    private ShimmerFrameLayout mShimmerViewContainer;
     //Get Data From Login Process
     protected static String getNama = "";
 
@@ -75,10 +75,12 @@ public class ListViewDataPengurus extends AppCompatActivity {
         session = new PrefManager(this);
         final HashMap<String, String> user = session.getUserDetails();
         getNama = user.get(PrefManager.KEY_NAMA);
+        ctx = ListViewDataPengurus.this;
 
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
-
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+        linear_ListMember = findViewById( R.id.layoutList );
         cd_NoData = findViewById(R.id.cd_noData);
         cd_NoConnection = findViewById(R.id.cd_noInternet);
         parent_layout = findViewById(R.id.parent);
@@ -95,22 +97,36 @@ public class ListViewDataPengurus extends AppCompatActivity {
             }
         } );
 
-
-
+        if (ctx != null) {
+            conMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+            allOrder.clear();
+            getListPengurus();
+            cd_NoConnection.setVisibility( View.GONE );
+            cd_NoData.setVisibility( View.GONE );
+            linear_ListMember.setVisibility( View.VISIBLE );
+        }else {
+            Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            cd_NoConnection.setVisibility(View.VISIBLE);
+            cd_NoData.setVisibility(View.GONE);
+            linear_ListMember.setVisibility(View.GONE);
+        }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (getApplicationContext() != null) {
-                    if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                        //Jalanin API
-                        allOrder.clear();
-                        getListPengurus();
-                    } else {
-                        Snackbar snackbar = Snackbar
-                                .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-                        snackbar.show();
-                    }
+                if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+                    allOrder.clear();
+                    getListPengurus();
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.GONE );
+                    linear_ListMember.setVisibility( View.VISIBLE );
+                } else {
+                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    cd_NoConnection.setVisibility(View.VISIBLE);
+                    cd_NoData.setVisibility(View.GONE);
+                    linear_ListMember.setVisibility(View.GONE);
                 }
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -120,49 +136,34 @@ public class ListViewDataPengurus extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-                    //Jalanin API
                     allOrder.clear();
                     getListPengurus();
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.GONE );
+                    linear_ListMember.setVisibility( View.VISIBLE );
                 } else {
-                    Snackbar snackbar = Snackbar
-                            .make(parent_layout, "Tidak Ada Koneksi Internet", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    cd_NoConnection.setVisibility(View.VISIBLE);
+                    cd_NoData.setVisibility(View.GONE);
+                    linear_ListMember.setVisibility(View.GONE);
                 }
             }
         });
-
-        if (getApplicationContext() != null) {
-            conMgr = (ConnectivityManager)(getApplicationContext()).getSystemService(Context.CONNECTIVITY_SERVICE);
-        }
-
-        if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
-
-        } else {
-            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            cd_NoConnection.setVisibility(View.VISIBLE);
-            cd_NoData.setVisibility(View.GONE);
-            linear_ListMember.setVisibility(View.GONE);
-
-        }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        allOrder.clear();
-        getListPengurus();
-    }
+
 
     private void getListPengurus(){
-        customProgress.showProgress(ListViewDataPengurus.this, "", false);
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_pengurus");
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                customProgress.hideProgress();
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataPengurus(response);
+                    // Stopping Shimmer Effect's animation after data is loaded to ListView
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
@@ -195,19 +196,14 @@ public class ListViewDataPengurus extends AppCompatActivity {
                 return params;
             }
         };
-
         // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
 
     protected void viewDataPengurus(String resp_content){
         String[] field_name = {"message", "id_bank_sampah", "nama_pengurus", "jabatan","name"};
-
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
-
-            //if (!message.equalsIgnoreCase("Invalid")) {
-
             JSONArray cast = jsonObject.getJSONArray(field_name[0]);
             Log.e("tag_cast", String.valueOf(cast.length()));
 
@@ -244,5 +240,29 @@ public class ListViewDataPengurus extends AppCompatActivity {
                 Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
             }*/
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.setVisibility( View.VISIBLE );
+        mShimmerViewContainer.startShimmerAnimation();
+        timerDelayRemoveDialog();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
+
+    public void timerDelayRemoveDialog(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 }

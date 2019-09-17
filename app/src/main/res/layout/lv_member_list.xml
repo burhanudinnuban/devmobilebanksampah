@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="(Nama Member)"
+            android:textColor="@color/ColorGeneral"
             android:layout_marginBottom="5dp"
             android:maxLines="1"
             android:maxLength="15"/>
@@ -53,6 +54,7 @@
             android:id="@+id/tvIDMember_ListMember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/ColorGeneral"
             android:text="(ID Member)"
             android:maxLines="1"
             android:maxLength="15"/>
@@ -66,7 +68,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@drawable/ic_navigation_dompet" />
+                android:background="@drawable/ic_account_balance_wallet_general_24dp" />
 
             <TextView
                 android:id="@+id/tvPointMember_ListMember"
@@ -74,8 +76,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center|start|left"
                 android:text="(Point Member)"
-                android:maxLines="1"
-                android:maxLength="15"/>
+                android:textColor="#00C853" />
         </LinearLayout>
     </LinearLayout>
 
@@ -92,7 +93,7 @@
                 android:id="@+id/btnDetailListMember"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
-                android:background="@drawable/ic_btn_default"
+                android:background="@drawable/ic_button_rectangle_general"
                 android:text="Details"
                 android:textStyle="bold"
                 android:textSize="12dp"

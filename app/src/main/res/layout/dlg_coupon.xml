@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/dlgOk"
-    android:background="@drawable/dlgbox"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
     android:paddingTop="2dp">

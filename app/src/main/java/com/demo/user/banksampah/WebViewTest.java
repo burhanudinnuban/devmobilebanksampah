@@ -23,7 +23,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.Services.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

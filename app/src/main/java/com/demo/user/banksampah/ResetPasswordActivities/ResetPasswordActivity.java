@@ -23,8 +23,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
+import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
@@ -56,6 +56,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected Button btKonfirmasi_Reset;
     protected String getMessage_Result;
 
+    protected PrefManager session;
     protected RelativeLayout parent_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_password);
 
         customProgress = CustomProgress.getInstance();
-        myDialog = new Dialog(this);
+        myDialog = new Dialog(ResetPasswordActivity.this);
 
+        session = new PrefManager( getApplicationContext() );
+        HashMap<String, String> user = session.getUserDetails();
+        final String strPhone = user.get( PrefManager.KEY_NO_HP );
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
 
@@ -91,25 +95,25 @@ public class ResetPasswordActivity extends AppCompatActivity {
             etHP_Reset.requestFocus();
         }else{
             strHP_Reset = modifNumber(strHP_Reset);
-            ValidatePhoneNumber(resp_content ,strHP_Reset);
+            ValidatePhoneNumber(strHP_Reset);
             Log.e("tag", strHP_Reset);
         }
     }
 
     private String modifNumber(String num){
         if(num.startsWith("08")){
-            num = num.replaceFirst("08", "628");
+            num = num.replaceFirst("08", "08");
         }else if(num.startsWith("628")){
-            num = num.replaceFirst("628", "628");
+            num = num.replaceFirst("628", "08");
         }
         return num;
     }
 
-    private void ValidatePhoneNumber(final String resp_content ,final String phone){
+    private void ValidatePhoneNumber(final String phone){
         customProgress.showProgress(this, "", false);
         final String[] field_name = {"no_telepon"};
 
-        String base_url = apiData.get("str_url_address") + (".send_otp");
+        String base_url = apiData.get("str_url_address") + (".check_lupa_pass");
 
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
@@ -122,7 +126,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    viewStatus(resp_content, phone );
+                                    viewStatus(response, phone );
                                 }
                             });
                     android.app.AlertDialog alert = builder.create();
@@ -166,16 +170,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void viewStatus(String resp_content, String phone){
-        String[]field_name = {"message"};
-
+        String[]field_name = {"message", "no_telepon", "id_user"};
         try{
             arrayResult = rest_class.getJsonData(field_name, resp_content);
-            JSONObject jsonObject = new JSONObject(resp_content);
+            JSONObject jsonObject = new JSONObject( resp_content );
 
-            getMessage_Result = jsonObject.getString(field_name[0]);
+            String message = jsonObject.getString(field_name[0]);
+            String strPhone = jsonObject.getString( field_name[1] );
+            String idUser = jsonObject.getString( field_name[2] );
+            session.lupaPassword( strPhone, idUser );
 
-            if(getMessage_Result!=null){
-                Toasty.success(getApplicationContext(),"Kode Aktivasi Telah Dikirimkan ke Nomor Telepon Anda. Silakan Masukkan Kode Aktivasi Tersebut", Toast.LENGTH_LONG).show();
+            if(message.equals( "OTP Send" )){
+                Toasty.success(ResetPasswordActivity.this,"Kode Aktivasi Telah Dikirimkan ke Nomor Telepon Anda. Silakan Masukkan Kode Aktivasi Tersebut", Toast.LENGTH_LONG).show();
                 showOTPInput(phone);
             }
             else {
@@ -196,7 +202,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         }
     }
 
-    private void showOTPInput(final String phone){
+    private void showOTPInput(String phone){
         myDialog.setContentView(R.layout.activity_otp);
         myDialog.setCanceledOnTouchOutside(false);
 
@@ -222,7 +228,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     private void checkKodeAktivasi(final EditText etAktivasi, final String phone){
         String KodeAktivasi = etAktivasi.getText().toString();
-
+        session = new PrefManager( getApplicationContext() );
+        HashMap<String, String> user = session.getUserDetails();
+        String strPhone = user.get( PrefManager.KEY_NO_HP );
         if(KodeAktivasi.isEmpty()){
             etAktivasi.setError("Harap Masukkan Kode Aktivasi");
             etAktivasi.requestFocus();
@@ -235,7 +243,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         customProgress.showProgress(this, "", false);
         final String[] field_name = {"no_telepon", "otp"};
 
-        String base_url = apiData.get("str_url_address") + apiData.get("str_api_change_password");
+        String base_url = apiData.get("str_url_address") + (".validate_otp");
 
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
@@ -248,7 +256,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent changePassword = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent changePassword = new Intent(getApplicationContext(), ChangeResetPasswordActivity.class);
                                     startActivity(changePassword);
                                     finish();
                                 }
@@ -277,7 +285,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(field_name[0], phone);
+                params.put(field_name[0], strHP_Reset);
                 params.put(field_name[1], kode);
                 return params;
             }
@@ -292,45 +300,5 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         // Adding request to request queue
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
-    }
-
-    private void viewStatusOTP(String resp_content){
-        String[]field_name = {"message", "no_telepon", "id_user"};
-
-        String message, phone_number, id_user;
-
-        try{
-            arrayValidateOTP = rest_class.getJsonData(field_name, resp_content);
-            JSONObject jsonObject = new JSONObject(resp_content);
-
-            message = jsonObject.getString(field_name[0]);
-
-            Log.e("tag1", message);
-
-            if (message.equals("True")){
-                phone_number = jsonObject.getString(field_name[1]);
-                id_user = jsonObject.getString(field_name[2]);
-
-                Intent intent = new Intent(ResetPasswordActivity.this, ChangeResetPasswordActivity.class);
-                intent.putExtra("no_telepon", phone_number);
-                intent.putExtra("id_user", id_user);
-                startActivity(intent);
-                //finish();
-            }else if (message.equals("False")){
-                AlertDialog.Builder builder = new AlertDialog.Builder(ResetPasswordActivity.this);
-                builder.setMessage("Kode Aktivasi yang Anda Masukkan Salah. Mohon Periksa Data Kembali")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-
-        }catch (JSONException e){
-            Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_500) + " 2 : " + getString(R.string.MSG_CHECK_CONN), Toast.LENGTH_LONG).show();
-            Log.e("tag"," 2: " + String.valueOf(e));
-        }
     }
 }

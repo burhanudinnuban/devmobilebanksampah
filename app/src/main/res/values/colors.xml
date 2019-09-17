@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00C853</color>
-    <color name="colorPrimaryDark">#00E676</color>
-    <color name="colorAccent">#00C853</color>
-
+    <color name="colorPrimary">#00FF00</color>
+    <color name="colorPrimaryDark">#32CD32</color>
+    <color name="colorAccent">#ADFF2F</color>
+    <color name="ColorGeneral">#14A895</color>
     <color name="colorNavBarBelow">@android:color/holo_blue_light</color>
     <color name="colorNavBarBelowFont">#ffffff</color>
-
+    <color name="background">#dddddd</color>
     <color name="colorFragmenTittle">#428fc9</color>
     <color name="colorFragmenTittleFont">#ffffff</color>
     <color name="colorTvLogout">#103595</color>

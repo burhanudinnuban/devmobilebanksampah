@@ -20,7 +20,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.UpdateProfileActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.Documentation.SyaratKetentuan;
@@ -120,9 +119,9 @@ public class RegisterPhoneActivity extends AppCompatActivity {
     //Convert Phone Number If Start on 08... to +628....
     private String modifNumber(String num){
         if (num.startsWith("08")){
-            num = num.replaceFirst("08", "628");
+            num = num.replaceFirst("08", "08");
         } else if (num.startsWith("628")){
-            num = num.replaceFirst("628", "628");
+            num = num.replaceFirst("628", "08");
         }
         return num;
     }

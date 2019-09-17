@@ -18,7 +18,10 @@
     <dimen name="design_bottom_navigation_height" tools:override="true">50dp</dimen>
     <dimen name="design_navigation_icon_size" tools:override="true">18dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
-
+    <dimen name="activityPadding">16dp</dimen>
+    <dimen name="placeholderImage">60dp</dimen>
+    <dimen name="placeholderTextHeight">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
     <dimen name="pin_content_layout_padding">40dp</dimen>
     <dimen name="pin_label_margin">10dp</dimen>
     <dimen name="pin_min_width">32dp</dimen>

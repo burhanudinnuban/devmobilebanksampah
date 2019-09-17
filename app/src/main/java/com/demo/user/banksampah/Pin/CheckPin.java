@@ -48,7 +48,7 @@ public class CheckPin extends AppCompatActivity {
 
     //Pin
     protected TextView tvNum1, tvNum2, tvNum3, tvNum4, tvNum5, tvNum6, tvNum7, tvNum8, tvNum9, tvNum0, tvDel, tvLupaPin;
-    protected ImageView img1, img2, img3, img4, img5, img6;
+    protected ImageView img1, img2, img3, img4, img5, img6, imgExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,14 @@ public class CheckPin extends AppCompatActivity {
         img4 = findViewById( R.id.img4 );
         img5 = findViewById( R.id.img5 );
         img6 = findViewById( R.id.img6 );
+        imgExit = findViewById( R.id.imgExit );
+
+        imgExit.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        } );
 
         tvLupaPin.setOnClickListener( new View.OnClickListener() {
             @Override

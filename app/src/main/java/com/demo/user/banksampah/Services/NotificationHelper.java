@@ -19,7 +19,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 
-import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Firebase.Config;
 import com.demo.user.banksampah.NotificationActivities.ConfirmPickOrder;
 import com.demo.user.banksampah.R;

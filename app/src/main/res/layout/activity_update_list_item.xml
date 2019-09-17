@@ -6,25 +6,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.UpdateListItem"
+    tools:context=".DataItem.UpdateListItem"
     android:orientation="vertical">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        android:layout_margin="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="6dp">
-            <ImageView
-                android:id="@+id/imgUpdateItemPicture"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_camera_16_dp" />
-            <TextView
+               <TextView
                 android:id="@+id/tvJenisItemUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,13 +28,16 @@
                 android:textStyle="bold"
                 android:textSize="16dp"/>
             <TextView
-                android:id="@+id/tvIDItemUpdate"
+                android:id="@+id/tvIdItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ID Item"
+                android:text=" Jenis Item"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:visibility="invisible"/>
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +55,9 @@
                 android:id="@+id/etHargaItemUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Harga Item" />
+                android:hint="Harga Item"
+                android:inputType="numberDecimal"
+                android:layout_gravity="center"/>
             </LinearLayout>
             <Button
                 android:id="@+id/btnRubahItem"
@@ -67,7 +67,8 @@
                 android:background="@drawable/button_green"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:layout_margin="20dp"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.demo.user.banksampah.DataPengurus;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
@@ -98,8 +96,6 @@ public class EditPengurus extends AppCompatActivity {
                                             .setCancelable(false)
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    Intent hapusPengurus = new Intent(EditPengurus.this, MainActivity.class);
-                                                    startActivity(hapusPengurus);
                                                     finish();
                                                 }
                                             });

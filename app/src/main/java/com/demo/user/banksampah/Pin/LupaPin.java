@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,6 +50,7 @@ public class LupaPin extends AppCompatActivity {
 
     protected EditText etPassword;
     protected Button btnSubmit;
+    protected ImageView imgExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,14 @@ public class LupaPin extends AppCompatActivity {
         customProgress = CustomProgress.getInstance();
         restClass = new RestProcess();
         apiData = restClass.apiErecycle();
+        imgExit = findViewById( R.id.imgExit );
+
+        imgExit.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        } );
 
         btnSubmit.setOnClickListener( new View.OnClickListener() {
             @Override

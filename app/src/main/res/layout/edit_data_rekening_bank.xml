@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data Rekening Bank"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:gravity="center"
+                android:layout_margin="10dp"/>
+            <Spinner
+                android:id="@+id/sBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_margin="5dp"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etNoRekBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="No Rekening Bank"
+                    android:drawableLeft="@drawable/ic_bank"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etNamaPemilikRekBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama Pemilik Rekening "
+                    android:drawableLeft="@drawable/ic_user"
+                    android:inputType="text"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etCabangBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cabang"
+                    android:drawableLeft="@drawable/ic_bank"
+                    android:inputType="text"/>
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/btnAddRekBank"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_btn_default"
+                android:text="UPDATE"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

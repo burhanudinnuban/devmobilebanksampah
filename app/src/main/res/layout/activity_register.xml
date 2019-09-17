@@ -5,7 +5,7 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBorderWhite"
+    android:background="@drawable/ic_background_authentication"
     tools:context="com.demo.user.banksampah.RegisterActivities.RegisterActivity">
 
     <LinearLayout
@@ -52,7 +52,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_add_circle_16_dp" />
+                    android:src="@drawable/ic_plus_small" />
             </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -207,12 +207,10 @@
 
             <Button
                 android:id="@+id/btDaftarkan"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="50dp"
-                android:background="@drawable/ic_btn_default"
+                android:layout_margin="40dp"
+                android:background="@drawable/ic_button_rectangle_general"
                 android:text="Daftarkan"
                 android:textAllCaps="false"
                 android:textColor="@color/colorBorderWhite"

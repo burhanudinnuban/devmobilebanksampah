@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +49,7 @@ public class ListOrderUser extends AppCompatActivity {
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-
+    private ShimmerFrameLayout mShimmerViewContainer;
     protected String strNo_Telepon, strIdUser, strNamaBankSampah;
     protected CustomProgress customProgress;
     protected LinearLayout parent_layout;
@@ -60,6 +62,7 @@ public class ListOrderUser extends AppCompatActivity {
     protected CardView cd_NoData, cd_NoConnection;
     protected String tvIdMemberDetail1;
     protected Dialog myDialog;
+    protected ImageView imgExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +76,7 @@ public class ListOrderUser extends AppCompatActivity {
         strNo_Telepon = user.get( PrefManager.KEY_NO_HP );
         strIdUser = user.get( PrefManager.KEY_ID );
         strNamaBankSampah = user.get( PrefManager.KEY_NAMA );
-
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
         customProgress = CustomProgress.getInstance();
@@ -84,6 +87,13 @@ public class ListOrderUser extends AppCompatActivity {
         cd_NoConnection = findViewById(R.id.cd_noInternet);
         linear_ListMember = findViewById( R.id.parent );
         mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
+        imgExit = findViewById( R.id.imgExit );
+        imgExit.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        } );
         //Run Method
         getListOrderUser();
 
@@ -135,17 +145,16 @@ public class ListOrderUser extends AppCompatActivity {
     }
 
     private void getListOrderUser(){
-        customProgress.showProgress(ListOrderUser.this, "", false);
-
         String base_url = apiData.get("str_url_address") + (".get_history_user");
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                customProgress.hideProgress();
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataMember(response);
-
+// Stopping Shimmer Effect's animation after data is loaded to ListView
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + "1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);
@@ -227,6 +236,16 @@ public class ListOrderUser extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
 
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
 
 }

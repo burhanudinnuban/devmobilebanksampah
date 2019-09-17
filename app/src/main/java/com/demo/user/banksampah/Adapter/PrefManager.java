@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.demo.user.banksampah.Activities.LoginActivity;
+import com.demo.user.banksampah.Services.LoginActivity;
 
 import java.util.HashMap;
 
@@ -36,12 +36,17 @@ public class PrefManager {
     public static final String KEY_ID = "pref_id";
     public static final String KEY_PIN = "pref_pin";
     public static final String KEY_ROLE_USER = "pref_role_user";
-    public static final String KEY_ID_ITEM = "pref_id_item";
-    public static final String KEY_HARGA_ITEM = "pref_harga_item";
-    public static final String KEY_JENIS_ITEM = "pref_jenis_item";
     public static final String KEY_JAM_OPERASIONAL = "pref_operasional";
-
+    public static final String KEY_BANK = "pref_bank";
+    public static final String KEY_NO_REKENING = "pref_rekening";
+    public static final String KEY_NAMA_PEMILIK = "pref_pemilik";
+    public static final String KEY_CABANG = "pref_cabang";
     public static final String KEY_TOKEN = "pref_token_firebase";
+    public static final String KEY_SALDO = "pref_saldo_nasabah";
+    public static final String KEY_NO_SK = "pref_no_sk";
+    public static final String KEY_PENERBIT_SK = "pref_penerbit_sk";
+    public static final String KEY_ID_NASABAH = "pref_id_nasabah";
+    public static final String KEY_SALDO_BANK_SAMPAH = "pref_saldo_bank_sampah";
     //private static final String KEY_FRAGMENT = "pref_fragment";
     //private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
@@ -63,19 +68,20 @@ public class PrefManager {
     }*/
 
     //Create Login Session
-    public void createLoginSession(String no_hp, String nama, String point, String latlong,
-                                   String alamat, String email, String foto, String id, String role_user){
+    public void createLoginSession(String no_hp, String nama, String latlong,
+                                   String alamat, String email, String foto,
+                                   String id, String role_user, String jam, String point){
         editor.putBoolean(IS_LOGIN, true);
-
         editor.putString(KEY_NO_HP, no_hp);
         editor.putString(KEY_NAMA, nama);
-        editor.putString(KEY_POINT, point);
         editor.putString(KEY_LATLONG, latlong);
         editor.putString(KEY_ALAMAT, alamat);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_FOTO, foto);
         editor.putString(KEY_ID, id);
         editor.putString(KEY_ROLE_USER, role_user);
+        editor.putString(KEY_JAM_OPERASIONAL, jam);
+        editor.putString(KEY_SALDO_BANK_SAMPAH, point);
         editor.commit();
     }
 
@@ -84,31 +90,34 @@ public class PrefManager {
         editor.commit();
     }
 
-    //Create Login Session
-    public void createPinSession(String no_hp, String nama, String point, String latlong,
-                                   String alamat, String email, String foto, String id, String role_user){
-        editor.putBoolean(IS_LOGIN, true);
-
-        editor.putString(KEY_NO_HP, no_hp);
-        editor.putString(KEY_NAMA, nama);
-        editor.putString(KEY_POINT, point);
-        editor.putString(KEY_LATLONG, latlong);
-        editor.putString(KEY_ALAMAT, alamat);
-        editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_FOTO, foto);
-        editor.putString(KEY_ID, id);
-        editor.putString(KEY_ROLE_USER, role_user);
+    public void lupaPassword(String phone, String idUser){
+        editor.putString(KEY_NO_HP,phone );
+        editor.putString(KEY_ID,idUser );
         editor.commit();
     }
 
-    public void updateProfil(String nama,String latlong, String email, String alamat, String jam){
-        editor.putString(KEY_NAMA, nama);
+    public void updateProfil(String email, String alamat, String jam, String foto, String noSK, String PenerbitSK){
         editor.putString(KEY_EMAIL, email);
-        editor.putString(KEY_LATLONG, latlong);
         editor.putString(KEY_ALAMAT, alamat);
         editor.putString(KEY_JAM_OPERASIONAL,jam );
+        editor.putString(KEY_FOTO,foto );
+        editor.putString(KEY_NO_SK,noSK );
+        editor.putString(KEY_PENERBIT_SK,PenerbitSK );
         editor.commit();
-        editor.apply();
+    }
+
+    public void DetailMember(String saldo, String id_member){
+        editor.putString(KEY_SALDO, saldo);
+        editor.putString(KEY_ID_NASABAH, id_member);
+        editor.commit();
+    }
+
+    public void updateRekBank(String bank,String noRekening, String namaPemilik, String cabang){
+        editor.putString(KEY_BANK, bank);
+        editor.putString(KEY_NO_REKENING, noRekening);
+        editor.putString(KEY_NAMA_PEMILIK, namaPemilik);
+        editor.putString(KEY_CABANG, cabang);
+        editor.commit();
     }
 
     public void CheckPin(String no_telepon,String pin){
@@ -116,18 +125,8 @@ public class PrefManager {
         editor.putString(KEY_NO_HP, no_telepon);
         editor.putString(KEY_PIN, pin);
         editor.commit();
-        editor.apply();
     }
 
-    //Check if User Status is Login Or Not
-    public void checkLogin(){
-        if(!this.isLoggedIn()){
-            Intent intent_login = new Intent (_context, LoginActivity.class);
-            intent_login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent_login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            _context.startActivity(intent_login);
-        }
-    }
 
     //Stored Session Data
     public HashMap<String, String> getUserDetails(){
@@ -143,8 +142,16 @@ public class PrefManager {
         user.put(KEY_ID, pref.getString(KEY_ID, null));
         user.put(KEY_ROLE_USER, pref.getString(KEY_ROLE_USER, null));
         user.put(KEY_JAM_OPERASIONAL, pref.getString(KEY_JAM_OPERASIONAL, null));
-        user.put(KEY_LATLONG, pref.getString(KEY_LATLONG, null));
+        user.put(KEY_BANK, pref.getString(KEY_BANK, null));
+        user.put(KEY_CABANG, pref.getString(KEY_CABANG, null));
+        user.put(KEY_NO_REKENING, pref.getString(KEY_NO_REKENING, null));
+        user.put(KEY_NAMA_PEMILIK, pref.getString(KEY_NAMA_PEMILIK, null));
         user.put(KEY_PIN, pref.getString(KEY_PIN, null));
+        user.put(KEY_SALDO, pref.getString(KEY_SALDO, null));
+        user.put(KEY_NO_SK, pref.getString(KEY_NO_SK, null));
+        user.put(KEY_PENERBIT_SK, pref.getString(KEY_PENERBIT_SK, null));
+        user.put(KEY_ID_NASABAH, pref.getString(KEY_ID_NASABAH, null));
+        user.put(KEY_SALDO_BANK_SAMPAH, pref.getString(KEY_SALDO_BANK_SAMPAH, null));
         return user;
     }
 

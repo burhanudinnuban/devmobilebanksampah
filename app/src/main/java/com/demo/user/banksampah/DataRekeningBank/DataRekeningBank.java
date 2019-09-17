@@ -39,7 +39,8 @@ public class DataRekeningBank extends AppCompatActivity {
     //Proccess API
     protected RestProcess restClass;
     protected HashMap<String, String> apiData;
-    ArrayList<HashMap<String, String>> arrayPin = new ArrayList<>();
+    protected ArrayList<HashMap<String, String>> arrayPin = new ArrayList<>();
+
     //API dialog progress loading
     protected CustomProgress customProgress;
 
@@ -58,6 +59,7 @@ public class DataRekeningBank extends AppCompatActivity {
     protected Spinner sBank;
     protected Button btnAddRekBank;
     protected RelativeLayout parent_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -104,6 +106,7 @@ public class DataRekeningBank extends AppCompatActivity {
                 customProgress.hideProgress();
                 try {
                     ValidateDB(response);
+                    finish();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make( parent_layout,"Data Rekening Gagal Ditambahkan." , Snackbar.LENGTH_SHORT);

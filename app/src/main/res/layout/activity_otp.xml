@@ -5,6 +5,7 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_background_authentication"
     tools:context=".RegisterActivities.OtpActivity">
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         android:gravity="center"
+        android:textColor="@color/ColorGeneral"
         android:text="Periksa Kode Aktivasi yang Telah Dikirim Melalui SMS Sesuai dengan Nomor yang Anda Daftarkan"
         app:fontFamily="@font/sourcesansproregular" />
 
@@ -39,6 +41,7 @@
         app:fontFamily="@font/sourcesansproregular" />
 
     <EditText
+        android:background="@drawable/ic_rectangle_button_line"
         android:id="@+id/etPinOTP_Regist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +54,9 @@
         android:layout_marginBottom="35dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="1234"
+        android:hint="...."
+        android:textColorHint="@color/colorTransparentGray"
+        android:textColor="@color/ColorGeneral"
         android:inputType="number"
         android:maxLength="4"
         android:textSize="30sp"
@@ -64,7 +69,7 @@
         android:layout_above="@+id/btAktivasi_Regist"
         android:layout_centerInParent="true"
         android:text="Kirim Ulang Kode Aktivasi OTP"
-        android:textColor="@color/colorCardES"
+        android:textColor="@color/ColorGeneral"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -72,13 +77,10 @@
         android:id="@+id/btAktivasi_Regist"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/ic_btn_default"
+        android:layout_below="@+id/etPinOTP_Regist"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
+        android:background="@drawable/ic_button_rectangle_general"
         android:text="Aktivasi Akun"
         android:textColor="@color/colorBorderWhite"
         android:textSize="16sp"

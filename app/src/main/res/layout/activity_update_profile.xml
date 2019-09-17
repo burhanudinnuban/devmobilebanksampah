@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBorderWhite"
-    tools:context=".Activities.UpdateProfileActivity">
+    tools:context=".ProfileBankSampah.UpdateProfileActivity">
 
     <!--<RelativeLayout-->
         <!--android:id="@+id/timeline_register"-->
@@ -131,14 +131,16 @@
                     android:layout_marginRight="20dp">
 
                     <android.support.design.widget.TextInputEditText
+                        android:drawableLeft="@drawable/ic_user"
                         android:id="@+id/etNamaBankSampah_Register"
+                        android:backgroundTint="@color/colorTransparentGray"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:hint="Nama Unit Bank Sampah"
                         android:screenReaderFocusable="true"
                         android:inputType="text"
-                        android:textColor="@color/colorLogin"
+                        android:textColor="@color/colorTransparentGray"
                         android:textSize="15sp"
                         app:font="@font/sourcesansproregular" />
                 </android.support.design.widget.TextInputLayout>
@@ -150,13 +152,14 @@
                     android:layout_marginRight="20dp">
 
                     <android.support.design.widget.TextInputEditText
+                        android:drawableLeft="@drawable/ic_email"
                         android:id="@+id/etEmailBankSampah_Register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:hint="Email Unit Bank Sampah"
                         android:inputType="text"
-                        android:textColor="@color/colorLogin"
+                        android:textColor="#000000"
                         android:textSize="15sp"
                         app:font="@font/sourcesansproregular" />
                 </android.support.design.widget.TextInputLayout>
@@ -168,10 +171,12 @@
                     android:layout_marginRight="20dp">
 
                     <android.support.design.widget.TextInputEditText
+                        android:drawableLeft="@drawable/ic_call"
                         android:id="@+id/etNoHpBankSampah_Register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/colorTransparentGray"
                         android:hint="Nomor Telepon"
                         android:inputType="number"
                         android:textColor="@color/colorLogin"
@@ -190,13 +195,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/etJaOperasional_Register"
+                            android:drawableLeft="@drawable/ic_access_time"
+                            android:id="@+id/etJamOperasional_Register"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
                             android:hint="Jam Operasional"
                             android:inputType="text"
-                            android:textColor="@color/colorLogin"
+                            android:textColor="#000000"
                             android:textSize="15sp"
                             app:font="@font/sourcesansproregular" />
                     </android.support.design.widget.TextInputLayout>
@@ -209,7 +215,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/button_green"
+                        android:background="@drawable/ic_button_blue_recangle"
                         android:textColor="#ffffff"/>
                 </TableRow>
                 <TableRow
@@ -224,6 +230,7 @@
                         android:layout_weight="1">
 
                         <android.support.design.widget.TextInputEditText
+                            android:drawableLeft="@drawable/ic_location"
                             android:id="@+id/etAlamat"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -231,7 +238,7 @@
                             android:hint="Alamat Lengkap"
                             android:inputType="textMultiLine|text"
                             android:lineSpacingExtra="3sp"
-                            android:textColor="@color/colorLogin"
+                            android:textColor="#000000"
                             android:textSize="15sp"
                             app:font="@font/sourcesansproregular" />
                     </android.support.design.widget.TextInputLayout>
@@ -282,17 +289,54 @@
 
                 </TableRow>
 
+                <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:drawableLeft="@drawable/ic_doc"
+                    android:id="@+id/etNoSK"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Nomor SK"
+                    android:inputType="text"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:font="@font/sourcesansproregular" />
+            </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:drawableLeft="@drawable/ic_doc"
+                        android:id="@+id/etPenerbitSK"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:hint="Penerbit SK"
+                        android:inputType="text"
+                        android:textColor="#000"
+                        android:textSize="15sp"
+                        app:font="@font/sourcesansproregular" />
+                </android.support.design.widget.TextInputLayout>
                     <Button
                         android:layout_gravity="center"
                         android:id="@+id/btUpdatebankSampah"
-                        android:layout_width="80dp"
+                        android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="50dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="50dp"
                         android:layout_marginBottom="30dp"
-                        android:background="@drawable/ic_btn_default"
+                        android:background="@drawable/button_green"
                         android:text=" UPDATE "
                         android:textAllCaps="false"
                         android:textColor="@color/colorBorderWhite"

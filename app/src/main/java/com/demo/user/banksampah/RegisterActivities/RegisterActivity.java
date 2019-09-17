@@ -32,7 +32,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.LoginActivity;
+import com.demo.user.banksampah.Services.LoginActivity;
 import com.demo.user.banksampah.Activities.OpenMaps;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.RestProcess;

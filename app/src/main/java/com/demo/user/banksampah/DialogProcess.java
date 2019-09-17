@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.Services.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

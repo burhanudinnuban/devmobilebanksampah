@@ -1,5 +1,6 @@
 package com.demo.user.banksampah.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -35,12 +36,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.MainActivity;
-import com.demo.user.banksampah.Activities.UpdateListItem;
+import com.demo.user.banksampah.DataItem.UpdateListItem;
 import com.demo.user.banksampah.DataPengurus.EditPengurus;
+import com.demo.user.banksampah.DataPengurus.ListViewDataPengurus;
 import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
-import com.demo.user.banksampah.MemberFragment.RequestMember.DetailRequestMember;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.Services.MainActivity;
 import com.demo.user.banksampah.TimelineOrder.TimelineOrderActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -54,6 +55,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,6 +81,7 @@ public class LazyAdapter extends BaseAdapter {
     private int fragment_position;
     //private int lv_pos = 0;
     protected int lv_pos_old, lv_pos_current;
+    HashMap<String, String> ItemList;
 
     //private String ID_OrderLine, ID_IncomingOrder;
 
@@ -271,11 +274,15 @@ public class LazyAdapter extends BaseAdapter {
         //Untuk Fragment Position 15
         TextView tvNamaOrderUser, tvBerat, tvPoint;
         ImageView imgCancel;
-        ArrayList<HashMap<String, String>> allOrder1 = new ArrayList<>();
+
+        //Untuk Fragment Position 16
+        TextView tvNamaBank, tvPemilik, tvNoRek, tvCabang;
+        ImageView imgBank;
 
 
     }
 
+    @SuppressLint("SetTextI18n")
     public View getView(final int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         final ViewHolder holder;
@@ -288,10 +295,12 @@ public class LazyAdapter extends BaseAdapter {
         getDay = new SimpleDateFormat( "EEEE", Locale.getDefault() );
 
         Date convertDate;
-
+        NumberFormat format = NumberFormat.getCurrencyInstance( Locale.ENGLISH);
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
         //decimalFormat = new DecimalFormat("0.##");
-        decimalFormat = new DecimalFormat( ",###.##" );
-        decimalFormat_Point = new DecimalFormat( ",###" );
+        decimalFormat = new DecimalFormat( ".###" );
+        decimalFormat_Point = new DecimalFormat( ",###.##" );
         session = new PrefManager( activity );
         HashMap<String, String> user = session.getUserDetails();
         strNo_Telepon = user.get( PrefManager.KEY_NO_HP );
@@ -787,6 +796,23 @@ public class LazyAdapter extends BaseAdapter {
                 final String strNoTelepon = StatusPoint_List1.get( "no_telepon" );
                 final String strAlamatMember = StatusPoint_List1.get( "alamat" );
                 final String strEmailMember = StatusPoint_List1.get( "email" );
+
+
+                try {
+                    assert strPointMember != null;
+                    holder.tvPointMember.setText( "Rp" + " " + decimalFormat_Point.format(Float.valueOf(strPointMember)) );
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    Log.e( "tag", e.toString() );
+                }
+
+                url_foto = apiData.get( "str_url_main" );
+                Picasso.get()
+                        .load( url_foto + strFotoMember )
+                        .error( R.drawable.ic_navigation_profil )
+                        .into( holder.imgPhotoMember );
+                holder.tvIdMember.setText( strIdMember );
+                holder.tvNamaMember.setText( strNamaMember );
                 holder.btnDetailListMember.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -802,23 +828,6 @@ public class LazyAdapter extends BaseAdapter {
                         activity.startActivity( intent_detail );
                     }
                 } );
-
-                try {
-                    holder.tvPointMember.setText( "Point: " + decimalFormat.format( Double.valueOf( strPointMember ) ) );
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                    Log.e( "tag", e.toString() );
-                }
-
-                url_foto = apiData.get( "str_url_main" );
-                Picasso.get()
-                        .load( url_foto + strFotoMember )
-                        .error( R.drawable.ic_navigation_profil )
-                        .into( holder.imgPhotoMember );
-                holder.tvIdMember.setText( strIdMember );
-                holder.tvNamaMember.setText( strNamaMember );
-                holder.tvPointMember.setText( strPointMember );
-
                 break;
 
             case 10:
@@ -851,15 +860,17 @@ public class LazyAdapter extends BaseAdapter {
                 holder.btnDetailReqMember.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent_detail = new Intent( activity, DetailRequestMember.class );
-                        intent_detail.putExtra( "foto", strImggPictureReq );
-                        intent_detail.putExtra( "nama_member", strNamaReqMember );
-                        intent_detail.putExtra( "id_member", strIdReqMember );
-                        intent_detail.putExtra( "alamat", strAlamatReqMember );
-                        intent_detail.putExtra( "creation", strTanggalReqMember );
-                        intent_detail.putExtra( "id", strIdBankSampah );
-                        intent_detail.putExtra( "id_bank_sampah", strIdbankSampah1 );
-                        activity.startActivity( intent_detail );
+//                        Intent intent_detail = new Intent( activity, DetailRequestMember.class );
+//                        intent_detail.putExtra( "foto", strImggPictureReq );
+//                        intent_detail.putExtra( "nama_member", strNamaReqMember );
+//                        intent_detail.putExtra( "id_member", strIdReqMember );
+//                        intent_detail.putExtra( "alamat", strAlamatReqMember );
+//                        intent_detail.putExtra( "creation", strTanggalReqMember );
+//                        intent_detail.putExtra( "id", strIdBankSampah );
+//                        intent_detail.putExtra( "id_bank_sampah", strIdbankSampah1 );
+//                        activity.startActivity( intent_detail );
+
+                        popupRequestMember( strNamaReqMember,strAlamatReqMember, strIdReqMember, strTanggalReqMember, strImggPictureReq, position );
                     }
                 } );
                 url_foto = apiData.get( "str_url_main" );
@@ -1023,6 +1034,7 @@ public class LazyAdapter extends BaseAdapter {
 
             case 12:
                 if (convertView == null) {
+
                     vi = inflater.inflate( R.layout.lv_list_harga_item, parent, false );
                     holder = new ViewHolder();
                     holder.imgEditItem = vi.findViewById( R.id.btnEditItem );
@@ -1035,16 +1047,18 @@ public class LazyAdapter extends BaseAdapter {
                     holder = (ViewHolder) vi.getTag();
                 }
 
-                HashMap<String, String> ItemList;
                 ItemList = data.get( position );
+
+                LazyAdapter.this.notifyDataSetChanged();
 
                 final String strJenisitem = ItemList.get( "jenis_item" );
                 final String strHargaitem = ItemList.get( "harga_per_kilo" );
                 final String strBankSampah = ItemList.get( "id_bank_sampah" );
                 final String strIdItem = ItemList.get( "id_item" );
 
+
                 try {
-                    holder.tvHargaItem.setText( "Rp " + decimalFormat.format( Double.valueOf( strHargaitem ) ) );
+                    holder.tvHargaItem.setText( formatRupiah.format( Double.valueOf( strHargaitem ) ) );
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                     Log.e( "tag", e.toString() );
@@ -1052,7 +1066,8 @@ public class LazyAdapter extends BaseAdapter {
                 holder.imgHapusItem.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        hapusItem( strIdItem );
+                        hapusItem( strIdItem , position);
+
                     }
                 } );
 
@@ -1180,7 +1195,34 @@ public class LazyAdapter extends BaseAdapter {
                 holder.tvNamaOrderUser.setText( strjenisItemOrderUser );
                 holder.tvBerat.setText( strBerat );
                 holder.tvPoint.setText( strPointItem );
+                break;
 
+            case 16:
+                if (convertView == null) {
+                    vi = inflater.inflate( R.layout.lv_data_rekening_bank, parent, false );
+                    holder = new ViewHolder();
+                    holder.tvCabang = vi.findViewById( R.id.tvCabang );
+                    holder.tvNamaBank = vi.findViewById( R.id.tvNamaBank );
+                    holder.tvPemilik = vi.findViewById( R.id.tvPemilik );
+                    holder.tvNoRek = vi.findViewById( R.id.tvNoRek );
+
+                    vi.setTag( holder );
+                } else {
+                    holder = (ViewHolder) vi.getTag();
+                }
+
+                HashMap<String, String> ListRekeningBank;
+                ListRekeningBank = data.get( position );
+
+                final String strCabang = ListRekeningBank.get( "cabang" );
+                final String strNamaBank = ListRekeningBank.get( "nama_bank" );
+                final String strPemilik = ListRekeningBank.get( "pemilik" );
+                final String strNoRek = ListRekeningBank.get( "no_rekening" );
+
+                holder.tvCabang.setText( strCabang );
+                holder.tvNamaBank.setText( strNamaBank );
+                holder.tvPemilik.setText( strPemilik );
+                holder.tvNoRek.setText( strNoRek );
 
             default:
                 break;
@@ -1773,7 +1815,7 @@ public class LazyAdapter extends BaseAdapter {
                                             .setCancelable( false )
                                             .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    Intent hapusPengurus = new Intent( activity, MainActivity.class );
+                                                    Intent hapusPengurus = new Intent( activity, ListViewDataPengurus.class );
                                                     activity.startActivity( hapusPengurus );
                                                     activity.finish();
                                                 }
@@ -1822,7 +1864,7 @@ public class LazyAdapter extends BaseAdapter {
 
     //<---------------------- Fragment Position 12 - Incoming Order ---------------------->
 
-    private void hapusItem(final String str_id_item) {
+    private void hapusItem(final String str_id_item, final int position) {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder( activity );
         builder.setMessage( "Item Berhasil Dihapus." )
                 .setCancelable( false )
@@ -1842,9 +1884,12 @@ public class LazyAdapter extends BaseAdapter {
                                             .setCancelable( false )
                                             .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    Intent hapusPengurus = new Intent( activity, MainActivity.class );
+                                                    data.remove( position );
+                                                    data.set( position, ItemList );
+                                                    LazyAdapter.this.notifyDataSetChanged();
+                                                    /*Intent hapusPengurus = new Intent( activity, ListHargaItem.class );
                                                     activity.startActivity( hapusPengurus );
-                                                    activity.finish();
+                                                    activity.finish();*/
                                                 }
                                             } );
                                     android.app.AlertDialog alert = builder.create();
@@ -1887,6 +1932,8 @@ public class LazyAdapter extends BaseAdapter {
         alert.show();
         Log.e( "tag", "sukses" );
     }
+
+
     //<---------------------- Fragment Position 12 - Incoming Order ---------------------->
 
     //<---------------------- Fragment Position 15 - Incoming Order ---------------------->
@@ -2452,6 +2499,198 @@ public class LazyAdapter extends BaseAdapter {
         VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
     }
     //<---------------------- Fragment Position 11 - Incoming Order ---------------------->
+
+    //<---------------------- Fragment Position 10 - Incoming Order ---------------------->
+
+    private void popupRequestMember(final String strNamaDetailReqMember,final String strAlamatDetailReqMember, final String strIdReqMember, final String strTanggalCreateReqMember, final String strDetailPhotoReqmember, final  int position) {
+        Dialog myDialog = new Dialog( activity );
+        myDialog.setContentView(R.layout.activity_detail_request_member);
+
+        Button btTerimaMember = myDialog.findViewById(R.id.btTambahmember);
+        Button btTolakMember = myDialog.findViewById(R.id.btTolakMember);
+        ImageView imgPictureReq = myDialog.findViewById(R.id.imgPictureDetailReqMember);
+        ImageView arrowBack = myDialog.findViewById( R.id.arrowBack );
+        TextView tvNamaReqMember = myDialog.findViewById(R.id.tvNamaDetailReqMember);
+        TextView tvAlamatReqMember = myDialog.findViewById(R.id.tvAlamatDetailReqMember);
+        TextView tvIdReqMember = myDialog.findViewById(R.id.tvIdDetailReqMember);
+        TextView tvTanggalCreateReqMember = myDialog.findViewById(R.id.tvTanggalBuatDetailReqMember);
+
+        tvNamaReqMember.setText(""+strNamaDetailReqMember);
+        tvAlamatReqMember.setText(""+strAlamatDetailReqMember);
+        tvIdReqMember.setText(""+strIdReqMember);
+        tvTanggalCreateReqMember.setText(""+strTanggalCreateReqMember);
+
+        String url_foto = apiData.get("str_url_main");
+        Picasso.get()
+                .load(url_foto + strDetailPhotoReqmember)
+                .error(R.drawable.ic_navigation_profil)
+                .into(imgPictureReq);
+
+        arrowBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        } );
+        btTerimaMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                terimaMember( strIdReqMember, strNamaBankSampah, position);
+                myDialog.dismiss();
+            }
+        });
+
+        btTolakMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tolakMember( strIdReqMember, strNamaBankSampah, position );
+                myDialog.dismiss();
+            }
+        });
+
+        if (myDialog.getWindow() != null) {
+            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            myDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            myDialog.show();
+        }
+    }
+
+    public void tolakMember(String strIdReqMember, String strIdBankSampah1, int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder
+                .setTitle("Tolak Member!!")
+                .setPositiveButton("Tolak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        final String[] field_name = {"id_member", "id_bank_sampah"};
+                        String base_url = apiData.get("str_url_address") + apiData.get("str_api_tolak_request_member");
+
+                        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("DEBUG", "Register Response: " + response);
+                                try {
+                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+                                    builder
+                                            .setCancelable(false)
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    data.remove( position);
+                                                    LazyAdapter.this.notifyDataSetChanged();
+                                                    Toast.makeText( activity, "Member Berhasil Diterima", Toast.LENGTH_LONG ).show();
+                                                }
+                                            });
+                                    android.app.AlertDialog alert = builder.create();
+                                    alert.show();
+                                    Log.e("tag", "sukses");
+                                } catch (Throwable t) {
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("DEBUG", "Volley Error: " + error.getMessage());
+                            }
+                        }) {
+                            @Override
+                            protected Map<String, String> getParams() {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(field_name[0], strIdReqMember);
+                                params.put(field_name[1], strIdBankSampah1);
+
+                                return params;
+                            }
+
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                return params;
+                            }
+                        };
+
+                        // Adding request to request queue
+                        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                    }
+                });
+        builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
+    }
+
+    public void terimaMember(String strIdReqMember, String strIdBankSampah1, int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder
+                .setTitle("Terima Member")
+                .setPositiveButton("Terima", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        final String[] field_name = {"id_member", "id_bank_sampah"};
+
+                        String base_url = apiData.get("str_url_address") + apiData.get("str_api_acc_request_member");
+
+                        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("DEBUG", "Register Response: " + response);
+                                try {
+                                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+                                    builder.setMessage(R.string.MSG_ACC_MEMBER)
+                                            .setCancelable(false)
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    data.remove( position );
+                                                    LazyAdapter.this.notifyDataSetChanged();
+                                                    Toast.makeText( activity, "Member Berhasil Diterima", Toast.LENGTH_LONG ).show();
+                                                }
+                                            });
+                                    android.app.AlertDialog alert = builder.create();
+                                    alert.show();
+                                    Log.e("tag", "sukses");
+                                } catch (Throwable t) {
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }) {
+                            @Override
+                            protected Map<String, String> getParams() {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(field_name[0], strIdReqMember);
+                                params.put(field_name[1], strIdBankSampah1);
+                                return params;
+                            }
+
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+                                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                                return params;
+                            }
+                        };
+
+                        // Adding request to request queue
+                        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+                    }
+                });
+        builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+    }
+    //<---------------------- Fragment Position 10 - Incoming Order ---------------------->
 
 }
 

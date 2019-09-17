@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.demo.user.banksampah.Activities.MainActivity;
+import com.demo.user.banksampah.Services.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.Adapter.RestProcess;

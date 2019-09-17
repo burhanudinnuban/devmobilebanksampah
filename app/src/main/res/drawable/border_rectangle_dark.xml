@@ -3,12 +3,11 @@
     android:shape="oval">
     <stroke
         android:width="3dp"
-        android:color="@color/colorPrimary"/>
+        android:color="@color/colorPrimaryDark"/>
     <corners
         android:radius="5dp"/>
     <solid
-        android:color="#388E3C"
-        />
+        android:color="@color/colorPrimaryDark"/>
     <padding
         android:bottom="3dp"
         android:left="3dp"

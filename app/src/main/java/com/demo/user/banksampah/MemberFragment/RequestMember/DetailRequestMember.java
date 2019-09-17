@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -18,12 +18,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.MainActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.Services.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -32,9 +32,9 @@ import java.util.Map;
 public class DetailRequestMember extends AppCompatActivity {
 
     private Button btTerimaMember, btTolakMember;
-    private ImageView imgPictureReq;
+    private ImageView imgPictureReq, arrowback;
     private TextView tvNamaReqMember, tvIdReqMember, tvAlamatReqMember, tvTanggalCreateReqMember;
-    protected LinearLayout parent_layout;
+    protected RelativeLayout parent_layout;
 
     /*API process and dialog*/
     protected RestProcess rest_class;
@@ -52,6 +52,7 @@ public class DetailRequestMember extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_request_member);
+
         session = new PrefManager(DetailRequestMember.this);
         HashMap<String, String> user = session.getUserDetails();
         rest_class = new RestProcess();
@@ -67,6 +68,14 @@ public class DetailRequestMember extends AppCompatActivity {
         tvAlamatReqMember = findViewById(R.id.tvAlamatDetailReqMember);
         tvIdReqMember = findViewById(R.id.tvIdDetailReqMember);
         tvTanggalCreateReqMember = findViewById(R.id.tvTanggalBuatDetailReqMember);
+        arrowback = findViewById( R.id.arrowBack );
+
+        arrowback.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        } );
 
         String strDetailPhotoReqmember = getIntent().getStringExtra("foto");
         String strNamaDetailReqMember = getIntent().getStringExtra("nama_member");
@@ -86,9 +95,6 @@ public class DetailRequestMember extends AppCompatActivity {
                 .load(url_foto + strDetailPhotoReqmember)
                 .error(R.drawable.ic_navigation_profil)
                 .into(imgPictureReq);
-
-        final ImageView image = new ImageView(this);
-        Picasso.get().load((strDetailPhotoReqmember)).into(image);
 
         btTolakMember.setOnClickListener(new View.OnClickListener() {
             @Override
