@@ -110,7 +110,7 @@ public class CheckSetPin extends AppCompatActivity {
                 Intent main_intent = new Intent( CheckSetPin.this, CheckPin.class );
                 startActivity( main_intent );
                 finish();
-            } else if (message.equals( "Not Found" )){
+            } else if (message.equals( "False" )){
                 Intent main_intent = new Intent( CheckSetPin.this, CreatePin.class );
                 startActivity( main_intent );
                 finish(); }

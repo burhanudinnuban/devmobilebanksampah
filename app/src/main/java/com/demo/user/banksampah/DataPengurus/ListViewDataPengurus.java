@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,8 +35,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import es.dmoral.toasty.Toasty;
 
 public class ListViewDataPengurus extends AppCompatActivity {
 
@@ -80,7 +77,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-        linear_ListMember = findViewById( R.id.layoutList );
+        linear_ListMember = findViewById( R.id.linearLayout_ListItem );
         cd_NoData = findViewById(R.id.cd_noData);
         cd_NoConnection = findViewById(R.id.cd_noInternet);
         parent_layout = findViewById(R.id.parent);
@@ -103,11 +100,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
             allOrder.clear();
             getListPengurus();
-            cd_NoConnection.setVisibility( View.GONE );
-            cd_NoData.setVisibility( View.GONE );
-            linear_ListMember.setVisibility( View.VISIBLE );
         }else {
-            Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
             cd_NoData.setVisibility(View.GONE);
             linear_ListMember.setVisibility(View.GONE);
@@ -119,11 +112,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     allOrder.clear();
                     getListPengurus();
-                    cd_NoConnection.setVisibility( View.GONE );
-                    cd_NoData.setVisibility( View.GONE );
-                    linear_ListMember.setVisibility( View.VISIBLE );
                 } else {
-                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
                     cd_NoData.setVisibility(View.GONE);
                     linear_ListMember.setVisibility(View.GONE);
@@ -138,26 +127,36 @@ public class ListViewDataPengurus extends AppCompatActivity {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     allOrder.clear();
                     getListPengurus();
-                    cd_NoConnection.setVisibility( View.GONE );
-                    cd_NoData.setVisibility( View.GONE );
-                    linear_ListMember.setVisibility( View.VISIBLE );
                 } else {
-                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
                     cd_NoData.setVisibility(View.GONE);
                     linear_ListMember.setVisibility(View.GONE);
                 }
             }
         });
+
+        cd_NoData.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+                    allOrder.clear();
+                    getListPengurus();
+                } else {
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.VISIBLE );
+                    linear_ListMember.setVisibility( View.GONE );
+                }
+            }
+        } );
     }
 
-
-
     private void getListPengurus(){
+        customProgress.showProgress( ListViewDataPengurus.this, "Loading", false );
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_pengurus");
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                customProgress.hideProgress();
                 Log.d("debug", "Check Login Response: " + response);
                 try {
                     viewDataPengurus(response);
@@ -175,7 +174,7 @@ public class ListViewDataPengurus extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-//                customProgress.hideProgress();
+                customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
                         .make(parent_layout, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
                 snackbar.show();
@@ -201,12 +200,14 @@ public class ListViewDataPengurus extends AppCompatActivity {
     }
 
     protected void viewDataPengurus(String resp_content){
-        String[] field_name = {"message", "id_bank_sampah", "nama_pengurus", "jabatan","name"};
+        String[] field_name = {"message", "id_bank_sampah", "nama_pengurus", "jabatan","name","data"};
         try {
             JSONObject jsonObject = new JSONObject(resp_content);
-            JSONArray cast = jsonObject.getJSONArray(field_name[0]);
+            JSONArray cast = jsonObject.getJSONArray(field_name[5]);
             Log.e("tag_cast", String.valueOf(cast.length()));
+            String message = jsonObject.getString( field_name[0] );
 
+            if (message.equals( "True" )){
             for (int i = 0; i < cast.length(); i++) {
                 JSONObject c = cast.getJSONObject(i);
 
@@ -225,33 +226,41 @@ public class ListViewDataPengurus extends AppCompatActivity {
 
             Log.d("tag_allorder", allOrder.toString());
 
+            cd_NoConnection.setVisibility( View.GONE );
+            cd_NoData.setVisibility( View.GONE );
+            linear_ListMember.setVisibility( View.VISIBLE );
             adapter = new LazyAdapter(ListViewDataPengurus.this, allOrder, 13);
             lvListMember.setAdapter(adapter);
+            }
+            else if (message.equals( "Not Found" ))
+            {
+                cd_NoConnection.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                linear_ListMember.setVisibility(View.GONE);
+            }else{
+                cd_NoConnection.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                linear_ListMember.setVisibility(View.GONE);
+            }
 
         } catch (JSONException e) {
-            if (getApplicationContext() != null) {
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-            }
+            cd_NoConnection.setVisibility(View.GONE);
+            cd_NoData.setVisibility(View.VISIBLE);
+            linear_ListMember.setVisibility(View.GONE);
             Log.e("tag", " 2 :" + String.valueOf(e));
             e.printStackTrace();
-            /*include_FormOrderList.setVisibility(View.GONE);
-            linear_NoData.setVisibility(View.VISIBLE);
-            if(getContext()!=null) {
-                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-            }*/
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mShimmerViewContainer.setVisibility( View.VISIBLE );
         mShimmerViewContainer.startShimmerAnimation();
         timerDelayRemoveDialog();
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         mShimmerViewContainer.stopShimmerAnimation();
         super.onPause();
     }

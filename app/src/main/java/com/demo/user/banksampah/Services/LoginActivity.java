@@ -245,7 +245,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void displayLogin(String resp_content){
         String[] field_name = {"message", "nama", "foto", "role_user", "latlong", "token",
-                "no_telepon", "alamat", "id", "email","jam_operasional","point"};
+                "no_telepon", "alamat", "id", "email","jam_operasional","point", "unit_default"};
 
         try {
             arrayLogin = rest_class.getJsonData(field_name,resp_content);
@@ -264,9 +264,10 @@ public class LoginActivity extends AppCompatActivity {
                 pref_strEmail = jsonPost.getString(field_name[9]);
                 String jamOperasional = jsonPost.getString(field_name[10]);
                 String point = jsonPost.getString(field_name[11]);
+                String unit_default = jsonPost.getString(field_name[12]);
 
                 session.createLoginSession(pref_strNoHp, pref_strNama, pref_strLatlong,
-                        pref_strAlamat, pref_strEmail, pref_strFoto, pref_strID, pref_role_user, jamOperasional, point);
+                        pref_strAlamat, pref_strEmail, pref_strFoto, pref_strID, pref_role_user, jamOperasional, point, unit_default);
 
                 session.createTokenSession(pref_token);
 
@@ -274,8 +275,11 @@ public class LoginActivity extends AppCompatActivity {
                 Intent main_intent = new Intent(activity, MainActivity.class);
                 startActivity(main_intent);
                 finish();
+            }else if (message.equals( "Not Found" )){
+                Toasty.error(getApplicationContext(), "Akun Tidak Ditemukan" + "\n" + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
             }else{
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_FALSE_LOGIN) + "\n" + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+                Toasty.error(getApplicationContext(), getString( R.string.MSG_PASSWORD_CHECK ) + "\n" + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
+
             }
 
         } catch (JSONException e) {

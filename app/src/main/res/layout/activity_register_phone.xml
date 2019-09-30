@@ -26,15 +26,8 @@
         android:textStyle="bold"
         app:fontFamily="@font/sourcesansproregular" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView18"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColorHint="@color/colorTransparentGray">
-
         <android.support.design.widget.TextInputEditText
+            android:layout_below="@+id/textView18"
             android:id="@+id/etHp_Regist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +40,6 @@
             app:font="@font/sourcesansproregular"
             android:gravity="center"
             android:background="@drawable/ic_rectangle_button_line"/>
-    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/btKonfirmasi_Regist"

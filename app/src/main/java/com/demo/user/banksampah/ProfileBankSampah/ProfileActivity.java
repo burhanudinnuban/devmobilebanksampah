@@ -17,7 +17,7 @@ import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.DataPengurus.ListViewDataPengurus;
-import com.demo.user.banksampah.DataRekeningBank.ListViewRekeningBank;
+import com.demo.user.banksampah.DataRekeningBank.UpdatedDataBank;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.Services.ChangePassword;
 import com.demo.user.banksampah.Services.MainActivity;
@@ -83,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvRekeningBank.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent RekBank = new Intent( ProfileActivity.this, ListViewRekeningBank.class );
+                Intent RekBank = new Intent( ProfileActivity.this, UpdatedDataBank.class );
                 startActivity( RekBank );
             }
         } );

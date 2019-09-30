@@ -32,6 +32,7 @@ import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.Pin.CheckSetPin;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.Services.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -182,6 +183,8 @@ public class DetailMemberActivity extends AppCompatActivity {
                                                 .setCancelable( false )
                                                 .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
+                                                        Intent intent = new Intent( DetailMemberActivity.this, MainActivity.class );
+                                                        startActivity( intent );
                                                         finish();
                                                     }
                                                 } );

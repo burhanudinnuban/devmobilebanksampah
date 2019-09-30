@@ -1,159 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:orientation="vertical"
-        shimmer:duration="800">
-
-        <!-- Adding 7 rows of placeholders -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/data_placeholder_layout" />
-
-            <include layout="@layout/data_placeholder_layout" />
-
-            <include layout="@layout/data_placeholder_layout" />
-
-            <include layout="@layout/data_placeholder_layout" />
-
-            <include layout="@layout/data_placeholder_layout" />
-
-            <include layout="@layout/data_placeholder_layout" />
-
-            <include layout="@layout/data_placeholder_layout" />
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-    <RelativeLayout
-        android:id="@+id/linearLayout_ListMember"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbaddRekBank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/swipeToRefresh"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_add_circle" />
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeToRefresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp">
-
-            <ListView
-                android:id="@+id/listViewRekBank"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@null"
-                android:dividerHeight="0dp"></ListView>
-
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cd_noData"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:visibility="visible"
-        app:cardBackgroundColor="@color/colorBorderWhite"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="3dp">
-
+        android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/linearLayout_NoData"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <ImageView
-                android:id="@+id/imgNoData"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/no_data" />
-
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_rectangle_button_line">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Belum Ada Member Pada Bank Sampah Anda."
-                android:textColor="@color/colorBgGray"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cd_noInternet"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        app:cardBackgroundColor="@color/colorBorderWhite"
-        app:cardCornerRadius="5dp"
-        android:visibility="visible"
-        app:cardElevation="3dp">
-
-        <LinearLayout
-            android:id="@+id/linearLayout_NoInternet"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <ImageView
-                android:id="@+id/imgNoInternet"
+                android:layout_weight="2.5"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:text="Id User"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:text=":"/>
+            <EditText
+                android:id="@+id/etIdUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/no_connection" />
-
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_rectangle_button_line">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Tidak Dapat Terhubung ke Jaringan.\nPeriksa Koneksi Internet Anda\n\nTekan untuk Memuat Ulang"
-                android:textColor="@color/colorBgGray"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
+                android:layout_weight="2.5"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:text="Bank"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:layout_gravity="center"
+                android:text=":"/>
+            <Spinner
+                android:id="@+id/sNamaBank"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"/>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_rectangle_button_line">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:text="No Rekening"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:text=":"/>
+            <EditText
+                android:id="@+id/etNoRek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_rectangle_button_line">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:text="Pemilik"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:text=":"/>
+            <EditText
+                android:id="@+id/etPemilik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_rectangle_button_line">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:text="Cabang"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:text=":"/>
+            <EditText
+                android:id="@+id/etCabang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_rectangle_button_line">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:text="Account Bank"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:text=":"/>
+            <EditText
+                android:id="@+id/etAccountBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnUpdataDataBank"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_button_rectangle_general"
+            android:text="Perbarui Data"
+            android:textColor="#fff"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</RelativeLayout>

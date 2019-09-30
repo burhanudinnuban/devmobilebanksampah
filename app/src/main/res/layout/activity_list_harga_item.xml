@@ -1,224 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/parentItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/llList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:orientation="vertical"
-        shimmer:duration="800">
 
-        <!-- Adding 7 rows of placeholders -->
-        <LinearLayout
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <include layout="@layout/data_placeholder_layout" />
-            <include layout="@layout/data_placeholder_layout" />
-            <include layout="@layout/data_placeholder_layout" />
-            <include layout="@layout/data_placeholder_layout" />
-            <include layout="@layout/data_placeholder_layout" />
-            <include layout="@layout/data_placeholder_layout" />
-            <include layout="@layout/data_placeholder_layout" />
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:orientation="vertical"
+            shimmer:duration="800">
 
-    </com.facebook.shimmer.ShimmerFrameLayout>
+            <!-- Adding 7 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/data_placeholder_layout" />
+
+                <include layout="@layout/data_placeholder_layout" />
+
+                <include layout="@layout/data_placeholder_layout" />
+
+                <include layout="@layout/data_placeholder_layout" />
+
+                <include layout="@layout/data_placeholder_layout" />
+
+                <include layout="@layout/data_placeholder_layout" />
+
+                <include layout="@layout/data_placeholder_layout" />
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </LinearLayout>
-    <RelativeLayout
+
+    <LinearLayout
         android:id="@+id/linearLayout_ListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
 
-            <!--<AutoCompleteTextView-->
-                <!--android:drawableLeft="@drawable/ic_search1"-->
-                <!--android:drawablePadding="5dp"-->
-                <!--android:id="@+id/etSearchItem"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="0.3"-->
-                <!--android:hint="Cari Disini" />-->
+        <!--<AutoCompleteTextView-->
+        <!--android:drawableLeft="@drawable/ic_search1"-->
+        <!--android:drawablePadding="5dp"-->
+        <!--android:id="@+id/etSearchItem"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.3"-->
+        <!--android:hint="Cari Disini" />-->
+
         <TextView
             android:id="@+id/tvJudul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:gravity="center"
             android:text="Daftar Item"
             android:textColor="#000000"
-            android:textStyle="bold"
             android:textSize="16dp"
-            android:gravity="center"
-            android:layout_margin="15dp"/>
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/parentKolom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/tvJudul"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp">
-            <ImageView
-                android:id="@+id/imgGaris"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:color/darker_gray" />
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/imgGaris1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:color/darker_gray"
-                    android:layout_marginRight="15dp" />
-                <TextView
-                    android:id="@+id/tvJenisItem"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Jenis Item"
-                    android:textSize="12sp"
-                    android:maxLines="1"
-                    android:maxLength="15"
-                    android:textStyle="bold"
-                    android:textColor="#000000"/>
-                <ImageView
-                    android:id="@+id/imgGaris2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:color/darker_gray"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"/>
-                <TextView
-                    android:id="@+id/tvHargaItem"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
-                    android:layout_toLeftOf="@+id/cdBtnDetail"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Harga Item(/Kg)"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:maxLength="15"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#000000"/>
-                <ImageView
-                    android:id="@+id/imgGaris3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:color/darker_gray"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="10dp"/>
-                <ImageView
-                    android:id="@+id/btnEditPengurus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_edit"
-                    android:layout_margin="5dp"
-                    android:visibility="invisible"/>
-                <ImageView
-                    android:id="@+id/btnHapusPengurus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_delete"
-                    android:layout_marginLeft="5dp"
-                    android:layout_margin="5dp"
-                    android:layout_marginRight="5dp"
-                    android:visibility="invisible"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:color/darker_gray" />
-            </TableRow>
-            <ImageView
-                android:id="@+id/imgGaris4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:color/darker_gray" />
-        </LinearLayout>
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/parentKolom"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_below="@+id/parentKolom">
+            android:layout_marginEnd="15dp">
+
             <ListView
                 android:id="@+id/lvHargaItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@null"
-                android:dividerHeight="0dp">
-            </ListView>
+                android:dividerHeight="0dp"></ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbaddItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/swipeToRefresh"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/ic_add_circle" />
-    </RelativeLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cd_noData"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:visibility="gone"
-        app:cardBackgroundColor="@color/colorBorderWhite"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="3dp">
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout_NoData"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <ImageView
-                android:id="@+id/imgNoData"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/no_data" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Belum Ada Member Pada Bank Sampah Anda."
-                android:textColor="@color/colorBgGray"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbaddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_plus" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cd_noInternet"
@@ -246,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/no_connection" />
+                android:src="@drawable/ic_404" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -260,4 +142,52 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/cd_noData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/colorBorderWhite"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout_NoData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/imgNoData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_data_not_found" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Belum Ada Item Pada Bank Sampah Anda."
+                android:textColor="@color/ColorGeneral"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="**Tekan untuk Memuat Ulang**"
+                android:textColor="@color/colorBgGray"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +28,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.demo.user.banksampah.Activities.QRScanActivity;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
@@ -36,9 +36,12 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.DataItem.ListHargaItem;
+import com.demo.user.banksampah.DataRekeningBank.PencairanSaldoBankSampah;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.Services.MainActivity;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,6 +51,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class HomeFragment extends Fragment {
 
@@ -63,22 +68,22 @@ public class HomeFragment extends Fragment {
     private final static int BARCODE_REQUEST_CODE = 1;
     protected LazyAdapter adapter;
     protected View rootView;
-    protected CardView cvRekBank, cvDataItem, cvPencairanSaldo, cvDataPengurus;
+    protected LinearLayout cvDataItem, cvPencairanSaldo, casts_container, cvBankInduk;
     protected String strNamaBankSampah, strMessage;
     protected CustomProgress customProgress;
     //Session Class
     PrefManager session;
     protected String strNama, strAlamat, strFoto;
     ArrayList<HashMap<String, String>> ScanStatus = new ArrayList<>();
+
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
-
+    protected Context ctx;
     @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         LinearLayout scanQR = rootView.findViewById( R.id.layoutScanQR );
@@ -89,10 +94,21 @@ public class HomeFragment extends Fragment {
         cvDataItem = rootView.findViewById(R.id.cvDataItem);
         cvPencairanSaldo = rootView.findViewById( R.id.cvPencairanSaldo );
         customProgress = CustomProgress.getInstance();
+        casts_container = rootView.findViewById( R.id.casts_container );
         rest_class = new RestProcess();
         apiData = rest_class.apiErecycle();
         tvSaldo = rootView.findViewById( R.id.saldo_bank );
-        DecimalFormat decimalFormat_Point = new DecimalFormat( ",###" );
+        cvBankInduk = rootView.findViewById( R.id.cvBankInduk );
+        ctx = getContext();
+
+        cvBankInduk.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        } );
+
+        DecimalFormat decimalFormat_Point = new DecimalFormat( ",###.##" );
         if (getActivity() != null) {
             conMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         }
@@ -106,7 +122,15 @@ public class HomeFragment extends Fragment {
         strAlamat = user.get(PrefManager.KEY_ALAMAT);
         String saldo = user.get( PrefManager.KEY_SALDO_BANK_SAMPAH );
 
-        tvSaldo.setText( "Rp." + decimalFormat_Point.format(Double.valueOf(saldo))  );
+
+        if (saldo==null){
+            tvSaldo.setText( "Rp 0 " );
+        }else if (saldo.equals( "null" )){
+            tvSaldo.setText( "Rp 0 " );
+        }else{
+            tvSaldo.setText( "Rp." + decimalFormat_Point.format( Double.valueOf( saldo ) ) );
+        }
+
         tvNamaBank.setText(strNama);
         tvAlamatBank.setText(strAlamat);
 
@@ -130,7 +154,8 @@ public class HomeFragment extends Fragment {
         cvPencairanSaldo.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText( getContext(), "Maaf Sedang Dalam Proses", Toast.LENGTH_LONG ).show();
+                Intent intent = new Intent( getContext(), PencairanSaldoBankSampah.class );
+                startActivity( intent );
             }
         } );
 
@@ -139,6 +164,7 @@ public class HomeFragment extends Fragment {
                 .error(R.drawable.ic_navigation_profil)
                 .into(imgBankSampah);
 
+        dataBrosur( );
         return rootView;
     }
 
@@ -224,7 +250,7 @@ public class HomeFragment extends Fragment {
             Log.d("tag", String.valueOf( cast ) );
             String strAlert = jsonPost.getString( field_name[6] );
 
-            if (strMessage.equals( "True" )) {
+            if (strMessage.equals( "Success" )) {
                 String strStatus = cast.getString( field_name[2] );
                 String strIdMember = cast.getString( field_name[4] );
                 String sttBankSampah= cast.getString( field_name[3] );
@@ -258,6 +284,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ScanDialog.dismiss();
+                Intent intent =new Intent( getContext(), MainActivity.class );
             }
         } );
         tvNama.setText( strNamaMember );
@@ -272,4 +299,112 @@ public class HomeFragment extends Fragment {
             ScanDialog.show();
         }
     }
+
+    private void dataBrosur() {
+        String base_url = apiData.get( "str_url_address" ) + ( ".get_all_banner" );
+        StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                customProgress.hideProgress();
+                Log.d( "DEBUG", "Check Barcode Response: " + response );
+                try {
+                    getBrosur( response );
+                } catch (Throwable t) {
+                    Snackbar snackbar = Snackbar
+                            .make( parent_layout, getString( R.string.MSG_CODE_409 ) + " 1: " + getString( R.string.MSG_CHECK_DATA ), Snackbar.LENGTH_SHORT );
+                    snackbar.show();
+                    Log.d( "DEBUG", "Error Login Response: " + t.toString() );
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d( "DEBUG", "Volley Error: " + error.getMessage() );
+                customProgress.hideProgress();
+                Snackbar snackbar = Snackbar
+                        .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 1: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
+                snackbar.show();
+            }
+        } ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put( apiData.get( "str_header" ), apiData.get( "str_token_value" ) );
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue( strReq, apiData.get( "str_json_obj" ) );
+    }
+
+    private void getBrosur(String resp_content) {
+        String[] field_name = {"message","foto_banner"};
+        try {
+            JSONObject jsonPost = new JSONObject( resp_content );
+            JSONArray cast = jsonPost.getJSONArray( field_name[0] );
+            Log.d( TAG, "getBrosu12r: "+cast );
+
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService( LAYOUT_INFLATER_SERVICE );
+            for (int i = 0; i < cast.length(); i++) {
+                JSONObject c = cast.getJSONObject( i );
+                Log.d( TAG, "getBrosur: "+c );
+                String foto1 = c.getString( field_name[1] );
+                String foto = foto1.replace( " ", "%20" );
+                HashMap<String, String> map = new HashMap<>();
+                map.put( field_name[1], foto1 );
+                LinearLayout linearProductList = (LinearLayout) inflater.inflate(
+                        R.layout.list_image_home, null);
+
+                final ImageView ivProductList = linearProductList.findViewById(R.id.thumbnail_image);
+
+                Log.e("Home", "data_pro12334duct, i = " + i + ", size = " + cast.length());
+
+                String url_foto = apiData.get( "str_url_main" );
+                Log.d( "fototag", "getBrosur: "+url_foto+foto );
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(url_foto + foto)
+                        .into(ivProductList);
+
+                casts_container.addView(linearProductList);
+            }
+        } catch (JSONException e) {
+            Snackbar snackbar = Snackbar
+                    .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 2: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
+            snackbar.show();
+            Log.e( "DEBUG", "JSON Exception Error: " + e.toString() );
+        }
+    }
+
+    private void popupBankSampah(){
+        ScanDialog = new Dialog(getContext());
+        ScanDialog.setContentView( R.layout.activity_scan_data_member );
+        TextView tvNama, tvStatus, tvBankSampah, tvIdMember, tvPoint;
+
+        tvNama = ScanDialog.findViewById( R.id.tvNamaMember );
+
+
+        Button btnApprove = ScanDialog.findViewById( R.id.btnApprove );
+
+        btnApprove.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanDialog.dismiss();
+                Intent intent =new Intent( getContext(), MainActivity.class );
+            }
+        } );
+
+        if (ScanDialog.getWindow()!= null){
+            ScanDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+            ScanDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+            ScanDialog.show();
+        }
+    }
+
 }

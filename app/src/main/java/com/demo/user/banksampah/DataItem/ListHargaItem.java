@@ -16,13 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
@@ -39,13 +39,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import es.dmoral.toasty.Toasty;
-
 public class ListHargaItem extends AppCompatActivity {
 
     private TextView tvJenisItem, tvHargaItem;
-    private LinearLayout llParent, llList;
-    protected RelativeLayout llListRelative;
+    private LinearLayout llList,llListRelative;
+    protected RelativeLayout  llParent;
     private ListView lvHargaItem;
 
     //if (!message.equalsIgnoreCase("Invalid")) {
@@ -66,6 +64,7 @@ public class ListHargaItem extends AppCompatActivity {
     protected ConnectivityManager conMgr;
     private ShimmerFrameLayout mShimmerViewContainer;
     protected String strIDUser;
+    protected CustomProgress customProgress;
 
     protected FloatingActionButton fbaddItem;
     protected Context ctx;
@@ -85,6 +84,7 @@ public class ListHargaItem extends AppCompatActivity {
         cd_NoConnection = findViewById(R.id.cd_noInternet);
         mSwipeRefreshLayout = findViewById(R.id.swipeToRefresh);
 
+        customProgress = CustomProgress.getInstance();
         tvHargaItem =findViewById(R.id.tvHargaItem);
         tvJenisItem = findViewById(R.id.tvJenisItem);
         llParent = findViewById(R.id.parentItem);
@@ -107,11 +107,7 @@ public class ListHargaItem extends AppCompatActivity {
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
             allOrder.clear();
             getListItem( strIDUser );
-            cd_NoConnection.setVisibility( View.GONE );
-            cd_NoData.setVisibility( View.GONE );
-            llListRelative.setVisibility( View.VISIBLE );
         }else {
-            Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
             cd_NoData.setVisibility(View.GONE);
             llListRelative.setVisibility(View.GONE);
@@ -123,11 +119,7 @@ public class ListHargaItem extends AppCompatActivity {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     allOrder.clear();
                     getListItem( strIDUser );
-                    cd_NoConnection.setVisibility( View.GONE );
-                    cd_NoData.setVisibility( View.GONE );
-                    llListRelative.setVisibility( View.VISIBLE );
                 } else {
-                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
                     cd_NoData.setVisibility(View.GONE);
                     llListRelative.setVisibility(View.GONE);
@@ -142,26 +134,38 @@ public class ListHargaItem extends AppCompatActivity {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     allOrder.clear();
                     getListItem( strIDUser );
-                    cd_NoConnection.setVisibility( View.GONE );
-                    cd_NoData.setVisibility( View.GONE );
-                    llListRelative.setVisibility( View.VISIBLE );
                 } else {
-                    Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
                     cd_NoData.setVisibility(View.GONE);
                     llListRelative.setVisibility(View.GONE);
                 }
             }
         });
+
+        cd_NoData.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+                    allOrder.clear();
+                    getListItem( strIDUser );
+                } else {
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.VISIBLE );
+                    llListRelative.setVisibility( View.GONE );
+                }
+            }
+        } );
     }
 
     private void getListItem(final String strIDUser){
+        customProgress.showProgress( ListHargaItem.this,"Loading",false );
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_list_daftar");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("debug", "Check Login Response: " + response);
                 try {
+                    customProgress.hideProgress();
                     viewDataMember(response);
                     // Stopping Shimmer Effect's animation after data is loaded to ListView
                     mShimmerViewContainer.stopShimmerAnimation();
@@ -176,6 +180,7 @@ public class ListHargaItem extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                customProgress.hideProgress();
                 timerDelayRemoveDialog();
                 Snackbar snackbar = Snackbar
                         .make(llParent, getString(R.string.MSG_CODE_500) + " 1: " + getString(R.string.MSG_CHECK_CONN), Snackbar.LENGTH_SHORT);
@@ -208,35 +213,43 @@ public class ListHargaItem extends AppCompatActivity {
 
             JSONArray cast = jsonObject.getJSONArray(field_name[0]);
             Log.e("tag", String.valueOf(cast.length()));
+            JSONArray message = jsonObject.getJSONArray( field_name[0] );
 
-            for (int i = 0; i < cast.length(); i++) {
-                JSONObject c = cast.getJSONObject(i);
+            if (message!=null) {
 
-                String id_item= c.getString(field_name[1]);
-                String id_bank_sampah = c.getString(field_name[2]);
-                String jenis_item = c.getString(field_name[3]);
-                String harga_per_kilo = c.getString(field_name[4]);
+                for (int i = 0; i < cast.length(); i++) {
+                    JSONObject c = cast.getJSONObject( i );
 
-                HashMap<String, String> map = new HashMap<>();
+                    String id_item = c.getString( field_name[1] );
+                    String id_bank_sampah = c.getString( field_name[2] );
+                    String jenis_item = c.getString( field_name[3] );
+                    String harga_per_kilo = c.getString( field_name[4] );
 
-                map.put(field_name[1], id_item);
-                map.put(field_name[2], id_bank_sampah);
-                map.put(field_name[3], jenis_item);
-                map.put(field_name[4], harga_per_kilo);
+                    HashMap<String, String> map = new HashMap<>();
 
-                allOrder.add(map);
+                    map.put( field_name[1], id_item );
+                    map.put( field_name[2], id_bank_sampah );
+                    map.put( field_name[3], jenis_item );
+                    map.put( field_name[4], harga_per_kilo );
+
+                    allOrder.add( map );
+                }
+
+                Log.d( "tag", allOrder.toString() );
+                cd_NoConnection.setVisibility( View.GONE );
+                cd_NoData.setVisibility( View.GONE );
+                llListRelative.setVisibility( View.VISIBLE );
+                adapter = new LazyAdapter( ListHargaItem.this, allOrder, 12 );
+                lvHargaItem.setAdapter( adapter );
+            }else if (message.equals( "Not Found" )){
+                cd_NoConnection.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                llListRelative.setVisibility(View.GONE);
             }
-
-            Log.d("tag", allOrder.toString());
-
-            adapter = new LazyAdapter(ListHargaItem.this, allOrder, 12);
-            lvHargaItem.setAdapter(adapter);
-
-
         } catch (JSONException e) {
-            if (getApplicationContext() != null) {
-                Toasty.error(getApplicationContext(), getString(R.string.MSG_CODE_409) + " 2: " + getString(R.string.MSG_CHECK_DATA), Toast.LENGTH_LONG).show();
-            }
+            cd_NoConnection.setVisibility(View.GONE);
+            cd_NoData.setVisibility(View.VISIBLE);
+            llListRelative.setVisibility(View.GONE);
             Log.e("tag", " 2 :" + String.valueOf(e));
             e.printStackTrace();
         }

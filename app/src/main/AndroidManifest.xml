@@ -47,7 +47,7 @@
             android:parentActivityName=".DataPengurus.ListViewDataPengurus"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DataRekeningBank.ListViewRekeningBank"
+            android:name=".DataRekeningBank.UpdatedDataBank"
             android:configChanges="orientation"
             android:label="Daftar Rekening Bank"
             android:parentActivityName=".ProfileBankSampah.ProfileActivity"
@@ -56,7 +56,7 @@
             android:name=".DataRekeningBank.DataRekeningBank"
             android:configChanges="orientation"
             android:label="Rekening Bank"
-            android:parentActivityName=".DataRekeningBank.ListViewRekeningBank"
+            android:parentActivityName=".DataRekeningBank.UpdatedDataBank"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DataPengurus.ListViewDataPengurus"
@@ -74,12 +74,6 @@
             android:name=".MemberFragment.ListMember.ListOrderUser"
             android:configChanges="orientation"
             android:label="Daftar Order User"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".DataItem.UpdateListItem"
-            android:configChanges="orientation"
-            android:label="Update Harga item"
-            android:parentActivityName=".DataItem.ListHargaItem"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DataItem.ListHargaItem"

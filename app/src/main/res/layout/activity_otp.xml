@@ -54,7 +54,7 @@
         android:layout_marginBottom="35dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="...."
+        android:hint="OTP"
         android:textColorHint="@color/colorTransparentGray"
         android:textColor="@color/ColorGeneral"
         android:inputType="number"

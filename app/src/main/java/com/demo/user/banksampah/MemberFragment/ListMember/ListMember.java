@@ -1,7 +1,6 @@
 package com.demo.user.banksampah.MemberFragment.ListMember;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -46,19 +44,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import es.dmoral.toasty.Toasty;
-
 public class ListMember extends Fragment  {
     private ShimmerFrameLayout mShimmerViewContainer;
+
     //Session Class
     protected PrefManager session;
-    private final static int BARCODE_REQUEST_CODE = 1;
-    protected String contents, format;
-    ArrayList<HashMap<String, String>> ScanStatus = new ArrayList<>();
+    protected String format, strNamaBankSampah;
+
     /*API process and dialog*/
     protected RestProcess rest_class;
     protected HashMap<String, String> apiData;
-    protected String strNamaBankSampah, strMessage;
 
     protected CustomProgress customProgress;
     ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
@@ -75,9 +70,7 @@ public class ListMember extends Fragment  {
 
     protected CardView cd_NoData, cd_NoConnection;
 
-    protected ImageView imgScanMember;
     private AppCompatAutoCompleteTextView etSearch;
-    private Dialog ScanDialog;
 
     public static ListMember newInstance() {
         return new ListMember();
@@ -165,21 +158,18 @@ public class ListMember extends Fragment  {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
         } );
+
         if (ctx != null) {
             conMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         }
         if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
             allOrder.clear();
-            getListMember( strNamaBankSampah );
-            cd_NoConnection.setVisibility( View.GONE );
-            cd_NoData.setVisibility( View.GONE );
-            linear_ListMember.setVisibility( View.VISIBLE );
+            getListMember();
         }else {
             Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
             cd_NoConnection.setVisibility(View.VISIBLE);
@@ -192,10 +182,7 @@ public class ListMember extends Fragment  {
             public void onRefresh() {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     allOrder.clear();
-                    getListMember( strNamaBankSampah );
-                    cd_NoConnection.setVisibility( View.GONE );
-                    cd_NoData.setVisibility( View.GONE );
-                    linear_ListMember.setVisibility( View.VISIBLE );
+                    getListMember();
                 } else {
                     Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
@@ -211,10 +198,7 @@ public class ListMember extends Fragment  {
             public void onClick(View v) {
                 if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
                     allOrder.clear();
-                    getListMember( strNamaBankSampah );
-                    cd_NoConnection.setVisibility( View.GONE );
-                    cd_NoData.setVisibility( View.GONE );
-                    linear_ListMember.setVisibility( View.VISIBLE );
+                    getListMember();
                 } else {
                     Toast.makeText(ctx, "No Internet Connection", Toast.LENGTH_SHORT).show();
                     cd_NoConnection.setVisibility(View.VISIBLE);
@@ -223,20 +207,38 @@ public class ListMember extends Fragment  {
                 }
             }
         });
+
+        cd_NoData.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isConnected()) {
+                    allOrder.clear();
+                    getListMember();
+
+                } else {
+                    Toast.makeText( ctx, "No Internet Connection", Toast.LENGTH_SHORT ).show();
+                    cd_NoConnection.setVisibility( View.GONE );
+                    cd_NoData.setVisibility( View.VISIBLE );
+                    linear_ListMember.setVisibility( View.GONE );
+                }
+            }
+        } );
         return rootView;
     }
 
-    private void getListMember(final String strIDUser) {
+    private void getListMember() {
+        customProgress.showProgress( getContext(),"",true );
         String base_url = apiData.get( "str_url_address" ) + apiData.get( "str_api_list_member" );
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d( "debug", "Check Login Response: " + response );
+                Log.d( "debug", "Check ListMember Response: " + response );
                 try {
                     viewDataMember( response );
                     // Stopping Shimmer Effect's animation after data is loaded to ListView
                     mShimmerViewContainer.stopShimmerAnimation();
                     mShimmerViewContainer.setVisibility(View.GONE);
+
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make( parent_layout, getString( R.string.MSG_CODE_409 ) + "1: " + getString( R.string.MSG_CHECK_DATA ), Snackbar.LENGTH_SHORT );
@@ -275,56 +277,57 @@ public class ListMember extends Fragment  {
     }
 
     protected void viewDataMember(String resp_content) {
-        String[] field_name = {"message", "id_member", "nama_member", "point", "no_telepon", "email", "foto", "alamat"};
+        String[] field_name = {"message", "id_member", "nama_member", "point", "no_telepon", "email", "foto", "alamat", "request"};
 
         try {
+            customProgress.hideProgress();
             JSONObject jsonObject = new JSONObject( resp_content );
+            JSONArray cast = jsonObject.getJSONArray( field_name[8] );
+            String message = jsonObject.getString( field_name[0] );
 
-            //if (!message.equalsIgnoreCase("Invalid")) {
+            if (message.equals( "True" )) {
+                Log.e( "tag_cast", String.valueOf( cast.length() ) );
+                for (int i = 0; i < cast.length(); i++) {
+                    JSONObject c = cast.getJSONObject( i );
 
-            JSONArray cast = jsonObject.getJSONArray( field_name[0] );
-            Log.e( "tag_cast", String.valueOf( cast.length() ) );
+                    String id_member = c.getString( field_name[1] );
+                    String nama_member = c.getString( field_name[2] );
+                    String point = c.getString( field_name[3] );
+                    String no_telepon = c.getString( field_name[4] );
+                    String email = c.getString( field_name[5] );
+                    String foto = c.getString( field_name[6] );
+                    String alamat = c.getString( field_name[7] );
 
-            for (int i = 0; i < cast.length(); i++) {
-                JSONObject c = cast.getJSONObject( i );
+                    HashMap<String, String> map = new HashMap<>();
 
-                String id_member = c.getString( field_name[1] );
-                String nama_member = c.getString( field_name[2] );
-                String point = c.getString( field_name[3] );
-                String no_telepon = c.getString( field_name[4] );
-                String email = c.getString( field_name[5] );
-                String foto = c.getString( field_name[6] );
-                String alamat = c.getString( field_name[7] );
+                    map.put( field_name[1], id_member );
+                    map.put( field_name[2], nama_member );
+                    map.put( field_name[3], point );
+                    map.put( field_name[4], no_telepon );
+                    map.put( field_name[5], email );
+                    map.put( field_name[6], foto );
+                    map.put( field_name[7], alamat );
+                    allOrder.add( map );
+                }
+                cd_NoConnection.setVisibility( View.GONE );
+                cd_NoData.setVisibility( View.GONE );
+                linear_ListMember.setVisibility( View.VISIBLE );
+                Log.d( "tag_allorder", allOrder.toString() );
 
-                HashMap<String, String> map = new HashMap<>();
-
-                map.put( field_name[1], id_member );
-                map.put( field_name[2], nama_member );
-                map.put( field_name[3], point );
-                map.put( field_name[4], no_telepon );
-                map.put( field_name[5], email );
-                map.put( field_name[6], foto );
-                map.put( field_name[7], alamat );
-                allOrder.add( map );
-
+                adapter = new LazyAdapter( getActivity(), allOrder, 9 );
+                lvListMember.setAdapter( adapter );
             }
-
-            Log.d( "tag_allorder", allOrder.toString() );
-
-            adapter = new LazyAdapter( getActivity(), allOrder, 9 );
-            lvListMember.setAdapter( adapter );
-
+            else if (message.equals( "Not Found" )){
+                cd_NoConnection.setVisibility(View.GONE);
+                cd_NoData.setVisibility(View.VISIBLE);
+                linear_ListMember.setVisibility(View.GONE);
+            }
         } catch (JSONException e) {
-            if (getContext() != null) {
-                Toasty.error( getContext(), getString( R.string.MSG_CODE_409 ) + " 2: " + getString( R.string.MSG_CHECK_DATA ), Toast.LENGTH_LONG ).show();
-            }
+            cd_NoConnection.setVisibility(View.GONE);
+            cd_NoData.setVisibility(View.VISIBLE);
+            linear_ListMember.setVisibility(View.GONE);
             Log.e( "tag", " 2 :" + String.valueOf( e ) );
             e.printStackTrace();
-            /*include_FormOrderList.setVisibility(View.GONE);
-            linear_NoData.setVisibility(View.VISIBLE);
-            if(getContext()!=null) {
-                Toasty.info(getContext(), getString(R.string.MSG_NO_LIMBAH) + "\n" + getString(R.string.MSG_PURSUE_LIMBAH), Toast.LENGTH_LONG).show();
-            }*/
         }
     }
 

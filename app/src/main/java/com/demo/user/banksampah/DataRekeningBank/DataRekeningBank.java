@@ -1,5 +1,6 @@
 package com.demo.user.banksampah.DataRekeningBank;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -84,7 +85,6 @@ public class DataRekeningBank extends AppCompatActivity {
         btnAddRekBank = findViewById( R.id.btnAddRekBank );
         parent_layout = findViewById( R.id.parent_layout );
 
-
         btnAddRekBank.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +106,6 @@ public class DataRekeningBank extends AppCompatActivity {
                 customProgress.hideProgress();
                 try {
                     ValidateDB(response);
-                    finish();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make( parent_layout,"Data Rekening Gagal Ditambahkan." , Snackbar.LENGTH_SHORT);
@@ -149,6 +148,8 @@ public class DataRekeningBank extends AppCompatActivity {
             String message = jsonPost.getString( field_name[0] );
             if (message.equals( "success" )) {
                 Toast.makeText( DataRekeningBank.this, "Rekening Bank Berhasil Ditambahkan",Toast.LENGTH_LONG ).show();
+                Intent intent = new Intent( DataRekeningBank.this, PencairanSaldoBankSampah.class );
+                startActivity( intent );
                 finish();
             } else if (message.equals( "Failed" )){
                 Snackbar snackbar = Snackbar
@@ -214,12 +215,10 @@ public class DataRekeningBank extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
     private void getItem(String response){
-        String[]field_name = {"message", "bank_name"};
+        String[]field_name = {"message", "name"};
 
         try {
             JSONObject jsonObject = new JSONObject(response);
-            ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
-
             JSONArray cast = jsonObject.getJSONArray(field_name[0]);
             Log.e("tag", String.valueOf(cast.length()));
 

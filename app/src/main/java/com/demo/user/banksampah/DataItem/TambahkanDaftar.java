@@ -114,6 +114,8 @@ public class TambahkanDaftar extends AppCompatActivity {
         //Initializing the ArrayList
         Items = new ArrayList<String>();
         etNamaBahan.setText(getNama);
+        etNamaBahan.setEnabled( false );
+
         sBahan.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) ctx);
         btnTambahkan.setOnClickListener(new View.OnClickListener() {
             @Override

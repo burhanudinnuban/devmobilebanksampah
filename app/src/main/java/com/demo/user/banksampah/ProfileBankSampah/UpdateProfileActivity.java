@@ -235,24 +235,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
         dateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         dateFormatter_ToDB = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
 
-
-
-//        etTglLahir.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDateDialog();
-//            }
-//        });
-
-//        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                month = month + 1;
-//                String date = dayOfMonth + "/" + month + "/" + year;
-//                etTglLahir.setText(date);
-//            }
-//        };
-
         imgPinCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -580,6 +562,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 Log.d("DEBUG", "Validate Response: " + response);
                 try {
                     Toasty.success(getApplicationContext(), "Berhasil Mengupload Gambar", Toast.LENGTH_SHORT).show();
+                    finish();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make(parent_layout, getString(R.string.MSG_CODE_409) + " 1: " + getString(R.string.MSG_CHECK_DATA), Snackbar.LENGTH_SHORT);

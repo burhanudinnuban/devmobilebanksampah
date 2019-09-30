@@ -38,6 +38,7 @@ public class PrefManager {
     public static final String KEY_ROLE_USER = "pref_role_user";
     public static final String KEY_JAM_OPERASIONAL = "pref_operasional";
     public static final String KEY_BANK = "pref_bank";
+    public static final String KEY_BANK_ACCOUNT = "pref_bank_account";
     public static final String KEY_NO_REKENING = "pref_rekening";
     public static final String KEY_NAMA_PEMILIK = "pref_pemilik";
     public static final String KEY_CABANG = "pref_cabang";
@@ -47,6 +48,7 @@ public class PrefManager {
     public static final String KEY_PENERBIT_SK = "pref_penerbit_sk";
     public static final String KEY_ID_NASABAH = "pref_id_nasabah";
     public static final String KEY_SALDO_BANK_SAMPAH = "pref_saldo_bank_sampah";
+    public static final String KEY_UNIT_DEFAULT = "pref_bank_unit_default";
     //private static final String KEY_FRAGMENT = "pref_fragment";
     //private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
@@ -70,7 +72,7 @@ public class PrefManager {
     //Create Login Session
     public void createLoginSession(String no_hp, String nama, String latlong,
                                    String alamat, String email, String foto,
-                                   String id, String role_user, String jam, String point){
+                                   String id, String role_user, String jam, String point, String unitDefault){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NO_HP, no_hp);
         editor.putString(KEY_NAMA, nama);
@@ -82,6 +84,7 @@ public class PrefManager {
         editor.putString(KEY_ROLE_USER, role_user);
         editor.putString(KEY_JAM_OPERASIONAL, jam);
         editor.putString(KEY_SALDO_BANK_SAMPAH, point);
+        editor.putString(KEY_UNIT_DEFAULT, unitDefault);
         editor.commit();
     }
 
@@ -112,11 +115,12 @@ public class PrefManager {
         editor.commit();
     }
 
-    public void updateRekBank(String bank,String noRekening, String namaPemilik, String cabang){
+    public void checkBankAkun(String bank,String noRekening, String namaPemilik, String cabang, String bankAccount){
         editor.putString(KEY_BANK, bank);
         editor.putString(KEY_NO_REKENING, noRekening);
         editor.putString(KEY_NAMA_PEMILIK, namaPemilik);
         editor.putString(KEY_CABANG, cabang);
+        editor.putString(KEY_BANK_ACCOUNT, bankAccount);
         editor.commit();
     }
 
@@ -143,6 +147,7 @@ public class PrefManager {
         user.put(KEY_ROLE_USER, pref.getString(KEY_ROLE_USER, null));
         user.put(KEY_JAM_OPERASIONAL, pref.getString(KEY_JAM_OPERASIONAL, null));
         user.put(KEY_BANK, pref.getString(KEY_BANK, null));
+        user.put(KEY_BANK_ACCOUNT, pref.getString(KEY_BANK_ACCOUNT, null));
         user.put(KEY_CABANG, pref.getString(KEY_CABANG, null));
         user.put(KEY_NO_REKENING, pref.getString(KEY_NO_REKENING, null));
         user.put(KEY_NAMA_PEMILIK, pref.getString(KEY_NAMA_PEMILIK, null));
@@ -152,6 +157,7 @@ public class PrefManager {
         user.put(KEY_PENERBIT_SK, pref.getString(KEY_PENERBIT_SK, null));
         user.put(KEY_ID_NASABAH, pref.getString(KEY_ID_NASABAH, null));
         user.put(KEY_SALDO_BANK_SAMPAH, pref.getString(KEY_SALDO_BANK_SAMPAH, null));
+        user.put(KEY_UNIT_DEFAULT, pref.getString(KEY_UNIT_DEFAULT, null));
         return user;
     }
 

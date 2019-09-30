@@ -34,7 +34,8 @@
         android:id="@+id/linearLayout_ListRequestMember"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,16 +97,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/no_data" />
-
+                android:src="@drawable/ic_data_not_found" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Belum Ada Request Member Pada Bank Sampah Anda."
-                android:textColor="@color/colorBgGray"
+                android:textColor="@color/ColorGeneral"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="**Tekan untuk Memuat Ulang**"
+                android:textColor="@color/colorBgGray"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"/>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -136,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/no_connection" />
+                android:src="@drawable/ic_404" />
 
             <TextView
                 android:layout_width="match_parent"

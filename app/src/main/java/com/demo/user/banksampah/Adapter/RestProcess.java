@@ -227,7 +227,7 @@ public class RestProcess {
 
         //Token Authorization
         apiErecyle.put("str_header", "Authorization");
-        apiErecyle.put("str_token_value", "token 3313f7fb94a3997:dfe1becfc518ce9");
+        apiErecyle.put("str_token_value", "token a9b5f03f9c33ab3:b88ec9d98a1ea68");
 
         //Volley Setting
         apiErecyle.put("str_json_obj", "json_obj_req");

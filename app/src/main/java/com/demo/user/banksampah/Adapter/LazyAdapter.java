@@ -36,7 +36,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.DataItem.UpdateListItem;
+import com.demo.user.banksampah.DataItem.ListHargaItem;
 import com.demo.user.banksampah.DataPengurus.EditPengurus;
 import com.demo.user.banksampah.DataPengurus.ListViewDataPengurus;
 import com.demo.user.banksampah.MemberFragment.ListMember.DetailMemberActivity;
@@ -75,7 +75,7 @@ public class LazyAdapter extends BaseAdapter {
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     protected ArrayList<HashMap<String, String>> filter_data;
-    private static LayoutInflater inflater = null;
+    public static LayoutInflater inflater = null;
     //public ImageLoader imageLoader;
     //private ItemFilter mFilter = new ItemFilter();
     private int fragment_position;
@@ -1056,7 +1056,6 @@ public class LazyAdapter extends BaseAdapter {
                 final String strBankSampah = ItemList.get( "id_bank_sampah" );
                 final String strIdItem = ItemList.get( "id_item" );
 
-
                 try {
                     holder.tvHargaItem.setText( formatRupiah.format( Double.valueOf( strHargaitem ) ) );
                 } catch (NumberFormatException e) {
@@ -1074,12 +1073,13 @@ public class LazyAdapter extends BaseAdapter {
                 holder.imgEditItem.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent_detail = new Intent( activity, UpdateListItem.class );
-                        intent_detail.putExtra( "id_item", strIdItem );
-                        intent_detail.putExtra( "id_bank_sampah", strBankSampah );
-                        intent_detail.putExtra( "jenis_item", strJenisitem );
-                        intent_detail.putExtra( "harga_per_kilo", strHargaitem );
-                        activity.startActivity( intent_detail );
+//                        Intent intent_detail = new Intent( activity, UpdateListItem.class );
+//                        intent_detail.putExtra( "id_item", strIdItem );
+//                        intent_detail.putExtra( "id_bank_sampah", strBankSampah );
+//                        intent_detail.putExtra( "jenis_item", strJenisitem );
+//                        intent_detail.putExtra( "harga_per_kilo", strHargaitem );
+//                        activity.startActivity( intent_detail );
+                        popupUpdateItem(strIdItem, strHargaitem, position);
                     }
                 } );
                 holder.tvJenisItem.setText( strJenisitem );
@@ -1093,7 +1093,6 @@ public class LazyAdapter extends BaseAdapter {
                     holder.tvJabatan = vi.findViewById( R.id.tvJabatan );
                     holder.btnHapusPengurus = vi.findViewById( R.id.btnHapusPengurus );
                     holder.btnEditPengurus = vi.findViewById( R.id.btnEditPengurus );
-                    holder.tvIdPengurus = vi.findViewById( R.id.id_pengurus );
 
                     vi.setTag( holder );
                 } else {
@@ -1128,7 +1127,6 @@ public class LazyAdapter extends BaseAdapter {
 
                 holder.tvNamaPengurus.setText( strNamaPengurus );
                 holder.tvJabatan.setText( strJabatan );
-                holder.tvIdPengurus.setText( strIdPengurus );
 
                 break;
 
@@ -1885,7 +1883,6 @@ public class LazyAdapter extends BaseAdapter {
                                             .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     data.remove( position );
-                                                    data.set( position, ItemList );
                                                     LazyAdapter.this.notifyDataSetChanged();
                                                     /*Intent hapusPengurus = new Intent( activity, ListHargaItem.class );
                                                     activity.startActivity( hapusPengurus );
@@ -1931,6 +1928,90 @@ public class LazyAdapter extends BaseAdapter {
         android.app.AlertDialog alert = builder.create();
         alert.show();
         Log.e( "tag", "sukses" );
+    }
+
+    protected void updateItem(String IdItem, String HargaItem) {
+        final String[] field_name = {"id_item_bs", "harga_per_kilo"};
+        String base_url = apiData.get("str_url_address") + (".edit_harga_item");
+        StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("DEBUG 1", "Update Item Response: " + response);
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(field_name[0], IdItem);
+                params.put(field_name[1], HargaItem);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(apiData.get("str_header"), apiData.get("str_token_value"));
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        VolleyController.getInstance().addToRequestQueue(strReq, apiData.get("str_json_obj"));
+    }
+
+    public void popupUpdateItem(String idItem, String strHargaitem, int position){
+        Dialog myDialog = new Dialog( activity );
+        myDialog.setContentView( R.layout.activity_update_list_item );
+        myDialog.setCanceledOnTouchOutside( false );
+
+        EditText etHargaitemUpdate = myDialog.findViewById(R.id.etHargaItemUpdate);
+        TextView tvJenisItemUpdate = myDialog.findViewById(R.id.tvJenisItemUpdate);
+        Button btnUpdateItem = myDialog.findViewById(R.id.btnRubahItem);
+        ImageView arrowBack = myDialog.findViewById( R.id.arrowBack );
+        arrowBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        } );
+
+        etHargaitemUpdate.setHint( strHargaitem );
+
+        tvJenisItemUpdate.setText(idItem);
+
+        btnUpdateItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder( activity);
+                String strHargaItem = etHargaitemUpdate.getText().toString();
+                builder.setMessage("Apakah Anda Yakin Memperbarui Harga Item?")
+                        .setCancelable(false)
+                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                updateItem(idItem,strHargaItem);
+                                Intent intent = new Intent( activity, ListHargaItem.class );
+                                activity.startActivity( intent );
+                            }
+                        })
+                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+        if (myDialog.getWindow() != null) {
+            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            myDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            myDialog.show();
+        }
     }
 
 
@@ -2645,9 +2726,8 @@ public class LazyAdapter extends BaseAdapter {
                                             .setCancelable(false)
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    data.remove( position );
-                                                    LazyAdapter.this.notifyDataSetChanged();
-                                                    Toast.makeText( activity, "Member Berhasil Diterima", Toast.LENGTH_LONG ).show();
+                                                    Intent intent = new Intent( activity, MainActivity.class );
+                                                    activity.startActivity( intent );
                                                 }
                                             });
                                     android.app.AlertDialog alert = builder.create();

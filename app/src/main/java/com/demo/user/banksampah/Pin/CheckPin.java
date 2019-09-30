@@ -287,25 +287,32 @@ public class CheckPin extends AppCompatActivity {
     }
 
     private void displayLogin(String resp_content) {
-        String[] field_name = {"message", "no_telepon", "pin"};
+        String[] field_name = {"message", "no_telepon", "pin","data"};
         try {
             arrayLogin = rest_class.getJsonData( field_name, resp_content );
             JSONObject jsonPost = new JSONObject( resp_content );
             JSONObject message = jsonPost.getJSONObject( field_name[0] );
-            if (message != null) {
+            String data = jsonPost.getString( field_name[3] );
+            String message1 = jsonPost.getString( field_name[0] );
+            if (data.equals( "True" )) {
                 strNo_Telepon = message.getString( field_name[1] );
                 strPin = message.getString( field_name[2]);
                 session.CheckPin( strNo_Telepon, strPin );
                 Intent main_intent = new Intent( CheckPin.this, PencairanNasabah.class );
                 startActivity( main_intent );
                 finish();
-            } else{
-                Toasty.error( getApplicationContext(), getString( R.string.MSG_FALSE_LOGIN ) + "\n" + getString( R.string.MSG_CHECK_DATA ), Toast.LENGTH_LONG ).show();
             }
 
         } catch (JSONException e) {
-            Log.d( "tag", e.toString() );
-            Toasty.error( getApplicationContext(), getString( R.string.MSG_CODE_500 ) + " 2 : " + getString( R.string.MSG_CHECK_CONN ), Toast.LENGTH_LONG ).show();
+            listPin.clear();
+            img1.setBackgroundResource( R.drawable.border_rectangle );
+            img2.setBackgroundResource( R.drawable.border_rectangle );
+            img3.setBackgroundResource( R.drawable.border_rectangle );
+            img4.setBackgroundResource( R.drawable.border_rectangle );
+            img5.setBackgroundResource( R.drawable.border_rectangle );
+            img6.setBackgroundResource( R.drawable.border_rectangle );
+            Toasty.error( getApplicationContext(), "Kata Sandi/Pin Salah." + "\n" + getString( R.string.MSG_CHECK_DATA ), Toast.LENGTH_LONG ).show();
+
         }
 
     }
@@ -359,8 +366,6 @@ public class CheckPin extends AppCompatActivity {
             }
             Log.d( "tag", pin );
             SaveToDB( pin );
-        } else
-            {
         }
         Log.d( "tag", String.valueOf( listPin ) );
     }
