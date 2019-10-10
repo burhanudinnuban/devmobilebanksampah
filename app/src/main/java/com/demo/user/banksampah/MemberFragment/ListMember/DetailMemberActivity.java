@@ -90,13 +90,13 @@ public class DetailMemberActivity extends AppCompatActivity {
         cvSaldo = findViewById( R.id.cvSaldo );
         cvTelepon = findViewById( R.id.cvTelepon );
         parent_layout = findViewById( R.id.parent );
-        arrowBack = findViewById( R.id.arrowBack );
-        arrowBack.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        } );
+//        arrowBack = findViewById( R.id.arrowBack );
+//        arrowBack.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        } );
 //        Deklarasi String ke Rest
         String imgDetailMember1 = getIntent().getStringExtra( "foto" );
         String tvNamaMemberDetail1 = getIntent().getStringExtra( "nama_member" );
@@ -247,7 +247,7 @@ public class DetailMemberActivity extends AppCompatActivity {
     public void CreateAlertDialogWithRadioButtonGroup() {
         Dialog mydialog = new Dialog( DetailMemberActivity.this );
         CardView cvMessage, cvCall;
-        ImageView imgExit;
+        TextView imgExit;
         mydialog.setContentView( R.layout.alert_call_n_message );
         cvMessage = mydialog.findViewById( R.id.cvMessage );
         cvCall = mydialog.findViewById( R.id.cvCall );

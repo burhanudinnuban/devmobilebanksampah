@@ -70,6 +70,7 @@ public class DataRekeningBank extends AppCompatActivity {
         restClass = new RestProcess();
         apiData = restClass.apiErecycle();
         Items = new ArrayList<String>();
+
         //Session Instance
         session = new PrefManager(getApplicationContext());
         user = session.getUserDetails();
@@ -106,6 +107,7 @@ public class DataRekeningBank extends AppCompatActivity {
                 customProgress.hideProgress();
                 try {
                     ValidateDB(response);
+                    finish();
                 } catch (Throwable t) {
                     Snackbar snackbar = Snackbar
                             .make( parent_layout,"Data Rekening Gagal Ditambahkan." , Snackbar.LENGTH_SHORT);
@@ -156,7 +158,6 @@ public class DataRekeningBank extends AppCompatActivity {
                         .make( parent_layout,"Data Rekening Gagal Ditambahkan." , Snackbar.LENGTH_SHORT);
                 snackbar.show();
                  }
-
         } catch (JSONException e) {
             Log.d( "tag", e.toString() );
             Toasty.error( getApplicationContext(), getString( R.string.MSG_CODE_500 ) + " 2 : " + getString( R.string.MSG_CHECK_CONN ), Toast.LENGTH_LONG ).show();

@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,10 +38,16 @@ import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
+import com.demo.user.banksampah.BankSampahActivities.CariBankSampah;
 import com.demo.user.banksampah.DataItem.ListHargaItem;
 import com.demo.user.banksampah.DataRekeningBank.PencairanSaldoBankSampah;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.Services.MainActivity;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -49,6 +58,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import es.dmoral.toasty.Toasty;
 
@@ -69,11 +79,17 @@ public class HomeFragment extends Fragment {
     protected LazyAdapter adapter;
     protected View rootView;
     protected LinearLayout cvDataItem, cvPencairanSaldo, casts_container, cvBankInduk;
-    protected String strNamaBankSampah, strMessage;
+    protected String strMessage;
     protected CustomProgress customProgress;
+    ImageView imageView, imgBack;
+    String EditTextValue ;
+    Thread thread ;
+    Bitmap bitmap ;
+    public final static int QRcodeWidth = 500 ;
+
     //Session Class
     PrefManager session;
-    protected String strNama, strAlamat, strFoto;
+    protected String strNama, strAlamat, strFoto,strIdBankSampah;
     ArrayList<HashMap<String, String>> ScanStatus = new ArrayList<>();
 
     public static HomeFragment newInstance() {
@@ -104,7 +120,7 @@ public class HomeFragment extends Fragment {
         cvBankInduk.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                popupBankSampah();
             }
         } );
 
@@ -114,14 +130,14 @@ public class HomeFragment extends Fragment {
         }
 
         session = new PrefManager(getContext());
-        //session.checkLogin();
 
+        //session.checkLogin();
         HashMap<String, String> user = session.getUserDetails();
         strNama = user.get(PrefManager.KEY_NAMA);
         strFoto = user.get(PrefManager.KEY_FOTO);
         strAlamat = user.get(PrefManager.KEY_ALAMAT);
         String saldo = user.get( PrefManager.KEY_SALDO_BANK_SAMPAH );
-
+        strIdBankSampah = user.get( PrefManager.KEY_ID );
 
         if (saldo==null){
             tvSaldo.setText( "Rp 0 " );
@@ -159,6 +175,12 @@ public class HomeFragment extends Fragment {
             }
         } );
 
+        imgBankSampah.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfilePopUp(  );
+            }
+        } );
         Picasso.get()
                 .load(apiData.get("str_url_main")+ strFoto)
                 .error(R.drawable.ic_navigation_profil)
@@ -166,6 +188,20 @@ public class HomeFragment extends Fragment {
 
         dataBrosur( );
         return rootView;
+    }
+
+    Bitmap TextToImageEncode(String Value) throws WriterException {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try{
+            BitMatrix bitMatrix = multiFormatWriter.encode(Value, BarcodeFormat.QR_CODE,500,500);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            return bitmap;
+        }
+        catch (WriterException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -198,7 +234,6 @@ public class HomeFragment extends Fragment {
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                customProgress.hideProgress();
                 Log.d( "DEBUG", "Check Barcode Response: " + response );
                 try {
                     getMember( response );
@@ -214,7 +249,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d( "DEBUG", "Volley Error: " + error.getMessage() );
-                customProgress.hideProgress();
                 Snackbar snackbar = Snackbar
                         .make( parent_layout, getString( R.string.MSG_CODE_500 ) + " 1: " + getString( R.string.MSG_CHECK_CONN ), Snackbar.LENGTH_SHORT );
                 snackbar.show();
@@ -305,7 +339,6 @@ public class HomeFragment extends Fragment {
         StringRequest strReq = new StringRequest( Request.Method.POST, base_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                customProgress.hideProgress();
                 Log.d( "DEBUG", "Check Barcode Response: " + response );
                 try {
                     getBrosur( response );
@@ -363,6 +396,12 @@ public class HomeFragment extends Fragment {
 
                 final ImageView ivProductList = linearProductList.findViewById(R.id.thumbnail_image);
 
+                ivProductList.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText( getContext(), "Coming Soon", Toast.LENGTH_LONG ).show();
+                    }
+                } );
                 Log.e("Home", "data_pro12334duct, i = " + i + ", size = " + cast.length());
 
                 String url_foto = apiData.get( "str_url_main" );
@@ -383,23 +422,37 @@ public class HomeFragment extends Fragment {
     }
 
     private void popupBankSampah(){
-        ScanDialog = new Dialog(getContext());
-        ScanDialog.setContentView( R.layout.activity_scan_data_member );
-        TextView tvNama, tvStatus, tvBankSampah, tvIdMember, tvPoint;
+        ScanDialog = new Dialog(ctx);
+        ScanDialog.setContentView( R.layout.bank_sampah_induk );
+        ScanDialog.setCanceledOnTouchOutside( false );
 
-        tvNama = ScanDialog.findViewById( R.id.tvNamaMember );
+        ImageView imgCancel;
 
+        TableRow trQRCode, trPencarian;
+        trQRCode = ScanDialog.findViewById( R.id.trQRCode );
+        trPencarian = ScanDialog.findViewById( R.id.trPencarian );
+        imgCancel = ScanDialog.findViewById( R.id.arrowBack );
 
-        Button btnApprove = ScanDialog.findViewById( R.id.btnApprove );
-
-        btnApprove.setOnClickListener( new View.OnClickListener() {
+        trQRCode.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ScanDialog.dismiss();
-                Intent intent =new Intent( getContext(), MainActivity.class );
+                QRCode();
             }
         } );
 
+        trPencarian.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( getContext(), CariBankSampah.class );
+                startActivity( intent );
+            }
+        } );
+        imgCancel.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanDialog.dismiss();
+            }
+        } );
         if (ScanDialog.getWindow()!= null){
             ScanDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
             ScanDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
@@ -407,4 +460,64 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public void ProfilePopUp() {
+        //Initiate Variable Image
+        ImageView imgProfilCache;
+        Dialog myDialog = new Dialog( getContext() );
+        myDialog.setContentView( R.layout.pop_up_image );
+
+        ImageView imgCancel = myDialog.findViewById( R.id.arrowBack );
+        imgCancel.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        } );
+
+        imgProfilCache = myDialog.findViewById( R.id.imgPicture_Cache );
+        String url_foto = apiData.get( "str_url_main" );
+        Picasso.get()
+                .load( url_foto + MainActivity.strFoto )
+                .error( R.drawable.ic_navigation_profil )
+                .resize( 800, 800 )
+                .centerCrop()
+                .into( imgProfilCache );
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull( myDialog.getWindow() ).setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
+        }
+
+        if (myDialog.getWindow() != null) {
+            myDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT );
+            myDialog.show();
+        }
+    }
+
+    public void QRCode() {
+        Dialog myDialog = new Dialog( ctx );
+        myDialog.setCanceledOnTouchOutside( false );
+        myDialog.setContentView( R.layout.qr_code_bank_sampah_induk );
+        imageView = myDialog.findViewById(R.id.imageView);
+        TextView tvbankSampah = myDialog.findViewById( R.id.tvBankSampah );
+        tvbankSampah.setText( strIdBankSampah );
+
+        imgBack = myDialog.findViewById( R.id.arrowBack );
+        imgBack.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        } );
+
+        try {
+            bitmap = TextToImageEncode(strIdBankSampah);
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        if (myDialog.getWindow()!= null){
+            myDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
+            myDialog.show();
+        }
+    }
 }

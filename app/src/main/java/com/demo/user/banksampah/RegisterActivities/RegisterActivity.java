@@ -10,13 +10,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -32,13 +32,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Services.LoginActivity;
-import com.demo.user.banksampah.Activities.OpenMaps;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
+import com.demo.user.banksampah.GoogleMaps.GoogleMapsMarker;
 import com.demo.user.banksampah.R;
+import com.demo.user.banksampah.Services.LoginActivity;
 import com.demo.user.banksampah.TrackGPS;
 
 import java.io.ByteArrayOutputStream;
@@ -153,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
         imgPinCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openMaps = new Intent(getApplicationContext(), OpenMaps.class);
+                Intent openMaps = new Intent(getApplicationContext(), GoogleMapsMarker.class);
                 startActivityForResult(openMaps, ADDRESS_REQUEST_CODE);
             }
         });

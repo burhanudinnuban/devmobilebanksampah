@@ -38,12 +38,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.demo.user.banksampah.Activities.OpenMaps;
 import com.demo.user.banksampah.Adapter.CustomProgress;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
 import com.demo.user.banksampah.BuildConfig;
+import com.demo.user.banksampah.GoogleMaps.GoogleMapsMarker;
 import com.demo.user.banksampah.R;
 import com.demo.user.banksampah.TrackGPS;
 import com.squareup.picasso.Picasso;
@@ -63,6 +63,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import es.dmoral.toasty.Toasty;
 
@@ -238,7 +240,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
         imgPinCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openMaps = new Intent(getApplicationContext(), OpenMaps.class);
+                Intent openMaps = new Intent(getApplicationContext(), GoogleMapsMarker.class);
+                openMaps.putExtra( "lihat_lokasi", "pilih_lokasi" );
+                openMaps.putExtra( "latlong", getLatLong );
                 startActivityForResult(openMaps, 2);
             }
         });
@@ -445,13 +449,17 @@ public class UpdateProfileActivity extends AppCompatActivity {
             etAlamat.setError("Alamat Bank Sampah Diperlukan");
             etAlamat.requestFocus();
         }
-        else
+        else if (isEmailValid( strEmail_Update ))
             {
-            UpdateProfile(noSk, penerbitSk);
+            UpdateProfile(noSk, penerbitSk, strEmail_Update);
             }
+        else {
+            etEmailBankSampah.setError("Format Email Anda Tidak Sesuai");
+            etEmailBankSampah.requestFocus();
+        }
     }
 
-    private void UpdateProfile(String noSk, String penerbitSk){
+    private void UpdateProfile(String noSk, String penerbitSk, String strEmail_Update){
         final String[] field_name = {"id_bank_sampah", "email", "alamat","jam_operasional","latlong", "no_sk", "penerbit_sk"};
         String base_url = apiData.get("str_url_address") + apiData.get("str_api_update_profile");
         StringRequest strReq = new StringRequest(Request.Method.POST, base_url, new Response.Listener<String>() {
@@ -627,19 +635,37 @@ public class UpdateProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int hour, minute, hour1, minute1;
                 String am_pm;
-                if (Build.VERSION.SDK_INT >= 23 ){
+                if (Build.VERSION.SDK_INT >= 23 ) {
                     hour = picker.getHour();
                     minute = picker.getMinute();
                     hour1 = picker1.getHour();
                     minute1 = picker1.getMinute();
+                    if (hour < 10) {
+                        etJamKerja.setText( "0" + hour + ":" + minute + " - " + hour1 + ":" + minute1 );
+                    } else if (minute < 10) {
+                        etJamKerja.setText( hour + ":" + "0" + minute + " - " + hour1 + ":" + minute1 );
+                    } else if (hour1 < 10) {
+                        etJamKerja.setText( hour + ":" + minute + " - " + "0" + hour1 + ":" + minute1 );
+                    } else if (minute1 < 10) {
+                        etJamKerja.setText( hour + ":" + minute + " - " + hour1 + ":" + "0" + minute1 );
+                    }
                 }
                 else{
                     hour = picker.getCurrentHour();
                     minute = picker.getCurrentMinute();
                     hour1 = picker1.getCurrentHour();
                     minute1 = picker1.getCurrentMinute();
+                    if (hour < 10) {
+                        etJamKerja.setText( "0" + hour + ":" + minute + " - " + hour1 + ":" + minute1 );
+                    } else if (minute < 10) {
+                        etJamKerja.setText( hour + ":" + "0" + minute + " - " + hour1 + ":" + minute1 );
+                    } else if (hour1 < 10) {
+                        etJamKerja.setText( hour + ":" + minute + " - " + "0" + hour1 + ":" + minute1 );
+                    } else if (minute1 < 10) {
+                        etJamKerja.setText( hour + ":" + minute + " - " + hour1 + ":" + "0" + minute1 );
+                    }
                 }
-                etJamKerja.setText(hour +":"+ minute+" - "+ hour1 +":"+ minute1);
+//                etJamKerja.setText(hour +":"+ minute+" - "+ hour1 +":"+ minute1);
                 myDialog.dismiss();
             }
 
@@ -649,5 +675,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
             myDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
             myDialog.show();
         }
+    }
+
+    public boolean isEmailValid(String email)
+    {
+        String regExpn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if(matcher.matches())
+            return true;
+        else
+            return false;
     }
 }

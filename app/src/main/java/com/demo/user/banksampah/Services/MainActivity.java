@@ -40,9 +40,9 @@ import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.BottomNavigationViewNew;
 import com.demo.user.banksampah.MainFragment.HomeFragment;
+import com.demo.user.banksampah.MainFragment.JualSampahFragment;
 import com.demo.user.banksampah.MainFragment.MemberFragment;
 import com.demo.user.banksampah.MainFragment.ReceiveFragment;
-import com.demo.user.banksampah.MainFragment.SalesFragment;
 import com.demo.user.banksampah.NotificationActivities.SubNotificationActivity;
 import com.demo.user.banksampah.ProfileBankSampah.ProfileActivity;
 import com.demo.user.banksampah.R;
@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
     final Fragment fragment_beranda = new HomeFragment();
     final Fragment fragment_receiveSampah = new ReceiveFragment();
     final Fragment fragment_member = new MemberFragment();
-    final Fragment fragment_jualSampah = new SalesFragment();
+    final Fragment fragment_jualSampah = new JualSampahFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment_beranda;
 
     //private static final String TAG = MainActivity.class.getSimpleName();
     //private BroadcastReceiver mRegistrationBroadcastReceiver;
-//Session Class
+    //Session Class
     protected HashMap<String,String> user;
     public static boolean isAppRunning;
     protected Dialog myDialog;

@@ -244,6 +244,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         myDialog.setContentView( R.layout.pop_up_image );
 
+        ImageView imgCancel = myDialog.findViewById( R.id.arrowBack );
+        imgCancel.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        } );
+
         imgProfilCache = myDialog.findViewById( R.id.imgPicture_Cache );
 
         Picasso.get()

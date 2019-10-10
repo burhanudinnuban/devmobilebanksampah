@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="(saldo)"
-                    android:textColor="#68C500"/>
+                    android:textColor="#304FFE"/>
 
 
             </TableRow>
@@ -97,7 +97,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@color/colorAccent"
+                        android:background="@color/ColorGeneral"
                         android:gravity="center"
                         android:text="Ya"
                         android:textAllCaps="false"
@@ -118,7 +118,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@color/colorFragmenTittle"
+                        android:background="@drawable/btngeneralred"
                         android:gravity="center"
                         android:text="Batal"
                         android:textAllCaps="false"

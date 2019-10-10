@@ -36,6 +36,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.demo.user.banksampah.BankSampahActivities.DetailBankSampah;
 import com.demo.user.banksampah.DataItem.ListHargaItem;
 import com.demo.user.banksampah.DataPengurus.EditPengurus;
 import com.demo.user.banksampah.DataPengurus.ListViewDataPengurus;
@@ -278,6 +279,12 @@ public class LazyAdapter extends BaseAdapter {
         //Untuk Fragment Position 16
         TextView tvNamaBank, tvPemilik, tvNoRek, tvCabang;
         ImageView imgBank;
+
+        //Untuk Fragment Position 17
+        TextView tvNamaBankInduk, tvAlamatBankInduk, tvNoTelepon;
+        Button btnDetailBankInduk;
+        ImageView imgProfileBankInduk;
+
 
 
     }
@@ -1222,8 +1229,57 @@ public class LazyAdapter extends BaseAdapter {
                 holder.tvPemilik.setText( strPemilik );
                 holder.tvNoRek.setText( strNoRek );
 
-            default:
                 break;
+
+            case 17:
+                if (convertView == null) {
+                    vi = inflater.inflate( R.layout.lv_bank_sampah, parent, false );
+                    holder = new ViewHolder();
+
+                    holder.tvAlamatBankInduk = vi.findViewById( R.id.tvAlamat_ListBankSampah );
+                    holder.tvNamaBankInduk = vi.findViewById( R.id.tvNama_ListBankSampah );
+                    holder.tvNoTelepon = vi.findViewById( R.id.tvINoTeleponBankSampahinduk );
+                    holder.imgProfileBankInduk = vi.findViewById( R.id.imgPicture_BankSampah );
+                    holder.btnDetailBankInduk = vi.findViewById( R.id.btnDetailListBank );
+                    vi.setTag( holder );
+                } else {
+                    holder = (ViewHolder) vi.getTag();
+                }
+
+                HashMap<String, String> ListBankSampah;
+                ListBankSampah = data.get( position );
+                String strAlamatBankSampahinduk = ListBankSampah.get( "alamat" );
+                String strNamaBankSampahInduk = ListBankSampah.get( "id_bank_sampah" );
+                String strNoTeleponBankSampahInduk = ListBankSampah.get( "no_telepon" );
+                String strFotobankSampahInduk = ListBankSampah.get( "foto" );
+                String strjamOperasionalBankSampahInduk = ListBankSampah.get( "jam_operasional" );
+                String strEmailBankSampahInduk = ListBankSampah.get( "email" );
+                String strLatlongBankSampah = ListBankSampah.get( "latlong" );
+
+                holder.btnDetailBankInduk.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent( activity, DetailBankSampah.class );
+                        intent.putExtra( "lihat_lokasi","lihat_lokasi" );
+                        intent.putExtra( "foto", strFotobankSampahInduk );
+                        intent.putExtra( "alamat", strAlamatBankSampahinduk );
+                        intent.putExtra( "idBankSampah", strNamaBankSampahInduk );
+                        intent.putExtra( "noTelepon", strNoTeleponBankSampahInduk );
+                        intent.putExtra( "jam_operasional", strjamOperasionalBankSampahInduk );
+                        intent.putExtra( "email", strEmailBankSampahInduk );
+                        intent.putExtra( "latlong", strLatlongBankSampah );
+                        activity.startActivity( intent );
+                    }
+                } );
+                holder.tvAlamatBankInduk.setText( strAlamatBankSampahinduk );
+                holder.tvNamaBankInduk.setText( strNamaBankSampahInduk );
+                holder.tvNoTelepon.setText( strNoTeleponBankSampahInduk );
+                url_foto = apiData.get( "str_url_main" );
+                Picasso.get()
+                        .load( url_foto + strFotobankSampahInduk )
+                        .error( R.drawable.ic_navigation_profil )
+                        .into( holder.imgProfileBankInduk );
+            default:
         }
         return vi;
     }

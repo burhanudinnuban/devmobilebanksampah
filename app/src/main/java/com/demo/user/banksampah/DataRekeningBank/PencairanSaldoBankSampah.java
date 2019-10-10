@@ -226,17 +226,17 @@ public class PencairanSaldoBankSampah extends AppCompatActivity {
         }
     }
 
-
     private void popupYesOrNo(){
         dialog.setContentView( R.layout.ok_dan_tidak );
         Button ok = dialog.findViewById( R.id.btnOk );
         Button cancel = dialog.findViewById( R.id.btnCancel );
-
+        dialog.setCanceledOnTouchOutside( false );
         ok.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent( PencairanSaldoBankSampah.this, DataRekeningBank.class );
                 startActivity( intent );
+                finish();
             }
         } );
 
@@ -245,6 +245,7 @@ public class PencairanSaldoBankSampah extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent( PencairanSaldoBankSampah.this, MainActivity.class );
                 startActivity( intent );
+                finish();
             }
         } );
 

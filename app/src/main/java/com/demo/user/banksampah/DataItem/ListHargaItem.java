@@ -27,7 +27,6 @@ import com.demo.user.banksampah.Adapter.LazyAdapter;
 import com.demo.user.banksampah.Adapter.PrefManager;
 import com.demo.user.banksampah.Adapter.RestProcess;
 import com.demo.user.banksampah.Adapter.VolleyController;
-import com.demo.user.banksampah.ProfileBankSampah.ProfileActivity;
 import com.demo.user.banksampah.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -40,19 +39,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListHargaItem extends AppCompatActivity {
-
     private TextView tvJenisItem, tvHargaItem;
     private LinearLayout llList,llListRelative;
     protected RelativeLayout  llParent;
     private ListView lvHargaItem;
 
-    //if (!message.equalsIgnoreCase("Invalid")) {
     ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
 
     //Session Class
     protected PrefManager session;
-
-    protected View rootView;
 
     /*API process and dialog*/
     private RestProcess rest_class;
@@ -253,15 +248,6 @@ public class ListHargaItem extends AppCompatActivity {
             Log.e("tag", " 2 :" + String.valueOf(e));
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onBackPressed(){
-        Intent a = new Intent(ListHargaItem.this, ProfileActivity.class);
-        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(a);
-        finish();
-        super.onBackPressed();
     }
 
     @Override

@@ -16,7 +16,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".DataRekeningBank.PencairanSaldoBankSampah"></activity>
+        <activity android:name=".DetailJualSampahProcess"></activity>
+        <activity android:name=".GoogleMaps.GoogleMapsMarker" />
+        <activity android:name=".BankSampahActivities.DetailBankSampah" />
+        <activity android:name=".DataRekeningBank.PencairanSaldoBankSampah" />
         <activity android:name=".IntroStart" />
         <activity
             android:name=".Pin.LupaPin"
@@ -106,12 +109,6 @@
         </activity>
         <activity android:name=".HereMaps.ResultListActivity" />
         <activity android:name=".TimelineOrder.TimelineOrderActivity" />
-        <activity
-            android:name=".BankSampahActivities.DaftarHargaBankSampah"
-            android:configChanges="orientation"
-            android:label="Daftar Harga Bank Sampah"
-            android:parentActivityName=".ProfileBankSampah.ProfileActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".BankSampahActivities.CariBankSampah" />
         <activity
             android:name=".NotificationActivities.RiwayatOrder"
@@ -243,20 +240,6 @@
             android:launchMode="singleTop"
             android:parentActivityName=".Services.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.TrashDetailOrder"
-            android:configChanges="orientation"
-            android:label="Detil Sampah"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Activities.TrashDetail"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.TrashDetail"
-            android:configChanges="orientation"
-            android:label="Daftar Pilihan Sampah"
-            android:launchMode="singleTop"
-            android:parentActivityName=".Services.MainActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".WebViewTest" />
         <activity android:name=".Services.SplashScreen">
             <intent-filter>
@@ -328,12 +311,12 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permission Firebase -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- Permission Firebase -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />

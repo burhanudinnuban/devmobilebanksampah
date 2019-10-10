@@ -39,11 +39,9 @@ import java.util.Map;
 import es.dmoral.toasty.Toasty;
 
 public class ListOrderUser extends AppCompatActivity {
-
     //Session Class
     protected PrefManager session;
     private ArrayList listPin = new ArrayList();
-    ArrayList<HashMap<String, String>> allOrder1 = new ArrayList<>();
     ArrayList<HashMap<String, String>> allOrder = new ArrayList<>();
 
     /*API process and dialog*/

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="8dp"
+        android:layout_margin="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:gravity="center">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPicture_BankSampah"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_navigation_profil"
+                android:background="@drawable/border_rectangle"
+                android:padding="5dp" />
+
+            <LinearLayout
+                android:id="@+id/LinearList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@+id/imgPicture_BankSampah"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNama_ListBankSampah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(Nama\)"
+                    android:textColor="@color/ColorGeneral"
+                    android:layout_marginBottom="5dp"
+                    android:maxLines="1"
+                    android:maxLength="15"/>
+
+                <TextView
+                    android:id="@+id/tvINoTeleponBankSampahinduk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ColorGeneral"
+                    android:text="(No Telepon )"
+                    android:maxLines="1"
+                    android:maxLength="15"/>
+
+                <TextView
+                    android:id="@+id/tvAlamat_ListBankSampah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ColorGeneral"
+                    android:text="(Alamat)"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:maxLength="15"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/LinearList"
+                android:gravity="end|center|center_horizontal"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="5dp">
+
+                <Button
+                    android:id="@+id/btnDetailListBank"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_button_rectangle_general"
+                    android:text="Details"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
